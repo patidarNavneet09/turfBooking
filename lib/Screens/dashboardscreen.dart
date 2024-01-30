@@ -21,9 +21,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: buildMyNavBar(context),
-      body: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.99,
-          child: pagesProvider[pagesIndex]),
+      body: pagesProvider[pagesIndex],
     );
   }
 
