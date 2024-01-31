@@ -67,13 +67,13 @@ class _HomescreenState extends State<Homescreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 4, right: 4, top: 13, bottom: 13),
+                            padding: const EdgeInsets.only(top: 25, bottom: 25),
                             child: Row(
                               children: [
+                                SizedBox(
+                                  width: Screen.width * 0.03,
+                                ),
                                 Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 8, right: 8, top: 13, bottom: 13),
                                   height: 58,
                                   width: 58,
                                   decoration: const BoxDecoration(
@@ -96,6 +96,9 @@ class _HomescreenState extends State<Homescreen> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
+                                ),
+                                SizedBox(
+                                  width: Screen.width * 0.02,
                                 ),
                                 SizedBox(
                                   // color: Colors.amber,
