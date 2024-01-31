@@ -117,6 +117,7 @@ class _LoginState extends State<Login> {
                   obscureText: texthide,
                   decoration: const InputDecoration().prefixIconTextField(
                       suffix: InkWell(
+                        radius: 30,
                         onTap: () {
                           if (texthide == true) {
                             iconsdata = 0;
@@ -129,13 +130,15 @@ class _LoginState extends State<Login> {
                           }
                         },
                         child: iconsdata == 0
-                            ? SizedBox(
+                            ? const SizedBox(
                                 width: 2,
                                 height: 0,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Image.asset("assets/images/img_eye.png"),
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.visibility_off,
+                                    color: MyColor.greyText,
+                                  ),
                                 ))
                             : SizedBox(
                                 width: 2,
@@ -162,6 +165,7 @@ class _LoginState extends State<Login> {
                   obscureText: texthide1,
                   decoration: const InputDecoration().prefixIconTextField(
                       suffix: InkWell(
+                        radius: 30,
                         onTap: () {
                           if (texthide1 == true) {
                             iconsdata1 = 0;
@@ -174,13 +178,15 @@ class _LoginState extends State<Login> {
                           }
                         },
                         child: iconsdata1 == 0
-                            ? SizedBox(
+                            ? const SizedBox(
                                 width: 2,
                                 height: 0,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Image.asset("assets/images/img_eye.png"),
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.visibility_off,
+                                    color: MyColor.greyText,
+                                  ),
                                 ))
                             : SizedBox(
                                 width: 2,
