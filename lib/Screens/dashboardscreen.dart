@@ -27,7 +27,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
 
   Container buildMyNavBar(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.09,
+      height: MediaQuery.of(context).size.height * 0.10,
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
         borderRadius: BorderRadius.circular(12),

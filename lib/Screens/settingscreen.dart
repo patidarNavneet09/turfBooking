@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/editprofile.dart';
 import 'package:truckmanagement/Screens/homescreen.dart';
 import 'package:truckmanagement/Screens/loginscreen.dart';
+import 'package:truckmanagement/Screens/privacypolicy.dart';
+import 'package:truckmanagement/Screens/termcondition.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
@@ -227,42 +229,51 @@ class _SettingState extends State<Setting> {
                         ),
                         Row(
                           children: [
-                            Card(
-                              surfaceTintColor: Colors.white,
-                              elevation: 1,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 55,
-                                    width: screen.size.width * 0.90,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Image.asset(
-                                          "assets/images/termcondition.png",
-                                          height: 20,
-                                          width: 13,
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          "Terms & Conditions",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: MyColor.listviewtext,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w500,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const TermCondition()));
+                              },
+                              child: Card(
+                                surfaceTintColor: Colors.white,
+                                elevation: 1,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 55,
+                                      width: screen.size.width * 0.90,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 15,
                                           ),
-                                        ),
-                                      ],
+                                          Image.asset(
+                                            "assets/images/termcondition.png",
+                                            height: 20,
+                                            width: 13,
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          const Text(
+                                            "Terms & Conditions",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: MyColor.listviewtext,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -272,42 +283,51 @@ class _SettingState extends State<Setting> {
                         ),
                         Row(
                           children: [
-                            Card(
-                              surfaceTintColor: Colors.white,
-                              elevation: 1,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 55,
-                                    width: screen.size.width * 0.90,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Image.asset(
-                                          "assets/images/privacypolicy.png",
-                                          height: 20,
-                                          width: 13,
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          "Privacy Policy",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: MyColor.listviewtext,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w500,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PrivacyPolicy()));
+                              },
+                              child: Card(
+                                surfaceTintColor: Colors.white,
+                                elevation: 1,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 55,
+                                      width: screen.size.width * 0.90,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 15,
                                           ),
-                                        ),
-                                      ],
+                                          Image.asset(
+                                            "assets/images/privacypolicy.png",
+                                            height: 20,
+                                            width: 13,
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          const Text(
+                                            "Privacy Policy",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: MyColor.listviewtext,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             )
                           ],

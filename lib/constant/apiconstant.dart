@@ -5,4 +5,6 @@ class ApiServer {
   static const login = "${baseurl}login";
   static const profiledetail = "${baseurl}profile-detail";
   static const logout = "${baseurl}logout";
+  static const privacypolicy = "${baseurl}privacy-policy";
+  static const termconditonapi = "${baseurl}terms-and-conditions";
 }
