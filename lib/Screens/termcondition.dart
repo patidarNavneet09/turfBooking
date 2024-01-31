@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/termconditionmodel.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
@@ -21,7 +20,6 @@ class _TermConditionState extends State<TermCondition> {
   bool loading1 = true;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => termCondition(context));
   }
@@ -54,7 +52,7 @@ class _TermConditionState extends State<TermCondition> {
             )
           : Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
                   // Wrap with SingleChildScrollView
@@ -75,7 +73,6 @@ class _TermConditionState extends State<TermCondition> {
     BuildContext context,
   ) async {
     // Utility.progressloadingDialog(context, true);
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
       HttpLogger(logLevel: LogLevel.BODY),
     ]);

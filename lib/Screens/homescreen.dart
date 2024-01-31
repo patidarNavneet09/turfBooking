@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/mytripmodel.dart';
 import 'package:truckmanagement/Model/profilemodel.dart';
 import 'package:truckmanagement/Screens/editprofile.dart';
 import 'package:truckmanagement/Screens/tripdetials.dart';
@@ -23,18 +24,23 @@ int index = 0;
 bool loading1 = true;
 
 class _HomescreenState extends State<Homescreen> {
+  MyTrip myTrip = MyTrip();
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
+    index = 0;
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => mytripGet(context, "Accept"));
   }
 
+  dynamic status = '';
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: loading1 == true
+      body: loading1 == true && myTrip.status != true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
             )
@@ -200,7 +206,9 @@ class _HomescreenState extends State<Homescreen> {
                           children: [
                             InkWell(
                               onTap: () {
+                                status = "Accept";
                                 index = 0;
+                                mytripGet(context, status);
                                 setState(() {});
                               },
                               child: Container(
@@ -239,6 +247,8 @@ class _HomescreenState extends State<Homescreen> {
                             ),
                             InkWell(
                               onTap: () {
+                                status = "Pending";
+                                mytripGet(context, status);
                                 index = 1;
                                 setState(() {});
                               },
@@ -278,6 +288,8 @@ class _HomescreenState extends State<Homescreen> {
                             ),
                             InkWell(
                               onTap: () {
+                                status = "Completed";
+                                mytripGet(context, status);
                                 index = 2;
                                 setState(() {});
                               },
@@ -319,1323 +331,1116 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ),
                     ),
-                    index == 0
-                        ? SingleChildScrollView(
+                    myTrip.status != true
+                        ? SizedBox(
+                            height: screen.height * 0.545,
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height: screen.height * 0.545,
-                                  child: ListView.builder(
-                                      padding: EdgeInsetsDirectional.zero,
-                                      shrinkWrap: true,
-                                      itemCount: 5,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Stack(
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const TripDetials()));
-                                              },
-                                              child: Card(
-                                                color: Colors.white,
-                                                surfaceTintColor: Colors.white,
-                                                child: Column(children: [
-                                                  const SizedBox(
-                                                    height: 08,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                          height: 20,
-                                                          width: 20,
-                                                          child: Image.asset(
-                                                              "assets/images/triplocation.png")),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.75,
-                                                        child: const Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Trip Name",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  "Indore to Bhopal",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor1,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                CircleAvatar(
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .green,
-                                                                  radius: 5,
-                                                                ),
-                                                                Text(
-                                                                  "  Accepted",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .green,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                          height: 20,
-                                                          width: 20,
-                                                          child: Image.asset(
-                                                              "assets/images/calender.png")),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.75,
-                                                        child: const Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Start Date",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  "December 22, 2023",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor1,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                          height: 20,
-                                                          width: 20,
-                                                          child: Image.asset(
-                                                              "assets/images/locationchart.png")),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.75,
-                                                        child: const Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Loading Location",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  "Indore",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor1,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 5),
-                                                        child: SizedBox(
-                                                            height: 22,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.05,
-                                                            child: Image.asset(
-                                                                "assets/images/cargotype.png")),
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.832,
-                                                        height: 50,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            const Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Cargo Type",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  "General Cargo",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .textcolor1,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Container(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.30,
-                                                              height: 30,
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                // color: MyColor.Red_color,
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                  begin: Alignment
-                                                                      .centerLeft,
-                                                                  end: Alignment
-                                                                      .centerRight,
-                                                                  tileMode:
-                                                                      TileMode
-                                                                          .mirror,
-                                                                  colors: [
-                                                                    MyColor
-                                                                        .button1,
-                                                                    MyColor
-                                                                        .button,
-                                                                  ],
-                                                                ),
-                                                                borderRadius: BorderRadius
-                                                                    .only(
-                                                                        topLeft:
-                                                                            Radius
-                                                                                .circular(
-                                                                          12,
-                                                                        ),
-                                                                        bottomRight:
-                                                                            Radius.circular(10)),
-                                                              ),
-                                                              child:
-                                                                  const Center(
-                                                                child: Text(
-                                                                  "View Detail",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: MyColor
-                                                                        .white,
-                                                                    // overflow: TextOverflow.ellipsis,
-                                                                    fontFamily:
-                                                                        ColorFamily
-                                                                            .fontsSFProDisplay,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ]),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
+                                Center(
+                                  child: Text("No Data"),
                                 ),
                               ],
                             ),
                           )
-                        : index == 1
+                        : index == 0
                             ? SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: screen.height * 0.545,
-                                      child: ListView.builder(
-                                          padding: EdgeInsetsDirectional.zero,
-                                          shrinkWrap: true,
-                                          itemCount: 5,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return Stack(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const TripDetials()));
-                                                  },
-                                                  child: Card(
-                                                    color: Colors.white,
-                                                    surfaceTintColor:
-                                                        Colors.white,
-                                                    child: Column(children: [
-                                                      const SizedBox(
-                                                        height: 08,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                              height: 20,
-                                                              width: 20,
-                                                              child: Image.asset(
-                                                                  "assets/images/triplocation.png")),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.75,
-                                                            child: const Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
+                                child: myTrip.data!.isEmpty
+                                    ? SizedBox(
+                                        height: screen.height * 0.545,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Center(
+                                              child: Text("No Data"),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : Column(
+                                        children: [
+                                          SizedBox(
+                                            height: screen.height * 0.545,
+                                            child: ListView.builder(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .only(bottom: 40),
+                                                shrinkWrap: true,
+                                                itemCount: myTrip.data!.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return Stack(
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          const TripDetials()));
+                                                        },
+                                                        child: Card(
+                                                          color: Colors.white,
+                                                          surfaceTintColor:
+                                                              Colors.white,
+                                                          child: Column(
                                                               children: [
-                                                                Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      "Trip Name",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      "Indore to Bhopal",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor1,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
-                                                                    ),
-                                                                  ],
+                                                                const SizedBox(
+                                                                  height: 08,
                                                                 ),
                                                                 Row(
                                                                   children: [
-                                                                    CircleAvatar(
-                                                                      backgroundColor:
-                                                                          MyColor
-                                                                              .cardpendding,
-                                                                      radius: 5,
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
                                                                     ),
-                                                                    Text(
-                                                                      "  New Job",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .cardpendding,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
+                                                                    SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                        width:
+                                                                            20,
+                                                                        child: Image.asset(
+                                                                            "assets/images/triplocation.png")),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.75,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              const Text(
+                                                                                "Trip Name",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                              Text(
+                                                                                myTrip.data![index].name.toString(),
+                                                                                style: const TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor1,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          Row(
+                                                                            children: [
+                                                                              const CircleAvatar(
+                                                                                backgroundColor: Colors.green,
+                                                                                radius: 5,
+                                                                              ),
+                                                                              const SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              Text(
+                                                                                myTrip.data![index].status.toString(),
+                                                                                style: const TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: Colors.green,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          )
+                                                                        ],
                                                                       ),
-                                                                    ),
+                                                                    )
                                                                   ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 12,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                              height: 20,
-                                                              width: 20,
-                                                              child: Image.asset(
-                                                                  "assets/images/calender.png")),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.75,
-                                                            child: const Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Column(
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 12,
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                        width:
+                                                                            20,
+                                                                        child: Image.asset(
+                                                                            "assets/images/calender.png")),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.75,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              const Text(
+                                                                                "Start Date",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                              Text(
+                                                                                myTrip.data![index].startDate.toString(),
+                                                                                style: const TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor1,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 12,
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            20,
+                                                                        width:
+                                                                            20,
+                                                                        child: Image.asset(
+                                                                            "assets/images/locationchart.png")),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.75,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              const Text(
+                                                                                "Loading Location",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                              Text(
+                                                                                myTrip.data![index].loadingLocation.toString(),
+                                                                                style: const TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor1,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 12,
+                                                                ),
+                                                                Row(
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
-                                                                          .start,
+                                                                          .center,
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Text(
-                                                                      "Start Date",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
                                                                     ),
-                                                                    Text(
-                                                                      "December 22, 2023",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor1,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          top:
+                                                                              5),
+                                                                      child: SizedBox(
+                                                                          height:
+                                                                              22,
+                                                                          width: MediaQuery.of(context).size.width *
+                                                                              0.05,
+                                                                          child:
+                                                                              Image.asset("assets/images/cargotype.png")),
                                                                     ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 12,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                              height: 20,
-                                                              width: 20,
-                                                              child: Image.asset(
-                                                                  "assets/images/locationchart.png")),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.75,
-                                                            child: const Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      "Loading Location",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.02,
                                                                     ),
-                                                                    Text(
-                                                                      "Indore",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor1,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 12,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    top: 5),
-                                                            child: SizedBox(
-                                                                height: 22,
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width *
-                                                                    0.05,
-                                                                child: Image.asset(
-                                                                    "assets/images/cargotype.png")),
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.02,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.832,
-                                                            height: 50,
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                const Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      "Cargo Type",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      "General Cargo",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .textcolor1,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Container(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.30,
-                                                                  height: 30,
-                                                                  decoration:
-                                                                      const BoxDecoration(
-                                                                    // color: MyColor.Red_color,
-                                                                    gradient:
-                                                                        LinearGradient(
-                                                                      begin: Alignment
-                                                                          .centerLeft,
-                                                                      end: Alignment
-                                                                          .centerRight,
-                                                                      tileMode:
-                                                                          TileMode
-                                                                              .mirror,
-                                                                      colors: [
-                                                                        MyColor
-                                                                            .button1,
-                                                                        MyColor
-                                                                            .button,
-                                                                      ],
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.only(
-                                                                            topLeft: Radius.circular(
-                                                                              12,
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.832,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.end,
+                                                                        children: [
+                                                                          Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              const Text(
+                                                                                "Cargo Type",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                              Text(
+                                                                                myTrip.data![index].typeOfCargo.toString(),
+                                                                                style: const TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.textcolor1,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.of(context).size.width * 0.30,
+                                                                            height:
+                                                                                30,
+                                                                            decoration:
+                                                                                const BoxDecoration(
+                                                                              // color: MyColor.Red_color,
+                                                                              gradient: LinearGradient(
+                                                                                begin: Alignment.centerLeft,
+                                                                                end: Alignment.centerRight,
+                                                                                tileMode: TileMode.mirror,
+                                                                                colors: [
+                                                                                  MyColor.button1,
+                                                                                  MyColor.button,
+                                                                                ],
+                                                                              ),
+                                                                              borderRadius: BorderRadius.only(
+                                                                                  topLeft: Radius.circular(
+                                                                                    12,
+                                                                                  ),
+                                                                                  bottomRight: Radius.circular(10)),
                                                                             ),
-                                                                            bottomRight: Radius.circular(10)),
-                                                                  ),
-                                                                  child:
-                                                                      const Center(
-                                                                    child: Text(
-                                                                      "View Detail",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: MyColor
-                                                                            .white,
-                                                                        // overflow: TextOverflow.ellipsis,
-                                                                        fontFamily:
-                                                                            ColorFamily.fontsSFProDisplay,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
+                                                                            child:
+                                                                                const Center(
+                                                                              child: Text(
+                                                                                "View Detail",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 12,
+                                                                                  color: MyColor.white,
+                                                                                  // overflow: TextOverflow.ellipsis,
+                                                                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          )
+                                                                        ],
                                                                       ),
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ]),
+                                                        ),
                                                       ),
-                                                    ]),
-                                                  ),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
+                                        ],
+                                      ),
+                              )
+                            : index == 1
+                                ? SingleChildScrollView(
+                                    child: myTrip.data!.isEmpty
+                                        ? SizedBox(
+                                            height: screen.height * 0.545,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                  child: Text("No Data"),
                                                 ),
                                               ],
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : index == 2
-                                ? SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.545,
-                                          child: ListView.builder(
-                                              padding:
-                                                  EdgeInsetsDirectional.zero,
-                                              shrinkWrap: true,
-                                              itemCount: 5,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Stack(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const TripDetials()));
-                                                      },
-                                                      child: Card(
-                                                        color: Colors.white,
-                                                        surfaceTintColor:
-                                                            Colors.white,
-                                                        child: Column(
-                                                            children: [
-                                                              const SizedBox(
-                                                                height: 08,
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
+                                            ),
+                                          )
+                                        : Column(
+                                            children: [
+                                              SizedBox(
+                                                height: screen.height * 0.545,
+                                                child: ListView.builder(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .only(bottom: 40),
+                                                    shrinkWrap: true,
+                                                    itemCount:
+                                                        myTrip.data!.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Stack(
+                                                        children: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              const TripDetials()));
+                                                            },
+                                                            child: Card(
+                                                              color:
+                                                                  Colors.white,
+                                                              surfaceTintColor:
+                                                                  Colors.white,
+                                                              child: Column(
+                                                                  children: [
+                                                                    const SizedBox(
                                                                       height:
-                                                                          20,
-                                                                      width: 20,
-                                                                      child: Image
-                                                                          .asset(
-                                                                              "assets/images/triplocation.png")),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.75,
-                                                                    child:
-                                                                        const Row(
+                                                                          08,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                20,
+                                                                            width:
+                                                                                20,
+                                                                            child:
+                                                                                Image.asset("assets/images/triplocation.png")),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.75,
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  const Text(
+                                                                                    "Trip Name",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    myTrip.data![index].name.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor1,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              Row(
+                                                                                children: [
+                                                                                  const CircleAvatar(
+                                                                                    backgroundColor: MyColor.cardpendding,
+                                                                                    radius: 5,
+                                                                                  ),
+                                                                                  const SizedBox(
+                                                                                    width: 5,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    myTrip.data![index].status.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.cardpendding,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                          12,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                20,
+                                                                            width:
+                                                                                20,
+                                                                            child:
+                                                                                Image.asset("assets/images/calender.png")),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.75,
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  const Text(
+                                                                                    "Start Date",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    myTrip.data![index].startDate.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor1,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                          12,
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                20,
+                                                                            width:
+                                                                                20,
+                                                                            child:
+                                                                                Image.asset("assets/images/locationchart.png")),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.75,
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  const Text(
+                                                                                    "Loading Location",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    myTrip.data![index].loadingLocation.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor1,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height:
+                                                                          12,
+                                                                    ),
+                                                                    Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
-                                                                              .spaceBetween,
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
                                                                       children: [
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              "Trip Name",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.only(top: 5),
+                                                                          child: SizedBox(
+                                                                              height: 22,
+                                                                              width: MediaQuery.of(context).size.width * 0.05,
+                                                                              child: Image.asset("assets/images/cargotype.png")),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.02,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * 0.832,
+                                                                          height:
+                                                                              50,
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.end,
+                                                                            children: [
+                                                                              Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  const Text(
+                                                                                    "Cargo Type",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    myTrip.data![index].typeOfCargo.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor1,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
                                                                               ),
-                                                                            ),
-                                                                            Text(
-                                                                              "Indore to Bhopal",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor1,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                          ],
+                                                                              Container(
+                                                                                width: MediaQuery.of(context).size.width * 0.30,
+                                                                                height: 30,
+                                                                                decoration: const BoxDecoration(
+                                                                                  // color: MyColor.Red_color,
+                                                                                  gradient: LinearGradient(
+                                                                                    begin: Alignment.centerLeft,
+                                                                                    end: Alignment.centerRight,
+                                                                                    tileMode: TileMode.mirror,
+                                                                                    colors: [
+                                                                                      MyColor.button1,
+                                                                                      MyColor.button,
+                                                                                    ],
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.only(
+                                                                                      topLeft: Radius.circular(
+                                                                                        12,
+                                                                                      ),
+                                                                                      bottomRight: Radius.circular(10)),
+                                                                                ),
+                                                                                child: const Center(
+                                                                                  child: Text(
+                                                                                    "View Detail",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.white,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ]),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
+                                  )
+                                : index == 2
+                                    ? SingleChildScrollView(
+                                        child: myTrip.data!.isEmpty
+                                            ? SizedBox(
+                                                height: screen.height * 0.545,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Center(
+                                                      child: Text("No Data"),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.545,
+                                                    child: ListView.builder(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                    .only(
+                                                                bottom: 40),
+                                                        shrinkWrap: true,
+                                                        itemCount:
+                                                            myTrip.data!.length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return Stack(
+                                                            children: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              const TripDetials()));
+                                                                },
+                                                                child: Card(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  surfaceTintColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  child: Column(
+                                                                      children: [
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              08,
                                                                         ),
                                                                         Row(
                                                                           children: [
-                                                                            CircleAvatar(
-                                                                              backgroundColor: MyColor.cardcompleted,
-                                                                              radius: 5,
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
                                                                             ),
-                                                                            Text(
-                                                                              "  Completed",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.cardcompleted,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w400,
+                                                                            SizedBox(
+                                                                                height: 20,
+                                                                                width: 20,
+                                                                                child: Image.asset("assets/images/triplocation.png")),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.75,
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      const Text(
+                                                                                        "Trip Name",
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        myTrip.data![index].name.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor1,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      const CircleAvatar(
+                                                                                        backgroundColor: MyColor.cardcompleted,
+                                                                                        radius: 5,
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        width: 5,
+                                                                                      ),
+                                                                                      Text(
+                                                                                        myTrip.data![index].status.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.cardcompleted,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  )
+                                                                                ],
                                                                               ),
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 12,
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          20,
-                                                                      width: 20,
-                                                                      child: Image
-                                                                          .asset(
-                                                                              "assets/images/calender.png")),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.75,
-                                                                    child:
-                                                                        const Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              "Start Date",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                            Text(
-                                                                              "December 22, 2023",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor1,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
+                                                                            )
                                                                           ],
                                                                         ),
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 12,
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          20,
-                                                                      width: 20,
-                                                                      child: Image
-                                                                          .asset(
-                                                                              "assets/images/locationchart.png")),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.75,
-                                                                    child:
-                                                                        const Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              "Loading Location",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                            Text(
-                                                                              "Indore",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor1,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 12,
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .only(
-                                                                        top: 5),
-                                                                    child: SizedBox(
-                                                                        height:
-                                                                            22,
-                                                                        width: screen.width *
-                                                                            0.05,
-                                                                        child: Image.asset(
-                                                                            "assets/images/cargotype.png")),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.02,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.832,
-                                                                    height: 50,
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        const Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              "Cargo Type",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                            Text(
-                                                                              "General Cargo",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.textcolor1,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w600,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        Container(
-                                                                          width:
-                                                                              screen.width * 0.30,
+                                                                        const SizedBox(
                                                                           height:
-                                                                              30,
-                                                                          decoration:
-                                                                              const BoxDecoration(
-                                                                            // color: MyColor.Red_color,
-                                                                            gradient:
-                                                                                LinearGradient(
-                                                                              begin: Alignment.centerLeft,
-                                                                              end: Alignment.centerRight,
-                                                                              tileMode: TileMode.mirror,
-                                                                              colors: [
-                                                                                MyColor.button1,
-                                                                                MyColor.button,
-                                                                              ],
+                                                                              12,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
                                                                             ),
-                                                                            borderRadius: BorderRadius.only(
-                                                                                topLeft: Radius.circular(
-                                                                                  12,
-                                                                                ),
-                                                                                bottomRight: Radius.circular(10)),
-                                                                          ),
-                                                                          child:
-                                                                              const Center(
-                                                                            child:
-                                                                                Text(
-                                                                              "View Detail",
-                                                                              style: TextStyle(
-                                                                                fontSize: 12,
-                                                                                color: MyColor.white,
-                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                fontWeight: FontWeight.w500,
+                                                                            SizedBox(
+                                                                                height: 20,
+                                                                                width: 20,
+                                                                                child: Image.asset("assets/images/calender.png")),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.75,
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      const Text(
+                                                                                        "Start Date",
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        myTrip.data![index].startDate.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor1,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ],
                                                                               ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              12,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
                                                                             ),
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ],
+                                                                            SizedBox(
+                                                                                height: 20,
+                                                                                width: 20,
+                                                                                child: Image.asset("assets/images/locationchart.png")),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.75,
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      const Text(
+                                                                                        "Loading Location",
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        myTrip.data![index].loadingLocation.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor1,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              12,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: const EdgeInsets.only(top: 5),
+                                                                              child: SizedBox(height: 22, width: screen.width * 0.05, child: Image.asset("assets/images/cargotype.png")),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.02,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 0.832,
+                                                                              height: 50,
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                                                children: [
+                                                                                  Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      const Text(
+                                                                                        "Cargo Type",
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        myTrip.data![index].typeOfCargo.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor1,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  Container(
+                                                                                    width: screen.width * 0.30,
+                                                                                    height: 30,
+                                                                                    decoration: const BoxDecoration(
+                                                                                      // color: MyColor.Red_color,
+                                                                                      gradient: LinearGradient(
+                                                                                        begin: Alignment.centerLeft,
+                                                                                        end: Alignment.centerRight,
+                                                                                        tileMode: TileMode.mirror,
+                                                                                        colors: [
+                                                                                          MyColor.button1,
+                                                                                          MyColor.button,
+                                                                                        ],
+                                                                                      ),
+                                                                                      borderRadius: BorderRadius.only(
+                                                                                          topLeft: Radius.circular(
+                                                                                            12,
+                                                                                          ),
+                                                                                          bottomRight: Radius.circular(10)),
+                                                                                    ),
+                                                                                    child: const Center(
+                                                                                      child: Text(
+                                                                                        "View Detail",
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.white,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w500,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      ]),
+                                                                ),
                                                               ),
-                                                            ]),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container()
+                                                            ],
+                                                          );
+                                                        }),
+                                                  ),
+                                                ],
+                                              ),
+                                      )
+                                    : Container()
                   ],
                 ),
               ),
@@ -1707,6 +1512,38 @@ class _HomescreenState extends State<Homescreen> {
         ],
       ),
     );
+  }
+
+  Future<MyTrip> mytripGet(BuildContext context, String status) async {
+    // Utility.progressloadingDialog(context, true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(logLevel: LogLevel.BODY),
+    ]);
+
+    var response =
+        await http.get(Uri.parse(ApiServer.mytripapi + status), headers: {
+      "content-type": "application/json",
+      "accept": "application/json",
+      "Authorization":
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    loading1 = true;
+    if (jsonResponse['status'] == true) {
+      setState(() {
+        loading1 = false;
+      });
+      myTrip = MyTrip.fromJson(jsonResponse);
+    } else {
+      setState(() {
+        loading1 = false;
+      });
+    }
+
+    return MyTrip.fromJson(jsonDecode(response.body));
   }
 
   Future<ProfileGet> profileGet(
