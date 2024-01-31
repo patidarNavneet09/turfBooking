@@ -272,7 +272,7 @@ class _HomescreenState extends State<Homescreen> {
                                     : const BoxDecoration(),
                                 child: Center(
                                   child: Text(
-                                    "Accept",
+                                    "Active",
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: index == 1
