@@ -32,7 +32,7 @@ class _HomescreenState extends State<Homescreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
     index = 0;
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => mytripGet(context, "Accept"));
+        .addPostFrameCallback((_) => mytripGet(context, "Pending"));
   }
 
   dynamic status = '';
@@ -206,7 +206,7 @@ class _HomescreenState extends State<Homescreen> {
                           children: [
                             InkWell(
                               onTap: () {
-                                status = "Accept";
+                                status = "Pending";
                                 index = 0;
                                 mytripGet(context, status);
                                 setState(() {});
@@ -231,7 +231,7 @@ class _HomescreenState extends State<Homescreen> {
                                     : const BoxDecoration(),
                                 child: Center(
                                   child: Text(
-                                    "Active",
+                                    "New Jobs",
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: index == 0
@@ -247,7 +247,7 @@ class _HomescreenState extends State<Homescreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                status = "Pending";
+                                status = "Accept";
                                 mytripGet(context, status);
                                 index = 1;
                                 setState(() {});
@@ -272,7 +272,7 @@ class _HomescreenState extends State<Homescreen> {
                                     : const BoxDecoration(),
                                 child: Center(
                                   child: Text(
-                                    "Pending",
+                                    "Accept",
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: index == 1
@@ -334,7 +334,7 @@ class _HomescreenState extends State<Homescreen> {
                     myTrip.status != true
                         ? SizedBox(
                             height: screen.height * 0.545,
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -349,7 +349,7 @@ class _HomescreenState extends State<Homescreen> {
                                 child: myTrip.data!.isEmpty
                                     ? SizedBox(
                                         height: screen.height * 0.545,
-                                        child: Column(
+                                        child: const Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           crossAxisAlignment:
@@ -456,17 +456,17 @@ class _HomescreenState extends State<Homescreen> {
                                                                           Row(
                                                                             children: [
                                                                               const CircleAvatar(
-                                                                                backgroundColor: Colors.green,
+                                                                                backgroundColor: MyColor.cardpendding,
                                                                                 radius: 5,
                                                                               ),
                                                                               const SizedBox(
                                                                                 width: 5,
                                                                               ),
                                                                               Text(
-                                                                                myTrip.data![index].status.toString(),
+                                                                                myTrip.data![index].status.toString() == "Pending" ? "New Jobs" : "",
                                                                                 style: const TextStyle(
                                                                                   fontSize: 12,
-                                                                                  color: Colors.green,
+                                                                                  color: MyColor.cardpendding,
                                                                                   // overflow: TextOverflow.ellipsis,
                                                                                   fontFamily: ColorFamily.fontsSFProDisplay,
                                                                                   fontWeight: FontWeight.w400,
@@ -748,7 +748,7 @@ class _HomescreenState extends State<Homescreen> {
                                     child: myTrip.data!.isEmpty
                                         ? SizedBox(
                                             height: screen.height * 0.545,
-                                            child: Column(
+                                            child: const Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
@@ -1112,7 +1112,7 @@ class _HomescreenState extends State<Homescreen> {
                                         child: myTrip.data!.isEmpty
                                             ? SizedBox(
                                                 height: screen.height * 0.545,
-                                                child: Column(
+                                                child: const Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   crossAxisAlignment:
