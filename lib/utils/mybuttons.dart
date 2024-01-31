@@ -13,6 +13,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsets? padding;
   final TextStyle? textStyle;
   final Color? color;
+  final bool? isLoading;
 
   const AppButton({
     super.key,
@@ -27,6 +28,7 @@ class AppButton extends StatelessWidget {
     this.btnWidth,
     this.btnHeight,
     this.color,
+    this.isLoading = false,
   });
 
   @override
@@ -63,11 +65,10 @@ class AppButton extends StatelessWidget {
                       ),
                     ),
               ),
-              onPressed: onPressed,
-              child: Padding(
-                padding: padding ??
-                    const EdgeInsets.fromLTRB(00.0, 18.0, 00.0, 18.0),
-                child: Text(
+              onPressed: (isLoading ?? false) ? null : onPressed,
+              child: Visibility(
+                visible: isLoading ?? false,
+                replacement: Text(
                   name,
                   style: textStyle ??
                       const TextStyle(
@@ -77,6 +78,13 @@ class AppButton extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                 ),
+                child: const SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: CircularProgressIndicator(
+                      color: MyColor.white,
+                      strokeWidth: 3,
+                    )),
               ),
             ),
           ),

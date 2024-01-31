@@ -22,7 +22,9 @@ class Login extends StatefulWidget {
 }
 
 bool texthide = true;
+bool texthide1 = true;
 dynamic iconsdata;
+dynamic iconsdata1;
 
 class _LoginState extends State<Login> {
   String devicetoken = "";
@@ -37,6 +39,15 @@ class _LoginState extends State<Login> {
     texthide = true;
   }
 
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
+  bool loadingLogin = false;
   LoginResponse loginResponse = LoginResponse();
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
@@ -83,7 +94,7 @@ class _LoginState extends State<Login> {
         centerTitle: true,
         leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+              exit(0);
             },
             child: const Icon(Icons.arrow_back)),
       ),
@@ -148,21 +159,21 @@ class _LoginState extends State<Login> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: passwordController,
                   keyboardType: TextInputType.text,
-                  obscureText: texthide,
+                  obscureText: texthide1,
                   decoration: const InputDecoration().prefixIconTextField(
                       suffix: InkWell(
                         onTap: () {
-                          if (texthide == true) {
-                            iconsdata = 0;
-                            texthide = false;
+                          if (texthide1 == true) {
+                            iconsdata1 = 0;
+                            texthide1 = false;
                             setState(() {});
-                          } else if (texthide == false) {
-                            iconsdata = 1;
-                            texthide = true;
+                          } else if (texthide1 == false) {
+                            iconsdata1 = 1;
+                            texthide1 = true;
                             setState(() {});
                           }
                         },
-                        child: iconsdata == 0
+                        child: iconsdata1 == 0
                             ? SizedBox(
                                 width: 2,
                                 height: 0,
@@ -190,6 +201,7 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppButton(
+                      isLoading: isLoading,
                       // color: MyColor.transparent,
                       textStyle: const TextStyle(
                         color: MyColor.white,
@@ -199,6 +211,7 @@ class _LoginState extends State<Login> {
                       ),
                       btnWidth: MediaQuery.of(context).size.width * 0.90,
                       onPressed: () {
+                        loadingLogin = true;
                         String email = emailController.text;
                         String password = passwordController.text;
                         if (email.isEmpty) {
@@ -208,7 +221,6 @@ class _LoginState extends State<Login> {
                           Fluttertoast.showToast(
                               msg: "Please Enter Your Password");
                         } else {
-                          // print("Mobile.length >>>>>>${mobile.length}");
                           loginApi(context);
                         }
                       },
@@ -228,7 +240,7 @@ class _LoginState extends State<Login> {
     BuildContext context,
   ) async {
     var request = {};
-
+    setLoading(true);
     request['email'] = emailController.text;
     request['password'] = passwordController.text;
     request['fcm_token'] = "123456";
@@ -250,8 +262,10 @@ class _LoginState extends State<Login> {
         });
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
-
+    loadingLogin = true;
+    setLoading(false);
     if (jsonResponse['status'] == true) {
+      loadingLogin = false;
       loginResponse = LoginResponse.fromJson(jsonResponse);
 
       SharedPreferences sharedPreferences =
