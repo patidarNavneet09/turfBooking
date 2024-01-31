@@ -158,6 +158,12 @@ class _LoginState extends State<Login> {
               child: Card(
                 elevation: 1,
                 child: TextFormField(
+                  onEditingComplete: () {
+                    String input = passwordController.text;
+                    if (input.isNotEmpty) {
+                      loginApi(context);
+                    }
+                  },
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: passwordController,
@@ -287,7 +293,9 @@ class _LoginState extends State<Login> {
                     )),
             (Route<dynamic> route) => false);
       }
-    } else {}
+    } else {
+      Fluttertoast.showToast(msg: jsonResponse['message']);
+    }
 
     return;
   }
