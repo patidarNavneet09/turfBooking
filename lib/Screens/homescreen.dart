@@ -32,7 +32,7 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   Widget build(BuildContext context) {
-    var Screen = MediaQuery.of(context).size;
+    var screen = MediaQuery.of(context).size;
     return Scaffold(
       body: loading1 == true
           ? Center(
@@ -45,13 +45,8 @@ class _HomescreenState extends State<Homescreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SizedBox(
-                    //   height: Screen.height * 0.078,
-                    // ),
                     Container(
-                      // height: Screen.height * 0.12,
                       decoration: BoxDecoration(
-                        // color: MyColor.Red_color,
                         gradient: const LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
@@ -69,40 +64,34 @@ class _HomescreenState extends State<Homescreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 25, bottom: 25),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width: Screen.width * 0.03,
+                                  width: screen.width * 0.03,
                                 ),
-                                Container(
-                                  height: 58,
-                                  width: 58,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: ClipOval(
-                                    child: CachedNetworkImage(
-                                      imageUrl: profilegetResponse.data!.image
-                                          .toString(),
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: CircularProgressIndicator(
-                                            color: MyColor.button,
-                                            value: downloadProgress.progress),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
-                                      fit: BoxFit.cover,
+                                ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: profilegetResponse.data!.image
+                                        .toString(),
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            CircularProgressIndicator(
+                                      color: MyColor.button,
+                                      value: downloadProgress.progress,
                                     ),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                    fit: BoxFit.cover,
+                                    height: screen.height * 0.08,
+                                    width: screen.height * 0.08,
                                   ),
                                 ),
                                 SizedBox(
-                                  width: Screen.width * 0.02,
+                                  width: screen.width * 0.02,
                                 ),
                                 SizedBox(
                                   // color: Colors.amber,
-                                  width: Screen.width * 0.70,
+                                  width: screen.width * 0.70,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -181,7 +170,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ),
                     SizedBox(
-                      height: Screen.height * 0.02,
+                      height: screen.height * 0.02,
                     ),
                     const Text(
                       "My Trips",
@@ -194,7 +183,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ),
                     SizedBox(
-                      height: Screen.height * 0.011,
+                      height: screen.height * 0.011,
                     ),
                     Card(
                       elevation: 1,
@@ -205,7 +194,7 @@ class _HomescreenState extends State<Homescreen> {
                           // border: Border.all(width: 2.1, color: MyColor.white),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        height: Screen.height * 0.08,
+                        height: screen.height * 0.08,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -215,8 +204,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: Screen.width * 0.30,
-                                height: Screen.height * 0.08,
+                                width: screen.width * 0.30,
+                                height: screen.height * 0.08,
                                 decoration: index == 0
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -254,8 +243,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: Screen.width * 0.30,
-                                height: Screen.height * 0.08,
+                                width: screen.width * 0.30,
+                                height: screen.height * 0.08,
                                 decoration: index == 1
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -293,8 +282,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: Screen.width * 0.30,
-                                height: Screen.height * 0.08,
+                                width: screen.width * 0.30,
+                                height: screen.height * 0.08,
                                 decoration: index == 2
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -335,7 +324,7 @@ class _HomescreenState extends State<Homescreen> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: Screen.height * 0.545,
+                                  height: screen.height * 0.545,
                                   child: ListView.builder(
                                       padding: EdgeInsetsDirectional.zero,
                                       shrinkWrap: true,
@@ -810,7 +799,7 @@ class _HomescreenState extends State<Homescreen> {
                                 child: Column(
                                   children: [
                                     SizedBox(
-                                      height: Screen.height * 0.545,
+                                      height: screen.height * 0.545,
                                       child: ListView.builder(
                                           padding: EdgeInsetsDirectional.zero,
                                           shrinkWrap: true,
@@ -1539,7 +1528,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                     child: SizedBox(
                                                                         height:
                                                                             22,
-                                                                        width: Screen.width *
+                                                                        width: screen.width *
                                                                             0.05,
                                                                         child: Image.asset(
                                                                             "assets/images/cargotype.png")),
@@ -1594,7 +1583,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                         ),
                                                                         Container(
                                                                           width:
-                                                                              Screen.width * 0.30,
+                                                                              screen.width * 0.30,
                                                                           height:
                                                                               30,
                                                                           decoration:
@@ -1656,9 +1645,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   Container buildMyNavBar(BuildContext context) {
-    var Screen = MediaQuery.of(context).size;
+    var screen = MediaQuery.of(context).size;
     return Container(
-      height: Screen.height * 0.09,
+      height: screen.height * 0.09,
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
         borderRadius: BorderRadius.circular(12),
