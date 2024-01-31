@@ -32,6 +32,7 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   Widget build(BuildContext context) {
+    var Screen = MediaQuery.of(context).size;
     return Scaffold(
       body: loading1 == true
           ? Center(
@@ -45,10 +46,10 @@ class _HomescreenState extends State<Homescreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * 0.078,
+                    //   height: Screen.height * 0.078,
                     // ),
                     Container(
-                      // height: MediaQuery.of(context).size.height * 0.12,
+                      // height: Screen.height * 0.12,
                       decoration: BoxDecoration(
                         // color: MyColor.Red_color,
                         gradient: const LinearGradient(
@@ -98,8 +99,7 @@ class _HomescreenState extends State<Homescreen> {
                                 ),
                                 SizedBox(
                                   // color: Colors.amber,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.75,
+                                  width: Screen.width * 0.70,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -178,7 +178,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
+                      height: Screen.height * 0.02,
                     ),
                     const Text(
                       "My Trips",
@@ -191,7 +191,7 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.011,
+                      height: Screen.height * 0.011,
                     ),
                     Card(
                       elevation: 1,
@@ -202,7 +202,7 @@ class _HomescreenState extends State<Homescreen> {
                           // border: Border.all(width: 2.1, color: MyColor.white),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: Screen.height * 0.08,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -212,9 +212,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width * 0.30,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
+                                width: Screen.width * 0.30,
+                                height: Screen.height * 0.08,
                                 decoration: index == 0
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -252,9 +251,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width * 0.30,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
+                                width: Screen.width * 0.30,
+                                height: Screen.height * 0.08,
                                 decoration: index == 1
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -292,9 +290,8 @@ class _HomescreenState extends State<Homescreen> {
                                 setState(() {});
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width * 0.30,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
+                                width: Screen.width * 0.30,
+                                height: Screen.height * 0.08,
                                 decoration: index == 2
                                     ? BoxDecoration(
                                         color: Colors.white,
@@ -335,8 +332,7 @@ class _HomescreenState extends State<Homescreen> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.545,
+                                  height: Screen.height * 0.545,
                                   child: ListView.builder(
                                       padding: EdgeInsetsDirectional.zero,
                                       shrinkWrap: true,
@@ -811,9 +807,7 @@ class _HomescreenState extends State<Homescreen> {
                                 child: Column(
                                   children: [
                                     SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.545,
+                                      height: Screen.height * 0.545,
                                       child: ListView.builder(
                                           padding: EdgeInsetsDirectional.zero,
                                           shrinkWrap: true,
@@ -1542,7 +1536,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                     child: SizedBox(
                                                                         height:
                                                                             22,
-                                                                        width: MediaQuery.of(context).size.width *
+                                                                        width: Screen.width *
                                                                             0.05,
                                                                         child: Image.asset(
                                                                             "assets/images/cargotype.png")),
@@ -1597,7 +1591,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                         ),
                                                                         Container(
                                                                           width:
-                                                                              MediaQuery.of(context).size.width * 0.30,
+                                                                              Screen.width * 0.30,
                                                                           height:
                                                                               30,
                                                                           decoration:
@@ -1659,8 +1653,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   Container buildMyNavBar(BuildContext context) {
+    var Screen = MediaQuery.of(context).size;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.09,
+      height: Screen.height * 0.09,
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
         borderRadius: BorderRadius.circular(12),

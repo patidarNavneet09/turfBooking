@@ -21,6 +21,7 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
+    var Screen = MediaQuery.of(context).size;
     return Scaffold(
       body: loading1 == true
           ? Center(
@@ -32,7 +33,7 @@ class _SettingState extends State<Setting> {
                 child: Column(
                   children: [
                     Container(
-                      // height: MediaQuery.of(context).size.height * 0.12,
+                      // height: Screen.height * 0.12,
                       decoration: BoxDecoration(
                         // color: MyColor.Red_color,
                         gradient: const LinearGradient(
@@ -81,8 +82,7 @@ class _SettingState extends State<Setting> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.58,
+                                  width: Screen.width * 0.50,
                                   // color: Colors.red,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -173,8 +173,7 @@ class _SettingState extends State<Setting> {
                                 children: [
                                   SizedBox(
                                     height: 55,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.90,
+                                    width: Screen.width * 0.90,
                                     child: Row(
                                       children: [
                                         const SizedBox(
@@ -219,8 +218,7 @@ class _SettingState extends State<Setting> {
                                 children: [
                                   SizedBox(
                                     height: 55,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.90,
+                                    width: Screen.width * 0.90,
                                     child: Row(
                                       children: [
                                         const SizedBox(
@@ -265,8 +263,7 @@ class _SettingState extends State<Setting> {
                                 children: [
                                   SizedBox(
                                     height: 55,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.90,
+                                    width: Screen.width * 0.90,
                                     child: Row(
                                       children: [
                                         const SizedBox(
@@ -311,8 +308,7 @@ class _SettingState extends State<Setting> {
                                 children: [
                                   SizedBox(
                                     height: 55,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.90,
+                                    width: Screen.width * 0.90,
                                     child: Row(
                                       children: [
                                         const SizedBox(
@@ -441,8 +437,7 @@ class _SettingState extends State<Setting> {
                                   children: [
                                     SizedBox(
                                       height: 55,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.90,
+                                      width: Screen.width * 0.90,
                                       child: Row(
                                         children: [
                                           const SizedBox(

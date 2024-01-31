@@ -57,19 +57,16 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
               children: [
                 SizedBox(
                     height: 25,
-                    width: 25,
+                    width: 30,
                     child: Image.asset("assets/images/Home.png")),
-                SizedBox(
-                  width: 30,
-                  child: Text(
-                    pagesIndex == 0 ? "Home" : "",
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: MyColor.white,
-                      // overflow: TextOverflow.ellipsis,
-                      fontFamily: ColorFamily.fontsSFProDisplay,
-                      fontWeight: FontWeight.w500,
-                    ),
+                Text(
+                  pagesIndex == 0 ? "Home" : "",
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: MyColor.white,
+                    // overflow: TextOverflow.ellipsis,
+                    fontFamily: ColorFamily.fontsSFProDisplay,
+                    fontWeight: FontWeight.w500,
                   ),
                 )
               ],
@@ -88,19 +85,16 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
               children: [
                 SizedBox(
                     height: 25,
-                    width: 25,
+                    width: 30,
                     child: Image.asset("assets/images/setting.png")),
-                SizedBox(
-                  width: 40,
-                  child: Text(
-                    pagesIndex == 1 ? "Settings" : "",
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: MyColor.white,
-                      // overflow: TextOverflow.ellipsis,
-                      // fontFamily: ColorFamily.fontsSFProDisplay,
-                      fontWeight: FontWeight.w500,
-                    ),
+                Text(
+                  pagesIndex == 1 ? "Settings" : "",
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: MyColor.white,
+                    // overflow: TextOverflow.ellipsis,
+                    // fontFamily: ColorFamily.fontsSFProDisplay,
+                    fontWeight: FontWeight.w500,
                   ),
                 )
               ],
