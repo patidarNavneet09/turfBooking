@@ -20,33 +20,35 @@ class Homescreen extends StatefulWidget {
 }
 
 int index = 0;
+bool loading1 = true;
 
 class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: profilegetResponse.status.toString() != "true"
+      body: loading1 == true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
             )
           : Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
-                    ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.078,
+                    // ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.12,
+                      // height: MediaQuery.of(context).size.height * 0.12,
                       decoration: BoxDecoration(
                         // color: MyColor.Red_color,
                         gradient: const LinearGradient(
@@ -64,13 +66,15 @@ class _HomescreenState extends State<Homescreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.only(
+                                left: 4, right: 4, top: 13, bottom: 13),
                             child: Row(
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.all(10),
-                                  height: 56,
-                                  width: 56,
+                                  margin: const EdgeInsets.only(
+                                      left: 8, right: 8, top: 13, bottom: 13),
+                                  height: 58,
+                                  width: 58,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
@@ -93,71 +97,80 @@ class _HomescreenState extends State<Homescreen> {
                                   ),
                                 ),
                                 SizedBox(
+                                  // color: Colors.amber,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.70,
-                                  // color: Colors.red,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                      MediaQuery.of(context).size.width * 0.75,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "${profilegetResponse.data!.firstName.toString()} ${profilegetResponse.data!.lastName.toString()}",
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w600,
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${profilegetResponse.data!.firstName.toString()} ${profilegetResponse.data!.lastName.toString()}",
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                color: MyColor.white,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                          const Text(
-                                            "Truck ID  ",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
+                                            const Text(
+                                              "Good Morning!",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: MyColor.white,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                      const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Good Morning!",
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
+                                      const Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "Truck ID ",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: MyColor.white,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            " #2512325",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
+                                            Text(
+                                              "#2512325",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: MyColor.white,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      )
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -325,6 +338,7 @@ class _HomescreenState extends State<Homescreen> {
                                   height: MediaQuery.of(context).size.height *
                                       0.545,
                                   child: ListView.builder(
+                                      padding: EdgeInsetsDirectional.zero,
                                       shrinkWrap: true,
                                       itemCount: 5,
                                       itemBuilder:
@@ -801,6 +815,7 @@ class _HomescreenState extends State<Homescreen> {
                                           MediaQuery.of(context).size.height *
                                               0.545,
                                       child: ListView.builder(
+                                          padding: EdgeInsetsDirectional.zero,
                                           shrinkWrap: true,
                                           itemCount: 5,
                                           itemBuilder: (BuildContext context,
@@ -1257,6 +1272,8 @@ class _HomescreenState extends State<Homescreen> {
                                                   .height *
                                               0.545,
                                           child: ListView.builder(
+                                              padding:
+                                                  EdgeInsetsDirectional.zero,
                                               shrinkWrap: true,
                                               itemCount: 5,
                                               itemBuilder:
@@ -1723,9 +1740,17 @@ class _HomescreenState extends State<Homescreen> {
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
+    loading1 = true;
     if (jsonResponse['status'] == true) {
+      setState(() {
+        loading1 = false;
+      });
       profilegetResponse = ProfileGet.fromJson(jsonResponse);
-    } else {}
+    } else {
+      setState(() {
+        loading1 = false;
+      });
+    }
 
     return ProfileGet.fromJson(jsonDecode(response.body));
   }

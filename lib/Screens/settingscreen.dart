@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/editprofile.dart';
+import 'package:truckmanagement/Screens/homescreen.dart';
 import 'package:truckmanagement/Screens/loginscreen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -21,25 +22,24 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: profilegetResponse.status.toString() != "true"
+      body: loading1 == true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
             )
           : Padding(
-              padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
-                      height: 110,
+                      // height: MediaQuery.of(context).size.height * 0.12,
                       decoration: BoxDecoration(
                         // color: MyColor.Red_color,
-                        // ignore: prefer_const_constructors
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                           tileMode: TileMode.mirror,
-                          colors: const [
+                          colors: [
                             MyColor.button1,
                             MyColor.button,
                           ],
@@ -49,49 +49,52 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.all(12),
-                                height: 60,
-                                width: 60,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl: profilegetResponse.data!.image
-                                        .toString(),
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: CircularProgressIndicator(
-                                          color: MyColor.button,
-                                          value: downloadProgress.progress),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 4, right: 4, top: 13, bottom: 13),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                      left: 8, right: 8, top: 13, bottom: 13),
+                                  height: 58,
+                                  width: 58,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: ClipOval(
+                                    child: CachedNetworkImage(
+                                      imageUrl: profilegetResponse.data!.image
+                                          .toString(),
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: CircularProgressIndicator(
+                                            color: MyColor.button,
+                                            value: downloadProgress.progress),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                      fit: BoxFit.cover,
                                     ),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.67,
-                                // color: Colors.red,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.58,
+                                  // color: Colors.red,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
                                               "${profilegetResponse.data!.firstName.toString()} ${profilegetResponse.data!.lastName.toString()}",
                                               style: const TextStyle(
                                                 fontSize: 18,
@@ -102,25 +105,21 @@ class _SettingState extends State<Setting> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                            // Text(
-                                            //   "Truck ID  ",
-                                            //   style: TextStyle(
-                                            //     fontSize: 16,
-                                            //     color: MyColor.white,
-                                            //     // overflow: TextOverflow.ellipsis,
-                                            //     // fontFamily: ColorFamily.fontsSFProDisplay,
-                                            //     fontWeight: FontWeight.w500,
-                                            //   ),
-                                            // ),
-                                          ],
-                                        ),
-                                        const Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "james@gmail.com",
-                                              style: TextStyle(
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              profilegetResponse.data!.email
+                                                  .toString(),
+                                              style: const TextStyle(
                                                 fontSize: 13,
                                                 color: MyColor.white,
                                                 // overflow: TextOverflow.ellipsis,
@@ -129,34 +128,33 @@ class _SettingState extends State<Setting> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ProfileSetting()));
-                                      },
-                                      child: const Text(
-                                        "Edit Profile",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: MyColor.white,
-                                          // overflow: TextOverflow.ellipsis,
-                                          fontFamily:
-                                              ColorFamily.fontsSFProDisplay,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ProfileSetting()));
+                                  },
+                                  child: const Text(
+                                    "Edit Profile",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: MyColor.white,
+                                      // overflow: TextOverflow.ellipsis,
+                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -508,7 +506,9 @@ class _SettingState extends State<Setting> {
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
+    loading1 = true;
     if (jsonResponse['status'] == true) {
+      loading1 = false;
       sharedPreferences.clear();
       if (context.mounted) {
         Navigator.of(context).pushAndRemoveUntil(

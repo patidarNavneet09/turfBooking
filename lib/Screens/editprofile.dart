@@ -23,6 +23,7 @@ List<XFile> imageFileList = [];
 ProfileGet profilegetResponse = ProfileGet();
 
 class _ProfileSettingState extends State<ProfileSetting> {
+  bool loading = false;
   File? image;
   File? selectedImage1;
   dynamic image1;
@@ -87,7 +88,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
             },
             child: const Icon(Icons.arrow_back)),
       ),
-      body: profilegetResponse.status.toString() != "true"
+      body: loading == true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
             )
@@ -104,137 +105,128 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
-                            onPressed: () {
-                              // showDialog(
-                              //   barrierDismissible: false,
-                              //   context: context,
-                              //   builder: (BuildContext context) => PopupContent(),
-                              // );
-                              // chooseImage1("camera");
-                              // showModalBottomSheet(
-                              //     shape: const RoundedRectangleBorder(
-                              //       // <-- SEE HERE
-                              //       borderRadius: BorderRadius.vertical(
-                              //         top: Radius.circular(20.0),
-                              //       ),
-                              //     ),
-                              //     context: context,
-                              //     builder: ((builder) => bottomSheet1()));
-                            },
-                            child: Stack(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.all(2),
-                                  height: 123,
-                                  width: 123,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 4, color: MyColor.button),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: selectedImage1 != null
-                                      ? CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: 50,
-                                          backgroundImage: Image.file(
-                                            selectedImage1!,
-                                            fit: BoxFit.cover,
-                                          ).image,
-                                        )
-                                      : Padding(
-                                          padding: const EdgeInsets.all(0.0),
-                                          child: ClipOval(
-                                            child: CachedNetworkImage(
-                                              imageUrl: profilegetResponse
-                                                  .data!.image
-                                                  .toString(),
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20.0),
-                                                child: SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.08,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                          color: MyColor.button,
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress),
-                                                ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                              fit: BoxFit.cover,
-                                            ),
+                          onPressed: () {
+                            // showDialog(
+                            //   barrierDismissible: false,
+                            //   context: context,
+                            //   builder: (BuildContext context) => PopupContent(),
+                            // );
+                            // chooseImage1("camera");
+                            // showModalBottomSheet(
+                            //     shape: const RoundedRectangleBorder(
+                            //       // <-- SEE HERE
+                            //       borderRadius: BorderRadius.vertical(
+                            //         top: Radius.circular(20.0),
+                            //       ),
+                            //     ),
+                            //     context: context,
+                            //     builder: ((builder) => bottomSheet1()));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(2),
+                            height: 123,
+                            width: 123,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 4, color: MyColor.button),
+                              shape: BoxShape.circle,
+                            ),
+                            child: selectedImage1 != null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 50,
+                                    backgroundImage: Image.file(
+                                      selectedImage1!,
+                                      fit: BoxFit.cover,
+                                    ).image,
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: ClipOval(
+                                      child: CachedNetworkImage(
+                                        imageUrl: profilegetResponse.data!.image
+                                            .toString(),
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.08,
+                                            child: CircularProgressIndicator(
+                                                color: MyColor.button,
+                                                value:
+                                                    downloadProgress.progress),
                                           ),
                                         ),
-                                  // : const CircleAvatar(
-                                  //     backgroundColor: Colors.white,
-                                  //     radius: 50,
-                                  //     backgroundImage: AssetImage(
-                                  //         "assets/images/Ellipse 18.png"))
-                                  // : snapshot.data!.data!.photo!.isEmpty
-                                  //     ? Padding(
-                                  //         padding:
-                                  //             const EdgeInsets.all(40.0),
-                                  //         child: SvgPicture.asset(
-                                  //             'assets/images/ic_upload_icon.svg'),
-                                  //       )
-                                  //     : Padding(
-                                  //         padding:
-                                  //             const EdgeInsets.all(0.0),
-                                  //         child: ClipOval(
-                                  //           child: CachedNetworkImage(
-                                  //             imageUrl: snapshot
-                                  //                 .data!.data!.photo
-                                  //                 .toString(),
-                                  //             progressIndicatorBuilder:
-                                  //                 (context, url,
-                                  //                         downloadProgress) =>
-                                  //                     Padding(
-                                  //               padding:
-                                  //                   const EdgeInsets.all(
-                                  //                       30.0),
-                                  //               child:
-                                  //                   CircularProgressIndicator(
-                                  //                       color: MyColor
-                                  //                           .black,
-                                  //                       value:
-                                  //                           downloadProgress
-                                  //                               .progress),
-                                  //             ),
-                                  //             errorWidget: (context, url,
-                                  //                     error) =>
-                                  //                 const Icon(Icons.error),
-                                  //             fit: BoxFit.cover,
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                ),
-                                // Positioned(
-                                //   left: 95,
-                                //   top: 95,
-                                //   child: SizedBox(
-                                //       height: 20,
-                                //       width: 20,
-                                //       child: Stack(
-                                //         children: [
-                                //           Container(
-                                //             color: Colors.white,
-                                //           ),
-                                //           Image.asset(
-                                //               "assets/images/editpropfile.png"),
-                                //         ],
-                                //       )),
-                                // ),
-                              ],
-                            )),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                            // : const CircleAvatar(
+                            //     backgroundColor: Colors.white,
+                            //     radius: 50,
+                            //     backgroundImage: AssetImage(
+                            //         "assets/images/Ellipse 18.png"))
+                            // : snapshot.data!.data!.photo!.isEmpty
+                            //     ? Padding(
+                            //         padding:
+                            //             const EdgeInsets.all(40.0),
+                            //         child: SvgPicture.asset(
+                            //             'assets/images/ic_upload_icon.svg'),
+                            //       )
+                            //     : Padding(
+                            //         padding:
+                            //             const EdgeInsets.all(0.0),
+                            //         child: ClipOval(
+                            //           child: CachedNetworkImage(
+                            //             imageUrl: snapshot
+                            //                 .data!.data!.photo
+                            //                 .toString(),
+                            //             progressIndicatorBuilder:
+                            //                 (context, url,
+                            //                         downloadProgress) =>
+                            //                     Padding(
+                            //               padding:
+                            //                   const EdgeInsets.all(
+                            //                       30.0),
+                            //               child:
+                            //                   CircularProgressIndicator(
+                            //                       color: MyColor
+                            //                           .black,
+                            //                       value:
+                            //                           downloadProgress
+                            //                               .progress),
+                            //             ),
+                            //             errorWidget: (context, url,
+                            //                     error) =>
+                            //                 const Icon(Icons.error),
+                            //             fit: BoxFit.cover,
+                            //           ),
+                            //         ),
+                            //       ),
+                          ),
+                          // Positioned(
+                          //   left: 95,
+                          //   top: 95,
+                          //   child: SizedBox(
+                          //       height: 20,
+                          //       width: 20,
+                          //       child: Stack(
+                          //         children: [
+                          //           Container(
+                          //             color: Colors.white,
+                          //           ),
+                          //           Image.asset(
+                          //               "assets/images/editpropfile.png"),
+                          //         ],
+                          //       )),
+                          // ),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -681,8 +673,9 @@ class _ProfileSettingState extends State<ProfileSetting> {
     });
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
-
+    loading = true;
     if (jsonResponse['status'] == true) {
+      loading = false;
       profilegetResponse = ProfileGet.fromJson(jsonResponse);
       nameController.text = profilegetResponse.data!.firstName.toString();
       emailController.text = profilegetResponse.data!.email.toString();
