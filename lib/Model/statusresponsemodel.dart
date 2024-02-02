@@ -1,21 +1,16 @@
-class MyTrip {
+class Statusresponse {
   bool? status;
   int? statusCode;
   String? message;
-  List<Data>? data;
+  Data? data;
 
-  MyTrip({this.status, this.statusCode, this.message, this.data});
+  Statusresponse({this.status, this.statusCode, this.message, this.data});
 
-  MyTrip.fromJson(Map<String, dynamic> json) {
+  Statusresponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusCode = json['status_code'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +19,7 @@ class MyTrip {
     data['status_code'] = statusCode;
     data['message'] = message;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
@@ -39,8 +34,6 @@ class Data {
   String? endDate;
   String? revenue;
   String? typeOfCargo;
-  String? truck;
-  String? driver;
   String? weightOfCargo;
   String? initialDiesel;
   String? mileageAllowanceCurrency;
@@ -50,7 +43,7 @@ class Data {
   String? roadTollCurrency;
   String? roadToll;
   String? status;
-  String? isstatus;
+
   String? createdAt;
   String? updatedAt;
 
@@ -63,8 +56,6 @@ class Data {
       this.endDate,
       this.revenue,
       this.typeOfCargo,
-      this.truck,
-      this.driver,
       this.weightOfCargo,
       this.initialDiesel,
       this.mileageAllowanceCurrency,
@@ -74,7 +65,6 @@ class Data {
       this.roadTollCurrency,
       this.roadToll,
       this.status,
-      this.isstatus,
       this.createdAt,
       this.updatedAt});
 
@@ -87,8 +77,6 @@ class Data {
     endDate = json['end_date'];
     revenue = json['revenue'];
     typeOfCargo = json['type_of_cargo'];
-    truck = json['truck'];
-    driver = json['driver'];
     weightOfCargo = json['weight_of_cargo'];
     initialDiesel = json['initial_diesel'];
     mileageAllowanceCurrency = json['mileage_allowance_currency'];
@@ -98,7 +86,6 @@ class Data {
     roadTollCurrency = json['road_toll_currency'];
     roadToll = json['road_toll'];
     status = json['status'];
-    isstatus = json['is_status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -113,8 +100,6 @@ class Data {
     data['end_date'] = endDate;
     data['revenue'] = revenue;
     data['type_of_cargo'] = typeOfCargo;
-    data['truck'] = truck;
-    data['driver'] = driver;
     data['weight_of_cargo'] = weightOfCargo;
     data['initial_diesel'] = initialDiesel;
     data['mileage_allowance_currency'] = mileageAllowanceCurrency;
@@ -124,7 +109,6 @@ class Data {
     data['road_toll_currency'] = roadTollCurrency;
     data['road_toll'] = roadToll;
     data['status'] = status;
-    data['is_status'] = isstatus;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

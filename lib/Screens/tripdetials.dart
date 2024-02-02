@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/statusresponsemodel.dart';
 import 'package:truckmanagement/Model/tripdetailsmodel.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -51,9 +53,10 @@ class _TripDetialsState extends State<TripDetials> {
   }
 
   Tripdetails tripdetails = Tripdetails();
+  Statusresponse statusresponse = Statusresponse();
   @override
   Widget build(BuildContext context) {
-    print(tripdetails.message.toString());
+    // print(tripdetails.message.toString());
     var screens = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -565,10 +568,11 @@ class _TripDetialsState extends State<TripDetials> {
                                   btnHeight:
                                       MediaQuery.of(context).size.height * 0.07,
                                   onPressed: () {
-                                    if (indexbutton == 0) {
-                                      _scrollToPosition();
+                                    if (indexbutton != 1) {
+                                      acceptApi(context, "Accepted",
+                                          tripdetails.data!.id.toString());
                                     }
-                                    indexbutton = 1;
+
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
@@ -602,12 +606,15 @@ class _TripDetialsState extends State<TripDetials> {
                                             MediaQuery.of(context).size.height *
                                                 0.07,
                                         onPressed: () {
-                                          indexbutton = 1;
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const StartTrip()));
+                                          acceptApi(context, "On the way",
+                                              tripdetails.data!.id.toString());
+
+                                          // indexbutton = 1;
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             const StartTrip()));
 
                                           setState(() {});
                                         },
@@ -646,6 +653,12 @@ class _TripDetialsState extends State<TripDetials> {
     loading1 = true;
     if (jsonResponse['status'] == true) {
       tripdetails = Tripdetails.fromJson(jsonResponse);
+
+      if (tripdetails.data!.status.toString() == "Accepted") {
+        indexbutton = 1;
+
+        setState(() {});
+      }
       setState(() {
         loading1 = false;
       });
@@ -657,5 +670,51 @@ class _TripDetialsState extends State<TripDetials> {
     }
 
     return Tripdetails.fromJson(jsonDecode(response.body));
+  }
+
+  Future<Statusresponse> acceptApi(
+    BuildContext context,
+    String? status,
+    String? tripId,
+  ) async {
+    var request = {};
+    request['status'] = status;
+    request['trip_id'] = tripId;
+
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(
+        logLevel: LogLevel.BODY,
+      ),
+    ]);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(Uri.parse(ApiServer.tripaccept),
+        body: convert.jsonEncode(request),
+        headers: {
+          "content-type": "application/json",
+          "accept": "application/json",
+          "Authorization":
+              "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+        });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    if (jsonResponse['status'] == true) {
+      statusresponse = Statusresponse.fromJson(jsonResponse);
+      if (indexbutton == 0) {
+        _scrollToPosition();
+      }
+      print("statusresponse.data!.status${statusresponse.data!.status}");
+      if (statusresponse.data!.status == "Accepted" && context.mounted) {
+        debugPrint("DAta");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const StartTrip()));
+      }
+      indexbutton = 1;
+      setState(() {});
+    } else {
+      Fluttertoast.showToast(msg: jsonResponse['message']);
+    }
+
+    return Statusresponse.fromJson(jsonDecode(response.body));
   }
 }

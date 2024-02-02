@@ -35,6 +35,10 @@ class _HomescreenState extends State<Homescreen> {
         .addPostFrameCallback((_) => mytripGet(context, "Pending"));
   }
 
+  returnApi(String status) {
+    mytripGet(context, status);
+  }
+
   String getGreeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -267,7 +271,7 @@ class _HomescreenState extends State<Homescreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    status = "Accept";
+                                    status = "Accepted";
                                     mytripGet(context, status);
                                     index = 1;
                                     setState(() {});
@@ -419,7 +423,12 @@ class _HomescreenState extends State<Homescreen> {
                                                                           tripId:
                                                                               tripId,
                                                                           truckId:
-                                                                              truckId)));
+                                                                              truckId))).then((value) =>
+                                                                  returnApi(myTrip
+                                                                      .data![
+                                                                          index]
+                                                                      .status
+                                                                      .toString()));
                                                             },
                                                             child: Card(
                                                               color:
@@ -791,8 +800,14 @@ class _HomescreenState extends State<Homescreen> {
                                                                       context,
                                                                       MaterialPageRoute(
                                                                           builder: (context) => TripDetials(
-                                                                              tripId: tripId,
-                                                                              truckId: truckId)));
+                                                                              tripId:
+                                                                                  tripId,
+                                                                              truckId: truckId))).then((value) =>
+                                                                      returnApi(myTrip
+                                                                          .data![
+                                                                              index]
+                                                                          .status
+                                                                          .toString()));
                                                                 },
                                                                 child: Card(
                                                                   color: Colors
@@ -867,7 +882,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                                           width: 5,
                                                                                         ),
                                                                                         Text(
-                                                                                          myTrip.data![index].status.toString(),
+                                                                                          myTrip.data![index].isstatus.toString(),
                                                                                           style: const TextStyle(
                                                                                             fontSize: 12,
                                                                                             color: MyColor.cardpendding,
@@ -1141,7 +1156,11 @@ class _HomescreenState extends State<Homescreen> {
                                                                       Navigator.push(
                                                                           context,
                                                                           MaterialPageRoute(
-                                                                              builder: (context) => TripDetials(tripId: tripId, truckId: truckId)));
+                                                                              builder: (context) => TripDetials(tripId: tripId, truckId: truckId))).then((value) => returnApi(myTrip
+                                                                          .data![
+                                                                              index]
+                                                                          .status
+                                                                          .toString()));
                                                                     },
                                                                     child: Card(
                                                                       color: Colors

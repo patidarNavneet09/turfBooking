@@ -3,13 +3,17 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/addonaddexpenstion.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as https;
 
 class StartTrip extends StatefulWidget {
   const StartTrip({super.key});
@@ -86,7 +90,7 @@ class _StartTripState extends State<StartTrip> {
       // imageFileListBanner.add(image1);
       // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
-      if (selectedImage1 == null) {
+      if (selectedImage1 == null && imageFileListBanner.length <= 1) {
         // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
@@ -121,7 +125,7 @@ class _StartTripState extends State<StartTrip> {
       }
       // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
-      if (selectedImage1 == null) {
+      if (selectedImage1 == null && imageFileListBanner.length <= 1) {
         image1 = (await ImagePicker().pickImage(
           source: ImageSource.gallery,
         ))!;
@@ -147,6 +151,7 @@ class _StartTripState extends State<StartTrip> {
           source: ImageSource.gallery,
         ))!;
         imageFileListBanner.add(image33);
+
         ppp2 = true;
         setState(() {});
       }
@@ -263,6 +268,7 @@ class _StartTripState extends State<StartTrip> {
     });
   }
 
+  TextEditingController KmdrivenController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -301,9 +307,8 @@ class _StartTripState extends State<StartTrip> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
-                  keyboardType: TextInputType.text,
-
+                  controller: KmdrivenController,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Exact km driven"),
                 ),
@@ -340,15 +345,22 @@ class _StartTripState extends State<StartTrip> {
                           onPressed: () {
                             indeximage = 1;
                             setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            print(
+                                "imageFileListBanner.length${imageFileListBanner.length}");
+                            if (imageFileListBanner.length < 1) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -570,15 +582,20 @@ class _StartTripState extends State<StartTrip> {
                           onPressed: () {
                             indeximage = 2;
                             setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner2.length < 1) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -783,6 +800,13 @@ class _StartTripState extends State<StartTrip> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          var kmDriven = KmdrivenController.text;
+                          if (kmDriven.isEmpty == true) {
+                            Utility.getToast(
+                                msg: "Fill exact kilometer driven");
+                          } else {
+                            // startTripApi(context, kmDriven);
+                          }
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -885,5 +909,38 @@ class _StartTripState extends State<StartTrip> {
         ],
       ),
     );
+  }
+
+  Future<void> startTripApi(context, String kmDriven) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "Accept": "application/json",
+      'Authorization':
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    };
+
+    var uri = Uri.parse("${ApiServer.tripstart}");
+
+    var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['exact_km_driven'] = kmDriven;
+    request.files.add(await https.MultipartFile.fromPath(
+        'existing_diesel_image', imageFileListBanner[0].path));
+    request.files.add(await https.MultipartFile.fromPath(
+        'odometer_image', imageFileListBanner2[0].path));
+
+    var response = await https.Response.fromStream(await request.send());
+
+    var body = json.decode(response.body);
+    // print("jjjjjjjjjjjjjjjjjjj${request.fields}");
+    // print("eeeeeeeeeeeeeeeeee${reque}");
+    if (response.statusCode == 200 && body['status'] == true) {
+      // videoFile1.clear();
+      // imageFileListBanner1.clear();
+      print("response.body>>>>>>>>>>${response.body}");
+    } else {
+      print("response.body>>>>>>>>>>${response.body}");
+    }
   }
 }

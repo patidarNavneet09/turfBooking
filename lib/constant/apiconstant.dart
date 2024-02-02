@@ -9,4 +9,7 @@ class ApiServer {
   static const termconditonapi = "${baseurl}terms-and-conditions";
   static const mytripapi = "${baseurl}my-trips?type=";
   static const tripdetailsapi = "${baseurl}trip-details?";
+  static const tripaccept = "${baseurl}trip-accept";
+  static const tripstart = "${baseurl}trip-start";
+  static const addondiesel = "${baseurl}add-on-diesel";
 }
