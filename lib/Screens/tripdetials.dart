@@ -44,9 +44,9 @@ class _TripDetialsState extends State<TripDetials> {
   // Method to scroll to a particular position
   void _scrollToPosition() {
     _controller.animateTo(
-      200.0, // Replace 200.0 with the desired scroll offset
-      duration: const Duration(milliseconds: 900), // Adjust duration as needed
-      curve: Curves.linear, // Adjust curve as needed
+      410.0, // Replace 200.0 with the desired scroll offset
+      duration: const Duration(seconds: 2), // Adjust duration as needed
+      curve: Curves.ease, // Adjust curve as needed
     );
   }
 
