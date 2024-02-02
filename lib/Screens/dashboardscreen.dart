@@ -42,62 +42,68 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           InkWell(
             radius: 30,
             onTap: () {
               pagesIndex = 0;
-
               setState(() {});
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                    height: 25,
-                    width: 30,
-                    child: Image.asset("assets/images/Home.png")),
-                Text(
-                  pagesIndex == 0 ? "Home" : "",
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: MyColor.white,
-                    // overflow: TextOverflow.ellipsis,
-                    fontFamily: ColorFamily.fontsSFProDisplay,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
-              ],
+            child: SizedBox(
+              // color: Colors.amber,
+              width: 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 25,
+                      width: 30,
+                      child: Image.asset("assets/images/Home.png")),
+                  Text(
+                    pagesIndex == 0 ? "Home" : "",
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: MyColor.white,
+                      // overflow: TextOverflow.ellipsis,
+                      fontFamily: ColorFamily.fontsSFProDisplay,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           InkWell(
             radius: 30,
             onTap: () {
               pagesIndex = 1;
-
               setState(() {});
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                    height: 25,
-                    width: 30,
-                    child: Image.asset("assets/images/setting.png")),
-                Text(
-                  pagesIndex == 1 ? "Settings" : "",
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: MyColor.white,
-                    // overflow: TextOverflow.ellipsis,
-                    // fontFamily: ColorFamily.fontsSFProDisplay,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
-              ],
+            child: SizedBox(
+              // color: Colors.amber,
+              width: 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 25,
+                      width: 30,
+                      child: Image.asset("assets/images/setting.png")),
+                  Text(
+                    pagesIndex == 1 ? "Settings" : "",
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: MyColor.white,
+                      // overflow: TextOverflow.ellipsis,
+                      // fontFamily: ColorFamily.fontsSFProDisplay,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

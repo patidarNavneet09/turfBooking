@@ -1,21 +1,16 @@
-class MyTrip {
+class Tripdetails {
   bool? status;
   int? statusCode;
   String? message;
-  List<Data>? data;
+  Data? data;
 
-  MyTrip({this.status, this.statusCode, this.message, this.data});
+  Tripdetails({this.status, this.statusCode, this.message, this.data});
 
-  MyTrip.fromJson(Map<String, dynamic> json) {
+  Tripdetails.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusCode = json['status_code'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +19,7 @@ class MyTrip {
     data['status_code'] = statusCode;
     data['message'] = message;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }

@@ -141,105 +141,12 @@ class _SettingState extends State<Setting> {
                           children: [
                             Card(
                               surfaceTintColor: Colors.white,
-                              elevation: 1,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 55,
-                                    width: screen.size.width * 0.90,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Image.asset(
-                                          "assets/images/triplocation.png",
-                                          height: 20,
-                                          width: 13,
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          "My Trip",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: MyColor.listviewtext,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Card(
-                              surfaceTintColor: Colors.white,
-                              elevation: 1,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 55,
-                                    width: screen.size.width * 0.90,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Image.asset(
-                                          "assets/images/helpcenter.png",
-                                          height: 20,
-                                          width: 13,
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        const Text(
-                                          "Help Centre",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: MyColor.listviewtext,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const TermCondition()));
-                              },
-                              child: Card(
-                                surfaceTintColor: Colors.white,
-                                elevation: 1,
+                              elevation: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: MyColor.greyText),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)),
                                 child: Row(
                                   children: [
                                     SizedBox(
@@ -251,7 +158,7 @@ class _SettingState extends State<Setting> {
                                             width: 15,
                                           ),
                                           Image.asset(
-                                            "assets/images/termcondition.png",
+                                            "assets/images/triplocation.png",
                                             height: 20,
                                             width: 13,
                                           ),
@@ -259,7 +166,58 @@ class _SettingState extends State<Setting> {
                                             width: 15,
                                           ),
                                           const Text(
-                                            "Terms & Conditions",
+                                            "My Trip",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: MyColor.listviewtext,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Card(
+                              surfaceTintColor: Colors.white,
+                              elevation: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: MyColor.greyText),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 55,
+                                      width: screen.size.width * 0.90,
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Image.asset(
+                                            "assets/images/helpcenter.png",
+                                            height: 20,
+                                            width: 13,
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          const Text(
+                                            "Help Centre",
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: MyColor.listviewtext,
@@ -289,44 +247,112 @@ class _SettingState extends State<Setting> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
+                                            const TermCondition()));
+                              },
+                              child: Card(
+                                surfaceTintColor: Colors.white,
+                                elevation: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: MyColor.greyText),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 55,
+                                        width: screen.size.width * 0.90,
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Image.asset(
+                                              "assets/images/termcondition.png",
+                                              height: 20,
+                                              width: 13,
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            const Text(
+                                              "Terms & Conditions",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: MyColor.listviewtext,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
                                             const PrivacyPolicy()));
                               },
                               child: Card(
                                 surfaceTintColor: Colors.white,
-                                elevation: 1,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 55,
-                                      width: screen.size.width * 0.90,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Image.asset(
-                                            "assets/images/privacypolicy.png",
-                                            height: 20,
-                                            width: 13,
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          const Text(
-                                            "Privacy Policy",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: MyColor.listviewtext,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
+                                elevation: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: MyColor.greyText),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 55,
+                                        width: screen.size.width * 0.90,
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 15,
                                             ),
-                                          ),
-                                        ],
+                                            Image.asset(
+                                              "assets/images/privacypolicy.png",
+                                              height: 20,
+                                              width: 13,
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            const Text(
+                                              "Privacy Policy",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: MyColor.listviewtext,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             )
@@ -423,40 +449,47 @@ class _SettingState extends State<Setting> {
                               },
                               child: Card(
                                 surfaceTintColor: Colors.white,
-                                elevation: 1,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 55,
-                                      width: screen.size.width * 0.90,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Image.asset(
-                                            "assets/images/logout.png",
-                                            height: 20,
-                                            width: 13,
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          const Text(
-                                            "Logout",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: MyColor.listviewtext,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
+                                elevation: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: MyColor.greyText),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 55,
+                                        width: screen.size.width * 0.90,
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 15,
                                             ),
-                                          ),
-                                        ],
+                                            Image.asset(
+                                              "assets/images/logout.png",
+                                              height: 20,
+                                              width: 13,
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            const Text(
+                                              "Logout",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: MyColor.listviewtext,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             )

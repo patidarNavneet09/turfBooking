@@ -8,4 +8,5 @@ class ApiServer {
   static const privacypolicy = "${baseurl}privacy-policy";
   static const termconditonapi = "${baseurl}terms-and-conditions";
   static const mytripapi = "${baseurl}my-trips?type=";
+  static const tripdetailsapi = "${baseurl}trip-details?";
 }

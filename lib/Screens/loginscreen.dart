@@ -10,7 +10,6 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
-import 'package:truckmanagement/utils/textfields.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:convert' as convert;
 
@@ -106,106 +105,161 @@ class _LoginState extends State<Login> {
               height: MediaQuery.of(context).size.height * 0.20,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Card(
-                elevation: 1,
-                child: TextFormField(
-                  textAlign: TextAlign.start,
-                  textAlignVertical: TextAlignVertical.center,
-                  controller: emailController,
-                  keyboardType: TextInputType.text,
-                  obscureText: texthide,
-                  decoration: const InputDecoration().prefixIconTextField(
-                      suffix: InkWell(
-                        radius: 30,
-                        onTap: () {
-                          if (texthide == true) {
-                            iconsdata = 0;
-                            texthide = false;
-                            setState(() {});
-                          } else if (texthide == false) {
-                            iconsdata = 1;
-                            texthide = true;
-                            setState(() {});
-                          }
-                        },
-                        child: iconsdata == 0
-                            ? const SizedBox(
-                                width: 2,
-                                height: 0,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.visibility_off,
-                                    color: MyColor.greyText,
-                                  ),
-                                ))
-                            : SizedBox(
-                                width: 2,
-                                height: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Image.asset("assets/images/img_eye.png"),
-                                )),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  height: 57,
+                  child: Center(
+                    child: TextFormField(
+                      textAlign: TextAlign.start,
+                      textAlignVertical: TextAlignVertical.center,
+                      controller: emailController,
+                      obscureText: texthide,
+                      // controller: NameController
+                      //   ..text =
+                      //       snapshot.data!.data!.name.toString(),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        // focusColor: MyColor.Red_color,
+                        // fillColor: MyColor.Red_color,
+                        suffixIcon: InkWell(
+                          radius: 30,
+                          onTap: () {
+                            if (texthide == true) {
+                              iconsdata = 0;
+                              texthide = false;
+                              setState(() {});
+                            } else if (texthide == false) {
+                              iconsdata = 1;
+                              texthide = true;
+                              setState(() {});
+                            }
+                          },
+                          child: iconsdata == 0
+                              ? const SizedBox(
+                                  width: 2,
+                                  height: 0,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.visibility_off,
+                                      color: MyColor.greyText,
+                                    ),
+                                  ))
+                              : SizedBox(
+                                  width: 2,
+                                  height: 0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                        "assets/images/img_eye.png"),
+                                  )),
+                        ),
+                        // prefixIconColor: MaterialStateColor.resolveWith(
+                        //     (states) =>
+                        //         states.contains(MaterialState.focused)
+                        //             ? MyColor.black
+                        //             : Colors.grey),
+                        hintText: "  Email",
+                        hintStyle: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: ColorFamily.fontsSFProDisplay,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: MyColor.greyText),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: MyColor.greyText),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                      hintText: "Email"),
-                ),
-              ),
-            ),
+                    ),
+                  ),
+                )),
             Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Card(
-                elevation: 1,
-                child: TextFormField(
-                  onEditingComplete: () {
-                    String input = passwordController.text;
-                    if (input.isNotEmpty) {
-                      loginApi(context);
-                    }
-                  },
-                  textAlign: TextAlign.start,
-                  textAlignVertical: TextAlignVertical.center,
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                  obscureText: texthide1,
-                  decoration: const InputDecoration().prefixIconTextField(
-                      suffix: InkWell(
-                        radius: 30,
-                        onTap: () {
-                          if (texthide1 == true) {
-                            iconsdata1 = 0;
-                            texthide1 = false;
-                            setState(() {});
-                          } else if (texthide1 == false) {
-                            iconsdata1 = 1;
-                            texthide1 = true;
-                            setState(() {});
-                          }
-                        },
-                        child: iconsdata1 == 0
-                            ? const SizedBox(
-                                width: 2,
-                                height: 0,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.visibility_off,
-                                    color: MyColor.greyText,
-                                  ),
-                                ))
-                            : SizedBox(
-                                width: 2,
-                                height: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Image.asset("assets/images/img_eye.png"),
-                                )),
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    height: 57,
+                    child: Center(
+                      child: TextFormField(
+                        textAlign: TextAlign.start,
+                        textAlignVertical: TextAlignVertical.center,
+                        controller: passwordController,
+                        obscureText: texthide1,
+                        // controller: NameController
+                        //   ..text =
+                        //       snapshot.data!.data!.name.toString(),
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          // focusColor: MyColor.Red_color,
+                          // fillColor: MyColor.Red_color,
+                          suffixIcon: InkWell(
+                            radius: 30,
+                            onTap: () {
+                              if (texthide1 == true) {
+                                iconsdata1 = 0;
+                                texthide1 = false;
+                                setState(() {});
+                              } else if (texthide1 == false) {
+                                iconsdata1 = 1;
+                                texthide1 = true;
+                                setState(() {});
+                              }
+                            },
+                            child: iconsdata1 == 0
+                                ? const SizedBox(
+                                    width: 2,
+                                    height: 0,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(
+                                        Icons.visibility_off,
+                                        color: MyColor.greyText,
+                                      ),
+                                    ))
+                                : SizedBox(
+                                    width: 2,
+                                    height: 0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                          "assets/images/img_eye.png"),
+                                    )),
+                          ),
+                          // prefixIconColor: MaterialStateColor.resolveWith(
+                          //     (states) =>
+                          //         states.contains(MaterialState.focused)
+                          //             ? MyColor.black
+                          //             : Colors.grey),
+                          hintText: "  Password",
+                          hintStyle: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: ColorFamily.fontsSFProDisplay,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: MyColor.greyText),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: MyColor.greyText),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                       ),
-                      hintText: "Password"),
-                ),
-              ),
+                    ),
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 35),

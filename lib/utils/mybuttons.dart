@@ -13,6 +13,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsets? padding;
   final TextStyle? textStyle;
   final Color? color;
+  final Gradient? gradient;
   final bool? isLoading;
 
   const AppButton({
@@ -28,6 +29,7 @@ class AppButton extends StatelessWidget {
     this.btnWidth,
     this.btnHeight,
     this.color,
+    this.gradient,
     this.isLoading = false,
   });
 
@@ -44,20 +46,22 @@ class AppButton extends StatelessWidget {
             decoration: BoxDecoration(
               // color: MyColor.Red_color,
               // ignore: prefer_const_constructors
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: const [
-                  MyColor.button1,
-                  MyColor.button,
-                ],
-              ),
+              gradient: gradient ??
+                  const LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      MyColor.button1,
+                      MyColor.button,
+                    ],
+                  ),
               borderRadius: boder1 ?? BorderRadius.circular(15),
             ),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: color ?? MyColor.transparent,
-                shadowColor: MyColor.transparent,
+                shadowColor: color ?? MyColor.transparent,
+                surfaceTintColor: color ?? MyColor.transparent,
                 shape: boder ??
                     const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
