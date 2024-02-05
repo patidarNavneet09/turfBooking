@@ -49,6 +49,8 @@ class Data {
   String? updatedAt;
   AddOnDiesel? addOnDiesel;
   EnrouteDiesel? enrouteDiesel;
+  Repairs? repairs;
+  Tolls? tolls;
 
   Data(
       {this.id,
@@ -73,7 +75,9 @@ class Data {
       this.createdAt,
       this.updatedAt,
       this.addOnDiesel,
-      this.enrouteDiesel});
+      this.enrouteDiesel,
+      this.repairs,
+      this.tolls});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -103,6 +107,9 @@ class Data {
     enrouteDiesel = json['enroute_diesel'] != ""
         ? EnrouteDiesel.fromJson(json['enroute_diesel'])
         : null;
+    repairs =
+        json['repairs'] != "" ? new Repairs.fromJson(json['repairs']) : null;
+    tolls = json['tolls'] != "" ? new Tolls.fromJson(json['tolls']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -133,6 +140,12 @@ class Data {
     }
     if (enrouteDiesel != null) {
       data['enroute_diesel'] = enrouteDiesel!.toJson();
+    }
+    if (repairs != null) {
+      data['repairs'] = repairs!.toJson();
+    }
+    if (tolls != null) {
+      data['tolls'] = tolls!.toJson();
     }
     return data;
   }
@@ -230,6 +243,120 @@ class EnrouteDiesel {
     data['unit_price'] = unitPrice;
     data['petrol_station_image'] = petrolStationImage;
     data['petrol_station'] = petrolStation;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Repairs {
+  String? id;
+  String? tripId;
+  String? driverId;
+  String? shopName;
+  String? repairName;
+  String? repairCost;
+  String? spareName;
+  String? spareCost;
+  String? totalAmount;
+  String? uploadBill;
+  String? deletedAt;
+  String? createdAt;
+  String? updatedAt;
+
+  Repairs(
+      {this.id,
+      this.tripId,
+      this.driverId,
+      this.shopName,
+      this.repairName,
+      this.repairCost,
+      this.spareName,
+      this.spareCost,
+      this.totalAmount,
+      this.uploadBill,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt});
+
+  Repairs.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    driverId = json['driver_id'];
+    shopName = json['shop_name'];
+    repairName = json['repair_name'];
+    repairCost = json['repair_cost'];
+    spareName = json['spare_name'];
+    spareCost = json['spare_cost'];
+    totalAmount = json['total_amount'];
+    uploadBill = json['upload_bill'];
+    deletedAt = json['deleted_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['driver_id'] = driverId;
+    data['shop_name'] = shopName;
+    data['repair_name'] = repairName;
+    data['repair_cost'] = repairCost;
+    data['spare_name'] = spareName;
+    data['spare_cost'] = spareCost;
+    data['total_amount'] = totalAmount;
+    data['upload_bill'] = uploadBill;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Tolls {
+  String? id;
+  String? tripId;
+  String? driverId;
+  String? tollName;
+  String? amount;
+  String? tollImage;
+  String? deletedAt;
+  String? createdAt;
+  String? updatedAt;
+
+  Tolls(
+      {this.id,
+      this.tripId,
+      this.driverId,
+      this.tollName,
+      this.amount,
+      this.tollImage,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt});
+
+  Tolls.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    driverId = json['driver_id'];
+    tollName = json['toll_name'];
+    amount = json['amount'];
+    tollImage = json['toll_image'];
+    deletedAt = json['deleted_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['driver_id'] = driverId;
+    data['toll_name'] = tollName;
+    data['amount'] = amount;
+    data['toll_image'] = tollImage;
+    data['deleted_at'] = deletedAt;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

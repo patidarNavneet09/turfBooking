@@ -1094,10 +1094,34 @@ class _TripDetialsState extends State<TripDetials> {
                                                 const BorderRadius.all(
                                                     Radius.circular(10)),
                                           ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
+                                          child: ClipOval(
+                                            child: CachedNetworkImage(
+                                              imageUrl: tripdetails
+                                                  .data!.repairs!.uploadBill
+                                                  .toString(),
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: MyColor.button,
+                                                  value:
+                                                      downloadProgress.progress,
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                              fit: BoxFit.contain,
+                                              height: screens.height * 0.08,
+                                              width: screens.height * 0.08,
+                                            ),
+                                          ),
                                         ),
-                                        const Column(
+                                        Column(
                                           children: [
                                             Text(
                                               "Shop Name",
@@ -1111,7 +1135,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "Abc",
+                                              tripdetails
+                                                  .data!.repairs!.shopName
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1136,7 +1162,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "Fuel Injector",
+                                              tripdetails
+                                                  .data!.repairs!.spareName
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1148,7 +1176,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                           ],
                                         ),
-                                        const Column(
+                                        Column(
                                           children: [
                                             Text(
                                               "Repair Name",
@@ -1162,7 +1190,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "Engine",
+                                              tripdetails
+                                                  .data!.repairs!.repairName
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1187,7 +1217,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "\$${15}",
+                                              "\$${tripdetails.data!.repairs!.spareCost.toString()}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1199,7 +1229,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                           ],
                                         ),
-                                        const Column(
+                                        Column(
                                           children: [
                                             Text(
                                               "Repair Cost",
@@ -1213,7 +1243,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "\$${20}",
+                                              "\$${tripdetails.data!.repairs!.repairCost.toString()}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1238,7 +1268,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "\$${35}",
+                                              "\$${tripdetails.data!.repairs!.totalAmount.toString()}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1354,10 +1384,34 @@ class _TripDetialsState extends State<TripDetials> {
                                                 const BorderRadius.all(
                                                     Radius.circular(10)),
                                           ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
+                                          child: ClipOval(
+                                            child: CachedNetworkImage(
+                                              imageUrl: tripdetails
+                                                  .data!.tolls!.tollImage
+                                                  .toString(),
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: MyColor.button,
+                                                  value:
+                                                      downloadProgress.progress,
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                              fit: BoxFit.contain,
+                                              height: screens.height * 0.08,
+                                              width: screens.height * 0.08,
+                                            ),
+                                          ),
                                         ),
-                                        const Column(
+                                        Column(
                                           children: [
                                             Text(
                                               "Toll Name",
@@ -1371,7 +1425,8 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "Roadway",
+                                              tripdetails.data!.tolls!.tollName
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -1383,7 +1438,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                           ],
                                         ),
-                                        const Column(
+                                        Column(
                                           children: [
                                             Text(
                                               "Amount",
@@ -1397,7 +1452,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                             ),
                                             Text(
-                                              "\$${80}",
+                                              "\$${tripdetails.data!.tolls!.amount.toString()}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
