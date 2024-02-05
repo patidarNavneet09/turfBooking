@@ -56,8 +56,8 @@ class _TripDetialsState extends State<TripDetials> {
   }
 
   apihit() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGet(
-        context, widget.truckId.toString(), widget.tripId.toString()));
+    tripdetialsGet(
+        context, widget.truckId.toString(), widget.tripId.toString());
   }
 
   Tripdetails tripdetails = Tripdetails();

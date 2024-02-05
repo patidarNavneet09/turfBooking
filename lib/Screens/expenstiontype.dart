@@ -84,7 +84,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RepairsScreen()));
+                              builder: (context) => RepairsScreen(
+                                  tripId: widget.tripId,
+                                  truckId: widget.truckId)));
                     },
                     leading: const Text(
                       "Repairs",
@@ -111,7 +113,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const TollsScreen()));
+                              builder: (context) => TollsScreen(
+                                  tripId: widget.tripId,
+                                  truckId: widget.truckId)));
                     },
                     leading: const Text(
                       "Tolls",
