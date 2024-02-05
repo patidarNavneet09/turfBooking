@@ -268,7 +268,7 @@ class _StartTripState extends State<StartTrip> {
     });
   }
 
-  TextEditingController KmdrivenController = TextEditingController();
+  TextEditingController kmdrivenController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -307,7 +307,7 @@ class _StartTripState extends State<StartTrip> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  controller: KmdrivenController,
+                  controller: kmdrivenController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Exact km driven"),
@@ -345,9 +345,9 @@ class _StartTripState extends State<StartTrip> {
                           onPressed: () {
                             indeximage = 1;
                             setState(() {});
-                            print(
+                            debugPrint(
                                 "imageFileListBanner.length${imageFileListBanner.length}");
-                            if (imageFileListBanner.length < 1) {
+                            if (imageFileListBanner.isEmpty) {
                               showModalBottomSheet(
                                   shape: const RoundedRectangleBorder(
                                     // <-- SEE HERE
@@ -582,7 +582,7 @@ class _StartTripState extends State<StartTrip> {
                           onPressed: () {
                             indeximage = 2;
                             setState(() {});
-                            if (imageFileListBanner2.length < 1) {
+                            if (imageFileListBanner2.isEmpty) {
                               showModalBottomSheet(
                                   shape: const RoundedRectangleBorder(
                                     // <-- SEE HERE
@@ -800,7 +800,7 @@ class _StartTripState extends State<StartTrip> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
-                          var kmDriven = KmdrivenController.text;
+                          var kmDriven = kmdrivenController.text;
                           if (kmDriven.isEmpty == true) {
                             Utility.getToast(
                                 msg: "Fill exact kilometer driven");
@@ -921,7 +921,7 @@ class _StartTripState extends State<StartTrip> {
           "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
     };
 
-    var uri = Uri.parse("${ApiServer.tripstart}");
+    var uri = Uri.parse(ApiServer.tripstart);
 
     var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
     request.fields['exact_km_driven'] = kmDriven;
@@ -938,9 +938,9 @@ class _StartTripState extends State<StartTrip> {
     if (response.statusCode == 200 && body['status'] == true) {
       // videoFile1.clear();
       // imageFileListBanner1.clear();
-      print("response.body>>>>>>>>>>${response.body}");
+      debugPrint("response.body>>>>>>>>>>${response.body}");
     } else {
-      print("response.body>>>>>>>>>>${response.body}");
+      debugPrint("response.body>>>>>>>>>>${response.body}");
     }
   }
 }

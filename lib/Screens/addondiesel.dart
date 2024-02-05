@@ -3,12 +3,17 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/%20addondieselresponse.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as https;
 
 class AddOnDiesel extends StatefulWidget {
   const AddOnDiesel({super.key});
@@ -20,7 +25,7 @@ class AddOnDiesel extends StatefulWidget {
 class _AddOnDieselState extends State<AddOnDiesel> {
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
-  List<XFile> imageFileListBanner2 = [];
+  // List<XFile> imageFileListBanner2 = [];
   final _picker = ImagePicker();
   final _picker1 = ImagePicker();
   List<XFile> imageList = [];
@@ -42,22 +47,22 @@ class _AddOnDieselState extends State<AddOnDiesel> {
     }
   }
 
-  getImage2(List<XFile> list) {
-    setState(() {
-      imageFileListBanner2 = list;
-    });
-    if (imageFileListBanner2.isNotEmpty) {
-      ppp = true;
-    }
-    if (imageFileListBanner2.length >= 2) {
-      ppp1 = true;
-    }
-    if (imageFileListBanner2.length >= 3) {
-      ppp = true;
-      ppp1 = true;
-      ppp2 = true;
-    }
-  }
+  // getImage2(List<XFile> list) {
+  //   setState(() {
+  //     imageFileListBanner2 = list;
+  //   });
+  //   if (imageFileListBanner2.isNotEmpty) {
+  //     ppp = true;
+  //   }
+  //   if (imageFileListBanner2.length >= 2) {
+  //     ppp1 = true;
+  //   }
+  //   if (imageFileListBanner2.length >= 3) {
+  //     ppp = true;
+  //     ppp1 = true;
+  //     ppp2 = true;
+  //   }
+  // }
 
   File? image;
   String base64Image = "";
@@ -169,99 +174,102 @@ class _AddOnDieselState extends State<AddOnDiesel> {
     });
   }
 
-  Future<void> chooseImage2(type) async {
-    // print("imageFileList${imageFileListBanner.length}");
-    if (type == "camera") {
-      // image1 = await ImagePicker().pickImage(
-      //   source: ImageSource.camera,
-      // );
-      // imageFileListBanner.add(image1);
-      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
+  // Future<void> chooseImage2(type) async {
+  //   // print("imageFileList${imageFileListBanner.length}");
+  //   if (type == "camera") {
+  //     // image1 = await ImagePicker().pickImage(
+  //     //   source: ImageSource.camera,
+  //     // );
+  //     // imageFileListBanner.add(image1);
+  //     // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
-      if (selectedImage4 == null) {
-        // print("ffffffffffffffffff");
-        image1 = (await ImagePicker().pickImage(
-          imageQuality: 50,
-          source: ImageSource.camera,
-        ))!;
-        imageFileListBanner2.add(image1);
-        ppp = true;
-        setState(() {});
-      } else if (selectedImage5 == null) {
-        // print("rrrrrrrrrrrr");
-        image2 = (await ImagePicker().pickImage(
-          imageQuality: 50,
-          source: ImageSource.camera,
-        ))!;
-        imageFileListBanner2.add(image2);
-        ppp1 = true;
-        setState(() {});
-      } else if (selectedImage6 == null) {
-        image3 = (await ImagePicker().pickImage(
-          source: ImageSource.camera,
-        ))!;
-        imageFileListBanner2.add(image3);
-        ppp2 = true;
-        setState(() {});
-      } else {
-        image33 = (await ImagePicker().pickImage(
-          source: ImageSource.camera,
-        ))!;
-        imageFileListBanner2.add(image33);
-        ppp2 = true;
-        setState(() {});
-      }
-      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
-    } else {
-      if (selectedImage4 == null) {
-        image1 = (await ImagePicker().pickImage(
-          source: ImageSource.gallery,
-        ))!;
-        imageFileListBanner2.add(image1);
-        ppp = true;
-        setState(() {});
-      } else if (selectedImage5 == null) {
-        image2 = (await ImagePicker().pickImage(
-          source: ImageSource.gallery,
-        ))!;
-        imageFileListBanner2.add(image2);
-        ppp1 = true;
-        setState(() {});
-      } else if (selectedImage6 == null) {
-        image3 = (await ImagePicker().pickImage(
-          source: ImageSource.gallery,
-        ))!;
-        imageFileListBanner2.add(image3);
-        ppp2 = true;
-        setState(() {});
-      } else {
-        image33 = (await ImagePicker().pickImage(
-          source: ImageSource.gallery,
-        ))!;
-        imageFileListBanner2.add(image33);
-        ppp2 = true;
-        setState(() {});
-      }
-      // print("imageFileListBanner${imageFileListBanner.length}");
-    }
-    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
-    setState(() {
-      selectedImage1 = File(image1.path);
-      base64Image = base64Encode(selectedImage4!.readAsBytesSync());
-      // print(imageFileListBanner);
-    });
-    setState(() {
-      selectedImage2 = File(image2.path);
-      base64Image = base64Encode(selectedImage5!.readAsBytesSync());
-      // print(imageFileListBanner);
-    });
-    setState(() {
-      selectedImage3 = File(image3.path);
-      base64Image = base64Encode(selectedImage6!.readAsBytesSync());
-      // print(imageFileListBanner);
-    });
-  }
-
+  //     if (selectedImage4 == null) {
+  //       // print("ffffffffffffffffff");
+  //       image1 = (await ImagePicker().pickImage(
+  //         imageQuality: 50,
+  //         source: ImageSource.camera,
+  //       ))!;
+  //       imageFileListBanner2.add(image1);
+  //       ppp = true;
+  //       setState(() {});
+  //     } else if (selectedImage5 == null) {
+  //       // print("rrrrrrrrrrrr");
+  //       image2 = (await ImagePicker().pickImage(
+  //         imageQuality: 50,
+  //         source: ImageSource.camera,
+  //       ))!;
+  //       imageFileListBanner2.add(image2);
+  //       ppp1 = true;
+  //       setState(() {});
+  //     } else if (selectedImage6 == null) {
+  //       image3 = (await ImagePicker().pickImage(
+  //         source: ImageSource.camera,
+  //       ))!;
+  //       imageFileListBanner2.add(image3);
+  //       ppp2 = true;
+  //       setState(() {});
+  //     } else {
+  //       image33 = (await ImagePicker().pickImage(
+  //         source: ImageSource.camera,
+  //       ))!;
+  //       imageFileListBanner2.add(image33);
+  //       ppp2 = true;
+  //       setState(() {});
+  //     }
+  //     // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
+  //   } else {
+  //     if (selectedImage4 == null) {
+  //       image1 = (await ImagePicker().pickImage(
+  //         source: ImageSource.gallery,
+  //       ))!;
+  //       imageFileListBanner2.add(image1);
+  //       ppp = true;
+  //       setState(() {});
+  //     } else if (selectedImage5 == null) {
+  //       image2 = (await ImagePicker().pickImage(
+  //         source: ImageSource.gallery,
+  //       ))!;
+  //       imageFileListBanner2.add(image2);
+  //       ppp1 = true;
+  //       setState(() {});
+  //     } else if (selectedImage6 == null) {
+  //       image3 = (await ImagePicker().pickImage(
+  //         source: ImageSource.gallery,
+  //       ))!;
+  //       imageFileListBanner2.add(image3);
+  //       ppp2 = true;
+  //       setState(() {});
+  //     } else {
+  //       image33 = (await ImagePicker().pickImage(
+  //         source: ImageSource.gallery,
+  //       ))!;
+  //       imageFileListBanner2.add(image33);
+  //       ppp2 = true;
+  //       setState(() {});
+  //     }
+  //     // print("imageFileListBanner${imageFileListBanner.length}");
+  //   }
+  //   // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
+  //   setState(() {
+  //     selectedImage1 = File(image1.path);
+  //     base64Image = base64Encode(selectedImage4!.readAsBytesSync());
+  //     // print(imageFileListBanner);
+  //   });
+  //   setState(() {
+  //     selectedImage2 = File(image2.path);
+  //     base64Image = base64Encode(selectedImage5!.readAsBytesSync());
+  //     // print(imageFileListBanner);
+  //   });
+  //   setState(() {
+  //     selectedImage3 = File(image3.path);
+  //     base64Image = base64Encode(selectedImage6!.readAsBytesSync());
+  //     // print(imageFileListBanner);
+  //   });
+  // }
+  TextEditingController quantityLitersController = TextEditingController();
+  TextEditingController unitPriceController = TextEditingController();
+  TextEditingController enterNameOFStatationController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -300,9 +308,8 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: quantityLitersController,
                   keyboardType: TextInputType.text,
-
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Quantity in liters"),
                 ),
@@ -318,9 +325,8 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: unitPriceController,
                   keyboardType: TextInputType.text,
-
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Unit Price"),
                 ),
@@ -336,9 +342,8 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: enterNameOFStatationController,
                   keyboardType: TextInputType.text,
-
                   decoration: const InputDecoration().prefixIconTextField(
                       hintText: "   Enter name of petrol station"),
                 ),
@@ -375,15 +380,20 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                           onPressed: () {
                             indeximage = 1;
                             setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -592,6 +602,12 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          var quantityLiters = quantityLitersController.text;
+                          var unitPrice = unitPriceController.text;
+                          var enterNameOFStatation =
+                              enterNameOFStatationController.text;
+                          addondieselApi(context, quantityLiters, unitPrice,
+                              enterNameOFStatation);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -641,10 +657,8 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
-                    if (indeximage == 1) {
+                    if (imageFileListBanner.isEmpty) {
                       chooseImage1("camera");
-                    } else {
-                      chooseImage2("camera");
                     }
                   },
                   icon: const Icon(
@@ -667,12 +681,9 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                 onPressed: () {
                   Navigator.pop(context);
                   // chooseImage1("Gallery");
-                  if (indeximage == 1) {
+                  if (imageFileListBanner.isEmpty) {
                     TakePhoto().getMultipleImagesFromGallery(
                         _picker, imageList, getImage, context);
-                  } else {
-                    TakePhoto1().getMultipleImagesFromGallery(
-                        _picker1, imageList2, getImage2, context);
                   }
                 },
                 icon: const Icon(
@@ -694,5 +705,38 @@ class _AddOnDieselState extends State<AddOnDiesel> {
         ],
       ),
     );
+  }
+
+  Future<AddonDiesel> addondieselApi(context, String quantityLiters,
+      String unitPrice, String petrolStation) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "Accept": "application/json",
+      'Authorization':
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    };
+
+    var uri = Uri.parse(ApiServer.addondiesel);
+
+    var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['quantity_in_litres'] = quantityLiters;
+    request.fields['unit_price'] = unitPrice;
+    request.fields['petrol_station'] = petrolStation;
+    request.files.add(await https.MultipartFile.fromPath(
+        'existing_diesel_image', imageFileListBanner[0].path));
+    request.files.add(await https.MultipartFile.fromPath(
+        'petrol_station_image', imageFileListBanner[0].path));
+
+    var response = await https.Response.fromStream(await request.send());
+
+    var body = json.decode(response.body);
+    if (response.statusCode == 200 && body['status'] == true) {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+    } else {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+    }
+    return AddonDiesel.fromJson(jsonDecode(response.body));
   }
 }

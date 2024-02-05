@@ -703,7 +703,7 @@ class _TripDetialsState extends State<TripDetials> {
       if (indexbutton == 0) {
         _scrollToPosition();
       }
-      print("statusresponse.data!.status${statusresponse.data!.status}");
+      debugPrint("statusresponse.data!.status${statusresponse.data!.status}");
       if (statusresponse.data!.status == "Accepted" && context.mounted) {
         debugPrint("DAta");
         Navigator.push(context,
