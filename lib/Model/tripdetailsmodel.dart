@@ -107,9 +107,8 @@ class Data {
     enrouteDiesel = json['enroute_diesel'] != ""
         ? EnrouteDiesel.fromJson(json['enroute_diesel'])
         : null;
-    repairs =
-        json['repairs'] != "" ? new Repairs.fromJson(json['repairs']) : null;
-    tolls = json['tolls'] != "" ? new Tolls.fromJson(json['tolls']) : null;
+    repairs = json['repairs'] != "" ? Repairs.fromJson(json['repairs']) : null;
+    tolls = json['tolls'] != "" ? Tolls.fromJson(json['tolls']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -296,7 +295,7 @@ class Repairs {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['trip_id'] = tripId;
     data['driver_id'] = driverId;
@@ -349,7 +348,7 @@ class Tolls {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['trip_id'] = tripId;
     data['driver_id'] = driverId;

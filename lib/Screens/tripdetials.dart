@@ -1123,7 +1123,7 @@ class _TripDetialsState extends State<TripDetials> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Shop Name",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1138,7 +1138,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               tripdetails
                                                   .data!.repairs!.shopName
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1147,10 +1147,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
+                                            const Text(
                                               "Spare Name",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1165,7 +1165,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               tripdetails
                                                   .data!.repairs!.spareName
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1178,7 +1178,7 @@ class _TripDetialsState extends State<TripDetials> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Repair Name",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1193,7 +1193,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               tripdetails
                                                   .data!.repairs!.repairName
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1202,10 +1202,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
+                                            const Text(
                                               "Spare Cost",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1218,7 +1218,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                             Text(
                                               "\$${tripdetails.data!.repairs!.spareCost.toString()}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1231,7 +1231,7 @@ class _TripDetialsState extends State<TripDetials> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Repair Cost",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1244,7 +1244,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                             Text(
                                               "\$${tripdetails.data!.repairs!.repairCost.toString()}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1253,10 +1253,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
-                                            Text(
+                                            const Text(
                                               "Total Amount",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1269,7 +1269,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                             Text(
                                               "\$${tripdetails.data!.repairs!.totalAmount.toString()}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1413,7 +1413,7 @@ class _TripDetialsState extends State<TripDetials> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Toll Name",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1427,7 +1427,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             Text(
                                               tripdetails.data!.tolls!.tollName
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
@@ -1440,7 +1440,7 @@ class _TripDetialsState extends State<TripDetials> {
                                         ),
                                         Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Amount",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -1453,7 +1453,7 @@ class _TripDetialsState extends State<TripDetials> {
                                             ),
                                             Text(
                                               "\$${tripdetails.data!.tolls!.amount.toString()}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
                                                 // overflow: TextOverflow.ellipsis,
