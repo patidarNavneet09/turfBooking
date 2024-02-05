@@ -12,4 +12,5 @@ class ApiServer {
   static const tripaccept = "${baseurl}trip-accept";
   static const tripstart = "${baseurl}trip-start";
   static const addondiesel = "${baseurl}add-on-diesel";
+  static const enroutediesel = "${baseurl}enroute-diesel";
 }

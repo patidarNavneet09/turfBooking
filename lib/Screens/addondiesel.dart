@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/%20addondieselresponse.dart';
+import 'package:truckmanagement/Model/diesel.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -27,7 +27,7 @@ class _AddOnDieselState extends State<AddOnDiesel> {
   List<XFile> imageFileListBanner = [];
   // List<XFile> imageFileListBanner2 = [];
   final _picker = ImagePicker();
-  final _picker1 = ImagePicker();
+  // final _picker1 = ImagePicker();
   List<XFile> imageList = [];
   List<XFile> imageList2 = [];
   getImage(List<XFile> list) {
@@ -606,8 +606,18 @@ class _AddOnDieselState extends State<AddOnDiesel> {
                           var unitPrice = unitPriceController.text;
                           var enterNameOFStatation =
                               enterNameOFStatationController.text;
-                          addondieselApi(context, quantityLiters, unitPrice,
-                              enterNameOFStatation);
+                          if (quantityLiters.isEmpty == true) {
+                            Utility.getToast(
+                                msg: "Fill exact quantity in liters");
+                          } else if (unitPrice.isEmpty == true) {
+                            Utility.getToast(msg: "Fill exact unit price");
+                          } else if (enterNameOFStatation.isEmpty == true) {
+                            Utility.getToast(
+                                msg: "Fill exact Enter name of petrol station");
+                          } else {
+                            addondieselApi(context, quantityLiters, unitPrice,
+                                enterNameOFStatation);
+                          }
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -707,7 +717,7 @@ class _AddOnDieselState extends State<AddOnDiesel> {
     );
   }
 
-  Future<AddonDiesel> addondieselApi(context, String quantityLiters,
+  Future<Dieselrespose> addondieselApi(context, String quantityLiters,
       String unitPrice, String petrolStation) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -737,6 +747,6 @@ class _AddOnDieselState extends State<AddOnDiesel> {
     } else {
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
-    return AddonDiesel.fromJson(jsonDecode(response.body));
+    return Dieselrespose.fromJson(jsonDecode(response.body));
   }
 }

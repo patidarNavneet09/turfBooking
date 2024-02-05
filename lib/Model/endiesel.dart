@@ -1,16 +1,16 @@
-class AddonDiesel {
+class EnrouteDieselRes {
   bool? status;
   int? statusCode;
   String? message;
   Data? data;
 
-  AddonDiesel({this.status, this.statusCode, this.message, this.data});
+  EnrouteDieselRes({this.status, this.statusCode, this.message, this.data});
 
-  AddonDiesel.fromJson(Map<String, dynamic> json) {
+  EnrouteDieselRes.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusCode = json['status_code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -29,7 +29,7 @@ class Data {
   String? petrolStationImage;
   String? tripId;
   String? driverId;
-  String? quantityInLitres;
+  String? quantity;
   String? unitPrice;
   String? petrolStation;
   String? updatedAt;
@@ -40,7 +40,7 @@ class Data {
       {this.petrolStationImage,
       this.tripId,
       this.driverId,
-      this.quantityInLitres,
+      this.quantity,
       this.unitPrice,
       this.petrolStation,
       this.updatedAt,
@@ -51,7 +51,7 @@ class Data {
     petrolStationImage = json['petrol_station_image'];
     tripId = json['trip_id'];
     driverId = json['driver_id'];
-    quantityInLitres = json['quantity_in_litres'];
+    quantity = json['quantity'];
     unitPrice = json['unit_price'];
     petrolStation = json['petrol_station'];
     updatedAt = json['updated_at'];
@@ -64,7 +64,7 @@ class Data {
     data['petrol_station_image'] = petrolStationImage;
     data['trip_id'] = tripId;
     data['driver_id'] = driverId;
-    data['quantity_in_litres'] = quantityInLitres;
+    data['quantity'] = quantity;
     data['unit_price'] = unitPrice;
     data['petrol_station'] = petrolStation;
     data['updated_at'] = updatedAt;

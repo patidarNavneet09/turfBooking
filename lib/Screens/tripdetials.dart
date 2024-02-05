@@ -606,15 +606,15 @@ class _TripDetialsState extends State<TripDetials> {
                                             MediaQuery.of(context).size.height *
                                                 0.07,
                                         onPressed: () {
-                                          acceptApi(context, "On the way",
-                                              tripdetails.data!.id.toString());
+                                          // acceptApi(context, "On the way",
+                                          //     tripdetails.data!.id.toString());
 
                                           // indexbutton = 1;
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             const StartTrip()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const StartTrip()));
 
                                           setState(() {});
                                         },
