@@ -292,11 +292,11 @@ class _TollsScreenState extends State<TollsScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Card(
-                elevation: 2,
-                shadowColor: Colors.white,
-                color: Colors.white,
-                surfaceTintColor: Colors.white,
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: MyColor.greyText),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
@@ -310,11 +310,11 @@ class _TollsScreenState extends State<TollsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Card(
-                elevation: 2,
-                shadowColor: Colors.white,
-                color: Colors.white,
-                surfaceTintColor: Colors.white,
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: MyColor.greyText),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
