@@ -7,7 +7,6 @@ import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/statusresponsemodel.dart';
 import 'package:truckmanagement/Model/tripdetailsmodel.dart';
-import 'package:truckmanagement/Screens/addexpenstion.dart';
 import 'package:truckmanagement/Screens/addondiesel.dart';
 import 'package:truckmanagement/Screens/expenstiontype.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
@@ -65,7 +64,6 @@ class _TripDetialsState extends State<TripDetials> {
   Statusresponse statusresponse = Statusresponse();
   @override
   Widget build(BuildContext context) {
-    // print(tripdetails.message.toString());
     var screens = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -429,7 +427,7 @@ class _TripDetialsState extends State<TripDetials> {
                             Text(
                               // "Box Truck",
                               tripdetails.data!.truck.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: MyColor.black,
                                 // overflow: TextOverflow.ellipsis,
@@ -665,7 +663,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                 ),
                                                 Column(
                                                   children: [
-                                                    Text(
+                                                    const Text(
                                                       "Quantity",
                                                       style: TextStyle(
                                                         fontSize: 14,
@@ -683,7 +681,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                           .addOnDiesel!
                                                           .quantityInLitres
                                                           .toString(),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
                                                         // overflow: TextOverflow.ellipsis,
@@ -697,7 +695,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                 ),
                                                 Column(
                                                   children: [
-                                                    Text(
+                                                    const Text(
                                                       "Unit Price",
                                                       style: TextStyle(
                                                         fontSize: 14,
@@ -711,7 +709,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                     ),
                                                     Text(
                                                       "\$${tripdetails.data!.addOnDiesel!.unitPrice.toString()}",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
                                                         // overflow: TextOverflow.ellipsis,
@@ -725,7 +723,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                 ),
                                                 Column(
                                                   children: [
-                                                    Text(
+                                                    const Text(
                                                       "Fuel Station",
                                                       style: TextStyle(
                                                         fontSize: 14,
@@ -743,7 +741,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                           .addOnDiesel!
                                                           .petrolStation
                                                           .toString(),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
                                                         // overflow: TextOverflow.ellipsis,
@@ -901,7 +899,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                               Column(
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Quantity",
                                                     style: TextStyle(
                                                       fontSize: 14,
@@ -917,7 +915,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                     tripdetails.data!
                                                         .enrouteDiesel!.quantity
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.black,
                                                       // overflow: TextOverflow.ellipsis,
@@ -931,7 +929,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                               Column(
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Unit Price",
                                                     style: TextStyle(
                                                       fontSize: 14,
@@ -945,7 +943,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                   Text(
                                                     "\$${tripdetails.data!.enrouteDiesel!.unitPrice.toString()}",
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.black,
                                                       // overflow: TextOverflow.ellipsis,
@@ -959,7 +957,7 @@ class _TripDetialsState extends State<TripDetials> {
                                               ),
                                               Column(
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Fuel Station",
                                                     style: TextStyle(
                                                       fontSize: 14,
@@ -977,7 +975,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                         .enrouteDiesel!
                                                         .petrolStation
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.black,
                                                       // overflow: TextOverflow.ellipsis,
@@ -2385,39 +2383,38 @@ class _TripDetialsState extends State<TripDetials> {
                                     ),
                                   )
                                 : Container(),
-                            indexbutton == 1
-                                ? tripdetails.data!.isStatus.toString() ==
+                            indexbutton == 1 &&
+                                    tripdetails.data!.isStatus.toString() ==
                                         "Accepted"
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, bottom: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            AppButton(
-                                                textStyle: const TextStyle(
-                                                  color: MyColor.white,
-                                                  fontSize: 16,
-                                                  fontFamily: ColorFamily
-                                                      .fontsSFProDisplay,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                                btnWidth: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.90,
-                                                btnHeight:
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .height *
-                                                        0.07,
-                                                onPressed: () {
-                                                  // acceptApi(context, "On the way",
-                                                  //     tripdetails.data!.id.toString());
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        AppButton(
+                                            textStyle: const TextStyle(
+                                              color: MyColor.white,
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            btnWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.90,
+                                            btnHeight: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.07,
+                                            onPressed: () {
+                                              // acceptApi(context, "On the way",
+                                              //     tripdetails.data!.id.toString());
 
-                                                  // indexbutton = 1;
-                                                  Navigator.push(
+                                              // indexbutton = 1;
+                                              Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
@@ -2425,18 +2422,17 @@ class _TripDetialsState extends State<TripDetials> {
                                                                   tripId: widget
                                                                       .tripId,
                                                                   truckId: widget
-                                                                      .truckId))).then(
-                                                      (value) => apihit());
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
 
-                                                  setState(() {});
-                                                },
-                                                name: "Start Trip"),
-                                          ],
-                                        ),
-                                      )
-                                    : Container()
+                                              setState(() {});
+                                            },
+                                            name: "Start Trip"),
+                                      ],
+                                    ),
+                                  )
                                 : Container(),
-                            tripdetails.data!.addOnDiesel.toString() != null
+                            tripdetails.data!.addOnDiesel.toString() == 'null'
                                 ? Padding(
                                     padding: const EdgeInsets.only(
                                         top: 50, bottom: 15),
@@ -2458,14 +2454,15 @@ class _TripDetialsState extends State<TripDetials> {
                                                 0.90,
                                             onPressed: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          AddOnDieselscreen(
-                                                              tripId:
-                                                                  widget.tripId,
-                                                              truckId: widget
-                                                                  .truckId)));
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AddOnDieselscreen(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
                                             },
                                             name: "Add On Diesel"),
                                       ],
@@ -2474,8 +2471,13 @@ class _TripDetialsState extends State<TripDetials> {
                                 : Container(),
                             tripdetails.data!.isStatus.toString() != "Accepted"
                                 ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, bottom: 15),
+                                    padding: EdgeInsets.only(
+                                        top: tripdetails.data!.addOnDiesel
+                                                    .toString() ==
+                                                'null'
+                                            ? 10
+                                            : 30,
+                                        bottom: 15),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -2494,10 +2496,15 @@ class _TripDetialsState extends State<TripDetials> {
                                                 0.90,
                                             onPressed: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const ExpentionType()));
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ExpentionType(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
 
                                               setState(() {});
                                             },

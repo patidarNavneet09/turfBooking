@@ -16,13 +16,23 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as https;
 
 class EnrouteDiesel extends StatefulWidget {
-  const EnrouteDiesel({super.key});
+  final String? tripId;
+  final String? truckId;
+  const EnrouteDiesel({super.key, this.tripId, this.truckId});
 
   @override
   State<EnrouteDiesel> createState() => _EnrouteDieselState();
 }
 
 class _EnrouteDieselState extends State<EnrouteDiesel> {
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   final _picker = ImagePicker();
@@ -482,6 +492,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
+                        isLoading: isLoading,
                         // color: MyColor.transparent,
                         textStyle: const TextStyle(
                           color: MyColor.white,
@@ -607,6 +618,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
 
   Future<EnrouteDieselRes> enRouteddieselApi(context, String quantityLiters,
       String unitPrice, String petrolStation) async {
+    setLoading(true);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     Map<String, String> headers = {
@@ -622,6 +634,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
     request.fields['quantity_in_litres'] = quantityLiters;
     request.fields['unit_price'] = unitPrice;
     request.fields['petrol_station'] = petrolStation;
+    request.fields['trip_id'] = widget.tripId.toString();
 
     request.files.add(await https.MultipartFile.fromPath(
         'petrol_station_image', imageFileListBanner[0].path));
@@ -629,6 +642,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
     var response = await https.Response.fromStream(await request.send());
 
     var body = json.decode(response.body);
+    setLoading(false);
     if (response.statusCode == 200 && body['status'] == true) {
       debugPrint("response.body>>>>>>>>>>${response.body}");
       Navigator.pop(context);

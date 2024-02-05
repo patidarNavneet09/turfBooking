@@ -746,6 +746,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
     request.fields['quantity_in_litres'] = quantityLiters;
     request.fields['unit_price'] = unitPrice;
+    request.fields['trip_id'] = widget.tripId.toString();
     request.fields['petrol_station'] = petrolStation;
     request.files.add(await https.MultipartFile.fromPath(
         'existing_diesel_image', imageFileListBanner[0].path));

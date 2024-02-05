@@ -9,7 +9,9 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 
 class ExpentionType extends StatefulWidget {
-  const ExpentionType({super.key});
+  final String? tripId;
+  final String? truckId;
+  const ExpentionType({super.key, this.tripId, this.truckId});
 
   @override
   State<ExpentionType> createState() => _ExpentionTypeState();
@@ -53,7 +55,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const EnrouteDiesel()));
+                              builder: (context) => EnrouteDiesel(
+                                  tripId: widget.tripId,
+                                  truckId: widget.truckId)));
                     },
                     leading: const Text(
                       "Enroute Diesel ",
