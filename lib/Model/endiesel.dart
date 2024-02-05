@@ -10,7 +10,7 @@ class EnrouteDieselRes {
     status = json['status'];
     statusCode = json['status_code'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {

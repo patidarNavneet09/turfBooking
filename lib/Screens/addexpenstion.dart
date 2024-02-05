@@ -1,13 +1,26 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:pretty_http_logger/pretty_http_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/statusresponsemodel.dart';
+import 'package:truckmanagement/Model/tripdetailsmodel.dart';
+import 'package:truckmanagement/Screens/addondiesel.dart';
 import 'package:truckmanagement/Screens/deliveryscreen.dart';
 import 'package:truckmanagement/Screens/expenstiontype.dart';
+import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
+import 'dart:convert' as convert;
 
 class AddExpension extends StatefulWidget {
-  const AddExpension({super.key});
+  final String? tripId;
+  final String? truckId;
+  const AddExpension({super.key, this.tripId, this.truckId});
 
   @override
   State<AddExpension> createState() => _AddExpensionState();
@@ -17,6 +30,35 @@ class _AddExpensionState extends State<AddExpension> {
   String startDate = '';
   String endDate = '';
   int indexbutton = 0;
+  bool loading1 = true;
+
+  final ScrollController _controller = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGet(
+        context, widget.truckId.toString(), widget.tripId.toString()));
+  }
+
+  @override
+  void dispose() {
+    // Dispose the ScrollController when not needed
+    _controller.dispose();
+    super.dispose();
+  }
+
+  // Method to scroll to a particular position
+  void _scrollToPosition() {
+    _controller.animateTo(
+      410.0, // Replace 200.0 with the desired scroll offset
+      duration: const Duration(seconds: 2), // Adjust duration as needed
+      curve: Curves.ease, // Adjust curve as needed
+    );
+  }
+
+  Tripdetails tripdetails = Tripdetails();
+  Statusresponse statusresponse = Statusresponse();
   @override
   Widget build(BuildContext context) {
     var screens = MediaQuery.of(context).size;
@@ -2022,5 +2064,93 @@ class _AddExpensionState extends State<AddExpension> {
         ),
       ),
     );
+  }
+
+  Future<Tripdetails> tripdetialsGet(
+      BuildContext context, String truckId, String tripId) async {
+    // Utility.progressloadingDialog(context, true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(logLevel: LogLevel.BODY),
+    ]);
+
+    var response = await http.get(
+        Uri.parse(
+            "${ApiServer.tripdetailsapi}truck_id=$truckId&trip_id=$tripId"),
+        headers: {
+          "content-type": "application/json",
+          "accept": "application/json",
+          "Authorization":
+              "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+        });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    loading1 = true;
+    if (jsonResponse['status'] == true) {
+      tripdetails = Tripdetails.fromJson(jsonResponse);
+
+      if (tripdetails.data!.status.toString() == "Accepted") {
+        indexbutton = 1;
+
+        setState(() {});
+      }
+      setState(() {
+        loading1 = false;
+      });
+    } else {
+      tripdetails = Tripdetails.fromJson(jsonResponse);
+      setState(() {
+        loading1 = false;
+      });
+    }
+
+    return Tripdetails.fromJson(jsonDecode(response.body));
+  }
+
+  Future<Statusresponse> acceptApi(
+    BuildContext context,
+    String? status,
+    String? tripId,
+  ) async {
+    var request = {};
+    request['status'] = status;
+    request['trip_id'] = tripId;
+
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(
+        logLevel: LogLevel.BODY,
+      ),
+    ]);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(Uri.parse(ApiServer.tripaccept),
+        body: convert.jsonEncode(request),
+        headers: {
+          "content-type": "application/json",
+          "accept": "application/json",
+          "Authorization":
+              "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+        });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    if (jsonResponse['status'] == true) {
+      statusresponse = Statusresponse.fromJson(jsonResponse);
+      if (indexbutton == 0) {
+        _scrollToPosition();
+      }
+      debugPrint("statusresponse.data!.status${statusresponse.data!.status}");
+      if (statusresponse.data!.status == "Accepted" && context.mounted) {
+        debugPrint("DAta");
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const StartTrip()));
+      }
+      indexbutton = 1;
+      setState(() {});
+    } else {
+      Fluttertoast.showToast(msg: jsonResponse['message']);
+    }
+
+    return Statusresponse.fromJson(jsonDecode(response.body));
   }
 }

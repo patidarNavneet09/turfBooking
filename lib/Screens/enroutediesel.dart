@@ -631,6 +631,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
     var body = json.decode(response.body);
     if (response.statusCode == 200 && body['status'] == true) {
       debugPrint("response.body>>>>>>>>>>${response.body}");
+      Navigator.pop(context);
     } else {
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }

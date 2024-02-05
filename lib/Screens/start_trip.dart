@@ -5,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/addonaddexpenstion.dart';
+import 'package:truckmanagement/Screens/tripdetials.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -16,13 +17,23 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as https;
 
 class StartTrip extends StatefulWidget {
-  const StartTrip({super.key});
+  final String? tripId;
+  final String? truckId;
+  const StartTrip({super.key, this.tripId, this.truckId});
 
   @override
   State<StartTrip> createState() => _StartTripState();
 }
 
 class _StartTripState extends State<StartTrip> {
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
@@ -791,6 +802,7 @@ class _StartTripState extends State<StartTrip> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
+                        isLoading: isLoading,
                         // color: MyColor.transparent,
                         textStyle: const TextStyle(
                           color: MyColor.white,
@@ -805,13 +817,22 @@ class _StartTripState extends State<StartTrip> {
                             Utility.getToast(
                                 msg: "Fill exact kilometer driven");
                           } else {
-                            // startTripApi(context, kmDriven);
+                            startTripApi(context, kmDriven);
                           }
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AddonAddExpenstion()));
+                          // Navigator.pop(context);
+                          // Navigator.pushReplacement(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) =>
+                          //             TripDetials(
+                          //               tripId: widget.tripId,
+                          //               truckId: widget.truckId,
+                          //             )));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const AddonAddExpenstion()));
                         },
                         name: "Start Trip"),
                   ],
@@ -913,7 +934,7 @@ class _StartTripState extends State<StartTrip> {
 
   Future<void> startTripApi(context, String kmDriven) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
+    setLoading(true);
     Map<String, String> headers = {
       "content-type": "application/json",
       "Accept": "application/json",
@@ -925,6 +946,8 @@ class _StartTripState extends State<StartTrip> {
 
     var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
     request.fields['exact_km_driven'] = kmDriven;
+    request.fields['trip_id'] = widget.tripId.toString();
+    request.fields['status'] = "On the way";
     request.files.add(await https.MultipartFile.fromPath(
         'existing_diesel_image', imageFileListBanner[0].path));
     request.files.add(await https.MultipartFile.fromPath(
@@ -935,11 +958,24 @@ class _StartTripState extends State<StartTrip> {
     var body = json.decode(response.body);
     // print("jjjjjjjjjjjjjjjjjjj${request.fields}");
     // print("eeeeeeeeeeeeeeeeee${reque}");
+    // Utility.progressloadingDialog(context, true);
+    setLoading(false);
     if (response.statusCode == 200 && body['status'] == true) {
+      // Utility.progressloadingDialog(context, false);
       // videoFile1.clear();
       // imageFileListBanner1.clear();
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => TripDetials(
+                    tripId: widget.tripId,
+                    truckId: widget.truckId,
+                  )));
+      // Navigator.push(context,
+      //     MaterialPageRoute(builder: (context) => const AddonAddExpenstion()));
       debugPrint("response.body>>>>>>>>>>${response.body}");
     } else {
+      // Utility.progressloadingDialog(context, false);
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
   }

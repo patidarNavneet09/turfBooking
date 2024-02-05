@@ -559,6 +559,12 @@ class _SettingState extends State<Setting> {
 
       setState(() {});
     } else {
+      debugPrint(jsonResponse['message']);
+      if (context.mounted && jsonResponse['message'] == "Unauthenticated.") {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const Login()),
+            (Route<dynamic> route) => false);
+      }
       setState(() {});
     }
   }

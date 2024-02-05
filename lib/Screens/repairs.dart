@@ -647,6 +647,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          Navigator.pop(context);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(

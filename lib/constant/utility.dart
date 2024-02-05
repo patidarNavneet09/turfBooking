@@ -26,35 +26,36 @@ class Utility {
     );
   }
 
-  // static progressloadingDialog(BuildContext context, bool status) async {
-  //   if (status) {
-  //     showDialog(
-  //         barrierColor: Colors.transparent,
-  //         context: context,
-  //         barrierDismissible: false,
-  //         builder: (_) => WillPopScope(
-  //             onWillPop: () async => false,
-  //             child: Center(
-  //                 // child: CircularProgressIndicator(
-  //                 //   color: MyColor.color_gradient3,
-  //                 // ),
-  //                 child: SizedBox(
-  //               width: MediaQuery.of(context).size.width * 0.30,
-  //               height: MediaQuery.of(context).size.height * 0.05,
-  //               // child: Image.asset(
-  //               //     // "assets/images/ig_hand_loading.gif",
-  //               //     "assets/images/Ellipsis-1.5s-207px (1).gif"
-  //               //     // "assets/images/gf_loadingdemo_icon.gif",
-  //               // color: MyColor.blue,
-  //               //     // height: MediaQuery.of(context).size.height * 0.30,
-  //               //     ),
-  //               child: LoadingAnimationWidget.waveDots(
-  //                   color: MyColor.redcolor, size: 75),
-  //             ))));
-  //   } else {
-  //     Navigator.pop(context, false);
-  //   }
-  // }
+  static progressloadingDialog(BuildContext context, bool status) async {
+    if (status) {
+      showDialog(
+          barrierColor: Colors.transparent,
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => WillPopScope(
+              onWillPop: () async => false,
+              child: Center(
+                  // child: CircularProgressIndicator(
+                  //   color: MyColor.color_gradient3,
+                  // ),
+                  child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.50,
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: Image.asset("assets/images/gif_loader.gif"),
+                // child: Image.asset(
+                //     // "assets/images/ig_hand_loading.gif",
+                //     "assets/images/Ellipsis-1.5s-207px (1).gif"
+                //     // "assets/images/gf_loadingdemo_icon.gif",
+                // color: MyColor.blue,
+                //     // height: MediaQuery.of(context).size.height * 0.30,
+                //     ),
+                // child: LoadingAnimationWidget.waveDots(
+                //     color: MyColor.redcolor, size: 75),
+              ))));
+    } else {
+      Navigator.pop(context, false);
+    }
+  }
 
   // static precentageloadingDialog(BuildContext context, bool status) async {
   //   if (status) {

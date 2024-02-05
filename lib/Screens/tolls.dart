@@ -575,6 +575,7 @@ class _TollsScreenState extends State<TollsScreen> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          Navigator.pop(context);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
