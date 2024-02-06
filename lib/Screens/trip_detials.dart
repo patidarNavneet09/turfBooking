@@ -2994,7 +2994,11 @@ class _TripDetialsState extends State<TripDetials> {
 
                                               setState(() {});
                                             },
-                                            name: "Accept"),
+                                            name: tripdetails.data!.status
+                                                        .toString() ==
+                                                    "Accepted"
+                                                ? "Accepted"
+                                                : "Accept"),
                                       ],
                                     ),
                                   )
@@ -3050,8 +3054,13 @@ class _TripDetialsState extends State<TripDetials> {
                                 : Container(),
                             tripdetails.data!.addOnDiesel.toString() == 'null'
                                 ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 50, bottom: 15),
+                                    padding: EdgeInsets.only(
+                                        top: tripdetails.data!.addOnDiesel
+                                                    .toString() ==
+                                                "null"
+                                            ? 5
+                                            : 50,
+                                        bottom: 15),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -3088,6 +3097,9 @@ class _TripDetialsState extends State<TripDetials> {
                             tripdetails.data!.isStatus.toString() !=
                                         "Accepted" &&
                                     tripdetails.data!.endTripDetail
+                                            .toString() ==
+                                        "null" &&
+                                    tripdetails.data!.deliveryInformation
                                             .toString() ==
                                         "null"
                                 ? Padding(
@@ -3135,6 +3147,9 @@ class _TripDetialsState extends State<TripDetials> {
                                 : Container(),
                             tripdetails.data!.otherCharges != null &&
                                     tripdetails.data!.endTripDetail
+                                            .toString() ==
+                                        "null" &&
+                                    tripdetails.data!.deliveryInformation
                                             .toString() ==
                                         "null"
                                 ? Padding(
@@ -3187,7 +3202,11 @@ class _TripDetialsState extends State<TripDetials> {
                                 ? Padding(
                                     padding: EdgeInsets.only(
                                         top: tripdetails.data!.otherCharges !=
-                                                null
+                                                    null &&
+                                                tripdetails.data!
+                                                        .deliveryInformation
+                                                        .toString() ==
+                                                    "null"
                                             ? 05
                                             : 30,
                                         bottom: 10),

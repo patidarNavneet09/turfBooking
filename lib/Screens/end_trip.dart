@@ -781,7 +781,7 @@ class _EndTripState extends State<EndTrip> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 155, bottom: 15),
+                padding: const EdgeInsets.only(top: 40, bottom: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
