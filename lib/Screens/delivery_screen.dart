@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/delivery_note.dart';
-import 'package:truckmanagement/Screens/end_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -594,26 +593,26 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         onPressed: () {
                           var deliverd = deliverynoteController.text;
 
-                          // if (deliverd.isEmpty == true) {
-                          //   Utility.getToast(
-                          //       toastColor:
-                          //           const Color.fromARGB(255, 34, 71, 99),
-                          //       msg: "Fill delivery note");
-                          // } else if (imageFileListBanner2.isEmpty == true) {
-                          //   Utility.getToast(
-                          //       toastColor:
-                          //           const Color.fromARGB(255, 34, 71, 99),
-                          //       msg: "Please upload photo");
-                          // } else {
-                          //   deliverynoteApi(
-                          //     context,
-                          //     deliverd,
-                          //   );
-                          // }
-                          Navigator.push(
+                          if (deliverd.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill delivery note");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
+                          } else {
+                            deliverynoteApi(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const EndTrip()));
+                              deliverd,
+                            );
+                          }
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const EndTrip()));
                         },
                         name: "Submit"),
                   ],
