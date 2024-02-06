@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:truckmanagement/Screens/roadaccident.dart';
-import 'package:truckmanagement/Screens/enroutediesel.dart';
+import 'package:truckmanagement/Screens/road_accident.dart';
+import 'package:truckmanagement/Screens/enroute_diesel.dart';
 import 'package:truckmanagement/Screens/fines.dart';
-import 'package:truckmanagement/Screens/othercharges.dart';
+import 'package:truckmanagement/Screens/other_charges.dart';
 import 'package:truckmanagement/Screens/repairs.dart';
 import 'package:truckmanagement/Screens/tolls.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -200,7 +200,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const OtherCharges()));
+                              builder: (context) => OtherCharges(
+                                  tripId: widget.tripId,
+                                  truckId: widget.truckId)));
                     },
                     leading: const Text(
                       "Other Charges",

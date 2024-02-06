@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Screens/dashboardscreen.dart';
-import 'package:truckmanagement/Screens/loginscreen.dart';
+import 'package:truckmanagement/Screens/dashboard_screen.dart';
+import 'package:truckmanagement/Screens/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

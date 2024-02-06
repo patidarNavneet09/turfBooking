@@ -4,24 +4,39 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/other_charges.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
+import 'package:http/http.dart' as https;
 
 class OtherCharges extends StatefulWidget {
-  const OtherCharges({super.key});
+  final String? tripId;
+  final String? truckId;
+  const OtherCharges({super.key, this.tripId, this.truckId});
 
   @override
   State<OtherCharges> createState() => _OtherChargesState();
 }
 
 class _OtherChargesState extends State<OtherCharges> {
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
-  final _picker = ImagePicker();
+  // final _picker = ImagePicker();
   final _picker1 = ImagePicker();
   List<XFile> imageList = [];
   List<XFile> imageList2 = [];
@@ -277,13 +292,9 @@ class _OtherChargesState extends State<OtherCharges> {
   ];
 
   String? selectedValue;
-  final TextEditingController textEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
+  TextEditingController chargeController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +303,7 @@ class _OtherChargesState extends State<OtherCharges> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: const Text(
-          "Fines",
+          "Other Charges",
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -325,11 +336,10 @@ class _OtherChargesState extends State<OtherCharges> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: chargeController,
                   keyboardType: TextInputType.text,
-
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Fine Name"),
+                      .prefixIconTextField(hintText: "   Charge Name"),
                 ),
               ),
               const SizedBox(
@@ -343,9 +353,8 @@ class _OtherChargesState extends State<OtherCharges> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
-                  keyboardType: TextInputType.text,
-
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Amount"),
                 ),
@@ -361,11 +370,9 @@ class _OtherChargesState extends State<OtherCharges> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: descriptionController,
                   keyboardType: TextInputType.text,
-
                   maxLines: 5,
-
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Description"),
                 ),
@@ -400,17 +407,22 @@ class _OtherChargesState extends State<OtherCharges> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            indeximage = 1;
-                            setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner2.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -432,7 +444,7 @@ class _OtherChargesState extends State<OtherCharges> {
                         SizedBox(
                           width: screen.size.width * 0.68,
                           height: 62,
-                          child: imageFileListBanner.isEmpty
+                          child: imageFileListBanner2.isEmpty
                               ? Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10, right: 10, top: 2, bottom: 2),
@@ -489,7 +501,7 @@ class _OtherChargesState extends State<OtherCharges> {
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: imageFileListBanner.length,
+                                  itemCount: imageFileListBanner2.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Stack(
@@ -537,7 +549,7 @@ class _OtherChargesState extends State<OtherCharges> {
                                                                           10)),
                                                           child: Image.file(
                                                             File(
-                                                                imageFileListBanner[
+                                                                imageFileListBanner2[
                                                                         index]
                                                                     .path),
                                                             fit: BoxFit.fill,
@@ -560,7 +572,7 @@ class _OtherChargesState extends State<OtherCharges> {
                                                       InkWell(
                                                           radius: 20,
                                                           onTap: () {
-                                                            imageFileListBanner
+                                                            imageFileListBanner2
                                                                 .removeAt(
                                                                     index);
                                                             setState(() {});
@@ -606,6 +618,7 @@ class _OtherChargesState extends State<OtherCharges> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
+                        isLoading: isLoading,
                         // color: MyColor.transparent,
                         textStyle: const TextStyle(
                           color: MyColor.white,
@@ -615,7 +628,38 @@ class _OtherChargesState extends State<OtherCharges> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
-                          Navigator.pop(context);
+                          var name = chargeController.text;
+                          var amount = amountController.text;
+                          var description = descriptionController.text;
+                          if (name.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please enter Charge name");
+                          } else if (amount.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please enter amount");
+                          } else if (description.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please enter description");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
+                          } else {
+                            otherchargesApi(
+                              context,
+                              name,
+                              amount,
+                              description,
+                            );
+                          }
+                          // Navigator.pop(context);
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -664,11 +708,8 @@ class _OtherChargesState extends State<OtherCharges> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
-                    if (indeximage == 1) {
-                      chooseImage1("camera");
-                    } else {
-                      chooseImage2("camera");
-                    }
+
+                    chooseImage2("camera");
                   },
                   icon: const Icon(
                     Icons.camera,
@@ -690,13 +731,9 @@ class _OtherChargesState extends State<OtherCharges> {
                 onPressed: () {
                   Navigator.pop(context);
                   // chooseImage1("Gallery");
-                  if (indeximage == 1) {
-                    TakePhoto().getMultipleImagesFromGallery(
-                        _picker, imageList, getImage, context);
-                  } else {
-                    TakePhoto1().getMultipleImagesFromGallery(
-                        _picker1, imageList2, getImage2, context);
-                  }
+
+                  TakePhoto1().getMultipleImagesFromGallery(
+                      _picker1, imageList2, getImage2, context);
                 },
                 icon: const Icon(
                   Icons.image,
@@ -717,5 +754,45 @@ class _OtherChargesState extends State<OtherCharges> {
         ],
       ),
     );
+  }
+
+  Future<OtherchargesModel> otherchargesApi(
+    context,
+    String name,
+    String cost,
+    String description,
+  ) async {
+    setLoading(true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "Accept": "application/json",
+      'Authorization':
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    };
+
+    var uri = Uri.parse(ApiServer.otherchargeApi);
+
+    var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['trip_id'] = widget.tripId.toString();
+
+    request.fields['name'] = name;
+    request.fields['amount'] = cost;
+    request.fields['description'] = description;
+    request.files.add(await https.MultipartFile.fromPath(
+        'image', imageFileListBanner2[0].path));
+
+    var response = await https.Response.fromStream(await request.send());
+
+    var body = json.decode(response.body);
+    setLoading(false);
+    if (response.statusCode == 200 && body['status'] == true) {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+      Navigator.pop(context);
+    } else {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+    }
+    return OtherchargesModel.fromJson(jsonDecode(response.body));
   }
 }

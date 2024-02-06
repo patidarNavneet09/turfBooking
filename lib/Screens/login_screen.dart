@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/loginmodel.dart';
-import 'package:truckmanagement/Screens/dashboardscreen.dart';
+import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';

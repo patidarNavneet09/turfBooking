@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:truckmanagement/Screens/homescreen.dart';
+import 'package:truckmanagement/Screens/home_screen.dart';
 import 'package:truckmanagement/Screens/settingscreen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';

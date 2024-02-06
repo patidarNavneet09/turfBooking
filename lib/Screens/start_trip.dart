@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Screens/tripdetials.dart';
+import 'package:truckmanagement/Screens/trip_detials.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';

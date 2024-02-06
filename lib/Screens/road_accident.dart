@@ -37,7 +37,7 @@ class _RoadAccidentState extends State<RoadAccident> {
   int indeximage = 0;
   // List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
-  final _picker = ImagePicker();
+  // final _picker = ImagePicker();
   final _picker1 = ImagePicker();
   List<XFile> imageList = [];
   List<XFile> imageList2 = [];
@@ -297,7 +297,6 @@ class _RoadAccidentState extends State<RoadAccident> {
 
   @override
   Widget build(BuildContext context) {
-    print(selectedValue);
     var screen = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -375,10 +374,10 @@ class _RoadAccidentState extends State<RoadAccident> {
                                   const MaterialStatePropertyAll(Colors.grey),
                             ),
                             dropdownStyleData: DropdownStyleData(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 // border: Border.all(
                                 //     width: 1, color: MyColor.greyText),
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(10),
                                     bottomRight: Radius.circular(10)),
                               ),
