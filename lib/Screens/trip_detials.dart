@@ -2613,7 +2613,8 @@ class _TripDetialsState extends State<TripDetials> {
                                                                 .deliveryInformation!
                                                                 .deliveryNote
                                                                 .toString(),
-                                                            style: TextStyle(
+                                                            style:
+                                                                const TextStyle(
                                                               fontSize: 14,
                                                               color:
                                                                   MyColor.black,

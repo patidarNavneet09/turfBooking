@@ -127,10 +127,10 @@ class Data {
         ? Fine.fromJson(json['other_charges'])
         : null;
     deliveryInformation = json['delivery_information'] != ""
-        ? new DeliveryInformation.fromJson(json['delivery_information'])
+        ? DeliveryInformation.fromJson(json['delivery_information'])
         : null;
     endTripDetail = json['end_trip_detail'] != ""
-        ? new EndTripDetail.fromJson(json['end_trip_detail'])
+        ? EndTripDetail.fromJson(json['end_trip_detail'])
         : null;
   }
 

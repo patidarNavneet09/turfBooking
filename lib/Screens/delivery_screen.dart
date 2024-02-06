@@ -36,7 +36,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
-  final _picker = ImagePicker();
   final _picker1 = ImagePicker();
   List<XFile> imageList = [];
   List<XFile> imageList2 = [];
