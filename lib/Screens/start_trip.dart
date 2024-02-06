@@ -369,6 +369,8 @@ class _StartTripState extends State<StartTrip> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -604,6 +606,8 @@ class _StartTripState extends State<StartTrip> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -814,7 +818,20 @@ class _StartTripState extends State<StartTrip> {
                           var kmDriven = kmdrivenController.text;
                           if (kmDriven.isEmpty == true) {
                             Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
                                 msg: "Fill exact kilometer driven");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "please upload photo of Odometer ");
+                          } else if (imageFileListBanner.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg:
+                                    "please upload photo diesel meter of existing diesel");
                           } else {
                             startTripApi(context, kmDriven);
                           }

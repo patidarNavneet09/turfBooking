@@ -291,6 +291,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -508,12 +510,24 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                               enterNameOFStatationController.text;
                           if (quantityLiters.isEmpty == true) {
                             Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
                                 msg: "Fill exact quantity in liters");
                           } else if (unitPrice.isEmpty == true) {
-                            Utility.getToast(msg: "Fill exact unit price");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill exact unit price");
                           } else if (enterNameOFStatation.isEmpty == true) {
                             Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
                                 msg: "Fill exact Enter name of petrol station");
+                          } else if (imageFileListBanner.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
                           } else {
                             enRouteddieselApi(context, quantityLiters,
                                 unitPrice, enterNameOFStatation);

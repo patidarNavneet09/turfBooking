@@ -386,6 +386,8 @@ class _TollsScreenState extends State<TollsScreen> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -599,9 +601,20 @@ class _TollsScreenState extends State<TollsScreen> {
                           var tollname = tollNameController.text;
                           var amount = amountController.text;
                           if (tollname.isEmpty == true) {
-                            Utility.getToast(msg: "Fill  tollname name");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill  tollname name");
                           } else if (amount.isEmpty == true) {
-                            Utility.getToast(msg: "Fill  amount");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill  amount");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
                           } else {
                             enRouteddieselApi(
                               context,

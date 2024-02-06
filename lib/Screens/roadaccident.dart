@@ -482,6 +482,8 @@ class _RoadAccidentState extends State<RoadAccident> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -692,13 +694,25 @@ class _RoadAccidentState extends State<RoadAccident> {
                           var cost = costController.text;
                           var description = descriptionContriller.text;
                           if (selectedValue == null) {
-                            Utility.getToast(msg: "Select acciedent category");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Select acciedent category");
                           } else if (cost.isEmpty == true) {
-                            Utility.getToast(msg: "Fill cost");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill cost");
                           } else if (description.isEmpty == true) {
-                            Utility.getToast(msg: "Fill description");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill description");
                           } else if (imageFileListBanner2.isEmpty == true) {
-                            Utility.getToast(msg: "please upload photo");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
                           } else {
                             roadAcciedentApi(context, selectedValue.toString(),
                                 cost, description);

@@ -463,6 +463,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
                                   msg: "You select only one images");
                             }
                           },
@@ -685,17 +687,40 @@ class _RepairsScreenState extends State<RepairsScreen> {
 
                           var totalamount = totalAmountController.text;
                           if (shopname.isEmpty == true) {
-                            Utility.getToast(msg: "Fill  shop name");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill  shop name");
                           } else if (reparename.isEmpty == true) {
-                            Utility.getToast(msg: "Fill repaire name ");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill repaire name ");
                           } else if (repaircost.isEmpty == true) {
-                            Utility.getToast(msg: "Fill repair cost");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill repair cost");
                           } else if (sparename.isEmpty == true) {
-                            Utility.getToast(msg: "Fill spare name");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill spare name");
                           } else if (sparecost.isEmpty == true) {
-                            Utility.getToast(msg: "Fill spare cost");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill spare cost");
                           } else if (totalamount.isEmpty == true) {
-                            Utility.getToast(msg: "Fill total amount");
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Fill total amount");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo");
                           } else {
                             enRouteddieselApi(context, shopname, reparename,
                                 repaircost, sparename, sparecost, totalamount);
