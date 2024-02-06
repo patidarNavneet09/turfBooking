@@ -171,7 +171,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const FinesScreen()));
+                              builder: (context) => FinesScreen(
+                                  tripId: widget.tripId,
+                                  truckId: widget.truckId)));
                     },
                     leading: const Text(
                       "Fines",

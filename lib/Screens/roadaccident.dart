@@ -287,7 +287,7 @@ class _RoadAccidentState extends State<RoadAccident> {
   ];
 
   String? selectedValue;
-  final TextEditingController costController = TextEditingController();
+  TextEditingController costController = TextEditingController();
   TextEditingController descriptionContriller = TextEditingController();
   @override
   void dispose() {
