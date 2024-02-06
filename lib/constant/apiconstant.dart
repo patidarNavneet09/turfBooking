@@ -15,4 +15,5 @@ class ApiServer {
   static const enroutediesel = "${baseurl}enroute-diesel";
   static const enrouterepairs = "${baseurl}enroute-repairs";
   static const enroutetoll = "${baseurl}enroute-toll";
+  static const roadaccident = "${baseurl}road-accident";
 }
