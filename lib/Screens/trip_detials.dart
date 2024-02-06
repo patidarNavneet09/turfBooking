@@ -8,7 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/statusresponsemodel.dart';
 import 'package:truckmanagement/Model/tripdetailsmodel.dart';
 import 'package:truckmanagement/Screens/add_on_diesel.dart';
+import 'package:truckmanagement/Screens/delivery_screen.dart';
+import 'package:truckmanagement/Screens/end_trip.dart';
 import 'package:truckmanagement/Screens/expenstion_type.dart';
+import 'package:truckmanagement/Screens/large_images.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
@@ -182,7 +185,7 @@ class _TripDetialsState extends State<TripDetials> {
                                           height: 04,
                                         ),
                                         Text(
-                                          // startDate == "" ? "25/01/2024" : startDate,
+                                          // startDate == null ? "25/01/2024" : startDate,
                                           tripdetails.data!.startDate
                                               .toString(),
                                           style: const TextStyle(
@@ -253,7 +256,7 @@ class _TripDetialsState extends State<TripDetials> {
                                           height: 04,
                                         ),
                                         Text(
-                                          // endDate == "" ? "30/01/2024" : endDate,
+                                          // endDate == null ? "30/01/2024" : endDate,
                                           tripdetails.data!.endDate.toString(),
                                           style: const TextStyle(
                                             fontSize: 14,
@@ -565,9 +568,11 @@ class _TripDetialsState extends State<TripDetials> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            const SizedBox(
-                              height: 12,
-                            ),
+                            tripdetails.data!.addOnDiesel == null
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
                             tripdetails.data!.addOnDiesel == null
                                 ? Container()
                                 : Container(
@@ -627,41 +632,61 @@ class _TripDetialsState extends State<TripDetials> {
                                                             Radius.circular(
                                                                 10)),
                                                   ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                09)),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: tripdetails
-                                                          .data!
-                                                          .addOnDiesel!
-                                                          .petrolStationImage
-                                                          .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: MyColor.button,
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      LargeImages(
+                                                                        imagesUrl: tripdetails
+                                                                            .data!
+                                                                            .addOnDiesel!
+                                                                            .petrolStationImage
+                                                                            .toString(),
+                                                                        nameProperty:
+                                                                            "Add On Diesel",
+                                                                      )));
+                                                    },
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .all(
+                                                              Radius.circular(
+                                                                  09)),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: tripdetails
+                                                            .data!
+                                                            .addOnDiesel!
+                                                            .petrolStationImage
+                                                            .toString(),
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color:
+                                                                MyColor.button,
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress,
+                                                          ),
                                                         ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            const Icon(
+                                                                Icons.error),
+                                                        fit: BoxFit.fill,
+                                                        height: screens.height *
+                                                            0.08,
+                                                        width: screens.width *
+                                                            0.08,
                                                       ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Icon(
-                                                              Icons.error),
-                                                      fit: BoxFit.fill,
-                                                      height:
-                                                          screens.height * 0.08,
-                                                      width:
-                                                          screens.width * 0.08,
                                                     ),
                                                   ),
                                                 ),
@@ -812,9 +837,11 @@ class _TripDetialsState extends State<TripDetials> {
                                       ),
                                     ),
                                   ),
-                            const SizedBox(
-                              height: 12,
-                            ),
+                            tripdetails.data!.enrouteDiesel == null
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
                             tripdetails.data!.enrouteDiesel == null
                                 ? Container()
                                 : Container(
@@ -869,37 +896,59 @@ class _TripDetialsState extends State<TripDetials> {
                                                       const BorderRadius.all(
                                                           Radius.circular(10)),
                                                 ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(09)),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl: tripdetails
-                                                        .data!
-                                                        .enrouteDiesel!
-                                                        .petrolStationImage
-                                                        .toString(),
-                                                    progressIndicatorBuilder:
-                                                        (context, url,
-                                                                downloadProgress) =>
-                                                            Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color: MyColor.button,
-                                                        value: downloadProgress
-                                                            .progress,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .enrouteDiesel!
+                                                                          .petrolStationImage
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Enroute Diesel",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .enrouteDiesel!
+                                                          .petrolStationImage
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
                                                       ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
                                                     ),
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        const Icon(Icons.error),
-                                                    fit: BoxFit.fill,
-                                                    height:
-                                                        screens.height * 0.08,
-                                                    width: screens.width * 0.08,
                                                   ),
                                                 ),
                                               ),
@@ -1043,1285 +1092,57 @@ class _TripDetialsState extends State<TripDetials> {
                                       ],
                                     ),
                                   ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 8, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Repairs",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
+                            tripdetails.data!.repairs.toString() == "null"
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
+                            tripdetails.data!.repairs.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(09)),
-                                            child: CachedNetworkImage(
-                                              imageUrl: tripdetails
-                                                  .data!.repairs!.uploadBill
-                                                  .toString(),
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: MyColor.button,
-                                                  value:
-                                                      downloadProgress.progress,
-                                                ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                              fit: BoxFit.fill,
-                                              height: screens.height * 0.08,
-                                              width: screens.width * 0.08,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Text(
-                                              "Shop Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              tripdetails
-                                                  .data!.repairs!.shopName
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            const Text(
-                                              "Spare Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              tripdetails
-                                                  .data!.repairs!.spareName
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Text(
-                                              "Repair Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              tripdetails
-                                                  .data!.repairs!.repairName
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            const Text(
-                                              "Spare Cost",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${tripdetails.data!.repairs!.spareCost.toString()}",
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Text(
-                                              "Repair Cost",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${tripdetails.data!.repairs!.repairCost.toString()}",
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            const Text(
-                                              "Total Amount",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${tripdetails.data!.repairs!.totalAmount.toString()}",
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 8, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Tolls",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(09)),
-                                            child: CachedNetworkImage(
-                                              imageUrl: tripdetails
-                                                  .data!.tolls!.tollImage
-                                                  .toString(),
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: MyColor.button,
-                                                  value:
-                                                      downloadProgress.progress,
-                                                ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                              fit: BoxFit.fill,
-                                              height: screens.height * 0.08,
-                                              width: screens.width * 0.08,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Text(
-                                              "Toll Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              tripdetails.data!.tolls!.tollName
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            const Text(
-                                              "Amount",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${tripdetails.data!.tolls!.amount.toString()}",
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.23,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 8, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Road Accident",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Accident Category",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Minor",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Cost",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${80}",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.23,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 08,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Text(
-                                      "Description",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.greyText,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 08,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.black,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 8, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Fine",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Fine Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Red Light",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Cost",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${80}",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.23,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Text(
-                                      "Description",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.greyText,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 08,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.black,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 8, right: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Other Charges",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Charge Name",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "PUC",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "Cost",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            Text(
-                                              "\$${80}",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.23,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Text(
-                                      "Description",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.greyText,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 08,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.black,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontFamily:
-                                            ColorFamily.fontsSFProDisplay,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 8, right: 8, top: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Delivery Information",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: Image.asset(
-                                              "assets/images/demometer.png"),
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Description",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.greyText,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.70,
-                                              child: const Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.black,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.30,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                          // color: MyColor.Red_color,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.mirror,
-                                            colors: [
-                                              MyColor.button1,
-                                              MyColor.button,
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                09,
-                                              ),
-                                              bottomRight: Radius.circular(09)),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "View",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.white,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1, color: MyColor.greyText),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 8, right: 8, top: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "End Trip Detail",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: MyColor.black,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                ColorFamily.fontsSFProDisplay,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down)
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, right: 0, bottom: 0, top: 5),
                                     child: Column(
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Container(
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8, left: 8, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Repairs",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8, bottom: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
                                                 height: 50,
                                                 width: 50,
                                                 decoration: BoxDecoration(
@@ -2332,25 +1153,235 @@ class _TripDetialsState extends State<TripDetials> {
                                                       const BorderRadius.all(
                                                           Radius.circular(10)),
                                                 ),
-                                                child: Image.asset(
-                                                    "assets/images/demometer.png"),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .repairs!
+                                                                          .uploadBill
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Repairs",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .repairs!
+                                                          .uploadBill
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            Container(
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: 1,
-                                                    color: MyColor.button),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10)),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Shop Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails
+                                                        .data!.repairs!.shopName
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  const Text(
+                                                    "Spare Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails.data!.repairs!
+                                                        .spareName
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              child: Image.asset(
-                                                  "assets/images/demometer.png"),
-                                            ),
-                                          ],
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Repair Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails.data!.repairs!
+                                                        .repairName
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  const Text(
+                                                    "Spare Cost",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.repairs!.spareCost.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Repair Cost",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.repairs!.repairCost.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  const Text(
+                                                    "Total Amount",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.repairs!.totalAmount.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -2399,9 +1430,1526 @@ class _TripDetialsState extends State<TripDetials> {
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
+                            tripdetails.data!.repairs.toString() == "null"
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
+                            tripdetails.data!.tolls.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8, left: 8, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Tolls",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: MyColor.button),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .tolls!
+                                                                          .tollImage
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Tolls",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .tolls!
+                                                          .tollImage
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Toll Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails
+                                                        .data!.tolls!.tollName
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Amount",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.tolls!.amount.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.23,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              height: 20,
+                                              decoration: const BoxDecoration(
+                                                // color: MyColor.Red_color,
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.mirror,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      09,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(09)),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "View",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: MyColor.white,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontFamily: ColorFamily
+                                                        .fontsSFProDisplay,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                            tripdetails.data!.tolls.toString() == "null"
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
+                            tripdetails.data!.roadAccident.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8, left: 8, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Road Accident",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8, bottom: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: MyColor.button),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .roadAccident!
+                                                                          .image
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Road Accident",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .roadAccident!
+                                                          .image
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Accident Category",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails
+                                                        .data!
+                                                        .roadAccident!
+                                                        .accidentCategory
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Cost",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.roadAccident!.cost.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.23,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 08,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.greyText,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 08,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Text(
+                                            tripdetails
+                                                .data!.roadAccident!.description
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.black,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              height: 20,
+                                              decoration: const BoxDecoration(
+                                                // color: MyColor.Red_color,
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.mirror,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      09,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(09)),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "View",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: MyColor.white,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontFamily: ColorFamily
+                                                        .fontsSFProDisplay,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                            tripdetails.data!.roadAccident.toString() == "null"
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
+                            tripdetails.data!.fine.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8, left: 8, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Fine",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: MyColor.button),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .fine!
+                                                                          .image
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Fine",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!.fine!.image
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Fine Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails.data!.fine!.name
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Cost",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.fine!.amount.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.23,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 8),
+                                          child: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.greyText,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 05,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Text(
+                                            tripdetails.data!.fine!.description
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.black,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              height: 20,
+                                              decoration: const BoxDecoration(
+                                                // color: MyColor.Red_color,
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.mirror,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      09,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(09)),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "View",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: MyColor.white,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontFamily: ColorFamily
+                                                        .fontsSFProDisplay,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                            tripdetails.data!.fine.toString() == "null"
+                                ? Container()
+                                : const SizedBox(
+                                    height: 12,
+                                  ),
+                            tripdetails.data!.otherCharges.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8, left: 8, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Other Charges",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: MyColor.button),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .otherCharges!
+                                                                          .image
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Other Charges",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .otherCharges!
+                                                          .image
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Charge Name",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tripdetails.data!
+                                                        .otherCharges!.name
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text(
+                                                    "Cost",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "\$${tripdetails.data!.otherCharges!.amount.toString()}",
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.black,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.23,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.greyText,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 02,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
+                                          child: Text(
+                                            tripdetails
+                                                .data!.otherCharges!.description
+                                                .toString(),
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: MyColor.black,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              height: 20,
+                                              decoration: const BoxDecoration(
+                                                // color: MyColor.Red_color,
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.mirror,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      09,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(09)),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "View",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: MyColor.white,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontFamily: ColorFamily
+                                                        .fontsSFProDisplay,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                            const SizedBox(
+                              height: 12,
                             ),
+                            tripdetails.data!.deliveryInformation.toString() ==
+                                    "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 8, right: 8, top: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Delivery Information",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8, bottom: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: MyColor.button),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LargeImages(
+                                                                      imagesUrl: tripdetails
+                                                                          .data!
+                                                                          .deliveryInformation!
+                                                                          .image
+                                                                          .toString(),
+                                                                      nameProperty:
+                                                                          "Delivery Information",
+                                                                    )));
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: tripdetails
+                                                          .data!
+                                                          .deliveryInformation!
+                                                          .image
+                                                          .toString(),
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: MyColor.button,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.fill,
+                                                      height:
+                                                          screens.height * 0.08,
+                                                      width:
+                                                          screens.width * 0.08,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text(
+                                                    "Description",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.70,
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            tripdetails
+                                                                .data!
+                                                                .deliveryInformation!
+                                                                .deliveryNote
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  MyColor.black,
+                                                              // overflow: TextOverflow.ellipsis,
+                                                              fontFamily:
+                                                                  ColorFamily
+                                                                      .fontsSFProDisplay,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.30,
+                                              height: 20,
+                                              decoration: const BoxDecoration(
+                                                // color: MyColor.Red_color,
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.mirror,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                      09,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(09)),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "View",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: MyColor.white,
+                                                    // overflow: TextOverflow.ellipsis,
+                                                    fontFamily: ColorFamily
+                                                        .fontsSFProDisplay,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            tripdetails.data!.endTripDetail.toString() == "null"
+                                ? Container()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 8, right: 8, top: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "End Trip Detail",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_down)
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8,
+                                              right: 0,
+                                              bottom: 0,
+                                              top: 5),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
+                                                    child: Container(
+                                                      height: 50,
+                                                      width: 50,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color:
+                                                                MyColor.button),
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    10)),
+                                                      ),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LargeImages(
+                                                                            imagesUrl:
+                                                                                tripdetails.data!.endTripDetail!.dieselMeterImage.toString(),
+                                                                            nameProperty:
+                                                                                "Delivery Information",
+                                                                          )));
+                                                        },
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                      .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          09)),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: tripdetails
+                                                                .data!
+                                                                .endTripDetail!
+                                                                .dieselMeterImage
+                                                                .toString(),
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color: MyColor
+                                                                    .button,
+                                                                value:
+                                                                    downloadProgress
+                                                                        .progress,
+                                                              ),
+                                                            ),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                const Icon(Icons
+                                                                    .error),
+                                                            fit: BoxFit.fill,
+                                                            height:
+                                                                screens.height *
+                                                                    0.08,
+                                                            width:
+                                                                screens.width *
+                                                                    0.08,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          width: 1,
+                                                          color:
+                                                              MyColor.button),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .all(
+                                                              Radius.circular(
+                                                                  10)),
+                                                    ),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        LargeImages(
+                                                                          imagesUrl: tripdetails
+                                                                              .data!
+                                                                              .endTripDetail!
+                                                                              .odometerImage
+                                                                              .toString(),
+                                                                          nameProperty:
+                                                                              "Delivery Information",
+                                                                        )));
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    09)),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: tripdetails
+                                                              .data!
+                                                              .endTripDetail!
+                                                              .odometerImage
+                                                              .toString(),
+                                                          progressIndicatorBuilder:
+                                                              (context, url,
+                                                                      downloadProgress) =>
+                                                                  Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: MyColor
+                                                                  .button,
+                                                              value:
+                                                                  downloadProgress
+                                                                      .progress,
+                                                            ),
+                                                          ),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              const Icon(
+                                                                  Icons.error),
+                                                          fit: BoxFit.fill,
+                                                          height:
+                                                              screens.height *
+                                                                  0.08,
+                                                          width: screens.width *
+                                                              0.08,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.30,
+                                                    height: 20,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      // color: MyColor.Red_color,
+                                                      gradient: LinearGradient(
+                                                        begin: Alignment
+                                                            .centerLeft,
+                                                        end: Alignment
+                                                            .centerRight,
+                                                        tileMode:
+                                                            TileMode.mirror,
+                                                        colors: [
+                                                          MyColor.button1,
+                                                          MyColor.button,
+                                                        ],
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                09,
+                                                              ),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          09)),
+                                                    ),
+                                                    child: const Center(
+                                                      child: Text(
+                                                        "View",
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: MyColor.white,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                             tripdetails.data!.isStatus.toString() == "Accepted"
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -2536,7 +3084,11 @@ class _TripDetialsState extends State<TripDetials> {
                                     ),
                                   )
                                 : Container(),
-                            tripdetails.data!.isStatus.toString() != "Accepted"
+                            tripdetails.data!.isStatus.toString() !=
+                                        "Accepted" &&
+                                    tripdetails.data!.endTripDetail
+                                            .toString() ==
+                                        "null"
                                 ? Padding(
                                     padding: EdgeInsets.only(
                                         top: tripdetails.data!.addOnDiesel
@@ -2576,6 +3128,99 @@ class _TripDetialsState extends State<TripDetials> {
                                               setState(() {});
                                             },
                                             name: "Add Expenses"),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                            tripdetails.data!.otherCharges != null &&
+                                    tripdetails.data!.endTripDetail
+                                            .toString() ==
+                                        "null"
+                                ? Padding(
+                                    padding: EdgeInsets.only(
+                                        top: tripdetails.data!.otherCharges !=
+                                                null
+                                            ? 05
+                                            : 30,
+                                        bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        AppButton(
+                                            textStyle: const TextStyle(
+                                              color: MyColor.white,
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            btnWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.90,
+                                            onPressed: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DeliveryScreen(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
+
+                                              setState(() {});
+                                            },
+                                            name: "Mark as delivered"),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                            tripdetails.data!.endTripDetail.toString() ==
+                                        "null" &&
+                                    tripdetails.data!.deliveryInformation
+                                            .toString() !=
+                                        "null"
+                                ? Padding(
+                                    padding: EdgeInsets.only(
+                                        top: tripdetails.data!.otherCharges !=
+                                                null
+                                            ? 05
+                                            : 30,
+                                        bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        AppButton(
+                                            textStyle: const TextStyle(
+                                              color: MyColor.white,
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            btnWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.90,
+                                            onPressed: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EndTrip(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
+
+                                              setState(() {});
+                                            },
+                                            name: "End Trip"),
                                       ],
                                     ),
                                   )

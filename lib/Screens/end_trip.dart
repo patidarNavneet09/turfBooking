@@ -3,20 +3,36 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/delivery_note.dart';
+import 'package:truckmanagement/Model/end_tripmodel.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as https;
 
 class EndTrip extends StatefulWidget {
-  const EndTrip({super.key});
+  final String? tripId;
+  final String? truckId;
+  const EndTrip({super.key, this.tripId, this.truckId});
 
   @override
   State<EndTrip> createState() => _EndTripState();
 }
 
 class _EndTripState extends State<EndTrip> {
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
@@ -323,15 +339,22 @@ class _EndTripState extends State<EndTrip> {
                           onPressed: () {
                             indeximage = 1;
                             setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -553,15 +576,22 @@ class _EndTripState extends State<EndTrip> {
                           onPressed: () {
                             indeximage = 2;
                             setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner2.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -766,6 +796,20 @@ class _EndTripState extends State<EndTrip> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          if (imageFileListBanner.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo of the diesel meter");
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "Please upload photo of odometer");
+                          } else {
+                            endTripApi(context);
+                          }
+
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -868,5 +912,42 @@ class _EndTripState extends State<EndTrip> {
         ],
       ),
     );
+  }
+
+  Future<EndTripModel> endTripApi(
+    context,
+  ) async {
+    setLoading(true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "Accept": "application/json",
+      'Authorization':
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    };
+
+    var uri = Uri.parse(ApiServer.endtripApi);
+
+    var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['trip_id'] = widget.tripId.toString();
+    request.fields['status'] = "Completed";
+    request.files.add(await https.MultipartFile.fromPath(
+        'diesel_meter_image', imageFileListBanner[0].path));
+    request.files.add(await https.MultipartFile.fromPath(
+        'odometer_image', imageFileListBanner2[0].path));
+
+    var response = await https.Response.fromStream(await request.send());
+
+    var body = json.decode(response.body);
+    debugPrint("response.body>>>>>>>>>>${response.headers}");
+    setLoading(false);
+    if (response.statusCode == 200 && body['status'] == true) {
+      debugPrint("response.body>>>>>>>>>>${response.request}");
+      Navigator.pop(context);
+    } else {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+    }
+    return EndTripModel.fromJson(jsonDecode(response.body));
   }
 }

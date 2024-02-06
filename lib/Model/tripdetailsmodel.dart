@@ -51,6 +51,11 @@ class Data {
   EnrouteDiesel? enrouteDiesel;
   Repairs? repairs;
   Tolls? tolls;
+  RoadAccident? roadAccident;
+  Fine? fine;
+  Fine? otherCharges;
+  DeliveryInformation? deliveryInformation;
+  EndTripDetail? endTripDetail;
 
   Data(
       {this.id,
@@ -77,7 +82,12 @@ class Data {
       this.addOnDiesel,
       this.enrouteDiesel,
       this.repairs,
-      this.tolls});
+      this.tolls,
+      this.roadAccident,
+      this.fine,
+      this.otherCharges,
+      this.deliveryInformation,
+      this.endTripDetail});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -109,6 +119,19 @@ class Data {
         : null;
     repairs = json['repairs'] != "" ? Repairs.fromJson(json['repairs']) : null;
     tolls = json['tolls'] != "" ? Tolls.fromJson(json['tolls']) : null;
+    roadAccident = json['road_accident'] != ""
+        ? RoadAccident.fromJson(json['road_accident'])
+        : null;
+    fine = json['fine'] != "" ? Fine.fromJson(json['fine']) : null;
+    otherCharges = json['other_charges'] != ""
+        ? Fine.fromJson(json['other_charges'])
+        : null;
+    deliveryInformation = json['delivery_information'] != ""
+        ? new DeliveryInformation.fromJson(json['delivery_information'])
+        : null;
+    endTripDetail = json['end_trip_detail'] != ""
+        ? new EndTripDetail.fromJson(json['end_trip_detail'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -145,6 +168,21 @@ class Data {
     }
     if (tolls != null) {
       data['tolls'] = tolls!.toJson();
+    }
+    if (roadAccident != null) {
+      data['road_accident'] = roadAccident!.toJson();
+    }
+    if (fine != null) {
+      data['fine'] = fine!.toJson();
+    }
+    if (otherCharges != null) {
+      data['other_charges'] = otherCharges!.toJson();
+    }
+    if (deliveryInformation != null) {
+      data['delivery_information'] = deliveryInformation!.toJson();
+    }
+    if (endTripDetail != null) {
+      data['end_trip_detail'] = endTripDetail!.toJson();
     }
     return data;
   }
@@ -355,6 +393,227 @@ class Tolls {
     data['toll_name'] = tollName;
     data['amount'] = amount;
     data['toll_image'] = tollImage;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class RoadAccident {
+  String? id;
+  String? tripId;
+  String? driverId;
+  String? accidentCategory;
+  String? cost;
+  String? image;
+  String? description;
+  String? createdAt;
+  String? updatedAt;
+
+  RoadAccident(
+      {this.id,
+      this.tripId,
+      this.driverId,
+      this.accidentCategory,
+      this.cost,
+      this.image,
+      this.description,
+      this.createdAt,
+      this.updatedAt});
+
+  RoadAccident.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    driverId = json['driver_id'];
+    accidentCategory = json['accident_category'];
+    cost = json['cost'];
+    image = json['image'];
+    description = json['description'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['driver_id'] = driverId;
+    data['accident_category'] = accidentCategory;
+    data['cost'] = cost;
+    data['image'] = image;
+    data['description'] = description;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Fine {
+  String? id;
+  String? tripId;
+  String? name;
+  String? image;
+  String? amount;
+  String? description;
+  String? createdAt;
+  String? updatedAt;
+
+  Fine(
+      {this.id,
+      this.tripId,
+      this.name,
+      this.image,
+      this.amount,
+      this.description,
+      this.createdAt,
+      this.updatedAt});
+
+  Fine.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    name = json['name'];
+    image = json['image'];
+    amount = json['amount'];
+    description = json['description'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['name'] = name;
+    data['image'] = image;
+    data['amount'] = amount;
+    data['description'] = description;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class OtherCharges {
+  String? id;
+  String? tripId;
+  String? name;
+  String? image;
+  String? amount;
+  String? description;
+  String? createdAt;
+  String? updatedAt;
+
+  OtherCharges(
+      {this.id,
+      this.tripId,
+      this.name,
+      this.image,
+      this.amount,
+      this.description,
+      this.createdAt,
+      this.updatedAt});
+
+  OtherCharges.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    name = json['name'];
+    image = json['image'];
+    amount = json['amount'];
+    description = json['description'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['name'] = name;
+    data['image'] = image;
+    data['amount'] = amount;
+    data['description'] = description;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class DeliveryInformation {
+  String? id;
+  String? tripId;
+  String? image;
+  String? deliveryNote;
+  String? deletedAt;
+  String? createdAt;
+  String? updatedAt;
+
+  DeliveryInformation(
+      {this.id,
+      this.tripId,
+      this.image,
+      this.deliveryNote,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt});
+
+  DeliveryInformation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    image = json['image'];
+    deliveryNote = json['delivery_note'];
+    deletedAt = json['deleted_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['image'] = image;
+    data['delivery_note'] = deliveryNote;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class EndTripDetail {
+  String? id;
+  String? tripId;
+  String? dieselMeterImage;
+  String? odometerImage;
+  String? deletedAt;
+  String? createdAt;
+  String? updatedAt;
+
+  EndTripDetail(
+      {this.id,
+      this.tripId,
+      this.dieselMeterImage,
+      this.odometerImage,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt});
+
+  EndTripDetail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripId = json['trip_id'];
+    dieselMeterImage = json['diesel_meter_image'];
+    odometerImage = json['odometer_image'];
+    deletedAt = json['deleted_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['trip_id'] = tripId;
+    data['diesel_meter_image'] = dieselMeterImage;
+    data['odometer_image'] = odometerImage;
     data['deleted_at'] = deletedAt;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

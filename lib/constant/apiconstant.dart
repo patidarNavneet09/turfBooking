@@ -18,4 +18,6 @@ class ApiServer {
   static const roadaccident = "${baseurl}road-accident";
   static const finesApi = "${baseurl}fines";
   static const otherchargeApi = "${baseurl}other-charges";
+  static const deliverynoteApi = "${baseurl}delivery-note";
+  static const endtripApi = "${baseurl}end-trip";
 }

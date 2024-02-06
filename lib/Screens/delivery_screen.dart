@@ -4,21 +4,36 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/delivery_note.dart';
 import 'package:truckmanagement/Screens/end_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
+import 'package:http/http.dart' as https;
 
 class DeliveryScreen extends StatefulWidget {
-  const DeliveryScreen({super.key});
+  final String? tripId;
+  final String? truckId;
+  const DeliveryScreen({super.key, this.tripId, this.truckId});
 
   @override
   State<DeliveryScreen> createState() => _DeliveryScreenState();
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  bool isLoading = false;
+
+  void setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   int indeximage = 0;
   List<XFile> imageFileListBanner = [];
   List<XFile> imageFileListBanner2 = [];
@@ -278,13 +293,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   ];
 
   String? selectedValue;
-  final TextEditingController textEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
+  TextEditingController deliverynoteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -326,11 +335,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 child: TextFormField(
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  // controller: passwordphoneController,
+                  controller: deliverynoteController,
                   keyboardType: TextInputType.text,
-
                   maxLines: 5,
-
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Delivery Note"),
                 ),
@@ -365,17 +372,22 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            indeximage = 1;
-                            setState(() {});
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                  // <-- SEE HERE
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20.0),
+                            if (imageFileListBanner2.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
                                   ),
-                                ),
-                                context: context,
-                                builder: ((builder) => bottomSheet1()));
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
+                                  msg: "You select only one images");
+                            }
                           },
                           child: DottedBorder(
                               color: MyColor.button,
@@ -397,7 +409,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         SizedBox(
                           width: screen.size.width * 0.68,
                           height: 62,
-                          child: imageFileListBanner.isEmpty
+                          child: imageFileListBanner2.isEmpty
                               ? Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10, right: 10, top: 2, bottom: 2),
@@ -454,7 +466,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: imageFileListBanner.length,
+                                  itemCount: imageFileListBanner2.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Stack(
@@ -502,7 +514,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                                           10)),
                                                           child: Image.file(
                                                             File(
-                                                                imageFileListBanner[
+                                                                imageFileListBanner2[
                                                                         index]
                                                                     .path),
                                                             fit: BoxFit.fill,
@@ -525,7 +537,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                       InkWell(
                                                           radius: 20,
                                                           onTap: () {
-                                                            imageFileListBanner
+                                                            imageFileListBanner2
                                                                 .removeAt(
                                                                     index);
                                                             setState(() {});
@@ -580,6 +592,24 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ),
                         btnWidth: MediaQuery.of(context).size.width * 0.90,
                         onPressed: () {
+                          var deliverd = deliverynoteController.text;
+
+                          // if (deliverd.isEmpty == true) {
+                          //   Utility.getToast(
+                          //       toastColor:
+                          //           const Color.fromARGB(255, 34, 71, 99),
+                          //       msg: "Fill delivery note");
+                          // } else if (imageFileListBanner2.isEmpty == true) {
+                          //   Utility.getToast(
+                          //       toastColor:
+                          //           const Color.fromARGB(255, 34, 71, 99),
+                          //       msg: "Please upload photo");
+                          // } else {
+                          //   deliverynoteApi(
+                          //     context,
+                          //     deliverd,
+                          //   );
+                          // }
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -627,11 +657,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
-                    if (indeximage == 1) {
-                      chooseImage1("camera");
-                    } else {
-                      chooseImage2("camera");
-                    }
+
+                    chooseImage2("camera");
                   },
                   icon: const Icon(
                     Icons.camera,
@@ -653,13 +680,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                   // chooseImage1("Gallery");
-                  if (indeximage == 1) {
-                    TakePhoto().getMultipleImagesFromGallery(
-                        _picker, imageList, getImage, context);
-                  } else {
-                    TakePhoto1().getMultipleImagesFromGallery(
-                        _picker1, imageList2, getImage2, context);
-                  }
+
+                  TakePhoto1().getMultipleImagesFromGallery(
+                      _picker1, imageList2, getImage2, context);
                 },
                 icon: const Icon(
                   Icons.image,
@@ -680,5 +703,42 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
         ],
       ),
     );
+  }
+
+  Future<DeliverNote> deliverynoteApi(
+    context,
+    String deliverynote,
+  ) async {
+    setLoading(true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "Accept": "application/json",
+      'Authorization':
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    };
+
+    var uri = Uri.parse(ApiServer.deliverynoteApi);
+
+    var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['trip_id'] = widget.tripId.toString();
+    request.fields['delivery_note'] = deliverynote;
+    request.fields['status'] = "Delivered";
+
+    request.files.add(await https.MultipartFile.fromPath(
+        'image', imageFileListBanner2[0].path));
+
+    var response = await https.Response.fromStream(await request.send());
+
+    var body = json.decode(response.body);
+    setLoading(false);
+    if (response.statusCode == 200 && body['status'] == true) {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+      Navigator.pop(context);
+    } else {
+      debugPrint("response.body>>>>>>>>>>${response.body}");
+    }
+    return DeliverNote.fromJson(jsonDecode(response.body));
   }
 }
