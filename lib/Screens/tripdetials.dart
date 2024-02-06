@@ -627,7 +627,11 @@ class _TripDetialsState extends State<TripDetials> {
                                                             Radius.circular(
                                                                 10)),
                                                   ),
-                                                  child: ClipOval(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                09)),
                                                     child: CachedNetworkImage(
                                                       imageUrl: tripdetails
                                                           .data!
@@ -653,11 +657,11 @@ class _TripDetialsState extends State<TripDetials> {
                                                               url, error) =>
                                                           const Icon(
                                                               Icons.error),
-                                                      fit: BoxFit.contain,
+                                                      fit: BoxFit.fill,
                                                       height:
                                                           screens.height * 0.08,
                                                       width:
-                                                          screens.height * 0.08,
+                                                          screens.width * 0.08,
                                                     ),
                                                   ),
                                                 ),
@@ -865,7 +869,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                       const BorderRadius.all(
                                                           Radius.circular(10)),
                                                 ),
-                                                child: ClipOval(
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(09)),
                                                   child: CachedNetworkImage(
                                                     imageUrl: tripdetails
                                                         .data!
@@ -889,11 +896,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                     errorWidget: (context, url,
                                                             error) =>
                                                         const Icon(Icons.error),
-                                                    fit: BoxFit.contain,
+                                                    fit: BoxFit.fill,
                                                     height:
                                                         screens.height * 0.08,
-                                                    width:
-                                                        screens.height * 0.08,
+                                                    width: screens.width * 0.08,
                                                   ),
                                                 ),
                                               ),
@@ -1094,7 +1100,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                 const BorderRadius.all(
                                                     Radius.circular(10)),
                                           ),
-                                          child: ClipOval(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(09)),
                                             child: CachedNetworkImage(
                                               imageUrl: tripdetails
                                                   .data!.repairs!.uploadBill
@@ -1115,9 +1124,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(Icons.error),
-                                              fit: BoxFit.contain,
+                                              fit: BoxFit.fill,
                                               height: screens.height * 0.08,
-                                              width: screens.height * 0.08,
+                                              width: screens.width * 0.08,
                                             ),
                                           ),
                                         ),
@@ -1384,7 +1393,10 @@ class _TripDetialsState extends State<TripDetials> {
                                                 const BorderRadius.all(
                                                     Radius.circular(10)),
                                           ),
-                                          child: ClipOval(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(09)),
                                             child: CachedNetworkImage(
                                               imageUrl: tripdetails
                                                   .data!.tolls!.tollImage
@@ -1405,9 +1417,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(Icons.error),
-                                              fit: BoxFit.contain,
+                                              fit: BoxFit.fill,
                                               height: screens.height * 0.08,
-                                              width: screens.height * 0.08,
+                                              width: screens.width * 0.08,
                                             ),
                                           ),
                                         ),
@@ -1638,7 +1650,7 @@ class _TripDetialsState extends State<TripDetials> {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 10,
+                                    height: 08,
                                   ),
                                   const Padding(
                                     padding: EdgeInsets.only(left: 8, right: 8),
