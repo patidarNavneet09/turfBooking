@@ -19,16 +19,16 @@ import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 
-class TripDetials extends StatefulWidget {
+class DemoTripDetials extends StatefulWidget {
   final String? tripId;
   final String? truckId;
-  const TripDetials({super.key, this.tripId, this.truckId});
+  const DemoTripDetials({super.key, this.tripId, this.truckId});
 
   @override
-  State<TripDetials> createState() => _TripDetialsState();
+  State<DemoTripDetials> createState() => _DemoTripDetialsState();
 }
 
-class _TripDetialsState extends State<TripDetials> {
+class _DemoTripDetialsState extends State<DemoTripDetials> {
   bool loading1 = true;
   String startDate = '';
   String endDate = '';
@@ -617,8 +617,8 @@ class _TripDetialsState extends State<TripDetials> {
                                                           FontWeight.w400,
                                                     ),
                                                   ),
-                                                  Icon(
-                                                      Icons.keyboard_arrow_down)
+                                                  // Icon(
+                                                  //     Icons.keyboard_arrow_down)
                                                 ],
                                               ),
                                             ),
@@ -630,8 +630,9 @@ class _TripDetialsState extends State<TripDetials> {
                                                   left: 8, right: 8, bottom: 5),
                                               child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
                                                     height: 50,
@@ -707,155 +708,221 @@ class _TripDetialsState extends State<TripDetials> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Column(
-                                                    children: [
-                                                      const Text(
-                                                        "Quantity",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const Text(
+                                                            "Quantity",
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: MyColor
+                                                                  .greyText,
+                                                              // overflow: TextOverflow.ellipsis,
+                                                              fontFamily:
+                                                                  ColorFamily
+                                                                      .fontsSFProDisplay,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          ),
+                                                          ListView.builder(
+                                                              physics:
+                                                                  const NeverScrollableScrollPhysics(),
+                                                              shrinkWrap: true,
+                                                              itemCount: 5,
+                                                              itemBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      index) {
+                                                                return const Text(
+                                                                  "120",
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                );
+                                                              })
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        tripdetails
-                                                            .data!
-                                                            .addOnDiesel!
-                                                            .quantityInLitres
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                          fontSize: 14,
-                                                          color: MyColor.black,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  Column(
-                                                    children: [
-                                                      const Text(
-                                                        "Unit Price",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          "Unit Price",
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: MyColor
+                                                                .greyText,
+                                                            // overflow: TextOverflow.ellipsis,
+                                                            fontFamily: ColorFamily
+                                                                .fontsSFProDisplay,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        "\$${tripdetails.data!.addOnDiesel!.unitPrice.toString()}",
-                                                        style: const TextStyle(
-                                                          fontSize: 14,
-                                                          color: MyColor.black,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                        ListView.builder(
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            shrinkWrap: true,
+                                                            itemCount: 5,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    index) {
+                                                              return const Text(
+                                                                "120",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: MyColor
+                                                                      .black,
+                                                                  // overflow: TextOverflow.ellipsis,
+                                                                  fontFamily:
+                                                                      ColorFamily
+                                                                          .fontsSFProDisplay,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              );
+                                                            })
+                                                      ],
+                                                    ),
                                                   ),
-                                                  Column(
-                                                    children: [
-                                                      const Text(
-                                                        "Fuel Station",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          "Fuel Station",
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: MyColor
+                                                                .greyText,
+                                                            // overflow: TextOverflow.ellipsis,
+                                                            fontFamily: ColorFamily
+                                                                .fontsSFProDisplay,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                        tripdetails
-                                                            .data!
-                                                            .addOnDiesel!
-                                                            .petrolStation
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                          fontSize: 14,
-                                                          color: MyColor.black,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                        ListView.builder(
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            shrinkWrap: true,
+                                                            itemCount: 5,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    index) {
+                                                              return const Text(
+                                                                "120",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: MyColor
+                                                                      .black,
+                                                                  // overflow: TextOverflow.ellipsis,
+                                                                  fontFamily:
+                                                                      ColorFamily
+                                                                          .fontsSFProDisplay,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              );
+                                                            })
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.30,
-                                                  height: 20,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    // color: MyColor.Red_color,
-                                                    gradient: LinearGradient(
-                                                      begin:
-                                                          Alignment.centerLeft,
-                                                      end:
-                                                          Alignment.centerRight,
-                                                      tileMode: TileMode.mirror,
-                                                      colors: [
-                                                        MyColor.button1,
-                                                        MyColor.button,
-                                                      ],
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                              09,
-                                                            ),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    09)),
-                                                  ),
-                                                  child: const Center(
-                                                    child: Text(
-                                                      "View",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: MyColor.white,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.end,
+                                            //   children: [
+                                            //     Container(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width *
+                                            //           0.30,
+                                            //       height: 20,
+                                            //       decoration:
+                                            //           const BoxDecoration(
+                                            //         // color: MyColor.Red_color,
+                                            //         gradient: LinearGradient(
+                                            //           begin:
+                                            //               Alignment.centerLeft,
+                                            //           end:
+                                            //               Alignment.centerRight,
+                                            //           tileMode: TileMode.mirror,
+                                            //           colors: [
+                                            //             MyColor.button1,
+                                            //             MyColor.button,
+                                            //           ],
+                                            //         ),
+                                            //         borderRadius:
+                                            //             BorderRadius.only(
+                                            //                 topLeft:
+                                            //                     Radius.circular(
+                                            //                   09,
+                                            //                 ),
+                                            //                 bottomRight:
+                                            //                     Radius.circular(
+                                            //                         09)),
+                                            //       ),
+                                            //       child: const Center(
+                                            //         child: Text(
+                                            //           "View",
+                                            //           style: TextStyle(
+                                            //             fontSize: 12,
+                                            //             color: MyColor.white,
+                                            //             // overflow: TextOverflow.ellipsis,
+                                            //             fontFamily: ColorFamily
+                                            //                 .fontsSFProDisplay,
+                                            //             fontWeight:
+                                            //                 FontWeight.w500,
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //   ],
+                                            // )
                                           ],
                                         ),
                                       ),
@@ -907,7 +974,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Icon(Icons.keyboard_arrow_down)
+                                                // Icon(Icons.keyboard_arrow_down)
                                               ],
                                             ),
                                           ),
@@ -919,8 +986,9 @@ class _TripDetialsState extends State<TripDetials> {
                                                 left: 8, right: 8, bottom: 5),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Container(
                                                   height: 50,
@@ -992,149 +1060,213 @@ class _TripDetialsState extends State<TripDetials> {
                                                     ),
                                                   ),
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    const Text(
-                                                      "Quantity",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.greyText,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          "Quantity",
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: MyColor
+                                                                .greyText,
+                                                            // overflow: TextOverflow.ellipsis,
+                                                            fontFamily: ColorFamily
+                                                                .fontsSFProDisplay,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                        ListView.builder(
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            shrinkWrap: true,
+                                                            itemCount: 5,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    index) {
+                                                              return const Text(
+                                                                "120",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: MyColor
+                                                                      .black,
+                                                                  // overflow: TextOverflow.ellipsis,
+                                                                  fontFamily:
+                                                                      ColorFamily
+                                                                          .fontsSFProDisplay,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              );
+                                                            })
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      tripdetails
-                                                          .data!
-                                                          .enrouteDiesel!
-                                                          .quantity
-                                                          .toString(),
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.black,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    const Text(
-                                                      "Unit Price",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.greyText,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Unit Price",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      "\$${tripdetails.data!.enrouteDiesel!.unitPrice.toString()}",
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.black,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
+                                                  ),
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    const Text(
-                                                      "Fuel Station",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.greyText,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Fuel Station",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      tripdetails
-                                                          .data!
-                                                          .enrouteDiesel!
-                                                          .petrolStation
-                                                          .toString(),
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.black,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.30,
-                                                height: 20,
-                                                decoration: const BoxDecoration(
-                                                  // color: MyColor.Red_color,
-                                                  gradient: LinearGradient(
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                    tileMode: TileMode.mirror,
-                                                    colors: [
-                                                      MyColor.button1,
-                                                      MyColor.button,
-                                                    ],
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                            09,
-                                                          ),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  09)),
-                                                ),
-                                                child: const Center(
-                                                  child: Text(
-                                                    "View",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: MyColor.white,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.end,
+                                          //   children: [
+                                          //     Container(
+                                          //       width: MediaQuery.of(context)
+                                          //               .size
+                                          //               .width *
+                                          //           0.30,
+                                          //       height: 20,
+                                          //       decoration: const BoxDecoration(
+                                          //         // color: MyColor.Red_color,
+                                          //         gradient: LinearGradient(
+                                          //           begin: Alignment.centerLeft,
+                                          //           end: Alignment.centerRight,
+                                          //           tileMode: TileMode.mirror,
+                                          //           colors: [
+                                          //             MyColor.button1,
+                                          //             MyColor.button,
+                                          //           ],
+                                          //         ),
+                                          //         borderRadius:
+                                          //             BorderRadius.only(
+                                          //                 topLeft:
+                                          //                     Radius.circular(
+                                          //                   09,
+                                          //                 ),
+                                          //                 bottomRight:
+                                          //                     Radius.circular(
+                                          //                         09)),
+                                          //       ),
+                                          //       child: const Center(
+                                          //         child: Text(
+                                          //           "View",
+                                          //           style: TextStyle(
+                                          //             fontSize: 12,
+                                          //             color: MyColor.white,
+                                          //             // overflow: TextOverflow.ellipsis,
+                                          //             fontFamily: ColorFamily
+                                          //                 .fontsSFProDisplay,
+                                          //             fontWeight:
+                                          //                 FontWeight.w500,
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //   ],
+                                          // )
                                         ],
                                       ),
                                     ),
@@ -1173,7 +1305,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -1256,224 +1388,336 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Shop Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Shop Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          }),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      const Text(
+                                                        "Repair Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          }),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails
-                                                        .data!.repairs!.shopName
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  const Text(
-                                                    "Spare Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    tripdetails.data!.repairs!
-                                                        .spareName
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Repair Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5, right: 5),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Repair Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          }),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      const Text(
+                                                        "Repair Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          }),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails.data!.repairs!
-                                                        .repairName
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  const Text(
-                                                    "Spare Cost",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.repairs!.spareCost.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Repair Cost",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                              Expanded(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      "Repair Name",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        // overflow: TextOverflow.ellipsis,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.repairs!.repairCost.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                    ListView.builder(
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        shrinkWrap: true,
+                                                        itemCount: 5,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                index) {
+                                                          return const Text(
+                                                            "120",
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  MyColor.black,
+                                                              // overflow: TextOverflow.ellipsis,
+                                                              fontFamily:
+                                                                  ColorFamily
+                                                                      .fontsSFProDisplay,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          );
+                                                        }),
+                                                    const SizedBox(
+                                                      height: 10,
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  const Text(
-                                                    "Total Amount",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                    const Text(
+                                                      "Repair Name",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        // overflow: TextOverflow.ellipsis,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.repairs!.totalAmount.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                    ListView.builder(
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        shrinkWrap: true,
+                                                        itemCount: 5,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                index) {
+                                                          return const Text(
+                                                            "120",
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  MyColor.black,
+                                                              // overflow: TextOverflow.ellipsis,
+                                                              fontFamily:
+                                                                  ColorFamily
+                                                                      .fontsSFProDisplay,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          );
+                                                        }),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -1511,7 +1755,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -1594,117 +1838,177 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Toll Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Fuel Station",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails
-                                                        .data!.tolls!.tollName
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Amount",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Fuel Station",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.tolls!.amount.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.23,
+                                              const Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 5),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [],
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -1744,7 +2048,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -1756,7 +2060,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               left: 8, right: 8, bottom: 8),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 50,
@@ -1825,157 +2131,206 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Accident Category",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Accident Category",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails
-                                                        .data!
-                                                        .roadAccident!
-                                                        .accidentCategory
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Cost",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Cost",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.roadAccident!.cost.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.23,
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 08,
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 08,
-                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Text(
-                                            tripdetails
-                                                .data!.roadAccident!.description
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.greyText,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: 5,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          index) {
+                                                    return const Text(
+                                                      "120",
+                                                      style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.black,
+                                                        // overflow: TextOverflow.ellipsis,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    );
+                                                  }),
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -2015,7 +2370,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -2026,7 +2381,9 @@ class _TripDetialsState extends State<TripDetials> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 50,
@@ -2093,62 +2450,115 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Fine Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Fine Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails.data!.fine!.name
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Cost",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Fine Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.fine!.amount.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
                                               SizedBox(
                                                 width: MediaQuery.of(context)
@@ -2159,86 +2569,93 @@ class _TripDetialsState extends State<TripDetials> {
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 05,
-                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Text(
-                                            tripdetails.data!.fine!.description
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.greyText,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: 5,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          index) {
+                                                    return const Text(
+                                                      "120",
+                                                      style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.black,
+                                                        // overflow: TextOverflow.ellipsis,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    );
+                                                  }),
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -2278,7 +2695,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -2290,7 +2707,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               left: 8, right: 8),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 50,
@@ -2359,63 +2778,115 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Charge Name",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Charge Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    tripdetails.data!
-                                                        .otherCharges!.name
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  const Text(
-                                                    "Cost",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Cost",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "\$${tripdetails.data!.otherCharges!.amount.toString()}",
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
                                               SizedBox(
                                                 width: MediaQuery.of(context)
@@ -2426,88 +2897,93 @@ class _TripDetialsState extends State<TripDetials> {
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 02,
-                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Text(
-                                            tripdetails
-                                                .data!.otherCharges!.description
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.greyText,
+                                                  // overflow: TextOverflow.ellipsis,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              ListView.builder(
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: 5,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          index) {
+                                                    return const Text(
+                                                      "120",
+                                                      style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.black,
+                                                        // overflow: TextOverflow.ellipsis,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    );
+                                                  }),
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -2546,7 +3022,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -2558,7 +3034,9 @@ class _TripDetialsState extends State<TripDetials> {
                                               left: 8, right: 8, bottom: 8),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 50,
@@ -2627,106 +3105,108 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ),
                                               ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  const Text(
-                                                    "Description",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.greyText,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.70,
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            tripdetails
-                                                                .data!
-                                                                .deliveryInformation!
-                                                                .deliveryNote
-                                                                .toString(),
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  MyColor.black,
-                                                              // overflow: TextOverflow.ellipsis,
-                                                              fontFamily:
-                                                                  ColorFamily
-                                                                      .fontsSFProDisplay,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Description",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          // overflow: TextOverflow.ellipsis,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              )
+                                                      ),
+                                                      ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          itemCount: 5,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  index) {
+                                                            return const Text(
+                                                              "120",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                color: MyColor
+                                                                    .black,
+                                                                // overflow: TextOverflow.ellipsis,
+                                                                fontFamily:
+                                                                    ColorFamily
+                                                                        .fontsSFProDisplay,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            );
+                                                          })
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.30,
-                                              height: 20,
-                                              decoration: const BoxDecoration(
-                                                // color: MyColor.Red_color,
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.mirror,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                      09,
-                                                    ),
-                                                    bottomRight:
-                                                        Radius.circular(09)),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  "View",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.end,
+                                        //   children: [
+                                        //     Container(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.30,
+                                        //       height: 20,
+                                        //       decoration: const BoxDecoration(
+                                        //         // color: MyColor.Red_color,
+                                        //         gradient: LinearGradient(
+                                        //           begin: Alignment.centerLeft,
+                                        //           end: Alignment.centerRight,
+                                        //           tileMode: TileMode.mirror,
+                                        //           colors: [
+                                        //             MyColor.button1,
+                                        //             MyColor.button,
+                                        //           ],
+                                        //         ),
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft: Radius.circular(
+                                        //               09,
+                                        //             ),
+                                        //             bottomRight:
+                                        //                 Radius.circular(09)),
+                                        //       ),
+                                        //       child: const Center(
+                                        //         child: Text(
+                                        //           "View",
+                                        //           style: TextStyle(
+                                        //             fontSize: 12,
+                                        //             color: MyColor.white,
+                                        //             // overflow: TextOverflow.ellipsis,
+                                        //             fontFamily: ColorFamily
+                                        //                 .fontsSFProDisplay,
+                                        //             fontWeight: FontWeight.w500,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // )
                                       ],
                                     ),
                                   ),
@@ -2764,7 +3244,7 @@ class _TripDetialsState extends State<TripDetials> {
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              Icon(Icons.keyboard_arrow_down)
+                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
                                         ),
@@ -2938,60 +3418,63 @@ class _TripDetialsState extends State<TripDetials> {
                                                   ),
                                                 ],
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.30,
-                                                    height: 20,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      // color: MyColor.Red_color,
-                                                      gradient: LinearGradient(
-                                                        begin: Alignment
-                                                            .centerLeft,
-                                                        end: Alignment
-                                                            .centerRight,
-                                                        tileMode:
-                                                            TileMode.mirror,
-                                                        colors: [
-                                                          MyColor.button1,
-                                                          MyColor.button,
-                                                        ],
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                09,
-                                                              ),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          09)),
-                                                    ),
-                                                    child: const Center(
-                                                      child: Text(
-                                                        "View",
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: MyColor.white,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.end,
+                                              //   children: [
+                                              //     Container(
+                                              //       width:
+                                              //           MediaQuery.of(context)
+                                              //                   .size
+                                              //                   .width *
+                                              //               0.30,
+                                              //       height: 20,
+                                              //       decoration:
+                                              //           const BoxDecoration(
+                                              //         // color: MyColor.Red_color,
+                                              //         gradient: LinearGradient(
+                                              //           begin: Alignment
+                                              //               .centerLeft,
+                                              //           end: Alignment
+                                              //               .centerRight,
+                                              //           tileMode:
+                                              //               TileMode.mirror,
+                                              //           colors: [
+                                              //             MyColor.button1,
+                                              //             MyColor.button,
+                                              //           ],
+                                              //         ),
+                                              //         borderRadius:
+                                              //             BorderRadius.only(
+                                              //                 topLeft: Radius
+                                              //                     .circular(
+                                              //                   09,
+                                              //                 ),
+                                              //                 bottomRight:
+                                              //                     Radius
+                                              //                         .circular(
+                                              //                             09)),
+                                              //       ),
+                                              //       child: const Center(
+                                              //         child: Text(
+                                              //           "View",
+                                              //           style: TextStyle(
+                                              //             fontSize: 12,
+                                              //             color: MyColor.white,
+                                              //             // overflow: TextOverflow.ellipsis,
+                                              //             fontFamily: ColorFamily
+                                              //                 .fontsSFProDisplay,
+                                              //             fontWeight:
+                                              //                 FontWeight.w500,
+                                              //           ),
+                                              //         ),
+                                              //       ),
+                                              //     ),
+                                              //   ],
+                                              // )
                                             ],
                                           ),
                                         ),

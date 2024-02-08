@@ -6,6 +6,7 @@ import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/mytripmodel.dart';
 import 'package:truckmanagement/Model/profilemodel.dart';
+import 'package:truckmanagement/Screens/demo_trip.dart';
 import 'package:truckmanagement/Screens/edit_profile.dart';
 import 'package:truckmanagement/Screens/trip_detials.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -420,7 +421,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               Navigator.push(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                      builder: (context) => TripDetials(
+                                                                      builder: (context) => DemoTripDetials(
                                                                           tripId:
                                                                               tripId,
                                                                           truckId:
@@ -800,7 +801,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   Navigator.push(
                                                                       context,
                                                                       MaterialPageRoute(
-                                                                          builder: (context) => TripDetials(
+                                                                          builder: (context) => DemoTripDetials(
                                                                               tripId:
                                                                                   tripId,
                                                                               truckId: truckId))).then((value) =>
@@ -1157,7 +1158,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                       Navigator.push(
                                                                           context,
                                                                           MaterialPageRoute(
-                                                                              builder: (context) => TripDetials(tripId: tripId, truckId: truckId))).then((value) => returnApi(myTrip
+                                                                              builder: (context) => DemoTripDetials(tripId: tripId, truckId: truckId))).then((value) => returnApi(myTrip
                                                                           .data![
                                                                               index]
                                                                           .status

@@ -37,15 +37,25 @@ class _LargeImagesState extends State<LargeImages> {
             },
             child: const Icon(Icons.arrow_back)),
       ),
-      body: Container(
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: PhotoView(
-            backgroundDecoration: const BoxDecoration(
-              color: Colors.white, // Set the background color here
+      body: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 2,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: PhotoView(
+                  backgroundDecoration: const BoxDecoration(
+                    color: Colors.white, // Set the background color here
+                  ),
+                  imageProvider: NetworkImage(widget.imagesUrl.toString())),
             ),
-            imageProvider: NetworkImage(widget.imagesUrl.toString())),
+          );
+        },
       ),
     );
   }

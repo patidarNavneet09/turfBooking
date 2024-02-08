@@ -92,16 +92,8 @@ class _OtherChargesState extends State<OtherCharges> {
   bool isChecked = false;
   String? selectedId = " ";
   Future<void> chooseImage1(type) async {
-    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
-      // image1 = await ImagePicker().pickImage(
-      //   source: ImageSource.camera,
-      // );
-      // imageFileListBanner.add(image1);
-      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
-
       if (selectedImage1 == null) {
-        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -110,7 +102,6 @@ class _OtherChargesState extends State<OtherCharges> {
         ppp = true;
         setState(() {});
       } else if (selectedImage2 == null) {
-        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -164,37 +155,24 @@ class _OtherChargesState extends State<OtherCharges> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.length}");
     }
-    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
   }
 
   Future<void> chooseImage2(type) async {
-    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
-      // image1 = await ImagePicker().pickImage(
-      //   source: ImageSource.camera,
-      // );
-      // imageFileListBanner.add(image1);
-      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
-
       if (selectedImage4 == null) {
-        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -203,7 +181,6 @@ class _OtherChargesState extends State<OtherCharges> {
         ppp = true;
         setState(() {});
       } else if (selectedImage5 == null) {
-        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -226,7 +203,6 @@ class _OtherChargesState extends State<OtherCharges> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage4 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -257,39 +233,22 @@ class _OtherChargesState extends State<OtherCharges> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.length}");
     }
-    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage4!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage5!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage6!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
   }
 
   String dropdownvalue = 'Select Accident Category';
-
-  // List of items in our dropdown menu
-  final List<String> items = [
-    'A_Item1',
-    'A_Item2',
-    'A_Item3',
-    'A_Item4',
-    'B_Item1',
-    'B_Item2',
-    'B_Item3',
-    'B_Item4',
-  ];
 
   String? selectedValue;
   TextEditingController chargeController = TextEditingController();
