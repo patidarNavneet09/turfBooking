@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Screens/trip_detials.dart';
+import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -832,6 +832,11 @@ class _StartTripState extends State<StartTrip> {
                                     const Color.fromARGB(255, 34, 71, 99),
                                 msg:
                                     "please upload photo diesel meter of existing diesel");
+                          } else if (currentLocation == null) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: "please refresh home page");
                           } else {
                             startTripApi(context, kmDriven);
                           }
@@ -961,6 +966,9 @@ class _StartTripState extends State<StartTrip> {
     var uri = Uri.parse(ApiServer.tripstart);
 
     var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
+    request.fields['lat'] = currentLocation!.altitude.toString();
+    request.fields['long'] = currentLocation!.longitude.toString();
+
     request.fields['exact_km_driven'] = kmDriven;
     request.fields['trip_id'] = widget.tripId.toString();
     request.fields['status'] = "On the way";
@@ -980,13 +988,13 @@ class _StartTripState extends State<StartTrip> {
       // Utility.progressloadingDialog(context, false);
       // videoFile1.clear();
       // imageFileListBanner1.clear();
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => TripDetials(
-                    tripId: widget.tripId,
-                    truckId: widget.truckId,
-                  )));
+      // Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (BuildContext context) => TripDetials(
+      //               tripId: widget.tripId,
+      //               truckId: widget.truckId,
+      //             )));
       // Navigator.push(context,
       //     MaterialPageRoute(builder: (context) => const AddonAddExpenstion()));
       debugPrint("response.body>>>>>>>>>>${response.body}");

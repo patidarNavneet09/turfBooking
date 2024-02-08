@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:truckmanagement/Screens/home_screen.dart';
 import 'package:truckmanagement/Screens/settingscreen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:location/location.dart';
 
 class DashBoardscreen extends StatefulWidget {
   final int pagesProviderIndex;
@@ -12,10 +15,39 @@ class DashBoardscreen extends StatefulWidget {
   State<DashBoardscreen> createState() => _DashBoardscreenState();
 }
 
+LocationData? currentLocation;
+
 class _DashBoardscreenState extends State<DashBoardscreen> {
   int pagesIndex = 0;
 
   var pagesProvider = [const Homescreen(), const Setting()];
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set up a periodic timer to call the API every 5 minutes
+    if (currentLocation == null) {
+      getCurrentLocation();
+    }
+    _timer = Timer.periodic(const Duration(minutes: 5), (timer) {
+      getCurrentLocation();
+    });
+  }
+
+  void getCurrentLocation() {
+    Location location = Location();
+    location.getLocation().then((location) {
+      currentLocation = location;
+    });
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the timer when the widget is removed from the widget tree
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

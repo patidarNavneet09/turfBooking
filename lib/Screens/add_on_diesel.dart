@@ -5,7 +5,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/diesel.dart';
-import 'package:truckmanagement/Screens/trip_detials.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
@@ -768,13 +767,13 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     setLoading(true);
     if (response.statusCode == 200 && body['status'] == true) {
       debugPrint("response.body>>>>>>>>>>${response.body}");
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => TripDetials(
-                    tripId: widget.tripId,
-                    truckId: widget.truckId,
-                  )));
+      // Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (BuildContext context) => TripDetials(
+      //               tripId: widget.tripId,
+      //               truckId: widget.truckId,
+      //             )));
     } else {
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }

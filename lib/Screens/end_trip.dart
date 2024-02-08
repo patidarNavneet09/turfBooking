@@ -14,16 +14,16 @@ import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as https;
 
-class EndTrip extends StatefulWidget {
+class EndTripscr extends StatefulWidget {
   final String? tripId;
   final String? truckId;
-  const EndTrip({super.key, this.tripId, this.truckId});
+  const EndTripscr({super.key, this.tripId, this.truckId});
 
   @override
-  State<EndTrip> createState() => _EndTripState();
+  State<EndTripscr> createState() => _EndTripscrState();
 }
 
-class _EndTripState extends State<EndTrip> {
+class _EndTripscrState extends State<EndTripscr> {
   bool isLoading = false;
 
   void setLoading(bool value) {

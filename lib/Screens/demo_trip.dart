@@ -19,16 +19,16 @@ import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 
-class DemoTripDetials extends StatefulWidget {
+class DemoTripDetials1 extends StatefulWidget {
   final String? tripId;
   final String? truckId;
-  const DemoTripDetials({super.key, this.tripId, this.truckId});
+  const DemoTripDetials1({super.key, this.tripId, this.truckId});
 
   @override
-  State<DemoTripDetials> createState() => _DemoTripDetialsState();
+  State<DemoTripDetials1> createState() => _DemoTripDetials1State();
 }
 
-class _DemoTripDetialsState extends State<DemoTripDetials> {
+class _DemoTripDetials1State extends State<DemoTripDetials1> {
   bool loading1 = true;
   String startDate = '';
   String endDate = '';
@@ -568,191 +568,292 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            tripdetails.data!.addOnDiesel == null
+                            tripdetails.data!.addOnDiesels == null
                                 ? Container()
                                 : const SizedBox(
                                     height: 12,
                                   ),
-                            tripdetails.data!.addOnDiesel == null
+                            tripdetails.data!.addOnDiesels == null
                                 ? Container()
-                                : InkWell(
-                                    // onTap: () {
-                                    //   Navigator.push(
-                                    //       context,
-                                    //       MaterialPageRoute(
-                                    //           builder: (context) =>
-                                    //               DetialsExpenstion(
-                                    //                 nameProperty:
-                                    //                     "Add On Diesel",
-                                    //               )));
-                                    // },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1, color: MyColor.greyText),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(0.0),
-                                        child: Column(
-                                          children: [
-                                            const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 8, left: 8, right: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "Add On Diesel",
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: MyColor.black,
-                                                      // overflow: TextOverflow.ellipsis,
-                                                      fontFamily: ColorFamily
-                                                          .fontsSFProDisplay,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  // Icon(
-                                                  //     Icons.keyboard_arrow_down)
-                                                ],
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Add On Diesel",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8, right: 8, bottom: 5),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    height: 50,
-                                                    width: 50,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 1,
-                                                          color:
-                                                              MyColor.button),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                                  .all(
-                                                              Radius.circular(
-                                                                  10)),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Photos",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
                                                     ),
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        LargeImages(
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Quantity",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Unit Price",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Fuel Station",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: tripdetails
+                                                .data!.addOnDiesels!.length,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                height: 40,
+                                                                width: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: MyColor
+                                                                          .button),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10)),
+                                                                ),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LargeImages(
                                                                           imagesUrl: tripdetails
                                                                               .data!
-                                                                              .addOnDiesel!
+                                                                              .addOnDiesels![index]
                                                                               .petrolStationImage
                                                                               .toString(),
                                                                           nameProperty:
                                                                               "Add On Diesel",
-                                                                        )));
-                                                      },
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    09)),
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl: tripdetails
-                                                              .data!
-                                                              .addOnDiesel!
-                                                              .petrolStationImage
-                                                              .toString(),
-                                                          progressIndicatorBuilder:
-                                                              (context, url,
-                                                                      downloadProgress) =>
-                                                                  Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: MyColor
-                                                                  .button,
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress,
-                                                            ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            09)),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl: tripdetails
+                                                                          .data!
+                                                                          .addOnDiesels![
+                                                                              index]
+                                                                          .petrolStationImage
+                                                                          .toString(),
+                                                                      progressIndicatorBuilder: (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              MyColor.button,
+                                                                          value:
+                                                                              downloadProgress.progress,
+                                                                        ),
+                                                                      ),
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          const Icon(
+                                                                              Icons.error),
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      height: screens
+                                                                              .height *
+                                                                          0.08,
+                                                                      width: screens
+                                                                              .width *
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              const Icon(
-                                                                  Icons.error),
-                                                          fit: BoxFit.fill,
-                                                          height:
-                                                              screens.height *
-                                                                  0.08,
-                                                          width: screens.width *
-                                                              0.08,
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          const Text(
-                                                            "Quantity",
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                              color: MyColor
-                                                                  .greyText,
-                                                              // overflow: TextOverflow.ellipsis,
-                                                              fontFamily:
-                                                                  ColorFamily
-                                                                      .fontsSFProDisplay,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          ),
-                                                          ListView.builder(
-                                                              physics:
-                                                                  const NeverScrollableScrollPhysics(),
-                                                              shrinkWrap: true,
-                                                              itemCount: 5,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      index) {
-                                                                return const Text(
-                                                                  "120",
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .addOnDiesels![
+                                                                          index]
+                                                                      .quantityInLitres
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
                                                                   style:
                                                                       const TextStyle(
                                                                     fontSize:
                                                                         14,
                                                                     color: MyColor
                                                                         .black,
+
                                                                     // overflow: TextOverflow.ellipsis,
                                                                     fontFamily:
                                                                         ColorFamily
@@ -761,512 +862,522 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                         FontWeight
                                                                             .w400,
                                                                   ),
-                                                                );
-                                                              })
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          "Unit Price",
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: MyColor
-                                                                .greyText,
-                                                            // overflow: TextOverflow.ellipsis,
-                                                            fontFamily: ColorFamily
-                                                                .fontsSFProDisplay,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                        ListView.builder(
-                                                            physics:
-                                                                const NeverScrollableScrollPhysics(),
-                                                            shrinkWrap: true,
-                                                            itemCount: 5,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    index) {
-                                                              return const Text(
-                                                                "120",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: MyColor
-                                                                      .black,
-                                                                  // overflow: TextOverflow.ellipsis,
-                                                                  fontFamily:
-                                                                      ColorFamily
-                                                                          .fontsSFProDisplay,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .addOnDiesels![
+                                                                          index]
+                                                                      .unitPrice
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
                                                                 ),
-                                                              );
-                                                            })
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          "Fuel Station",
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: MyColor
-                                                                .greyText,
-                                                            // overflow: TextOverflow.ellipsis,
-                                                            fontFamily: ColorFamily
-                                                                .fontsSFProDisplay,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                        ListView.builder(
-                                                            physics:
-                                                                const NeverScrollableScrollPhysics(),
-                                                            shrinkWrap: true,
-                                                            itemCount: 5,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    index) {
-                                                              return const Text(
-                                                                "120",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: MyColor
-                                                                      .black,
-                                                                  // overflow: TextOverflow.ellipsis,
-                                                                  fontFamily:
-                                                                      ColorFamily
-                                                                          .fontsSFProDisplay,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
+
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.17,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .addOnDiesels![
+                                                                          index]
+                                                                      .petrolStation
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
                                                                 ),
-                                                              );
-                                                            })
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        // Content below the Divider
                                                       ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            // Row(
-                                            //   mainAxisAlignment:
-                                            //       MainAxisAlignment.end,
-                                            //   children: [
-                                            //     Container(
-                                            //       width: MediaQuery.of(context)
-                                            //               .size
-                                            //               .width *
-                                            //           0.30,
-                                            //       height: 20,
-                                            //       decoration:
-                                            //           const BoxDecoration(
-                                            //         // color: MyColor.Red_color,
-                                            //         gradient: LinearGradient(
-                                            //           begin:
-                                            //               Alignment.centerLeft,
-                                            //           end:
-                                            //               Alignment.centerRight,
-                                            //           tileMode: TileMode.mirror,
-                                            //           colors: [
-                                            //             MyColor.button1,
-                                            //             MyColor.button,
-                                            //           ],
-                                            //         ),
-                                            //         borderRadius:
-                                            //             BorderRadius.only(
-                                            //                 topLeft:
-                                            //                     Radius.circular(
-                                            //                   09,
-                                            //                 ),
-                                            //                 bottomRight:
-                                            //                     Radius.circular(
-                                            //                         09)),
-                                            //       ),
-                                            //       child: const Center(
-                                            //         child: Text(
-                                            //           "View",
-                                            //           style: TextStyle(
-                                            //             fontSize: 12,
-                                            //             color: MyColor.white,
-                                            //             // overflow: TextOverflow.ellipsis,
-                                            //             fontFamily: ColorFamily
-                                            //                 .fontsSFProDisplay,
-                                            //             fontWeight:
-                                            //                 FontWeight.w500,
-                                            //           ),
-                                            //         ),
-                                            //       ),
-                                            //     ),
-                                            //   ],
-                                            // )
-                                          ],
-                                        ),
+                                                    tripdetails
+                                                                .data!
+                                                                .addOnDiesels!
+                                                                .length ==
+                                                            index + 1
+                                                        ? Container()
+                                                        : const Divider(
+                                                            color: MyColor
+                                                                .greyText,
+                                                            thickness: 1,
+                                                            indent: 2,
+                                                            endIndent: 2,
+                                                          ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                            tripdetails.data!.enrouteDiesel == null
+                            tripdetails.data!.enrouteDiesels == null
                                 ? Container()
                                 : const SizedBox(
                                     height: 12,
                                   ),
-                            tripdetails.data!.enrouteDiesel == null
+                            tripdetails.data!.enrouteDiesels == null
                                 ? Container()
-                                : InkWell(
-                                    // onTap: () {
-                                    //   Navigator.push(
-                                    //       context,
-                                    //       MaterialPageRoute(
-                                    //           builder: (context) =>
-                                    //               DetialsExpenstion(
-                                    //                 nameProperty:
-                                    //                     "Enroute Diesel",
-                                    //               )));
-                                    // },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1, color: MyColor.greyText),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1, color: MyColor.greyText),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         children: [
-                                          const Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 8, left: 8, right: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "Enroute Diesel",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: MyColor.black,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
+                                          const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Enroute Diesel",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.black,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                                // Icon(Icons.keyboard_arrow_down)
-                                              ],
-                                            ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Photos",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Quantity",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Unit Price",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Fuel Station",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
                                           ),
                                           const SizedBox(
                                             height: 5,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8, right: 8, bottom: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        width: 1,
-                                                        color: MyColor.button),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                  ),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      LargeImages(
-                                                                        imagesUrl: tripdetails
-                                                                            .data!
-                                                                            .enrouteDiesel!
-                                                                            .petrolStationImage
-                                                                            .toString(),
-                                                                        nameProperty:
-                                                                            "Enroute Diesel",
-                                                                      )));
-                                                    },
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                                  .all(
-                                                              Radius.circular(
-                                                                  09)),
-                                                      child: CachedNetworkImage(
-                                                        imageUrl: tripdetails
-                                                            .data!
-                                                            .enrouteDiesel!
-                                                            .petrolStationImage
-                                                            .toString(),
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    downloadProgress) =>
-                                                                Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            color:
-                                                                MyColor.button,
-                                                            value:
-                                                                downloadProgress
-                                                                    .progress,
-                                                          ),
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            const Icon(
-                                                                Icons.error),
-                                                        fit: BoxFit.fill,
-                                                        height: screens.height *
-                                                            0.08,
-                                                        width: screens.width *
-                                                            0.08,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 10),
-                                                    child: Column(
+                                          ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: tripdetails
+                                                .data!.enrouteDiesels!.length,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .start,
+                                                              .spaceBetween,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .start,
+                                                              .center,
                                                       children: [
-                                                        const Text(
-                                                          "Quantity",
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: MyColor
-                                                                .greyText,
-                                                            // overflow: TextOverflow.ellipsis,
-                                                            fontFamily: ColorFamily
-                                                                .fontsSFProDisplay,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                height: 40,
+                                                                width: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: MyColor
+                                                                          .button),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10)),
+                                                                ),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LargeImages(
+                                                                          imagesUrl: tripdetails
+                                                                              .data!
+                                                                              .enrouteDiesels![index]
+                                                                              .petrolStationImage
+                                                                              .toString(),
+                                                                          nameProperty:
+                                                                              "Enroute Diesel",
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            09)),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl: tripdetails
+                                                                          .data!
+                                                                          .enrouteDiesels![
+                                                                              index]
+                                                                          .petrolStationImage
+                                                                          .toString(),
+                                                                      progressIndicatorBuilder: (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              MyColor.button,
+                                                                          value:
+                                                                              downloadProgress.progress,
+                                                                        ),
+                                                                      ),
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          const Icon(
+                                                                              Icons.error),
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      height: screens
+                                                                              .height *
+                                                                          0.08,
+                                                                      width: screens
+                                                                              .width *
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                        ListView.builder(
-                                                            physics:
-                                                                const NeverScrollableScrollPhysics(),
-                                                            shrinkWrap: true,
-                                                            itemCount: 5,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    index) {
-                                                              return const Text(
-                                                                "120",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: MyColor
-                                                                      .black,
-                                                                  // overflow: TextOverflow.ellipsis,
-                                                                  fontFamily:
-                                                                      ColorFamily
-                                                                          .fontsSFProDisplay,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .enrouteDiesels![
+                                                                          index]
+                                                                      .quantity
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
                                                                 ),
-                                                              );
-                                                            })
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .enrouteDiesels![
+                                                                          index]
+                                                                      .unitPrice
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.17,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .enrouteDiesels![
+                                                                          index]
+                                                                      .petrolStation
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        // Content below the Divider
                                                       ],
                                                     ),
-                                                  ),
+                                                    tripdetails
+                                                                .data!
+                                                                .enrouteDiesels!
+                                                                .length ==
+                                                            index + 1
+                                                        ? Container()
+                                                        : const Divider(
+                                                            color: MyColor
+                                                                .greyText,
+                                                            thickness: 1,
+                                                            indent: 2,
+                                                            endIndent: 2,
+                                                          ),
+                                                  ],
                                                 ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Unit Price",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Fuel Station",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              );
+                                            },
                                           ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.end,
-                                          //   children: [
-                                          //     Container(
-                                          //       width: MediaQuery.of(context)
-                                          //               .size
-                                          //               .width *
-                                          //           0.30,
-                                          //       height: 20,
-                                          //       decoration: const BoxDecoration(
-                                          //         // color: MyColor.Red_color,
-                                          //         gradient: LinearGradient(
-                                          //           begin: Alignment.centerLeft,
-                                          //           end: Alignment.centerRight,
-                                          //           tileMode: TileMode.mirror,
-                                          //           colors: [
-                                          //             MyColor.button1,
-                                          //             MyColor.button,
-                                          //           ],
-                                          //         ),
-                                          //         borderRadius:
-                                          //             BorderRadius.only(
-                                          //                 topLeft:
-                                          //                     Radius.circular(
-                                          //                   09,
-                                          //                 ),
-                                          //                 bottomRight:
-                                          //                     Radius.circular(
-                                          //                         09)),
-                                          //       ),
-                                          //       child: const Center(
-                                          //         child: Text(
-                                          //           "View",
-                                          //           style: TextStyle(
-                                          //             fontSize: 12,
-                                          //             color: MyColor.white,
-                                          //             // overflow: TextOverflow.ellipsis,
-                                          //             fontFamily: ColorFamily
-                                          //                 .fontsSFProDisplay,
-                                          //             fontWeight:
-                                          //                 FontWeight.w500,
-                                          //           ),
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //   ],
-                                          // )
                                         ],
                                       ),
                                     ),
@@ -1285,440 +1396,721 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(10)),
                                     ),
-                                    child: Column(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8, left: 8, right: 10),
-                                          child: Row(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          const Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Repairs",
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   color: MyColor.black,
-                                                  // overflow: TextOverflow.ellipsis,
                                                   fontFamily: ColorFamily
                                                       .fontsSFProDisplay,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8, bottom: 5),
-                                          child: Row(
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: MyColor.button),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    LargeImages(
-                                                                      imagesUrl: tripdetails
-                                                                          .data!
-                                                                          .repairs!
-                                                                          .uploadBill
-                                                                          .toString(),
-                                                                      nameProperty:
-                                                                          "Repairs",
-                                                                    )));
-                                                  },
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                09)),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: tripdetails
-                                                          .data!
-                                                          .repairs!
-                                                          .uploadBill
-                                                          .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: MyColor.button,
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
-                                                        ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Photos",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Icon(
-                                                              Icons.error),
-                                                      fit: BoxFit.fill,
-                                                      height:
-                                                          screens.height * 0.08,
-                                                      width:
-                                                          screens.width * 0.08,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Shop Name",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "Repair Name",
+                                                    style: TextStyle(
+                                                      // fontSize: 14,
+                                                      color: MyColor.greyText,
+                                                      fontFamily: ColorFamily
+                                                          .fontsSFProDisplay,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Repair Cost",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Shop Name",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          }),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      const Text(
-                                                        "Repair Name",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          }),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5, right: 5),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Repair Name",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          }),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      const Text(
-                                                        "Repair Name",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          }),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: tripdetails
+                                                .data!.repairs!.length,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
-                                                      "Repair Name",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.greyText,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                height: 40,
+                                                                width: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: MyColor
+                                                                          .button),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10)),
+                                                                ),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LargeImages(
+                                                                          imagesUrl: tripdetails
+                                                                              .data!
+                                                                              .repairs![index]
+                                                                              .uploadBill
+                                                                              .toString(),
+                                                                          nameProperty:
+                                                                              "Add On Diesel",
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            09)),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl: tripdetails
+                                                                          .data!
+                                                                          .repairs![
+                                                                              index]
+                                                                          .uploadBill
+                                                                          .toString(),
+                                                                      progressIndicatorBuilder: (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              MyColor.button,
+                                                                          value:
+                                                                              downloadProgress.progress,
+                                                                        ),
+                                                                      ),
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          const Icon(
+                                                                              Icons.error),
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      height: screens
+                                                                              .height *
+                                                                          0.08,
+                                                                      width: screens
+                                                                              .width *
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .repairs![
+                                                                          index]
+                                                                      .shopName
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .repairs![
+                                                                          index]
+                                                                      .repairName
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.17,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .repairs![
+                                                                          index]
+                                                                      .repairCost
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        // Content below the Divider
+                                                      ],
                                                     ),
-                                                    ListView.builder(
-                                                        physics:
-                                                            const NeverScrollableScrollPhysics(),
-                                                        shrinkWrap: true,
-                                                        itemCount: 5,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                index) {
-                                                          return const Text(
-                                                            "120",
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  MyColor.black,
-                                                              // overflow: TextOverflow.ellipsis,
-                                                              fontFamily:
-                                                                  ColorFamily
-                                                                      .fontsSFProDisplay,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          );
-                                                        }),
-                                                    const SizedBox(
-                                                      height: 10,
+                                                    const Divider(
+                                                      color: MyColor.greyText,
+                                                      thickness: 1,
+                                                      indent: 2,
+                                                      endIndent: 2,
                                                     ),
-                                                    const Text(
-                                                      "Repair Name",
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: MyColor.greyText,
-                                                        // overflow: TextOverflow.ellipsis,
-                                                        fontFamily: ColorFamily
-                                                            .fontsSFProDisplay,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                    ListView.builder(
-                                                        physics:
-                                                            const NeverScrollableScrollPhysics(),
-                                                        shrinkWrap: true,
-                                                        itemCount: 5,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                index) {
-                                                          return const Text(
-                                                            "120",
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  MyColor.black,
-                                                              // overflow: TextOverflow.ellipsis,
-                                                              fontFamily:
-                                                                  ColorFamily
-                                                                      .fontsSFProDisplay,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          );
-                                                        }),
                                                   ],
                                                 ),
+                                              );
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    // color: Colors.amber,
+                                                    // height: screens.height * 0.08,
+                                                    width: screens.width * 0.20,
+                                                    child: const Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Photos",
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: MyColor
+                                                                .greyText,
+                                                            fontFamily: ColorFamily
+                                                                .fontsSFProDisplay,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Spare Name",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Spare Cost",
+                                                        style: TextStyle(
+                                                          // fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        "Total Amount",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              MyColor.greyText,
+                                                          fontFamily: ColorFamily
+                                                              .fontsSFProDisplay,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              const Divider(
+                                                color: MyColor.greyText,
+                                                thickness: 1,
+                                                indent: 2,
+                                                endIndent: 2,
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              ListView.builder(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: tripdetails
+                                                    .data!.repairs!.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        index) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              // color: Colors.amber,
+                                                              width: screens
+                                                                      .width *
+                                                                  0.20,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Container(
+                                                                    height: 40,
+                                                                    width: 40,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border: Border.all(
+                                                                          width:
+                                                                              1,
+                                                                          color:
+                                                                              MyColor.button),
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              10)),
+                                                                    ),
+                                                                    child:
+                                                                        InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator
+                                                                            .push(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                LargeImages(
+                                                                              imagesUrl: tripdetails.data!.repairs![index].uploadBill.toString(),
+                                                                              nameProperty: "Repairs",
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            const BorderRadius.all(Radius.circular(09)),
+                                                                        child:
+                                                                            CachedNetworkImage(
+                                                                          imageUrl: tripdetails
+                                                                              .data!
+                                                                              .repairs![index]
+                                                                              .uploadBill
+                                                                              .toString(),
+                                                                          progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.all(8.0),
+                                                                            child:
+                                                                                CircularProgressIndicator(
+                                                                              color: MyColor.button,
+                                                                              value: downloadProgress.progress,
+                                                                            ),
+                                                                          ),
+                                                                          errorWidget: (context, url, error) =>
+                                                                              const Icon(Icons.error),
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                          height:
+                                                                              screens.height * 0.08,
+                                                                          width:
+                                                                              screens.width * 0.08,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              // color: Colors.amber,
+                                                              // height: screens.height * 0.08,
+                                                              width: screens
+                                                                      .width *
+                                                                  0.20,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      tripdetails
+                                                                          .data!
+                                                                          .repairs![
+                                                                              index]
+                                                                          .spareName
+                                                                          .toString(),
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: MyColor
+                                                                            .black,
+
+                                                                        // overflow: TextOverflow.ellipsis,
+                                                                        fontFamily:
+                                                                            ColorFamily.fontsSFProDisplay,
+                                                                        fontWeight:
+                                                                            FontWeight.w400,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              // color: Colors.amber,
+                                                              // height: screens.height * 0.08,
+                                                              width: screens
+                                                                      .width *
+                                                                  0.20,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      tripdetails
+                                                                          .data!
+                                                                          .repairs![
+                                                                              index]
+                                                                          .spareCost
+                                                                          .toString(),
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: MyColor
+                                                                            .black,
+
+                                                                        // overflow: TextOverflow.ellipsis,
+                                                                        fontFamily:
+                                                                            ColorFamily.fontsSFProDisplay,
+                                                                        fontWeight:
+                                                                            FontWeight.w400,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+
+                                                            SizedBox(
+                                                              // color: Colors.amber,
+                                                              // height: screens.height * 0.08,
+                                                              width: screens
+                                                                      .width *
+                                                                  0.17,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      tripdetails
+                                                                          .data!
+                                                                          .repairs![
+                                                                              index]
+                                                                          .totalAmount
+                                                                          .toString(),
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: MyColor
+                                                                            .black,
+
+                                                                        // overflow: TextOverflow.ellipsis,
+                                                                        fontFamily:
+                                                                            ColorFamily.fontsSFProDisplay,
+                                                                        fontWeight:
+                                                                            FontWeight.w400,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            // Content below the Divider
+                                                          ],
+                                                        ),
+                                                        tripdetails
+                                                                    .data!
+                                                                    .repairs!
+                                                                    .length ==
+                                                                index + 1
+                                                            ? Container()
+                                                            : const Divider(
+                                                                color: MyColor
+                                                                    .greyText,
+                                                                thickness: 1,
+                                                                indent: 2,
+                                                                endIndent: 2,
+                                                              ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.end,
-                                        //   children: [
-                                        //     Container(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           0.30,
-                                        //       height: 20,
-                                        //       decoration: const BoxDecoration(
-                                        //         // color: MyColor.Red_color,
-                                        //         gradient: LinearGradient(
-                                        //           begin: Alignment.centerLeft,
-                                        //           end: Alignment.centerRight,
-                                        //           tileMode: TileMode.mirror,
-                                        //           colors: [
-                                        //             MyColor.button1,
-                                        //             MyColor.button,
-                                        //           ],
-                                        //         ),
-                                        //         borderRadius: BorderRadius.only(
-                                        //             topLeft: Radius.circular(
-                                        //               09,
-                                        //             ),
-                                        //             bottomRight:
-                                        //                 Radius.circular(09)),
-                                        //       ),
-                                        //       child: const Center(
-                                        //         child: Text(
-                                        //           "View",
-                                        //           style: TextStyle(
-                                        //             fontSize: 12,
-                                        //             color: MyColor.white,
-                                        //             // overflow: TextOverflow.ellipsis,
-                                        //             fontFamily: ColorFamily
-                                        //                 .fontsSFProDisplay,
-                                        //             fontWeight: FontWeight.w500,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // )
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                             tripdetails.data!.repairs.toString() == "null"
@@ -1735,281 +2127,361 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(10)),
                                     ),
-                                    child: Column(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8, left: 8, right: 10),
-                                          child: Row(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          const Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Tolls",
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   color: MyColor.black,
-                                                  // overflow: TextOverflow.ellipsis,
                                                   fontFamily: ColorFamily
                                                       .fontsSFProDisplay,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Row(
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: MyColor.button),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    LargeImages(
-                                                                      imagesUrl: tripdetails
-                                                                          .data!
-                                                                          .tolls!
-                                                                          .tollImage
-                                                                          .toString(),
-                                                                      nameProperty:
-                                                                          "Tolls",
-                                                                    )));
-                                                  },
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                09)),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: tripdetails
-                                                          .data!
-                                                          .tolls!
-                                                          .tollImage
-                                                          .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: MyColor.button,
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
-                                                        ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Photos",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Icon(
-                                                              Icons.error),
-                                                      fit: BoxFit.fill,
-                                                      height:
-                                                          screens.height * 0.08,
-                                                      width:
-                                                          screens.width * 0.08,
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Fuel Station",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Toll Name",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Fuel Station",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Amount",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              const Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 5),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [],
-                                                  ),
-                                                ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                // child: const Row(
+                                                //   mainAxisAlignment:
+                                                //       MainAxisAlignment.center,
+                                                //   children: [
+                                                //     Text(
+                                                //       "Fuel Station",
+                                                //       style: TextStyle(
+                                                //         fontSize: 14,
+                                                //         color: MyColor.greyText,
+                                                //         fontFamily: ColorFamily
+                                                //             .fontsSFProDisplay,
+                                                //         fontWeight:
+                                                //             FontWeight.w400,
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.end,
-                                        //   children: [
-                                        //     Container(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           0.30,
-                                        //       height: 20,
-                                        //       decoration: const BoxDecoration(
-                                        //         // color: MyColor.Red_color,
-                                        //         gradient: LinearGradient(
-                                        //           begin: Alignment.centerLeft,
-                                        //           end: Alignment.centerRight,
-                                        //           tileMode: TileMode.mirror,
-                                        //           colors: [
-                                        //             MyColor.button1,
-                                        //             MyColor.button,
-                                        //           ],
-                                        //         ),
-                                        //         borderRadius: BorderRadius.only(
-                                        //             topLeft: Radius.circular(
-                                        //               09,
-                                        //             ),
-                                        //             bottomRight:
-                                        //                 Radius.circular(09)),
-                                        //       ),
-                                        //       child: const Center(
-                                        //         child: Text(
-                                        //           "View",
-                                        //           style: TextStyle(
-                                        //             fontSize: 12,
-                                        //             color: MyColor.white,
-                                        //             // overflow: TextOverflow.ellipsis,
-                                        //             fontFamily: ColorFamily
-                                        //                 .fontsSFProDisplay,
-                                        //             fontWeight: FontWeight.w500,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // )
-                                      ],
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount:
+                                                tripdetails.data!.tolls!.length,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                height: 40,
+                                                                width: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: MyColor
+                                                                          .button),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10)),
+                                                                ),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LargeImages(
+                                                                          imagesUrl: tripdetails
+                                                                              .data!
+                                                                              .tolls![index]
+                                                                              .tollImage
+                                                                              .toString(),
+                                                                          nameProperty:
+                                                                              "Tolls",
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            09)),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl: tripdetails
+                                                                          .data!
+                                                                          .tolls![
+                                                                              index]
+                                                                          .tollImage
+                                                                          .toString(),
+                                                                      progressIndicatorBuilder: (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              MyColor.button,
+                                                                          value:
+                                                                              downloadProgress.progress,
+                                                                        ),
+                                                                      ),
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          const Icon(
+                                                                              Icons.error),
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      height: screens
+                                                                              .height *
+                                                                          0.08,
+                                                                      width: screens
+                                                                              .width *
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .tolls![
+                                                                          index]
+                                                                      .tollName
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .tolls![
+                                                                          index]
+                                                                      .amount
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.17,
+                                                          // c
+                                                        ),
+                                                        // Content below the Divider
+                                                      ],
+                                                    ),
+                                                    tripdetails.data!.tolls!
+                                                                .length ==
+                                                            (index + 1)
+                                                        ? Container()
+                                                        : const Divider(
+                                                            color: MyColor
+                                                                .greyText,
+                                                            thickness: 1,
+                                                            indent: 2,
+                                                            endIndent: 2,
+                                                          ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                             tripdetails.data!.tolls.toString() == "null"
@@ -2017,7 +2489,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                 : const SizedBox(
                                     height: 12,
                                   ),
-                            tripdetails.data!.roadAccident.toString() == "null"
+                            tripdetails.data!.roadAccidents.toString() == "null"
                                 ? Container()
                                 : Container(
                                     decoration: BoxDecoration(
@@ -2026,320 +2498,465 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(10)),
                                     ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8, left: 8, right: 10),
-                                          child: Row(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          const Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Road Accident",
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   color: MyColor.black,
-                                                  // overflow: TextOverflow.ellipsis,
                                                   fontFamily: ColorFamily
                                                       .fontsSFProDisplay,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              // Icon(Icons.keyboard_arrow_down)
                                             ],
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8, bottom: 8),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: MyColor.button),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    LargeImages(
-                                                                      imagesUrl: tripdetails
-                                                                          .data!
-                                                                          .roadAccident!
-                                                                          .image
-                                                                          .toString(),
-                                                                      nameProperty:
-                                                                          "Road Accident",
-                                                                    )));
-                                                  },
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                09)),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: tripdetails
-                                                          .data!
-                                                          .roadAccident!
-                                                          .image
-                                                          .toString(),
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: MyColor.button,
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
-                                                        ),
-                                                      ),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          const Icon(
-                                                              Icons.error),
-                                                      fit: BoxFit.fill,
-                                                      height:
-                                                          screens.height * 0.08,
-                                                      width:
-                                                          screens.width * 0.08,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Accident Category",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "Cost",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              MyColor.greyText,
-                                                          // overflow: TextOverflow.ellipsis,
-                                                          fontFamily: ColorFamily
-                                                              .fontsSFProDisplay,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      ListView.builder(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          itemCount: 5,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  index) {
-                                                            return const Text(
-                                                              "120",
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize: 14,
-                                                                color: MyColor
-                                                                    .black,
-                                                                // overflow: TextOverflow.ellipsis,
-                                                                fontFamily:
-                                                                    ColorFamily
-                                                                        .fontsSFProDisplay,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            );
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
+                                          Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              const Text(
-                                                "Description",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: MyColor.greyText,
-                                                  // overflow: TextOverflow.ellipsis,
-                                                  fontFamily: ColorFamily
-                                                      .fontsSFProDisplay,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                              ListView.builder(
-                                                  physics:
-                                                      const NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: 5,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          index) {
-                                                    return const Text(
-                                                      "120",
-                                                      style: const TextStyle(
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Photos",
+                                                      style: TextStyle(
                                                         fontSize: 14,
-                                                        color: MyColor.black,
-                                                        // overflow: TextOverflow.ellipsis,
+                                                        color: MyColor.greyText,
                                                         fontFamily: ColorFamily
                                                             .fontsSFProDisplay,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                       ),
-                                                    );
-                                                  }),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                // width: screens.width * 0.20,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Accident Category",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.20,
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "Cost",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: MyColor.greyText,
+                                                        fontFamily: ColorFamily
+                                                            .fontsSFProDisplay,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                // color: Colors.amber,
+                                                // height: screens.height * 0.08,
+                                                width: screens.width * 0.10,
+                                                // child: const Row(
+                                                //   mainAxisAlignment:
+                                                //       MainAxisAlignment.center,
+                                                //   children: [
+                                                //     Text(
+                                                //       "Fuel Station",
+                                                //       style: TextStyle(
+                                                //         fontSize: 14,
+                                                //         color: MyColor.greyText,
+                                                //         fontFamily: ColorFamily
+                                                //             .fontsSFProDisplay,
+                                                //         fontWeight:
+                                                //             FontWeight.w400,
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // ),
+                                              ),
                                             ],
                                           ),
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.end,
-                                        //   children: [
-                                        //     Container(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           0.30,
-                                        //       height: 20,
-                                        //       decoration: const BoxDecoration(
-                                        //         // color: MyColor.Red_color,
-                                        //         gradient: LinearGradient(
-                                        //           begin: Alignment.centerLeft,
-                                        //           end: Alignment.centerRight,
-                                        //           tileMode: TileMode.mirror,
-                                        //           colors: [
-                                        //             MyColor.button1,
-                                        //             MyColor.button,
-                                        //           ],
-                                        //         ),
-                                        //         borderRadius: BorderRadius.only(
-                                        //             topLeft: Radius.circular(
-                                        //               09,
-                                        //             ),
-                                        //             bottomRight:
-                                        //                 Radius.circular(09)),
-                                        //       ),
-                                        //       child: const Center(
-                                        //         child: Text(
-                                        //           "View",
-                                        //           style: TextStyle(
-                                        //             fontSize: 12,
-                                        //             color: MyColor.white,
-                                        //             // overflow: TextOverflow.ellipsis,
-                                        //             fontFamily: ColorFamily
-                                        //                 .fontsSFProDisplay,
-                                        //             fontWeight: FontWeight.w500,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // )
-                                      ],
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: tripdetails
+                                                .data!.roadAccidents!.length,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Container(
+                                                                height: 40,
+                                                                width: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: MyColor
+                                                                          .button),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10)),
+                                                                ),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LargeImages(
+                                                                          imagesUrl: tripdetails
+                                                                              .data!
+                                                                              .roadAccidents![index]
+                                                                              .image
+                                                                              .toString(),
+                                                                          nameProperty:
+                                                                              "Road Accident",
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            09)),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl: tripdetails
+                                                                          .data!
+                                                                          .roadAccidents![
+                                                                              index]
+                                                                          .image
+                                                                          .toString(),
+                                                                      progressIndicatorBuilder: (context,
+                                                                              url,
+                                                                              downloadProgress) =>
+                                                                          Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.all(8.0),
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              MyColor.button,
+                                                                          value:
+                                                                              downloadProgress.progress,
+                                                                        ),
+                                                                      ),
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          const Icon(
+                                                                              Icons.error),
+                                                                      fit: BoxFit
+                                                                          .fill,
+                                                                      height: screens
+                                                                              .height *
+                                                                          0.08,
+                                                                      width: screens
+                                                                              .width *
+                                                                          0.08,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .roadAccidents![
+                                                                          index]
+                                                                      .accidentCategory
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.20,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .roadAccidents![
+                                                                          index]
+                                                                      .cost
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+
+                                                                    // overflow: TextOverflow.ellipsis,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                        SizedBox(
+                                                          // color: Colors.amber,
+                                                          // height: screens.height * 0.08,
+                                                          width: screens.width *
+                                                              0.10,
+                                                          // c
+                                                        ),
+                                                        // Content below the Divider
+                                                      ],
+                                                    ),
+                                                    tripdetails
+                                                                .data!
+                                                                .roadAccidents!
+                                                                .length ==
+                                                            (index + 1)
+                                                        ? Container()
+                                                        : const Divider(
+                                                            color: MyColor
+                                                                .greyText,
+                                                            thickness: 1,
+                                                            indent: 2,
+                                                            endIndent: 2,
+                                                          ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: MyColor.greyText,
+                                                  fontFamily: ColorFamily
+                                                      .fontsSFProDisplay,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: MyColor.greyText,
+                                            thickness: 1,
+                                            indent: 2,
+                                            endIndent: 2,
+                                          ),
+                                          ListView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemCount: tripdetails
+                                                  .data!.roadAccidents!.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      index) {
+                                                return Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Text(
+                                                                  tripdetails
+                                                                      .data!
+                                                                      .roadAccidents![
+                                                                          index]
+                                                                      .description
+                                                                      .toString(),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: MyColor
+                                                                        .black,
+                                                                    fontFamily:
+                                                                        ColorFamily
+                                                                            .fontsSFProDisplay,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          tripdetails
+                                                                      .data!
+                                                                      .roadAccidents!
+                                                                      .length ==
+                                                                  (index + 1)
+                                                              ? Container()
+                                                              : const Divider(
+                                                                  color: MyColor
+                                                                      .greyText,
+                                                                  thickness: 1,
+                                                                  indent: 2,
+                                                                  endIndent: 2,
+                                                                ),
+                                                        ]));
+                                              })
+                                        ],
+                                      ),
                                     ),
                                   ),
-                            tripdetails.data!.roadAccident.toString() == "null"
+                            tripdetails.data!.roadAccidents.toString() == "null"
                                 ? Container()
                                 : const SizedBox(
                                     height: 12,
                                   ),
-                            tripdetails.data!.fine.toString() == "null"
+                            tripdetails.data!.fines.toString() == "null"
                                 ? Container()
                                 : Container(
                                     decoration: BoxDecoration(
@@ -2378,7 +2995,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                           height: 5,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 8),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -2406,7 +3024,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                     LargeImages(
                                                                       imagesUrl: tripdetails
                                                                           .data!
-                                                                          .fine!
+                                                                          .fines![
+                                                                              0]
                                                                           .image
                                                                           .toString(),
                                                                       nameProperty:
@@ -2420,7 +3039,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                 09)),
                                                     child: CachedNetworkImage(
                                                       imageUrl: tripdetails
-                                                          .data!.fine!.image
+                                                          .data!.fines![0].image
                                                           .toString(),
                                                       progressIndicatorBuilder:
                                                           (context, url,
@@ -2479,15 +3098,17 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
-                                                          itemCount: 5,
+                                                          itemCount: tripdetails
+                                                              .data!
+                                                              .fines!
+                                                              .length,
                                                           itemBuilder:
                                                               (BuildContext
                                                                       context,
                                                                   index) {
                                                             return const Text(
                                                               "120",
-                                                              style:
-                                                                  const TextStyle(
+                                                              style: TextStyle(
                                                                 fontSize: 14,
                                                                 color: MyColor
                                                                     .black,
@@ -2518,7 +3139,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                             .start,
                                                     children: [
                                                       const Text(
-                                                        "Fine Name",
+                                                        "Amount",
                                                         style: TextStyle(
                                                           fontSize: 14,
                                                           color:
@@ -2534,13 +3155,20 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
-                                                          itemCount: 5,
+                                                          itemCount: tripdetails
+                                                              .data!
+                                                              .fines!
+                                                              .length,
                                                           itemBuilder:
                                                               (BuildContext
                                                                       context,
                                                                   index) {
-                                                            return const Text(
-                                                              "120",
+                                                            return Text(
+                                                              tripdetails
+                                                                  .data!
+                                                                  .fines![index]
+                                                                  .amount
+                                                                  .toString(),
                                                               style:
                                                                   const TextStyle(
                                                                 fontSize: 14,
@@ -2570,7 +3198,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(12.0),
+                                          padding: const EdgeInsets.only(
+                                              left: 12, bottom: 8),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -2592,12 +3221,17 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                   physics:
                                                       const NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: 5,
+                                                  itemCount: tripdetails
+                                                      .data!.fines!.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           index) {
-                                                    return const Text(
-                                                      "120",
+                                                    return Text(
+                                                      tripdetails
+                                                          .data!
+                                                          .fines![index]
+                                                          .description
+                                                          .toString(),
                                                       style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
@@ -2659,7 +3293,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                       ],
                                     ),
                                   ),
-                            tripdetails.data!.fine.toString() == "null"
+                            tripdetails.data!.fines.toString() == "null"
                                 ? Container()
                                 : const SizedBox(
                                     height: 12,
@@ -2732,7 +3366,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                     LargeImages(
                                                                       imagesUrl: tripdetails
                                                                           .data!
-                                                                          .otherCharges!
+                                                                          .otherCharges![
+                                                                              0]
                                                                           .image
                                                                           .toString(),
                                                                       nameProperty:
@@ -2747,7 +3382,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                     child: CachedNetworkImage(
                                                       imageUrl: tripdetails
                                                           .data!
-                                                          .otherCharges!
+                                                          .otherCharges![0]
                                                           .image
                                                           .toString(),
                                                       progressIndicatorBuilder:
@@ -2807,13 +3442,21 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
-                                                          itemCount: 5,
+                                                          itemCount: tripdetails
+                                                              .data!
+                                                              .otherCharges!
+                                                              .length,
                                                           itemBuilder:
                                                               (BuildContext
                                                                       context,
                                                                   index) {
-                                                            return const Text(
-                                                              "120",
+                                                            return Text(
+                                                              tripdetails
+                                                                  .data!
+                                                                  .otherCharges![
+                                                                      index]
+                                                                  .name
+                                                                  .toString(),
                                                               style:
                                                                   const TextStyle(
                                                                 fontSize: 14,
@@ -2846,7 +3489,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                             .start,
                                                     children: [
                                                       const Text(
-                                                        "Cost",
+                                                        "Amount",
                                                         style: TextStyle(
                                                           fontSize: 14,
                                                           color:
@@ -2862,13 +3505,21 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
-                                                          itemCount: 5,
+                                                          itemCount: tripdetails
+                                                              .data!
+                                                              .otherCharges!
+                                                              .length,
                                                           itemBuilder:
                                                               (BuildContext
                                                                       context,
                                                                   index) {
-                                                            return const Text(
-                                                              "120",
+                                                            return Text(
+                                                              tripdetails
+                                                                  .data!
+                                                                  .otherCharges![
+                                                                      index]
+                                                                  .amount
+                                                                  .toString(),
                                                               style:
                                                                   const TextStyle(
                                                                 fontSize: 14,
@@ -2898,7 +3549,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(12.0),
+                                          padding: const EdgeInsets.only(
+                                              left: 12, bottom: 8),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -2920,12 +3572,17 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                   physics:
                                                       const NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: 5,
+                                                  itemCount: tripdetails.data!
+                                                      .otherCharges!.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           index) {
-                                                    return const Text(
-                                                      "120",
+                                                    return Text(
+                                                      tripdetails
+                                                          .data!
+                                                          .otherCharges![index]
+                                                          .description
+                                                          .toString(),
                                                       style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
@@ -2990,8 +3647,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                             const SizedBox(
                               height: 12,
                             ),
-                            tripdetails.data!.deliveryInformation.toString() ==
-                                    "null"
+                            tripdetails.data!.deliveryNote.toString() == "null"
                                 ? Container()
                                 : Container(
                                     decoration: BoxDecoration(
@@ -3059,7 +3715,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                     LargeImages(
                                                                       imagesUrl: tripdetails
                                                                           .data!
-                                                                          .deliveryInformation!
+                                                                          .deliveryNote![
+                                                                              0]
                                                                           .image
                                                                           .toString(),
                                                                       nameProperty:
@@ -3074,7 +3731,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                     child: CachedNetworkImage(
                                                       imageUrl: tripdetails
                                                           .data!
-                                                          .deliveryInformation!
+                                                          .deliveryNote![0]
                                                           .image
                                                           .toString(),
                                                       progressIndicatorBuilder:
@@ -3134,13 +3791,21 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
-                                                          itemCount: 5,
+                                                          itemCount: tripdetails
+                                                              .data!
+                                                              .deliveryNote!
+                                                              .length,
                                                           itemBuilder:
                                                               (BuildContext
                                                                       context,
                                                                   index) {
-                                                            return const Text(
-                                                              "120",
+                                                            return Text(
+                                                              tripdetails
+                                                                  .data!
+                                                                  .deliveryNote![
+                                                                      index]
+                                                                  .deliveryNote
+                                                                  .toString(),
                                                               style:
                                                                   const TextStyle(
                                                                 fontSize: 14,
@@ -3213,7 +3878,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                             const SizedBox(
                               height: 12,
                             ),
-                            tripdetails.data!.endTripDetail.toString() == "null"
+                            tripdetails.data!.enrouteDiesels.toString() ==
+                                    "null"
                                 ? Container()
                                 : Container(
                                     decoration: BoxDecoration(
@@ -3290,7 +3956,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                       (context) =>
                                                                           LargeImages(
                                                                             imagesUrl:
-                                                                                tripdetails.data!.endTripDetail!.dieselMeterImage.toString(),
+                                                                                tripdetails.data!.endTrip![0].dieselMeterImage.toString(),
                                                                             nameProperty:
                                                                                 "Delivery Information",
                                                                           )));
@@ -3306,8 +3972,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                               CachedNetworkImage(
                                                             imageUrl: tripdetails
                                                                 .data!
-                                                                .endTripDetail!
-                                                                .dieselMeterImage
+                                                                .endTrip![0]
+                                                                .dieselMeterImage!
                                                                 .toString(),
                                                             progressIndicatorBuilder:
                                                                 (context, url,
@@ -3366,8 +4032,8 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                                         LargeImages(
                                                                           imagesUrl: tripdetails
                                                                               .data!
-                                                                              .endTripDetail!
-                                                                              .odometerImage
+                                                                              .enrouteDiesels![0]
+                                                                              .petrolStationImage
                                                                               .toString(),
                                                                           nameProperty:
                                                                               "Delivery Information",
@@ -3383,7 +4049,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                             CachedNetworkImage(
                                                           imageUrl: tripdetails
                                                               .data!
-                                                              .endTripDetail!
+                                                              .endTrip![0]
                                                               .odometerImage
                                                               .toString(),
                                                           progressIndicatorBuilder:
@@ -3418,7 +4084,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               // Row(
@@ -3582,10 +4248,10 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                     ),
                                   )
                                 : Container(),
-                            tripdetails.data!.addOnDiesel.toString() == 'null'
+                            tripdetails.data!.addOnDiesels.toString() == 'null'
                                 ? Padding(
                                     padding: EdgeInsets.only(
-                                        top: tripdetails.data!.addOnDiesel
+                                        top: tripdetails.data!.addOnDiesels
                                                     .toString() ==
                                                 "null"
                                             ? 5
@@ -3626,15 +4292,13 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                 : Container(),
                             tripdetails.data!.isStatus.toString() !=
                                         "Accepted" &&
-                                    tripdetails.data!.endTripDetail
-                                            .toString() ==
+                                    tripdetails.data!.endTrip.toString() ==
                                         "null" &&
-                                    tripdetails.data!.deliveryInformation
-                                            .toString() ==
+                                    tripdetails.data!.deliveryNote.toString() ==
                                         "null"
                                 ? Padding(
                                     padding: EdgeInsets.only(
-                                        top: tripdetails.data!.addOnDiesel
+                                        top: tripdetails.data!.addOnDiesels
                                                     .toString() ==
                                                 'null'
                                             ? 10
@@ -3676,11 +4340,9 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                   )
                                 : Container(),
                             tripdetails.data!.otherCharges != null &&
-                                    tripdetails.data!.endTripDetail
-                                            .toString() ==
+                                    tripdetails.data!.endTrip.toString() ==
                                         "null" &&
-                                    tripdetails.data!.deliveryInformation
-                                            .toString() ==
+                                    tripdetails.data!.deliveryNote.toString() ==
                                         "null"
                                 ? Padding(
                                     padding: EdgeInsets.only(
@@ -3724,17 +4386,14 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                     ),
                                   )
                                 : Container(),
-                            tripdetails.data!.endTripDetail.toString() ==
-                                        "null" &&
-                                    tripdetails.data!.deliveryInformation
-                                            .toString() !=
+                            tripdetails.data!.endTrip.toString() == "null" &&
+                                    tripdetails.data!.deliveryNote.toString() !=
                                         "null"
                                 ? Padding(
                                     padding: EdgeInsets.only(
                                         top: tripdetails.data!.otherCharges !=
                                                     null &&
-                                                tripdetails.data!
-                                                        .deliveryInformation
+                                                tripdetails.data!.deliveryNote
                                                         .toString() ==
                                                     "null"
                                             ? 05
@@ -3761,7 +4420,7 @@ class _DemoTripDetialsState extends State<DemoTripDetials> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              EndTrip(
+                                                              EndTripscr(
                                                                   tripId: widget
                                                                       .tripId,
                                                                   truckId: widget
