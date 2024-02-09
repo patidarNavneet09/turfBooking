@@ -1572,9 +1572,8 @@ class _HomescreenState extends State<Homescreen> {
     loading1 = true;
     if (jsonResponse['status'] == true) {
       profilegetResponse = ProfileGet.fromJson(jsonResponse);
-      setState(() {
-        loading1 = false;
-      });
+
+      loading1 = false;
     } else {
       setState(() {
         loading1 = false;

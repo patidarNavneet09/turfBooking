@@ -639,7 +639,8 @@ class EndTrip {
       this.dieselMeterImage,
       this.odometerImage,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      String? truckId});
 
   EndTrip.fromJson(Map<String, dynamic> json) {
     id = json['id'];

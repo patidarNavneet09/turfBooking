@@ -1,13 +1,20 @@
 import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truckmanagement/Model/statusresponsemodel.dart';
 import 'package:truckmanagement/Model/tripdetailsmodel.dart';
+import 'package:truckmanagement/Screens/add_on_diesel.dart';
+import 'package:truckmanagement/Screens/delivery_screen.dart';
+import 'package:truckmanagement/Screens/end_trip.dart';
+import 'package:truckmanagement/Screens/expenstion_type.dart';
 import 'package:truckmanagement/Screens/large_images.dart';
+import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 import '../constant/apiconstant.dart';
 
@@ -22,7 +29,9 @@ class NewTrip extends StatefulWidget {
 
 class _NewTripState extends State<NewTrip> {
   Tripdetails tripdetails = Tripdetails();
+  Statusresponse statusresponse = Statusresponse();
   bool loading1 = true;
+  final ScrollController _controller = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -31,11 +40,33 @@ class _NewTripState extends State<NewTrip> {
         context, widget.truckId.toString(), widget.tripId.toString()));
   }
 
+  apihit() {
+    tripdetialsGet(
+        context, widget.truckId.toString(), widget.tripId.toString());
+  }
+
+  void _scrollToPosition() {
+    _controller.animateTo(
+      410.0, // Replace 200.0 with the desired scroll offset
+      duration: const Duration(seconds: 2), // Adjust duration as needed
+      curve: Curves.ease, // Adjust curve as needed
+    );
+  }
+
+  @override
+  void dispose() {
+    // Dispose the ScrollController when not needed
+    _controller.dispose();
+    super.dispose();
+  }
+
   List tripData = [];
   dynamic indexx = 0;
+  int indexbutton = 0;
   @override
   Widget build(BuildContext context) {
     var screens = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -214,6 +245,7 @@ class _NewTripState extends State<NewTrip> {
           ],
         ),
       ),
+      bottomNavigationBar: tripdetails.status != true ? null : button(),
       body: tripdetails.status != true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
@@ -222,7 +254,7 @@ class _NewTripState extends State<NewTrip> {
               // physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
-                  indexx == 0
+                  tripData.contains("Trip Detail") == true && indexx == 0
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -691,8 +723,10 @@ class _NewTripState extends State<NewTrip> {
                             ],
                           ),
                         )
-                      : indexx == 1 &&
-                              tripdetails.data!.addOnDiesels!.isNotEmpty
+                      : indexx ==
+                              tripData.indexWhere((element) =>
+                                  element.contains("Add On Diesel") &&
+                                  tripdetails.data!.addOnDiesels!.isNotEmpty)
                           ? Column(
                               children: [
                                 Padding(
@@ -1086,8 +1120,11 @@ class _NewTripState extends State<NewTrip> {
                                 ),
                               ],
                             )
-                          : indexx == 2 &&
-                                  tripdetails.data!.enrouteDiesels!.isNotEmpty
+                          : indexx ==
+                                  tripData.indexWhere((element) =>
+                                      element.contains("Enroute Diesel") &&
+                                      tripdetails
+                                          .data!.enrouteDiesels!.isNotEmpty)
                               ? Column(
                                   children: [
                                     Padding(
@@ -1491,8 +1528,10 @@ class _NewTripState extends State<NewTrip> {
                                     ),
                                   ],
                                 )
-                              : indexx == 3 &&
-                                      tripdetails.data!.repairs!.isNotEmpty
+                              : indexx ==
+                                      tripData.indexWhere((element) =>
+                                          element.contains("Repairs") &&
+                                          tripdetails.data!.repairs!.isNotEmpty)
                                   ? Column(
                                       children: [
                                         Padding(
@@ -2191,8 +2230,11 @@ class _NewTripState extends State<NewTrip> {
                                         ),
                                       ],
                                     )
-                                  : indexx == 4 &&
-                                          tripdetails.data!.tolls!.isNotEmpty
+                                  : indexx ==
+                                          tripData.indexWhere((element) =>
+                                              element.contains("Tolls") &&
+                                              tripdetails
+                                                  .data!.tolls!.isNotEmpty)
                                       ? Column(
                                           children: [
                                             Padding(
@@ -2536,9 +2578,13 @@ class _NewTripState extends State<NewTrip> {
                                             ),
                                           ],
                                         )
-                                      : indexx == 5 &&
-                                              tripdetails.data!.roadAccidents!
-                                                  .isNotEmpty
+                                      : indexx ==
+                                              tripData.indexWhere((element) =>
+                                                  element.contains("Road Accident") &&
+                                                  tripdetails
+                                                      .data!
+                                                      .roadAccidents!
+                                                      .isNotEmpty)
                                           ? Column(
                                               children: [
                                                 Padding(
@@ -2926,9 +2972,11 @@ class _NewTripState extends State<NewTrip> {
                                                 ),
                                               ],
                                             )
-                                          : indexx == 6 &&
-                                                  tripdetails
-                                                      .data!.fines!.isNotEmpty
+                                          : indexx ==
+                                                  tripData.indexWhere((element) =>
+                                                      element.contains("Fine") &&
+                                                      tripdetails.data!.fines!
+                                                          .isNotEmpty)
                                               ? Column(
                                                   children: [
                                                     Padding(
@@ -3301,11 +3349,7 @@ class _NewTripState extends State<NewTrip> {
                                                     ),
                                                   ],
                                                 )
-                                              : indexx == 7 &&
-                                                      tripdetails
-                                                          .data!
-                                                          .otherCharges!
-                                                          .isNotEmpty
+                                              : indexx == tripData.indexWhere((element) => element.contains("Other Charges") && tripdetails.data!.otherCharges!.isNotEmpty)
                                                   ? Column(
                                                       children: [
                                                         Padding(
@@ -3653,11 +3697,7 @@ class _NewTripState extends State<NewTrip> {
                                                         ),
                                                       ],
                                                     )
-                                                  : indexx == 8 &&
-                                                          tripdetails
-                                                              .data!
-                                                              .deliveryNote!
-                                                              .isNotEmpty
+                                                  : indexx == tripData.indexWhere((element) => element.contains("Delivery Information") && tripdetails.data!.deliveryNote!.isNotEmpty)
                                                       ? Column(
                                                           children: [
                                                             Padding(
@@ -3967,15 +4007,11 @@ class _NewTripState extends State<NewTrip> {
                                                           ],
                                                         )
                                                       : SizedBox(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.70,
+                                                          height: MediaQuery.of(context).size.height * 0.70,
                                                           child: const Center(
                                                             child:
                                                                 Text("No data"),
-                                                          ))
+                                                          )),
                 ],
               ),
             ),
@@ -4004,6 +4040,7 @@ class _NewTripState extends State<NewTrip> {
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
     loading1 = true;
+    tripData.clear();
     if (jsonResponse['status'] == true) {
       tripdetails = Tripdetails.fromJson(jsonResponse);
 
@@ -4058,5 +4095,275 @@ class _NewTripState extends State<NewTrip> {
     }
 
     return Tripdetails.fromJson(jsonDecode(response.body));
+  }
+
+  Future<Statusresponse> acceptApi(
+    BuildContext context,
+    String? status,
+    String? tripId,
+  ) async {
+    var request = {};
+    request['status'] = status;
+    request['trip_id'] = tripId;
+
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(
+        logLevel: LogLevel.BODY,
+      ),
+    ]);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(Uri.parse(ApiServer.tripaccept),
+        body: convert.jsonEncode(request),
+        headers: {
+          "content-type": "application/json",
+          "accept": "application/json",
+          "Authorization":
+              "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+        });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    if (jsonResponse['status'] == true) {
+      statusresponse = Statusresponse.fromJson(jsonResponse);
+      if (indexbutton == 0) {
+        _scrollToPosition();
+      }
+      debugPrint("statusresponse.data!.status${statusresponse.data!.status}");
+      if (statusresponse.data!.status == "Accepted" && context.mounted) {
+        debugPrint("DAta");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const StartTrip()));
+      }
+      indexbutton = 1;
+      setState(() {});
+    } else {
+      Fluttertoast.showToast(msg: jsonResponse['message']);
+    }
+
+    return Statusresponse.fromJson(jsonDecode(response.body));
+  }
+
+  button() {
+    return tripdetails.data!.isStatus.toString() == "Accepted"
+        ? Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppButton(
+                    color: indexbutton == 1
+                        ? const Color(0xffD9D9D9)
+                        : MyColor.transparent,
+                    textStyle: const TextStyle(
+                      color: MyColor.white,
+                      fontSize: 16,
+                      fontFamily: ColorFamily.fontsSFProDisplay,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    btnWidth: MediaQuery.of(context).size.width * 0.90,
+                    btnHeight: MediaQuery.of(context).size.height * 0.07,
+                    onPressed: () {
+                      if (indexbutton != 1) {
+                        acceptApi(context, "Accepted",
+                            tripdetails.data!.id.toString());
+                      }
+
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const StartTrip()));
+
+                      setState(() {});
+                    },
+                    name: tripdetails.data!.status.toString() == "Accepted"
+                        ? "Accepted"
+                        : "Accept"),
+              ],
+            ),
+          )
+        : indexbutton == 1 &&
+                tripdetails.data!.isStatus.toString() == "Accepted"
+            ? Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppButton(
+                        textStyle: const TextStyle(
+                          color: MyColor.white,
+                          fontSize: 16,
+                          fontFamily: ColorFamily.fontsSFProDisplay,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        btnWidth: MediaQuery.of(context).size.width * 0.90,
+                        btnHeight: MediaQuery.of(context).size.height * 0.07,
+                        onPressed: () {
+                          // acceptApi(context, "On the way",
+                          //     tripdetails.data!.id.toString());
+
+                          // indexbutton = 1;
+                          Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => StartTrip(
+                                          tripId: widget.tripId,
+                                          truckId: widget.truckId)))
+                              .then((value) => apihit());
+
+                          setState(() {});
+                        },
+                        name: "Start Trip"),
+                  ],
+                ),
+              )
+            : tripdetails.data!.addOnDiesels!.isEmpty
+                ? Padding(
+                    padding: EdgeInsets.only(
+                        top: tripdetails.data!.addOnDiesels!.isEmpty ? 5 : 50,
+                        bottom: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppButton(
+                            textStyle: const TextStyle(
+                              color: MyColor.white,
+                              fontSize: 16,
+                              fontFamily: ColorFamily.fontsSFProDisplay,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            btnWidth: MediaQuery.of(context).size.width * 0.90,
+                            onPressed: () {
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddOnDieselscreen(
+                                                  tripId: widget.tripId,
+                                                  truckId: widget.truckId)))
+                                  .then((value) => apihit());
+                            },
+                            name: "Add On Diesel"),
+                      ],
+                    ),
+                  )
+                : tripdetails.data!.isStatus.toString() != "Accepted" &&
+                        tripdetails.data!.endTrip!.isEmpty &&
+                        tripdetails.data!.deliveryNote!.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                            top: tripdetails.data!.addOnDiesels!.isEmpty
+                                ? 10
+                                : 30,
+                            bottom: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppButton(
+                                textStyle: const TextStyle(
+                                  color: MyColor.white,
+                                  fontSize: 16,
+                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                btnWidth:
+                                    MediaQuery.of(context).size.width * 0.90,
+                                onPressed: () {
+                                  Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ExpentionType(
+                                                      tripId: widget.tripId,
+                                                      truckId: widget.truckId)))
+                                      .then((value) => apihit());
+
+                                  setState(() {});
+                                },
+                                name: "Add Expenses"),
+                          ],
+                        ),
+                      )
+                    : tripdetails.data!.otherCharges != null &&
+                            tripdetails.data!.endTrip!.isEmpty &&
+                            tripdetails.data!.deliveryNote!.isEmpty
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                top: tripdetails.data!.otherCharges != null
+                                    ? 05
+                                    : 30,
+                                bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AppButton(
+                                    textStyle: const TextStyle(
+                                      color: MyColor.white,
+                                      fontSize: 16,
+                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    btnWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.90,
+                                    onPressed: () {
+                                      Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DeliveryScreen(
+                                                          tripId: widget.tripId,
+                                                          truckId:
+                                                              widget.truckId)))
+                                          .then((value) => apihit());
+
+                                      setState(() {});
+                                    },
+                                    name: "Mark as delivered"),
+                              ],
+                            ),
+                          )
+                        : tripdetails.data!.endTrip!.isEmpty &&
+                                tripdetails.data!.deliveryNote!.isNotEmpty
+                            ? Padding(
+                                padding: EdgeInsets.only(
+                                    top: tripdetails.data!.otherCharges !=
+                                                null &&
+                                            tripdetails
+                                                .data!.deliveryNote!.isEmpty
+                                        ? 05
+                                        : 30,
+                                    bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AppButton(
+                                        textStyle: const TextStyle(
+                                          color: MyColor.white,
+                                          fontSize: 16,
+                                          fontFamily:
+                                              ColorFamily.fontsSFProDisplay,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        btnWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.90,
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EndTripscr(
+                                                          tripId: widget.tripId,
+                                                          truckId: widget
+                                                              .truckId))).then(
+                                              (value) => apihit());
+
+                                          setState(() {});
+                                        },
+                                        name: "End Trip"),
+                                  ],
+                                ),
+                              )
+                            : null;
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764924303867",
+    "project_id": "senotrack-d3cf8",
+    "storage_bucket": "senotrack-d3cf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764924303867:android:c587289b3b029d9a68535e",
+        "android_client_info": {
+          "package_name": "com.cwt.truckmanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU3df5I8XNvKCNqKgTiiH5h-_0umpRBKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

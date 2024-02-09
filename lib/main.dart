@@ -1,21 +1,86 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/Screens/login_screen.dart';
+import 'package:truckmanagement/Screens/notifiction_hendler.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+String fcmtoken = "";
+FirebaseMessaging messaging = FirebaseMessaging.instance;
+void pushFCMtoken() async {
+  try {
+    // Get the FCM token
+    String? token = await messaging.getToken();
+    fcmtoken = token.toString();
+    // Store the FCM token in shared preferences
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("fcmtoken", fcmtoken.toString());
+    debugPrint("FCM Token:>>>>>>>>>>>>>>> $fcmtoken");
+  } catch (e) {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    debugPrint("Error getting FCM token: $e");
+    var check = preferences.getString("fcmtoken");
+    if (check == null) {
+      pushFCMtoken();
 
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  islogin = sharedPreferences.getBool("isLogin");
-  runApp(const MyApp());
+      debugPrint("Error getting FCM token>>>>>>>>>>>>.......check: $check");
+    }
+  }
 }
 
 bool? islogin;
-init() async {
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  debugPrint('Notification (${notificationResponse.id}) action tapped: '
+      '${notificationResponse.actionId} with'
+      ' payload: ${notificationResponse.payload}');
+  if (notificationResponse.input?.isNotEmpty ?? false) {
+    debugPrint(
+        'Notification action tapped with input: ${notificationResponse.input}');
+  }
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+  await init();
+  // Call pushFCMtoken in main
+  pushFCMtoken();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+  islogin = sharedPreferences.getBool("isLogin");
+  FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
+  runApp(const MyApp());
+}
+
+Future<void> _backgroundHandler(RemoteMessage message) async {
+  debugPrint('>>>>>>>>>>>>>>>>out>>>chatId>>>>$message');
+
+  // print('>>>>>>>>>>>>>>>>out>>chatmsg>>>>>${message.data['chatmsg']}');
+
+  // print('>>>>>>>>>>>>>>>>out>>>>>');
+
+  // chatReceivedUpdate(message.data['chatId'], message.data['msgId']);
+}
+
+Future init() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  NotificationService.initialize();
+
+  // Add the onBackgroundMessage handler here
+
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   islogin = sharedPreferences.getBool("isLogin");
 
+  FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
   debugPrint("islogin>>>>>>>$islogin");
 }
 

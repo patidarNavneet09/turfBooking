@@ -48,26 +48,21 @@ class _LoginState extends State<Login> {
 
   bool loadingLogin = false;
   LoginResponse loginResponse = LoginResponse();
+
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    debugPrint("devicetoken>>>>>>>>>>>>$devicetoken");
-    debugPrint("device_name>>>>>>>>>>$devicename");
     if (Platform.isIOS) {
-      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
       devicetoken = iosDeviceInfo.identifierForVendor!;
-      devicename = iosDeviceInfo.model!;
       devicetype = "ios";
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+
+      return iosDeviceInfo.identifierForVendor;
     } else {
       var androidDeviceInfo = await deviceInfo.androidInfo;
-      devicetoken = androidDeviceInfo.androidId!;
-      devicename = androidInfo.model!;
-
+      devicetoken = androidDeviceInfo.device;
       devicetype = "android";
 
-      return androidDeviceInfo.androidId; // unique ID on Android
+      return androidDeviceInfo.device;
     }
   }
 
@@ -307,9 +302,10 @@ class _LoginState extends State<Login> {
   ) async {
     var request = {};
     setLoading(true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     request['email'] = emailController.text;
     request['password'] = passwordController.text;
-    request['fcm_token'] = "123456";
+    request['fcm_token'] = sharedPreferences.getString("fcmtoken").toString();
     request['device_type'] = devicetype;
     request['device_id'] = devicetoken;
 
