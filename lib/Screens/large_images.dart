@@ -39,7 +39,7 @@ class _LargeImagesState extends State<LargeImages> {
       ),
       body: ListView.builder(
         shrinkWrap: true,
-        itemCount: 2,
+        itemCount: 1,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, index) {
           return Padding(

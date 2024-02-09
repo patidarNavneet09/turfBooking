@@ -22,7 +22,7 @@
     <uses-permission
         android:name="android.permission.AUDIO_CAPTURE"/>
     <application
-        android:label="truckmanagement"
+        android:label="SENOTRACK"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
