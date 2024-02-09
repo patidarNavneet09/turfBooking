@@ -587,15 +587,23 @@ class _HomescreenState extends State<Homescreen> {
                                                                             12,
                                                                       ),
                                                                       Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           SizedBox(
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.02,
                                                                           ),
-                                                                          SizedBox(
-                                                                              height: 20,
-                                                                              width: 20,
-                                                                              child: Image.asset("assets/images/locationchart.png")),
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(top: 5),
+                                                                            child: SizedBox(
+                                                                                height: 20,
+                                                                                width: 20,
+                                                                                child: Image.asset("assets/images/locationchart.png")),
+                                                                          ),
                                                                           SizedBox(
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.02,
@@ -604,34 +612,32 @@ class _HomescreenState extends State<Homescreen> {
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.75,
                                                                             child:
-                                                                                Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
                                                                                 Column(
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    const Text(
-                                                                                      "Loading Location",
-                                                                                      style: TextStyle(
-                                                                                        fontSize: 12,
-                                                                                        color: MyColor.textcolor,
-                                                                                        // overflow: TextOverflow.ellipsis,
-                                                                                        fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                        fontWeight: FontWeight.w600,
-                                                                                      ),
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                const Text(
+                                                                                  "Loading Location",
+                                                                                  style: TextStyle(
+                                                                                    fontSize: 12,
+                                                                                    color: MyColor.textcolor,
+                                                                                    // overflow: TextOverflow.ellipsis,
+                                                                                    fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                  ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: MediaQuery.of(context).size.width * 0.75,
+                                                                                  child: Text(
+                                                                                    myTrip.data![index].loadingLocation.toString(),
+                                                                                    style: const TextStyle(
+                                                                                      fontSize: 12,
+                                                                                      color: MyColor.textcolor1,
+                                                                                      // overflow: TextOverflow.ellipsis,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w600,
                                                                                     ),
-                                                                                    Text(
-                                                                                      myTrip.data![index].loadingLocation.toString(),
-                                                                                      style: const TextStyle(
-                                                                                        fontSize: 12,
-                                                                                        color: MyColor.textcolor1,
-                                                                                        // overflow: TextOverflow.ellipsis,
-                                                                                        fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                        fontWeight: FontWeight.w600,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
+                                                                                  ),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -953,44 +959,49 @@ class _HomescreenState extends State<Homescreen> {
                                                                                 12,
                                                                           ),
                                                                           Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
                                                                             children: [
                                                                               SizedBox(
                                                                                 width: MediaQuery.of(context).size.width * 0.02,
                                                                               ),
-                                                                              SizedBox(height: 20, width: 20, child: Image.asset("assets/images/locationchart.png")),
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(top: 5),
+                                                                                child: SizedBox(height: 20, width: 20, child: Image.asset("assets/images/locationchart.png")),
+                                                                              ),
                                                                               SizedBox(
                                                                                 width: MediaQuery.of(context).size.width * 0.02,
                                                                               ),
                                                                               SizedBox(
                                                                                 width: MediaQuery.of(context).size.width * 0.75,
-                                                                                child: Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                child: Column(
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
-                                                                                    Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        const Text(
-                                                                                          "Loading Location",
-                                                                                          style: TextStyle(
-                                                                                            fontSize: 12,
-                                                                                            color: MyColor.textcolor,
-                                                                                            // overflow: TextOverflow.ellipsis,
-                                                                                            fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                            fontWeight: FontWeight.w600,
-                                                                                          ),
+                                                                                    const Text(
+                                                                                      "Loading Location",
+                                                                                      style: TextStyle(
+                                                                                        fontSize: 12,
+                                                                                        color: MyColor.textcolor,
+                                                                                        // overflow: TextOverflow.ellipsis,
+                                                                                        fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                        fontWeight: FontWeight.w600,
+                                                                                      ),
+                                                                                    ),
+                                                                                    SizedBox(
+                                                                                      width: MediaQuery.of(context).size.width * 0.75,
+                                                                                      child: Text(
+                                                                                        myTrip.data![index].loadingLocation.toString(),
+                                                                                        style: const TextStyle(
+                                                                                          fontSize: 12,
+                                                                                          color: MyColor.textcolor1,
+                                                                                          // overflow: TextOverflow.ellipsis,
+                                                                                          fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                          fontWeight: FontWeight.w600,
                                                                                         ),
-                                                                                        Text(
-                                                                                          myTrip.data![index].loadingLocation.toString(),
-                                                                                          style: const TextStyle(
-                                                                                            fontSize: 12,
-                                                                                            color: MyColor.textcolor1,
-                                                                                            // overflow: TextOverflow.ellipsis,
-                                                                                            fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                            fontWeight: FontWeight.w600,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
+                                                                                      ),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -1301,44 +1312,47 @@ class _HomescreenState extends State<Homescreen> {
                                                                                 height: 12,
                                                                               ),
                                                                               Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width * 0.02,
                                                                                   ),
-                                                                                  SizedBox(height: 20, width: 20, child: Image.asset("assets/images/locationchart.png")),
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.only(top: 5),
+                                                                                    child: SizedBox(height: 20, width: 20, child: Image.asset("assets/images/locationchart.png")),
+                                                                                  ),
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width * 0.02,
                                                                                   ),
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width * 0.75,
-                                                                                    child: Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                                                       children: [
-                                                                                        Column(
-                                                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                          children: [
-                                                                                            const Text(
-                                                                                              "Loading Location",
-                                                                                              style: TextStyle(
-                                                                                                fontSize: 12,
-                                                                                                color: MyColor.textcolor,
-                                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                                fontWeight: FontWeight.w600,
-                                                                                              ),
+                                                                                        const Text(
+                                                                                          "Loading Location",
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 12,
+                                                                                            color: MyColor.textcolor,
+                                                                                            // overflow: TextOverflow.ellipsis,
+                                                                                            fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                            fontWeight: FontWeight.w600,
+                                                                                          ),
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: MediaQuery.of(context).size.width * 0.75,
+                                                                                          child: Text(
+                                                                                            myTrip.data![index].loadingLocation.toString(),
+                                                                                            style: const TextStyle(
+                                                                                              fontSize: 12,
+                                                                                              color: MyColor.textcolor1,
+                                                                                              // overflow: TextOverflow.ellipsis,
+                                                                                              fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                              fontWeight: FontWeight.w600,
                                                                                             ),
-                                                                                            Text(
-                                                                                              myTrip.data![index].loadingLocation.toString(),
-                                                                                              style: const TextStyle(
-                                                                                                fontSize: 12,
-                                                                                                color: MyColor.textcolor1,
-                                                                                                // overflow: TextOverflow.ellipsis,
-                                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                                fontWeight: FontWeight.w600,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ],
+                                                                                          ),
                                                                                         ),
                                                                                       ],
                                                                                     ),

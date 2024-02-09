@@ -985,6 +985,7 @@ class _StartTripState extends State<StartTrip> {
     // Utility.progressloadingDialog(context, true);
     setLoading(false);
     if (response.statusCode == 200 && body['status'] == true) {
+      Navigator.pop(context);
       // Utility.progressloadingDialog(context, false);
       // videoFile1.clear();
       // imageFileListBanner1.clear();

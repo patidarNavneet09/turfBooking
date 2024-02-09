@@ -319,7 +319,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: quantityLitersController,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Quantity in liters"),
                 ),
@@ -336,7 +336,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: unitPriceController,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Unit Price"),
                 ),
@@ -766,6 +766,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     var body = json.decode(response.body);
     setLoading(true);
     if (response.statusCode == 200 && body['status'] == true) {
+      Navigator.pop(context);
       debugPrint("response.body>>>>>>>>>>${response.body}");
       // Navigator.pushReplacement(
       //     context,

@@ -443,8 +443,12 @@ class _NewTripState extends State<NewTrip> {
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width: screens.width * 0.03,
@@ -477,16 +481,23 @@ class _NewTripState extends State<NewTrip> {
                                           const SizedBox(
                                             height: 04,
                                           ),
-                                          Text(
-                                            tripdetails.data!.loadingLocation
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.30,
+                                            // color: Colors.amber,
+                                            child: Text(
+                                              tripdetails.data!.loadingLocation
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: MyColor.black,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -494,6 +505,9 @@ class _NewTripState extends State<NewTrip> {
                                     ],
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width: screens.width * 0.05,
@@ -526,16 +540,24 @@ class _NewTripState extends State<NewTrip> {
                                           const SizedBox(
                                             height: 04,
                                           ),
-                                          Text(
-                                            tripdetails.data!.offloadingLocation
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.30,
+                                            // color: Colors.amber,
+                                            child: Text(
+                                              tripdetails
+                                                  .data!.offloadingLocation
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: MyColor.black,
+                                                // overflow: TextOverflow.ellipsis,
+                                                fontFamily: ColorFamily
+                                                    .fontsSFProDisplay,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -4045,6 +4067,7 @@ class _NewTripState extends State<NewTrip> {
       tripdetails = Tripdetails.fromJson(jsonResponse);
 
       if (tripdetails.data!.status.toString() == "Accepted") {
+        indexbutton = 1;
         setState(() {});
       }
 
@@ -4125,17 +4148,18 @@ class _NewTripState extends State<NewTrip> {
 
     if (jsonResponse['status'] == true) {
       statusresponse = Statusresponse.fromJson(jsonResponse);
-      if (indexbutton == 0) {
-        _scrollToPosition();
+      if (indexbutton == 1) {
+        // _scrollToPosition();
       }
       debugPrint("statusresponse.data!.status${statusresponse.data!.status}");
       if (statusresponse.data!.status == "Accepted" && context.mounted) {
-        debugPrint("DAta");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const StartTrip()));
+        // Navigator.pop(context);
+        // debugPrint("DAta");
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const StartTrip()));
+        indexbutton = 1;
+        setState(() {});
       }
-      indexbutton = 1;
-      setState(() {});
     } else {
       Fluttertoast.showToast(msg: jsonResponse['message']);
     }
@@ -4144,7 +4168,7 @@ class _NewTripState extends State<NewTrip> {
   }
 
   button() {
-    return tripdetails.data!.isStatus.toString() == "Accepted"
+    return tripdetails.data!.addOnDiesels!.isEmpty && indexbutton != 1
         ? Padding(
             padding: const EdgeInsets.only(top: 50, bottom: 15),
             child: Row(
@@ -4172,17 +4196,18 @@ class _NewTripState extends State<NewTrip> {
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => const StartTrip()));
-
+                      indexbutton = 1;
                       setState(() {});
                     },
-                    name: tripdetails.data!.status.toString() == "Accepted"
-                        ? "Accepted"
+                    name: tripdetails.data!.status.toString() != "Accepted"
+                        ? "Accept"
                         : "Accept"),
               ],
             ),
           )
-        : indexbutton == 1 &&
-                tripdetails.data!.isStatus.toString() == "Accepted"
+        : tripdetails.data!.isStatus.toString() == "Accepted" &&
+                tripdetails.data!.isStatus.toString() == "Accepted" &&
+                tripdetails.data!.addOnDiesels!.isEmpty
             ? Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Row(
