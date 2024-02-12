@@ -31,8 +31,7 @@ class _HomescreenState extends State<Homescreen> {
     super.initState();
     index = 0;
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => mytripGet(context, "Pending"));
+    WidgetsBinding.instance.addPostFrameCallback((_) => mytripGet(context, "Pending"));
   }
 
   returnApi(String status) {
@@ -156,39 +155,39 @@ class _HomescreenState extends State<Homescreen> {
                                               ],
                                             ),
                                           ),
-                                          const Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  "Truck ID ",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "#2512325",
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    color: MyColor.white,
-                                                    // overflow: TextOverflow.ellipsis,
-                                                    fontFamily: ColorFamily
-                                                        .fontsSFProDisplay,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                          // const Expanded(
+                                          //   child: Column(
+                                          //     mainAxisAlignment:
+                                          //         MainAxisAlignment
+                                          //             .spaceBetween,
+                                          //     crossAxisAlignment:
+                                          //         CrossAxisAlignment.end,
+                                          //     children: [
+                                          //       Text(
+                                          //         "Truck ID ",
+                                          //         style: TextStyle(
+                                          //           fontSize: 16,
+                                          //           color: MyColor.white,
+                                          //           // overflow: TextOverflow.ellipsis,
+                                          //           fontFamily: ColorFamily
+                                          //               .fontsSFProDisplay,
+                                          //           fontWeight: FontWeight.w500,
+                                          //         ),
+                                          //       ),
+                                          //       Text(
+                                          //         "#2512325",
+                                          //         style: TextStyle(
+                                          //           fontSize: 13,
+                                          //           color: MyColor.white,
+                                          //           // overflow: TextOverflow.ellipsis,
+                                          //           fontFamily: ColorFamily
+                                          //               .fontsSFProDisplay,
+                                          //           fontWeight: FontWeight.w400,
+                                          //         ),
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),

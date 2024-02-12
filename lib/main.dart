@@ -77,16 +77,32 @@ Future init() async {
 
   // Add the onBackgroundMessage handler here
 
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  islogin = sharedPreferences.getBool("isLogin");
 
   FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
   debugPrint("islogin>>>>>>>$islogin");
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    prefences();
+  }
+
+  prefences() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    islogin = sharedPreferences.getBool("isLogin");
+    setState(() {});
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

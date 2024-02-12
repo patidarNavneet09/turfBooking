@@ -9,6 +9,7 @@ class MyColor {
   static const grey = Color(0xffF2F2F2);
 
   static const greyText = Color(0xffA1A1A1);
+  static const divider = Color(0xffEDEDED);
   static const greyText2 = Color(0xff858585);
   static const tabbar = Color(0xff929292);
   static const button1 = Color(0xff161616);

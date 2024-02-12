@@ -28,6 +28,8 @@ class Tripdetails {
 class Data {
   String? id;
   String? name;
+  String? trip_number;
+  String? plate_number;
   String? loadingLocation;
   String? offloadingLocation;
   String? startDate;
@@ -63,9 +65,17 @@ class Data {
   List<DeliveryNote>? deliveryNote;
   List<EndTrip>? endTrip;
 
+
+  String? latitude;
+  String? longitude;
+  String? tid;
+
+
   Data(
       {this.id,
       this.name,
+      this.trip_number,
+      this.plate_number,
       this.loadingLocation,
       this.offloadingLocation,
       this.startDate,
@@ -99,11 +109,16 @@ class Data {
       this.fines,
       this.otherCharges,
       this.deliveryNote,
-      this.endTrip});
+      this.endTrip,
+        this.latitude,
+        this.longitude,
+        this.tid});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    trip_number = json['trip_number'];
+    plate_number = json['plate_number'];
     loadingLocation = json['loading_location'];
     offloadingLocation = json['offloading_location'];
     startDate = json['start_date'];
@@ -183,12 +198,17 @@ class Data {
         endTrip!.add(EndTrip.fromJson(v));
       });
     }
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    tid = json['tid'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['trip_number'] = trip_number;
+    data['plate_number'] = plate_number;
     data['loading_location'] = loadingLocation;
     data['offloading_location'] = offloadingLocation;
     data['start_date'] = startDate;
@@ -241,6 +261,9 @@ class Data {
     if (endTrip != null) {
       data['end_trip'] = endTrip!.map((v) => v.toJson()).toList();
     }
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['tid'] = this.tid;
     return data;
   }
 }

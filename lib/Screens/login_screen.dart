@@ -96,85 +96,90 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: SingleChildScrollView(
           child: Column(children: [
+            SizedBox(height: 25,),
+            Text("SENOTRACK",style: TextStyle(
+              fontSize: 28,
+              color:Color(0xFF075693) ,
+              fontWeight: FontWeight.bold
+            ),),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.20,
+              height: MediaQuery.of(context).size.height * 0.10,
+
             ),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  height: 57,
-                  child: Center(
-                    child: TextFormField(
-                      textAlign: TextAlign.start,
-                      textAlignVertical: TextAlignVertical.center,
-                      controller: emailController,
-                      obscureText: texthide,
-                      // controller: NameController
-                      //   ..text =
-                      //       snapshot.data!.data!.name.toString(),
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        // focusColor: MyColor.Red_color,
-                        // fillColor: MyColor.Red_color,
-                        suffixIcon: InkWell(
-                          radius: 30,
-                          onTap: () {
-                            if (texthide == true) {
-                              iconsdata = 0;
-                              texthide = false;
-                              setState(() {});
-                            } else if (texthide == false) {
-                              iconsdata = 1;
-                              texthide = true;
-                              setState(() {});
-                            }
-                          },
-                          child: iconsdata == 0
-                              ? const SizedBox(
-                                  width: 2,
-                                  height: 0,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.visibility_off,
-                                      color: MyColor.greyText,
-                                    ),
-                                  ))
-                              : SizedBox(
-                                  width: 2,
-                                  height: 0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                        "assets/images/img_eye.png"),
-                                  )),
-                        ),
-                        // prefixIconColor: MaterialStateColor.resolveWith(
-                        //     (states) =>
-                        //         states.contains(MaterialState.focused)
-                        //             ? MyColor.black
-                        //             : Colors.grey),
-                        hintText: "  Email",
-                        hintStyle: const TextStyle(
-                            color: Colors.black,
-                            fontFamily: ColorFamily.fontsSFProDisplay,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16),
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: MyColor.greyText),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: MyColor.greyText),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10)),
+              height: 57,
+              child: Center(
+                child: TextFormField(
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: emailController,
+                  // obscureText: texthide,
+                  // controller: NameController
+                  //   ..text =
+                  //       snapshot.data!.data!.name.toString(),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    // focusColor: MyColor.Red_color,
+                    // fillColor: MyColor.Red_color,
+                    // suffixIcon: InkWell(
+                    //   radius: 30,
+                    //   onTap: () {
+                    //     if (texthide == true) {
+                    //       iconsdata = 0;
+                    //       texthide = false;
+                    //       setState(() {});
+                    //     } else if (texthide == false) {
+                    //       iconsdata = 1;
+                    //       texthide = true;
+                    //       setState(() {});
+                    //     }
+                    //   },
+                    //   // child: iconsdata == 0
+                          // ? const SizedBox(
+                          //     width: 2,
+                          //     height: 0,
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(8.0),
+                          //       child: Icon(
+                          //         Icons.visibility_off,
+                          //         color: MyColor.greyText,
+                          //       ),
+                          //     ))
+                    //       child: SizedBox(
+                    //           width: 2,
+                    //           height: 0,
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.all(8.0),
+                    //             child: Image.asset(
+                    //                 "assets/images/img_eye.png"),
+                    //           )),
+                    // ),
+                    // prefixIconColor: MaterialStateColor.resolveWith(
+                    //     (states) =>
+                    //         states.contains(MaterialState.focused)
+                    //             ? MyColor.black
+                    //             : Colors.grey),
+                    hintText: "  Email",
+                    hintStyle: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: ColorFamily.fontsSFProDisplay,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: MyColor.greyText),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: MyColor.greyText),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Padding(

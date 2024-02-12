@@ -94,10 +94,10 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                       width: 30,
                       child: Image.asset("assets/images/Home.png")),
                   Text(
-                    pagesIndex == 0 ? "Home" : "",
-                    style: const TextStyle(
+                    "Home",
+                    style:  TextStyle(
                       fontSize: 10,
-                      color: MyColor.white,
+                      color:  pagesIndex == 0 ?  MyColor.white :Colors.grey,
                       // overflow: TextOverflow.ellipsis,
                       fontFamily: ColorFamily.fontsSFProDisplay,
                       fontWeight: FontWeight.w500,
@@ -125,10 +125,10 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                       width: 30,
                       child: Image.asset("assets/images/setting.png")),
                   Text(
-                    pagesIndex == 1 ? "Settings" : "",
-                    style: const TextStyle(
+                   "Settings" ,
+                    style:  TextStyle(
                       fontSize: 10,
-                      color: MyColor.white,
+                      color: pagesIndex == 1 ?  MyColor.white :Colors.grey,
                       // overflow: TextOverflow.ellipsis,
                       // fontFamily: ColorFamily.fontsSFProDisplay,
                       fontWeight: FontWeight.w500,

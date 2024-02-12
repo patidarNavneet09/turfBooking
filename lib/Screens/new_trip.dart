@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,15 +29,33 @@ class NewTrip extends StatefulWidget {
   State<NewTrip> createState() => _NewTripState();
 }
 
-class _NewTripState extends State<NewTrip> {
+class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
   Tripdetails tripdetails = Tripdetails();
   Statusresponse statusresponse = Statusresponse();
   bool loading1 = true;
   final ScrollController _controller = ScrollController();
+
+  bool _open = false;
+
+  void _toggle() {
+    setState(() {
+      _open = !_open;
+    });
+  }
+
+  Animation<double>? _animation;
+  AnimationController? _animationController ;
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 260),
+    );
 
+    final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+    // _open = widget.initialOpen ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGet(
         context, widget.truckId.toString(), widget.tripId.toString()));
   }
@@ -60,9 +80,12 @@ class _NewTripState extends State<NewTrip> {
     super.dispose();
   }
 
+  bool is_floating  = false;
   List tripData = [];
   dynamic indexx = 0;
   int indexbutton = 0;
+  final _key = GlobalKey<ExpandableFabState>();
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
     var screens = MediaQuery.of(context).size;
@@ -124,7 +147,7 @@ class _NewTripState extends State<NewTrip> {
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 18, right: 18),
+                      padding: const EdgeInsets.only(left: 15, right: 18),
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: tripData.length,
@@ -162,16 +185,40 @@ class _NewTripState extends State<NewTrip> {
                                 child: Center(
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
+                                        left: 0, right: 3),
                                     child: Column(
                                       children: [
-                                        Text(
-                                          tripData[index].toString(),
-                                          style: const TextStyle(
-                                            color: MyColor.black,
+                                        Container(
+                                          padding: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+                                          decoration: BoxDecoration(
+
+                                            gradient:indexx != index ?
+                                            const  LinearGradient(
+                                              begin: Alignment.topRight,
+                                              end: Alignment.bottomLeft,
+                                              colors: [
+                                                MyColor.divider,
+                                                MyColor.divider,
+                                              ],
+                                            ):
+                                                const  LinearGradient(
+                                                  begin: Alignment.topRight,
+                                                  end: Alignment.bottomLeft,
+                                                  colors: [
+                                                    MyColor.button1,
+                                                    MyColor.button,
+                                                  ],
+                                                ),
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                          child: Text(
+                                            tripData[index].toString(),
+                                            style:  TextStyle(
+                                              color: indexx != index ? Colors.black: MyColor.white,
+                                            ),
                                           ),
                                         ),
-                                        index == 0
+                                       /* index == 0
                                             ? Container(
                                                 width: 80,
                                                 height: 2,
@@ -227,7 +274,7 @@ class _NewTripState extends State<NewTrip> {
                                                                                 color: Colors.black)
                                                                             : index == 9
                                                                                 ? Container(width: 140, height: 2, color: Colors.black)
-                                                                                : Container(width: 120, height: 2, color: Colors.black),
+                                                                                : Container(width: 120, height: 2, color: Colors.black),*/
                                       ],
                                     ),
                                   ),
@@ -246,6 +293,149 @@ class _NewTripState extends State<NewTrip> {
         ),
       ),
       bottomNavigationBar: tripdetails.status != true ? null : button(),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+
+        //Init Floating Action Bubble
+        floatingActionButton: tripdetails.status == true ?
+        tripdetails.data!.status.toString() == "Accepted" &&
+          tripdetails.data!.isStatus.toString() != "Delivered"
+            // tripdetails.data!.status.toString() != "Completed"*/
+             ? Container(
+        width:  MediaQuery.of(context).size.width * 0.60,
+          alignment: Alignment.bottomRight,
+          // width:300,
+          child:  is_floating == false? togglebutton(Icons.add):
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+
+        /*      Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppButton(
+                        textStyle: const TextStyle(
+                          color: MyColor.white,
+                          fontSize: 16,
+                          fontFamily: ColorFamily.fontsSFProDisplay,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        btnWidth: MediaQuery.of(context).size.width * 0.90,
+                        btnHeight: MediaQuery.of(context).size.height * 0.07,
+                        onPressed: () {
+                          // acceptApi(context, "On the way",
+                          //     tripdetails.data!.id.toString());
+
+                          // indexbutton = 1;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StartTrip(
+                                      tripId: widget.tripId,
+                                      truckId: widget.truckId)))
+                              .then((value) => apihit());
+
+                          setState(() {});
+                        },
+                        name: "Start Trip"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),*/
+                  AppButton(
+                      textStyle: const TextStyle(
+                        color: MyColor.white,
+                        fontSize: 16,
+                        fontFamily: ColorFamily.fontsSFProDisplay,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      btnWidth: MediaQuery.of(context).size.width * 0.60,
+                      onPressed: () {
+                        is_floating = false;
+                        setState(() {});
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AddOnDieselscreen(
+                                        tripId: widget.tripId,
+                                        truckId: widget.truckId)))
+                            .then((value) => apihit());
+                      },
+                      name: "Add On Diesel"),
+
+               SizedBox(height: 10,),
+
+              AppButton(
+                  textStyle: const TextStyle(
+                    color: MyColor.white,
+                    fontSize: 16,
+                    fontFamily: ColorFamily.fontsSFProDisplay,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  btnWidth:
+                  MediaQuery.of(context).size.width * 0.60,
+                  onPressed: () {
+                    is_floating = false;
+                    setState(() {});
+                    print(" tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ExpentionType(
+                                    tripId: widget.tripId,
+                                    truckId: widget.truckId)))
+                        .then((value) => apihit());
+
+                    setState(() {});
+                  },
+                  name: "Add Expenses"),
+              SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppButton(
+                          textStyle: const TextStyle(
+                            color: MyColor.white,
+                            fontSize: 16,
+                            fontFamily: ColorFamily.fontsSFProDisplay,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          btnWidth:
+                          MediaQuery.of(context).size.width *
+                              0.60,
+                          onPressed: () {
+                            is_floating = false;
+                            setState(() {});
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        DeliveryScreen(
+                                            tripId: widget.tripId,
+                                            truckId:
+                                            widget.truckId)))
+                                .then((value) => apihit());
+
+                            setState(() {});
+                          },
+                          name: "Mark as delivered"),
+                    ],
+                  ),
+
+          SizedBox(height: 10,),
+              togglebutton(Icons.clear),
+
+              SizedBox(height: 0),
+            ],
+          ),
+        ) : null:null,
+
       body: tripdetails.status != true
           ? Center(
               child: Image.asset("assets/images/gif_loader.gif"),
@@ -258,493 +448,287 @@ class _NewTripState extends State<NewTrip> {
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Trip Name",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 04,
-                              ),
-                              Text(
-                                tripdetails.data!.name.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                             /* Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: screens.width * 0.03,
+                                  Expanded(
+                                    child: const Text(
+                                      "Trip Name",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.greyText,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          // DateTime? pickedDate;
-                                          // pickedDate = await showDatePicker(
-                                          //     context: context,
-                                          //     initialDate: DateTime.now(),
-                                          //     firstDate: DateTime(
-                                          //         2000), //DateTime.now() - not to allow to choose before today.
-                                          //     lastDate: DateTime(2101));
-
-                                          // if (pickedDate != null) {
-                                          //   //pickedDate output format => 2021-03-10 00:00:00.000
-                                          //   startDate =
-                                          //       DateFormat('dd/MM/yyyy').format(pickedDate);
-                                          //   setState(() {});
-                                          //   //formatted date output using intl package =>  2021-03-16
-                                          //   //you can implement different kind of Date Format here according to your requirement
-                                          // } else {}
-                                        },
-                                        child: SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: Image.asset(
-                                                "assets/images/calender.png")),
-                                      ),
-                                      SizedBox(
-                                        width: screens.width * 0.05,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Start Date",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 04,
-                                          ),
-                                          Text(
-                                            // startDate == null ? "25/01/2024" : startDate,
-                                            tripdetails.data!.startDate
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: screens.width * 0.03,
+                                  Expanded(
+                                    child: Text(
+                                      tripdetails.data!.name.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.black,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          // DateTime? pickedDate;
-                                          // pickedDate = await showDatePicker(
-                                          //     context: context,
-                                          //     initialDate: DateTime.now(),
-                                          //     firstDate: DateTime(
-                                          //         2000), //DateTime.now() - not to allow to choose before today.
-                                          //     lastDate: DateTime(2101));
-
-                                          // if (pickedDate != null) {
-                                          //   //pickedDate output format => 2021-03-10 00:00:00.000
-                                          //   endDate =
-                                          //       DateFormat('dd/MM/yyyy').format(pickedDate);
-                                          //   setState(() {});
-                                          //   //formatted date output using intl package =>  2021-03-16
-                                          //   //you can implement different kind of Date Format here according to your requirement
-                                          // } else {}
-                                          // setState(() {});
-                                        },
-                                        child: SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: Image.asset(
-                                                "assets/images/calender.png")),
-                                      ),
-                                      SizedBox(
-                                        width: screens.width * 0.05,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "End Date",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 04,
-                                          ),
-                                          Text(
-                                            // endDate == null ? "30/01/2024" : endDate,
-                                            tripdetails.data!.endDate
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: MyColor.black,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: screens.width * 0.12,
-                                      ),
-                                    ],
-                                  )
+                                    ),
+                                  ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 10,
+
+                              SizedBox(
+                                height: 8,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Divider(
+                                height: 1,
+                                color: MyColor.greyText,
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),*/
+
+
+                         rowUi("Trip Id",tripdetails.data!.trip_number.toString()),
+
+                              dividerUi(),
+                              rowUi("Customer Name",tripdetails.data!.name.toString()),
+
+                              dividerUi(),
+
+
+                              rowUi("Start Date",tripdetails.data!.startDate.toString()),
+
+                              dividerUi(),
+
+                             /* Row(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: screens.width * 0.03,
+                                  Expanded(
+                                    child: const Text(
+                                      "Start Date",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: MyColor.greyText,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: Image.asset(
-                                              "assets/images/calender.png")),
-                                      SizedBox(
-                                        width: screens.width * 0.05,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Loading Location",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 04,
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.30,
-                                            // color: Colors.amber,
-                                            child: Text(
-                                              tripdetails.data!.loadingLocation
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: screens.width * 0.05,
+                                  Expanded(
+                                    child: Text(
+                                      // startDate == null ? "25/01/2024" : startDate,
+                                      tripdetails.data!.startDate.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.black,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: Image.asset(
-                                              "assets/images/calender.png")),
-                                      SizedBox(
-                                        width: screens.width * 0.05,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            "Offloading Location",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: MyColor.greyText,
-                                              // overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  ColorFamily.fontsSFProDisplay,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 04,
-                                          ),
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.30,
-                                            // color: Colors.amber,
-                                            child: Text(
-                                              tripdetails
-                                                  .data!.offloadingLocation
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: MyColor.black,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontFamily: ColorFamily
-                                                    .fontsSFProDisplay,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: screens.width * 0.04,
-                                      ),
-                                    ],
-                                  )
+                                    ),
+                                  ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 15,
+                              SizedBox(
+                                height: 8,
                               ),
-                              const Text(
-                                "Cargo Type",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              Divider(
+                                height: 1,
+                                color: MyColor.greyText,
                               ),
-                              const SizedBox(
-                                height: 04,
+                              SizedBox(
+                                height: 8,
+                              ),*/
+
+                              rowUi("Loading Location",tripdetails.data!.loadingLocation.toString()),
+
+                              dividerUi(),
+
+                             /* Row(
+                                children: [
+                                  Expanded(
+                                    child: const Text(
+                                      "Loading Location",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: MyColor.greyText,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      tripdetails.data!.loadingLocation
+                                          .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.black,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                tripdetails.data!.typeOfCargo.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              SizedBox(
+                                height: 8,
                               ),
-                              const SizedBox(
-                                height: 15,
+                              Divider(
+                                height: 1,
+                                color: MyColor.greyText,
                               ),
-                              const Text(
-                                "Select Truck",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              SizedBox(
+                                height: 8,
+                              ),*/
+
+
+                              rowUi("Offloading Location",tripdetails.data!.offloadingLocation.toString()),
+
+                              dividerUi(),
+                              /*Row(
+                                children: [
+                                  Expanded(
+                                    child: const Text(
+                                      "Offloading Location",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: MyColor.greyText,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      tripdetails.data!.offloadingLocation
+                                          .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.black,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 04,
+                              SizedBox(
+                                height: 8,
                               ),
-                              Text(
-                                // "Box Truck",
-                                tripdetails.data!.truck.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              Divider(
+                                height: 1,
+                                color: MyColor.greyText,
                               ),
-                              const SizedBox(
-                                height: 15,
+                              SizedBox(
+                                height: 8,
+                              ),*/
+
+
+
+                              rowUi("End Date",tripdetails.data!.endDate.toString()),
+
+                              dividerUi(),
+
+
+                              /*Row(
+                                children: [
+                                  Expanded(
+                                    child: const Text(
+                                      "End Date",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: MyColor.greyText,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      // endDate == null ? "30/01/2024" : endDate,
+                                      tripdetails.data!.endDate.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: MyColor.black,
+                                        // overflow: TextOverflow.ellipsis,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const Text(
-                                "Weight Of Cargo",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              SizedBox(
+                                height: 8,
                               ),
-                              const SizedBox(
-                                height: 04,
+                              Divider(
+                                height: 1,
+                                color: MyColor.greyText,
                               ),
-                              Text(
-                                "${tripdetails.data!.weightOfCargo.toString()} Kg",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Text(
-                                "Initial Diesel",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 04,
-                              ),
-                              Text(
-                                tripdetails.data!.initialDiesel.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Text(
-                                "Mileage Allowances",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 04,
-                              ),
-                              Text(
-                                "\$${tripdetails.data!.mileageAllowance.toString()}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Text(
-                                "Movement Sheet ",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 04,
-                              ),
-                              Text(
-                                "\$${tripdetails.data!.movementSheet.toString()}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.black,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Text(
-                                "Road Toll",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: MyColor.greyText,
-                                  // overflow: TextOverflow.ellipsis,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 04,
-                              ),
+                              SizedBox(
+                                height: 8,
+                              ),*/
+
+
+                              rowUi("Cargo Type",tripdetails.data!.typeOfCargo.toString()),
+
+                              dividerUi(),
+
+
+                              rowUi( "Assigned Truck", tripdetails.data!.truck.toString()),
+
+                              dividerUi(),
+
+                              rowUi("Truck Plate", tripdetails.data!.plate_number.toString()),
+
+                              dividerUi(),
+
+                              rowUi("Weight Of Cargo",  "${tripdetails.data!.weightOfCargo.toString()} Kg"),
+
+                              dividerUi(),
+
+                              rowUi("Initial Diesel", tripdetails.data!.initialDiesel.toString()),
+
+                              dividerUi(),
+
+                              rowUi( "Mileage Allowances", "${tripdetails.data!.mileageAllowanceCur.toString()} ${tripdetails.data!.mileageAllowance.toString()}"),
+
+                              dividerUi(),
+
+                              rowUi( "Movement Sheet ", "${tripdetails.data!.movementSheetCurr.toString()} ${tripdetails.data!.movementSheet.toString()}"),
+
+                              dividerUi(),
+
+                              rowUi("Road Toll","${tripdetails.data!.roadTollCurr.toString()} ${tripdetails.data!.roadToll.toString()}"),
+
+
+                              SizedBox(height: 30,)
+                              // dividerUi(),
+                              //
+                              // rowUi("Road Toll","\$${tripdetails.data!.roadToll.toString()}"),
+
                             ],
                           ),
                         )
+
                       : indexx ==
                               tripData.indexWhere((element) =>
                                   element.contains("Add On Diesel") &&
@@ -872,16 +856,8 @@ class _NewTripState extends State<NewTrip> {
                                             ),
                                           ],
                                         ),
-                                        const Divider(
-                                          color:
-                                              Color.fromARGB(255, 46, 44, 44),
-                                          thickness: 1,
-                                          indent: 2,
-                                          endIndent: 2,
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
+                                        dividerUi(),
+
                                         ListView.builder(
                                           physics:
                                               const NeverScrollableScrollPhysics(),
@@ -1124,13 +1100,7 @@ class _NewTripState extends State<NewTrip> {
                                                       // Content below the Divider
                                                     ],
                                                   ),
-                                                  const Divider(
-                                                    color: Color.fromARGB(
-                                                        255, 46, 44, 44),
-                                                    thickness: 1,
-                                                    indent: 2,
-                                                    endIndent: 2,
-                                                  ),
+                                                  dividerUi()
                                                 ],
                                               ),
                                             );
@@ -1279,16 +1249,7 @@ class _NewTripState extends State<NewTrip> {
                                                 ),
                                               ],
                                             ),
-                                            const Divider(
-                                              color: Color.fromARGB(
-                                                  255, 46, 44, 44),
-                                              thickness: 1,
-                                              indent: 2,
-                                              endIndent: 2,
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
+                                            dividerUi(),
                                             ListView.builder(
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
@@ -1532,13 +1493,7 @@ class _NewTripState extends State<NewTrip> {
                                                           // Content below the Divider
                                                         ],
                                                       ),
-                                                      const Divider(
-                                                        color: Color.fromARGB(
-                                                            255, 46, 44, 44),
-                                                        thickness: 1,
-                                                        indent: 2,
-                                                        endIndent: 2,
-                                                      ),
+                                                      dividerUi()
                                                     ],
                                                   ),
                                                 );
@@ -1691,16 +1646,7 @@ class _NewTripState extends State<NewTrip> {
                                                     ),
                                                   ],
                                                 ),
-                                                const Divider(
-                                                  color: Color.fromARGB(
-                                                      255, 46, 44, 44),
-                                                  thickness: 1,
-                                                  indent: 2,
-                                                  endIndent: 2,
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
+                                                dividerUi(),
                                                 ListView.builder(
                                                   physics:
                                                       const NeverScrollableScrollPhysics(),
@@ -1915,17 +1861,7 @@ class _NewTripState extends State<NewTrip> {
                                                               // Content below the Divider
                                                             ],
                                                           ),
-                                                          const Divider(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    46,
-                                                                    44,
-                                                                    44),
-                                                            thickness: 1,
-                                                            indent: 2,
-                                                            endIndent: 2,
-                                                          ),
+                                                          dividerUi()
                                                         ],
                                                       ),
                                                     );
@@ -2037,16 +1973,7 @@ class _NewTripState extends State<NewTrip> {
                                                         ),
                                                       ],
                                                     ),
-                                                    const Divider(
-                                                      color: Color.fromARGB(
-                                                          255, 46, 44, 44),
-                                                      thickness: 1,
-                                                      indent: 2,
-                                                      endIndent: 2,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
+                                                    dividerUi(),
                                                     ListView.builder(
                                                       physics:
                                                           const NeverScrollableScrollPhysics(),
@@ -2228,17 +2155,7 @@ class _NewTripState extends State<NewTrip> {
                                                                   // Content below the Divider
                                                                 ],
                                                               ),
-                                                              const Divider(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        46,
-                                                                        44,
-                                                                        44),
-                                                                thickness: 1,
-                                                                indent: 2,
-                                                                endIndent: 2,
-                                                              ),
+                                                              dividerUi()
                                                             ],
                                                           ),
                                                         );
@@ -2406,16 +2323,7 @@ class _NewTripState extends State<NewTrip> {
                                                         ),
                                                       ],
                                                     ),
-                                                    const Divider(
-                                                      color: Color.fromARGB(
-                                                          255, 46, 44, 44),
-                                                      thickness: 1,
-                                                      indent: 2,
-                                                      endIndent: 2,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
+                                                    dividerUi(),
                                                     ListView.builder(
                                                       physics:
                                                           const NeverScrollableScrollPhysics(),
@@ -2578,17 +2486,7 @@ class _NewTripState extends State<NewTrip> {
                                                                   // Content below the Divider
                                                                 ],
                                                               ),
-                                                              const Divider(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        46,
-                                                                        44,
-                                                                        44),
-                                                                thickness: 1,
-                                                                indent: 2,
-                                                                endIndent: 2,
-                                                              ),
+                                                              dividerUi()
                                                             ],
                                                           ),
                                                         );
@@ -2764,16 +2662,7 @@ class _NewTripState extends State<NewTrip> {
                                                             ),
                                                           ],
                                                         ),
-                                                        const Divider(
-                                                          color: Color.fromARGB(
-                                                              255, 46, 44, 44),
-                                                          thickness: 1,
-                                                          indent: 2,
-                                                          endIndent: 2,
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 5,
-                                                        ),
+                                                        dividerUi(),
                                                         ListView.builder(
                                                           physics:
                                                               const NeverScrollableScrollPhysics(),
@@ -2970,19 +2859,7 @@ class _NewTripState extends State<NewTrip> {
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                  const Divider(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            46,
-                                                                            44,
-                                                                            44),
-                                                                    thickness:
-                                                                        1,
-                                                                    indent: 2,
-                                                                    endIndent:
-                                                                        2,
-                                                                  ),
+                                                                  dividerUi()
                                                                 ],
                                                               ),
                                                             );
@@ -3155,20 +3032,7 @@ class _NewTripState extends State<NewTrip> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            const Divider(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      46,
-                                                                      44,
-                                                                      44),
-                                                              thickness: 1,
-                                                              indent: 2,
-                                                              endIndent: 2,
-                                                            ),
-                                                            const SizedBox(
-                                                              height: 5,
-                                                            ),
+                                                            dividerUi(),
                                                             ListView.builder(
                                                               physics:
                                                                   const NeverScrollableScrollPhysics(),
@@ -3347,19 +3211,7 @@ class _NewTripState extends State<NewTrip> {
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      const Divider(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            46,
-                                                                            44,
-                                                                            44),
-                                                                        thickness:
-                                                                            1,
-                                                                        indent:
-                                                                            2,
-                                                                        endIndent:
-                                                                            2,
-                                                                      ),
+                                                                      dividerUi()
                                                                     ],
                                                                   ),
                                                                 );
@@ -3512,20 +3364,7 @@ class _NewTripState extends State<NewTrip> {
                                                                     ),
                                                                   ],
                                                                 ),
-                                                                const Divider(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          46,
-                                                                          44,
-                                                                          44),
-                                                                  thickness: 1,
-                                                                  indent: 2,
-                                                                  endIndent: 2,
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 5,
-                                                                ),
+                                                                dividerUi(),
                                                                 ListView
                                                                     .builder(
                                                                   physics:
@@ -3695,19 +3534,7 @@ class _NewTripState extends State<NewTrip> {
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                          const Divider(
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                46,
-                                                                                44,
-                                                                                44),
-                                                                            thickness:
-                                                                                1,
-                                                                            indent:
-                                                                                2,
-                                                                            endIndent:
-                                                                                2,
-                                                                          ),
+                                                                          dividerUi()
                                                                         ],
                                                                       ),
                                                                     );
@@ -3861,7 +3688,10 @@ class _NewTripState extends State<NewTrip> {
                                                                           true,
                                                                       itemCount: tripdetails
                                                                           .data!
-                                                                          .otherCharges!
+                                                                          .deliveryNote!
+                                                                          .length > 0 ?  1 : tripdetails
+                                                                          .data!
+                                                                          .deliveryNote!
                                                                           .length,
                                                                       itemBuilder:
                                                                           (BuildContext context,
@@ -3876,6 +3706,40 @@ class _NewTripState extends State<NewTrip> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
+
+                                                                              const Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "Description",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 14,
+                                                                                      color: MyColor.greyText,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: Text(
+                                                                                      tripdetails.data!.deliveryNote![index].deliveryNote.toString(),
+                                                                                      style: const TextStyle(
+                                                                                        fontSize: 14,
+                                                                                        color: MyColor.black,
+                                                                                        fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+
+                                                                              SizedBox(height: 10,),
+                                                                              // dividerUi(),
                                                                               Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -3884,8 +3748,8 @@ class _NewTripState extends State<NewTrip> {
                                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                                     children: [
                                                                                       Container(
-                                                                                        height: 40,
-                                                                                        width: 40,
+                                                                                        height: 150,
+                                                                                        width: 150,
                                                                                         decoration: BoxDecoration(
                                                                                           border: Border.all(width: 1, color: MyColor.button),
                                                                                           borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -3896,7 +3760,7 @@ class _NewTripState extends State<NewTrip> {
                                                                                               context,
                                                                                               MaterialPageRoute(
                                                                                                 builder: (context) => LargeImages(
-                                                                                                  imagesUrl: tripdetails.data!.otherCharges![index].image.toString(),
+                                                                                                  imagesUrl: tripdetails.data!.deliveryNote![index].image.toString(),
                                                                                                   nameProperty: "Delivery Information",
                                                                                                 ),
                                                                                               ),
@@ -3905,7 +3769,7 @@ class _NewTripState extends State<NewTrip> {
                                                                                           child: ClipRRect(
                                                                                             borderRadius: const BorderRadius.all(Radius.circular(09)),
                                                                                             child: CachedNetworkImage(
-                                                                                              imageUrl: tripdetails.data!.otherCharges![index].image.toString(),
+                                                                                              imageUrl: tripdetails.data!.deliveryNote![index].image.toString(),
                                                                                               progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
                                                                                                 padding: const EdgeInsets.all(8.0),
                                                                                                 child: CircularProgressIndicator(
@@ -3915,8 +3779,8 @@ class _NewTripState extends State<NewTrip> {
                                                                                               ),
                                                                                               errorWidget: (context, url, error) => const Icon(Icons.error),
                                                                                               fit: BoxFit.fill,
-                                                                                              height: screens.height * 0.08,
-                                                                                              width: screens.width * 0.08,
+                                                                                              height: screens.height * 0.2,
+                                                                                              width: screens.width * 0.2,
                                                                                             ),
                                                                                           ),
                                                                                         ),
@@ -3973,50 +3837,13 @@ class _NewTripState extends State<NewTrip> {
                                                                                   // ),
 
                                                                                   SizedBox(
-                                                                                    // color: Colors.amber,
-                                                                                    // height: screens.height * 0.08,
                                                                                     width: screens.width * 0.10,
-                                                                                    // c
                                                                                   ),
-                                                                                  // Content below the Divider
+
                                                                                 ],
                                                                               ),
-                                                                              const Row(
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    "Description",
-                                                                                    style: TextStyle(
-                                                                                      fontSize: 14,
-                                                                                      color: MyColor.greyText,
-                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                      fontWeight: FontWeight.w400,
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                              Row(
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: Text(
-                                                                                      tripdetails.data!.otherCharges![index].description.toString(),
-                                                                                      style: const TextStyle(
-                                                                                        fontSize: 14,
-                                                                                        color: MyColor.black,
-                                                                                        fontFamily: ColorFamily.fontsSFProDisplay,
-                                                                                        fontWeight: FontWeight.w400,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                              const Divider(
-                                                                                color: Color.fromARGB(255, 46, 44, 44),
-                                                                                thickness: 1,
-                                                                                indent: 2,
-                                                                                endIndent: 2,
-                                                                              ),
+
+
                                                                             ],
                                                                           ),
                                                                         );
@@ -4061,6 +3888,7 @@ class _NewTripState extends State<NewTrip> {
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
+    print("jsonResponse.................${jsonResponse}");
     loading1 = true;
     tripData.clear();
     if (jsonResponse['status'] == true) {
@@ -4170,7 +3998,7 @@ class _NewTripState extends State<NewTrip> {
   button() {
     return tripdetails.data!.addOnDiesels!.isEmpty && indexbutton != 1
         ? Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 15),
+            padding: const EdgeInsets.only(top: 10, bottom: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -4242,111 +4070,123 @@ class _NewTripState extends State<NewTrip> {
                 ),
               )
             : tripdetails.data!.addOnDiesels!.isEmpty
-                ? Padding(
-                    padding: EdgeInsets.only(
-                        top: tripdetails.data!.addOnDiesels!.isEmpty ? 5 : 50,
-                        bottom: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppButton(
-                            textStyle: const TextStyle(
-                              color: MyColor.white,
-                              fontSize: 16,
-                              fontFamily: ColorFamily.fontsSFProDisplay,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            btnWidth: MediaQuery.of(context).size.width * 0.90,
-                            onPressed: () {
-                              Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AddOnDieselscreen(
-                                                  tripId: widget.tripId,
-                                                  truckId: widget.truckId)))
-                                  .then((value) => apihit());
-                            },
-                            name: "Add On Diesel"),
-                      ],
+                ? Visibility(
+      visible: false,
+                  child: Padding(
+                      padding: EdgeInsets.only(
+                          top: tripdetails.data!.addOnDiesels!.isEmpty ? 5 : 50,
+                          bottom: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppButton(
+                              textStyle: const TextStyle(
+                                color: MyColor.white,
+                                fontSize: 16,
+                                fontFamily: ColorFamily.fontsSFProDisplay,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              btnWidth: MediaQuery.of(context).size.width * 0.90,
+                              onPressed: () {
+                                Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddOnDieselscreen(
+                                                    tripId: widget.tripId,
+                                                    truckId: widget.truckId)))
+                                    .then((value) => apihit());
+                              },
+                              name: "Add On Diesel"),
+                        ],
+                      ),
                     ),
-                  )
+                )
+
                 : tripdetails.data!.isStatus.toString() != "Accepted" &&
                         tripdetails.data!.endTrip!.isEmpty &&
                         tripdetails.data!.deliveryNote!.isEmpty
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                            top: tripdetails.data!.addOnDiesels!.isEmpty
-                                ? 10
-                                : 30,
-                            bottom: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AppButton(
-                                textStyle: const TextStyle(
-                                  color: MyColor.white,
-                                  fontSize: 16,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                btnWidth:
-                                    MediaQuery.of(context).size.width * 0.90,
-                                onPressed: () {
-                                  Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ExpentionType(
-                                                      tripId: widget.tripId,
-                                                      truckId: widget.truckId)))
-                                      .then((value) => apihit());
+                    ? Visibility(
+                       visible: false,
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              top: tripdetails.data!.addOnDiesels!.isEmpty
+                                  ? 10
+                                  : 30,
+                              bottom: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppButton(
+                                  textStyle: const TextStyle(
+                                    color: MyColor.white,
+                                    fontSize: 16,
+                                    fontFamily: ColorFamily.fontsSFProDisplay,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  btnWidth:
+                                      MediaQuery.of(context).size.width * 0.90,
+                                  onPressed: () {
+                                    print(" tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                  /*  Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ExpentionType(
+                                                        tripId: widget.tripId,
+                                                        truckId: widget.truckId)))
+                                        .then((value) => apihit());*/
 
-                                  setState(() {});
-                                },
-                                name: "Add Expenses"),
-                          ],
+                                    setState(() {});
+                                  },
+                                  name: "Add Expenses"),
+                            ],
+                          ),
                         ),
-                      )
+                    )
                     : tripdetails.data!.otherCharges != null &&
                             tripdetails.data!.endTrip!.isEmpty &&
                             tripdetails.data!.deliveryNote!.isEmpty
-                        ? Padding(
-                            padding: EdgeInsets.only(
-                                top: tripdetails.data!.otherCharges != null
-                                    ? 05
-                                    : 30,
-                                bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                AppButton(
-                                    textStyle: const TextStyle(
-                                      color: MyColor.white,
-                                      fontSize: 16,
-                                      fontFamily: ColorFamily.fontsSFProDisplay,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    btnWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.90,
-                                    onPressed: () {
-                                      Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DeliveryScreen(
-                                                          tripId: widget.tripId,
-                                                          truckId:
-                                                              widget.truckId)))
-                                          .then((value) => apihit());
+                        ? Visibility(
+      visible: false,
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: tripdetails.data!.otherCharges != null
+                                      ? 05
+                                      : 30,
+                                  bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppButton(
+                                      textStyle: const TextStyle(
+                                        color: MyColor.white,
+                                        fontSize: 16,
+                                        fontFamily: ColorFamily.fontsSFProDisplay,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      btnWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.90,
+                                      onPressed: () {
+                                        Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DeliveryScreen(
+                                                            tripId: widget.tripId,
+                                                            truckId:
+                                                                widget.truckId)))
+                                            .then((value) => apihit());
 
-                                      setState(() {});
-                                    },
-                                    name: "Mark as delivered"),
-                              ],
+                                        setState(() {});
+                                      },
+                                      name: "Mark as delivered"),
+                                ],
+                              ),
                             ),
-                          )
+                        )
+
                         : tripdetails.data!.endTrip!.isEmpty &&
                                 tripdetails.data!.deliveryNote!.isNotEmpty
                             ? Padding(
@@ -4390,5 +4230,101 @@ class _NewTripState extends State<NewTrip> {
                                 ),
                               )
                             : null;
+  }
+
+
+  rowUi(String title, String value) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child:  Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: MyColor.greyText,
+                  // overflow: TextOverflow.ellipsis,
+                  fontFamily:
+                  ColorFamily.fontsSFProDisplay,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text(
+                // "Box Truck",
+               value,
+                style:  TextStyle(
+                  fontSize: 14,
+                  color: MyColor.black,
+                  // overflow: TextOverflow.ellipsis,
+                  fontFamily:
+                  ColorFamily.fontsSFProDisplay,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  dividerUi(){
+    return Column(
+      children: [
+        SizedBox(
+          height: 12,
+        ),
+        Divider(
+          height: 1,
+          color: MyColor.divider.withOpacity(0.80),
+        ),
+
+        SizedBox(
+          height: 12,
+        ),
+      ],
+    );
+  }
+
+  dividerUi1(){
+    return Column(
+      children: [
+
+        Divider(
+          height: 1,
+          color: MyColor.divider.withOpacity(0.80),
+        ),
+
+
+      ],
+    );
+  }
+
+  togglebutton(IconData icon) {
+    return InkWell(
+        onTap: (){
+          is_floating = !is_floating;
+          setState(() {});
+        },
+        child: Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+
+                gradient:
+                const LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    MyColor.button1,
+                    MyColor.button,
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(15)),
+            child: Icon(icon,color: Colors.white,))
+    );
   }
 }

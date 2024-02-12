@@ -408,59 +408,62 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           width: screen.size.width * 0.68,
                           height: 62,
                           child: imageFileListBanner2.isEmpty
-                              ? Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 2, bottom: 2),
-                                  child: SizedBox(
-                                    width: screen.size.width * 0.60,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: MyColor.button),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
+                              ? Visibility(
+                            visible: false,
+                                child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10, top: 2, bottom: 2),
+                                    child: SizedBox(
+                                      width: screen.size.width * 0.60,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: MyColor.button),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
+                                            ),
+                                            height: 100,
+                                            width: 60,
+                                            child: const Icon(
+                                              Icons.photo,
+                                              color: MyColor.button,
+                                            ),
                                           ),
-                                          height: 100,
-                                          width: 60,
-                                          child: const Icon(
-                                            Icons.photo,
-                                            color: MyColor.button,
-                                          ),
-                                        ),
-                                        // Container(
-                                        //   decoration: BoxDecoration(
-                                        //     border: Border.all(
-                                        //         width: 1, color: MyColor.black),
-                                        //     borderRadius:
-                                        //         const BorderRadius.all(
-                                        //             Radius.circular(10)),
-                                        //   ),
-                                        //   height: 100,
-                                        //   width: 60,
-                                        //   child: const Icon(Icons.photo),
-                                        // ),
-                                        // Container(
-                                        //   decoration: BoxDecoration(
-                                        //     border: Border.all(
-                                        //         width: 1, color: MyColor.black),
-                                        //     borderRadius:
-                                        //         const BorderRadius.all(
-                                        //             Radius.circular(10)),
-                                        //   ),
-                                        //   height: 100,
-                                        //   width: 60,
-                                        //   child: const Icon(Icons.photo),
-                                        // ),
-                                      ],
+                                          // Container(
+                                          //   decoration: BoxDecoration(
+                                          //     border: Border.all(
+                                          //         width: 1, color: MyColor.black),
+                                          //     borderRadius:
+                                          //         const BorderRadius.all(
+                                          //             Radius.circular(10)),
+                                          //   ),
+                                          //   height: 100,
+                                          //   width: 60,
+                                          //   child: const Icon(Icons.photo),
+                                          // ),
+                                          // Container(
+                                          //   decoration: BoxDecoration(
+                                          //     border: Border.all(
+                                          //         width: 1, color: MyColor.black),
+                                          //     borderRadius:
+                                          //         const BorderRadius.all(
+                                          //             Radius.circular(10)),
+                                          //   ),
+                                          //   height: 100,
+                                          //   width: 60,
+                                          //   child: const Icon(Icons.photo),
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                )
+                              )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
