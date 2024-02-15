@@ -5,10 +5,14 @@ import 'package:platform/platform.dart';
 
 class ForegroundService {
   static const MethodChannel _channel =
-      const MethodChannel('com.pauldemarco.foreground_service');
+      MethodChannel('com.pauldemarco.foreground_service');
 
   /// ticker only has usage with accessibility services enabled. It does not show a text in the status bar.
-  static Future<String> start({String title, String text, String subText, String ticker}) {
+  static Future start(
+      {required String title,
+      required String text,
+      required String subText,
+      required String ticker}) {
     assert(const LocalPlatform().isAndroid);
     final args = {
       'title': title,
@@ -19,7 +23,7 @@ class ForegroundService {
     return _channel.invokeMethod('start', args);
   }
 
-  static Future<String> stop() {
+  static Future stop() {
     assert(const LocalPlatform().isAndroid);
     return _channel.invokeMethod('stop');
   }

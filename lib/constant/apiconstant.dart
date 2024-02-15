@@ -20,4 +20,6 @@ class ApiServer {
   static const otherchargeApi = "${baseurl}other-charges";
   static const deliverynoteApi = "${baseurl}delivery-note";
   static const endtripApi = "${baseurl}end-trip";
+  static const updatelocation = "${baseurl}updatelocation";
+  static const getnotification = "${baseurl}getnotification";
 }

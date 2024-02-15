@@ -9,6 +9,7 @@ import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/main.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:convert' as convert;
@@ -31,6 +32,7 @@ class _LoginState extends State<Login> {
   String devicename = "";
   @override
   void initState() {
+    pushFCMtoken();
     _getId();
     super.initState();
     iconsdata = 1;
@@ -48,6 +50,27 @@ class _LoginState extends State<Login> {
 
   bool loadingLogin = false;
   LoginResponse loginResponse = LoginResponse();
+
+  void pushFCMtoken() async {
+    try {
+      // Get the FCM token
+      String? token = await messaging.getToken();
+      fcmtoken = token.toString();
+      // Store the FCM token in shared preferences
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString("fcmtoken", fcmtoken.toString());
+      debugPrint("FCM Token:>>>>>>>>>>>>>>> $fcmtoken");
+    } catch (e) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      debugPrint("Error getting FCM token: $e");
+      var check = preferences.getString("fcmtoken");
+      if (check == null) {
+        pushFCMtoken();
+
+        debugPrint("Error getting FCM token>>>>>>>>>>>>.......check: $check");
+      }
+    }
+  }
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
@@ -96,20 +119,22 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: SingleChildScrollView(
           child: Column(children: [
-            SizedBox(height: 25,),
-            Text("SENOTRACK",style: TextStyle(
-              fontSize: 28,
-              color:Color(0xFF075693) ,
-              fontWeight: FontWeight.bold
-            ),),
+            const SizedBox(
+              height: 25,
+            ),
+            const Text(
+              "SENOTRACK",
+              style: TextStyle(
+                  fontSize: 28,
+                  color: Color(0xFF075693),
+                  fontWeight: FontWeight.bold),
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.10,
-
             ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
               height: 57,
               child: Center(
                 child: TextFormField(
@@ -138,16 +163,16 @@ class _LoginState extends State<Login> {
                     //     }
                     //   },
                     //   // child: iconsdata == 0
-                          // ? const SizedBox(
-                          //     width: 2,
-                          //     height: 0,
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(8.0),
-                          //       child: Icon(
-                          //         Icons.visibility_off,
-                          //         color: MyColor.greyText,
-                          //       ),
-                          //     ))
+                    // ? const SizedBox(
+                    //     width: 2,
+                    //     height: 0,
+                    //     child: Padding(
+                    //       padding: EdgeInsets.all(8.0),
+                    //       child: Icon(
+                    //         Icons.visibility_off,
+                    //         color: MyColor.greyText,
+                    //       ),
+                    //     ))
                     //       child: SizedBox(
                     //           width: 2,
                     //           height: 0,

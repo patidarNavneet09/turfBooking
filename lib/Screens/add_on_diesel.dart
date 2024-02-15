@@ -385,6 +385,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                     // Text("You can add upto 3 photos".tr),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextButton(
                           onPressed: () {
@@ -424,174 +425,176 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                                     color: MyColor.greyText,
                                   ))),
                         ),
-                        SizedBox(
-                          width: screen.size.width * 0.68,
-                          height: 62,
-                          child: imageFileListBanner.isEmpty
-                              ? Visibility(
-                            visible: false,
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10, top: 2, bottom: 2),
-                                    child: SizedBox(
-                                      width: screen.size.width * 0.60,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 1,
-                                                  color: MyColor.button),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(10)),
+                        Expanded(
+                          child: SizedBox(
+                            width: screen.size.width * 0.68,
+                            height: 62,
+                            child: imageFileListBanner.isEmpty
+                                ? Visibility(
+                              visible: false,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 2, bottom: 2),
+                                      child: SizedBox(
+                                        width: screen.size.width * 0.60,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: MyColor.button),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(10)),
+                                              ),
+                                              height: 100,
+                                              width: 60,
+                                              child: const Icon(
+                                                Icons.photo,
+                                                color: MyColor.button,
+                                              ),
                                             ),
-                                            height: 100,
-                                            width: 60,
-                                            child: const Icon(
-                                              Icons.photo,
-                                              color: MyColor.button,
-                                            ),
-                                          ),
-                                          // Container(
-                                          //   decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         width: 1, color: MyColor.black),
-                                          //     borderRadius:
-                                          //         const BorderRadius.all(
-                                          //             Radius.circular(10)),
-                                          //   ),
-                                          //   height: 100,
-                                          //   width: 60,
-                                          //   child: const Icon(Icons.photo),
-                                          // ),
-                                          // Container(
-                                          //   decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         width: 1, color: MyColor.black),
-                                          //     borderRadius:
-                                          //         const BorderRadius.all(
-                                          //             Radius.circular(10)),
-                                          //   ),
-                                          //   height: 100,
-                                          //   width: 60,
-                                          //   child: const Icon(Icons.photo),
-                                          // ),
-                                        ],
+                                            // Container(
+                                            //   decoration: BoxDecoration(
+                                            //     border: Border.all(
+                                            //         width: 1, color: MyColor.black),
+                                            //     borderRadius:
+                                            //         const BorderRadius.all(
+                                            //             Radius.circular(10)),
+                                            //   ),
+                                            //   height: 100,
+                                            //   width: 60,
+                                            //   child: const Icon(Icons.photo),
+                                            // ),
+                                            // Container(
+                                            //   decoration: BoxDecoration(
+                                            //     border: Border.all(
+                                            //         width: 1, color: MyColor.black),
+                                            //     borderRadius:
+                                            //         const BorderRadius.all(
+                                            //             Radius.circular(10)),
+                                            //   ),
+                                            //   height: 100,
+                                            //   width: 60,
+                                            //   child: const Icon(Icons.photo),
+                                            // ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                              )
-                              : ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: imageFileListBanner.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8.0, right: 8.0),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Stack(
-                                              children: [
-                                                SizedBox(
-                                                  height: 100,
-                                                  width: 65,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2.0),
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              width: 2,
-                                                              color: MyColor
-                                                                  .button),
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                      .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          12)),
-                                                        ),
-                                                        height: 65,
-                                                        width: 65,
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                      .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                          child: Image.file(
-                                                            File(
-                                                                imageFileListBanner[
-                                                                        index]
-                                                                    .path),
-                                                            fit: BoxFit.fill,
+                                )
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: imageFileListBanner.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Stack(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0, right: 8.0),
+                                            child: InkWell(
+                                              onTap: () {},
+                                              child: Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 100,
+                                                    width: 65,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                                2.0),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                width: 2,
+                                                                color: MyColor
+                                                                    .button),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            12)),
+                                                          ),
+                                                          height: 65,
+                                                          width: 65,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            10)),
+                                                            child: Image.file(
+                                                              File(
+                                                                  imageFileListBanner[
+                                                                          index]
+                                                                      .path),
+                                                              fit: BoxFit.fill,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 65,
-                                                  width: 66,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      InkWell(
-                                                          radius: 20,
-                                                          onTap: () {
-                                                            imageFileListBanner
-                                                                .removeAt(
-                                                                    index);
-                                                            setState(() {});
-                                                          },
-                                                          child: SizedBox(
-                                                            width: 20,
-                                                            child: Image.asset(
-                                                                "assets/images/cross.png"),
-                                                          )
-                                                          // child:
-                                                          //     const CircleAvatar(
-                                                          //   backgroundColor:
-                                                          //       MyColor
-                                                          //           .transparent,
-                                                          //   radius: 10,
-                                                          //   child: Text(
-                                                          //     'x',
-                                                          //     style: TextStyle(
-                                                          //         color: MyColor
-                                                          //             .white),
-                                                          //   ),
-                                                          // ),
-                                                          ),
-                                                    ],
+                                                  SizedBox(
+                                                    height: 65,
+                                                    width: 66,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                            radius: 20,
+                                                            onTap: () {
+                                                              imageFileListBanner
+                                                                  .removeAt(
+                                                                      index);
+                                                              setState(() {});
+                                                            },
+                                                            child: SizedBox(
+                                                              width: 20,
+                                                              child: Image.asset(
+                                                                  "assets/images/cross.png"),
+                                                            )
+                                                            // child:
+                                                            //     const CircleAvatar(
+                                                            //   backgroundColor:
+                                                            //       MyColor
+                                                            //           .transparent,
+                                                            //   radius: 10,
+                                                            //   child: Text(
+                                                            //     'x',
+                                                            //     style: TextStyle(
+                                                            //         color: MyColor
+                                                            //             .white),
+                                                            //   ),
+                                                            // ),
+                                                            ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
+                                        ],
+                                      );
+                                    }),
+                          ),
                         ),
                       ],
                     ),

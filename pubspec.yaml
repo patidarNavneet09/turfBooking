@@ -58,12 +58,18 @@ dependencies:
   flutter_app_badger: ^1.5.0
   flutter_expandable_fab: ^2.0.0
   floating_action_bubble: ^1.1.4
+  flutter_foreground_service: ^0.4.1
+  readmore: ^2.1.0
+  platform: ^3.1.4
+#  android_alarm_manager_plus: ^3.0.4
+#  flutter_foreground_task: ^6.1.2
   
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

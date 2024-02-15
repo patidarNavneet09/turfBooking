@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:truckmanagement/Screens/notification.dart';
+
 import 'package:truckmanagement/Screens/home_screen.dart';
 import 'package:truckmanagement/Screens/settingscreen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -20,7 +23,11 @@ LocationData? currentLocation;
 class _DashBoardscreenState extends State<DashBoardscreen> {
   int pagesIndex = 0;
 
-  var pagesProvider = [const Homescreen(), const Setting()];
+  var pagesProvider = [
+    const Homescreen(),
+    const Setting(),
+    const NotificationScreen()
+  ];
   late Timer _timer;
 
   @override
@@ -53,6 +60,19 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: buildMyNavBar(context),
+      appBar: PreferredSize(
+        preferredSize: Size.zero,
+        child: AppBar(
+          backgroundColor: Colors.white,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            //ios..
+            statusBarBrightness: Brightness.light,
+            //android..
+            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: MyColor.white,
+          ),
+        ),
+      ),
       body: pagesProvider[pagesIndex],
     );
   }
@@ -92,12 +112,14 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                   SizedBox(
                       height: 25,
                       width: 30,
-                      child: Image.asset("assets/images/Home.png")),
+                      child: Image.asset("assets/images/Home.png",
+                          color:
+                              pagesIndex == 0 ? MyColor.white : Colors.grey)),
                   Text(
                     "Home",
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color:  pagesIndex == 0 ?  MyColor.white :Colors.grey,
+                      color: pagesIndex == 0 ? MyColor.white : Colors.grey,
                       // overflow: TextOverflow.ellipsis,
                       fontFamily: ColorFamily.fontsSFProDisplay,
                       fontWeight: FontWeight.w500,
@@ -123,12 +145,49 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                   SizedBox(
                       height: 25,
                       width: 30,
-                      child: Image.asset("assets/images/setting.png")),
+                      child: Image.asset("assets/images/setting.png",
+                          color:
+                              pagesIndex == 1 ? MyColor.white : Colors.grey)),
                   Text(
-                   "Settings" ,
-                    style:  TextStyle(
+                    "Settings",
+                    style: TextStyle(
                       fontSize: 10,
-                      color: pagesIndex == 1 ?  MyColor.white :Colors.grey,
+                      color: pagesIndex == 1 ? MyColor.white : Colors.grey,
+                      // overflow: TextOverflow.ellipsis,
+                      // fontFamily: ColorFamily.fontsSFProDisplay,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          InkWell(
+            radius: 30,
+            onTap: () {
+              pagesIndex = 2;
+              setState(() {});
+            },
+            child: SizedBox(
+              // color: Colors.amber,
+              width: 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 25,
+                      width: 30,
+                      child: Image.asset("assets/images/notification.png",
+                          height: 20,
+                          width: 20,
+                          color:
+                              pagesIndex == 2 ? MyColor.white : Colors.grey)),
+                  Text(
+                    "Notification",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: pagesIndex == 2 ? MyColor.white : Colors.grey,
                       // overflow: TextOverflow.ellipsis,
                       // fontFamily: ColorFamily.fontsSFProDisplay,
                       fontWeight: FontWeight.w500,

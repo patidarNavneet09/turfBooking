@@ -30,7 +30,7 @@ class _SettingState extends State<Setting> {
               child: Image.asset("assets/images/gif_loader.gif"),
             )
           : Padding(
-              padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               child: SingleChildScrollView(
                 child: Column(
                   children: [

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,43 +28,47 @@ class NewTrip extends StatefulWidget {
   State<NewTrip> createState() => _NewTripState();
 }
 
-class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
+class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
   Tripdetails tripdetails = Tripdetails();
   Statusresponse statusresponse = Statusresponse();
   bool loading1 = true;
   final ScrollController _controller = ScrollController();
+  String btnName = "Accept";
 
   bool _open = false;
 
-  void _toggle() {
+  void toggle() {
     setState(() {
       _open = !_open;
     });
   }
 
-  Animation<double>? _animation;
-  AnimationController? _animationController ;
+  Animation<double>? animation;
+  AnimationController? _animationController;
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 260),
+      duration: const Duration(milliseconds: 260),
     );
 
-    final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
-    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+    final curvedAnimation =
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
+    animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
     // _open = widget.initialOpen ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGet(
         context, widget.truckId.toString(), widget.tripId.toString()));
   }
 
   apihit() {
+    btnName = "";
+    setState(() {});
     tripdetialsGet(
         context, widget.truckId.toString(), widget.tripId.toString());
   }
 
-  void _scrollToPosition() {
+  void scrollToPosition() {
     _controller.animateTo(
       410.0, // Replace 200.0 with the desired scroll offset
       duration: const Duration(seconds: 2), // Adjust duration as needed
@@ -80,11 +83,11 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
     super.dispose();
   }
 
-  bool is_floating  = false;
+  bool isfloating = false;
   List tripData = [];
   dynamic indexx = 0;
   int indexbutton = 0;
-  final _key = GlobalKey<ExpandableFabState>();
+  final key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
@@ -189,36 +192,39 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                     child: Column(
                                       children: [
                                         Container(
-                                          padding: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 10),
                                           decoration: BoxDecoration(
-
-                                            gradient:indexx != index ?
-                                            const  LinearGradient(
-                                              begin: Alignment.topRight,
-                                              end: Alignment.bottomLeft,
-                                              colors: [
-                                                MyColor.divider,
-                                                MyColor.divider,
-                                              ],
-                                            ):
-                                                const  LinearGradient(
-                                                  begin: Alignment.topRight,
-                                                  end: Alignment.bottomLeft,
-                                                  colors: [
-                                                    MyColor.button1,
-                                                    MyColor.button,
-                                                  ],
-                                                ),
-                                            borderRadius: BorderRadius.circular(15),
+                                            gradient: indexx != index
+                                                ? const LinearGradient(
+                                                    begin: Alignment.topRight,
+                                                    end: Alignment.bottomLeft,
+                                                    colors: [
+                                                      MyColor.divider,
+                                                      MyColor.divider,
+                                                    ],
+                                                  )
+                                                : const LinearGradient(
+                                                    begin: Alignment.topRight,
+                                                    end: Alignment.bottomLeft,
+                                                    colors: [
+                                                      MyColor.button1,
+                                                      MyColor.button,
+                                                    ],
+                                                  ),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
                                           ),
                                           child: Text(
                                             tripData[index].toString(),
-                                            style:  TextStyle(
-                                              color: indexx != index ? Colors.black: MyColor.white,
+                                            style: TextStyle(
+                                              color: indexx != index
+                                                  ? Colors.black
+                                                  : MyColor.white,
                                             ),
                                           ),
                                         ),
-                                       /* index == 0
+                                        /* index == 0
                                             ? Container(
                                                 width: 80,
                                                 height: 2,
@@ -294,25 +300,24 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
       ),
       bottomNavigationBar: tripdetails.status != true ? null : button(),
 
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
-        //Init Floating Action Bubble
-        floatingActionButton: tripdetails.status == true ?
-        tripdetails.data!.status.toString() == "Accepted" &&
-          tripdetails.data!.isStatus.toString() != "Delivered"
-            // tripdetails.data!.status.toString() != "Completed"*/
-             ? Container(
-        width:  MediaQuery.of(context).size.width * 0.60,
-          alignment: Alignment.bottomRight,
-          // width:300,
-          child:  is_floating == false? togglebutton(Icons.add):
-
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-
-        /*      Padding(
+      //Init Floating Action Bubble
+      floatingActionButton: tripdetails.status == true
+          ? tripdetails.data!.status.toString() == "Loading" &&
+                  tripdetails.data!.isStatus.toString() != "Accepted" &&
+                  tripdetails.data!.isStatus.toString() != "Delivered"
+              ? Container(
+                  width: MediaQuery.of(context).size.width * 0.60,
+                  alignment: Alignment.bottomRight,
+                  // width:300,
+                  child: isfloating == false
+                      ? togglebutton(Icons.add)
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            /*      Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -346,95 +351,101 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                 ),
               ),
               SizedBox(height: 10,),*/
-                  AppButton(
-                      textStyle: const TextStyle(
-                        color: MyColor.white,
-                        fontSize: 16,
-                        fontFamily: ColorFamily.fontsSFProDisplay,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      btnWidth: MediaQuery.of(context).size.width * 0.60,
-                      onPressed: () {
-                        is_floating = false;
-                        setState(() {});
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    AddOnDieselscreen(
-                                        tripId: widget.tripId,
-                                        truckId: widget.truckId)))
-                            .then((value) => apihit());
-                      },
-                      name: "Add On Diesel"),
+                            AppButton(
+                                textStyle: const TextStyle(
+                                  color: MyColor.white,
+                                  fontSize: 16,
+                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                btnWidth:
+                                    MediaQuery.of(context).size.width * 0.60,
+                                onPressed: () {
+                                  isfloating = false;
+                                  setState(() {});
+                                  Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddOnDieselscreen(
+                                                      tripId: widget.tripId,
+                                                      truckId: widget.truckId)))
+                                      .then((value) => apihit());
+                                },
+                                name: "Add On Diesel"),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            AppButton(
+                                textStyle: const TextStyle(
+                                  color: MyColor.white,
+                                  fontSize: 16,
+                                  fontFamily: ColorFamily.fontsSFProDisplay,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                btnWidth:
+                                    MediaQuery.of(context).size.width * 0.60,
+                                onPressed: () {
+                                  isfloating = false;
+                                  setState(() {});
+                                  debugPrint(
+                                      " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                  Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ExpentionType(
+                                                      tripId: widget.tripId,
+                                                      truckId: widget.truckId)))
+                                      .then((value) => apihit());
 
-               SizedBox(height: 10,),
+                                  setState(() {});
+                                },
+                                name: "Add Expenses"),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AppButton(
+                                    textStyle: const TextStyle(
+                                      color: MyColor.white,
+                                      fontSize: 16,
+                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    btnWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.60,
+                                    onPressed: () {
+                                      isfloating = false;
+                                      setState(() {});
+                                      Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DeliveryScreen(
+                                                          tripId: widget.tripId,
+                                                          truckId:
+                                                              widget.truckId)))
+                                          .then((value) => apihit());
 
-              AppButton(
-                  textStyle: const TextStyle(
-                    color: MyColor.white,
-                    fontSize: 16,
-                    fontFamily: ColorFamily.fontsSFProDisplay,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  btnWidth:
-                  MediaQuery.of(context).size.width * 0.60,
-                  onPressed: () {
-                    is_floating = false;
-                    setState(() {});
-                    print(" tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ExpentionType(
-                                    tripId: widget.tripId,
-                                    truckId: widget.truckId)))
-                        .then((value) => apihit());
-
-                    setState(() {});
-                  },
-                  name: "Add Expenses"),
-              SizedBox(height: 10,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppButton(
-                          textStyle: const TextStyle(
-                            color: MyColor.white,
-                            fontSize: 16,
-                            fontFamily: ColorFamily.fontsSFProDisplay,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          btnWidth:
-                          MediaQuery.of(context).size.width *
-                              0.60,
-                          onPressed: () {
-                            is_floating = false;
-                            setState(() {});
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        DeliveryScreen(
-                                            tripId: widget.tripId,
-                                            truckId:
-                                            widget.truckId)))
-                                .then((value) => apihit());
-
-                            setState(() {});
-                          },
-                          name: "Mark as delivered"),
-                    ],
-                  ),
-
-          SizedBox(height: 10,),
-              togglebutton(Icons.clear),
-
-              SizedBox(height: 0),
-            ],
-          ),
-        ) : null:null,
+                                      setState(() {});
+                                    },
+                                    name: "Mark as delivered"),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            togglebutton(Icons.clear),
+                            const SizedBox(height: 0),
+                          ],
+                        ),
+                )
+              : null
+          : null,
 
       body: tripdetails.status != true
           ? Center(
@@ -449,7 +460,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                             /* Row(
+                              /* Row(
                                 children: [
                                   Expanded(
                                     child: const Text(
@@ -491,20 +502,21 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 height: 8,
                               ),*/
 
-
-                         rowUi("Trip Id",tripdetails.data!.trip_number.toString()),
-
-                              dividerUi(),
-                              rowUi("Customer Name",tripdetails.data!.name.toString()),
+                              rowUi("Trip Id",
+                                  tripdetails.data!.tripnumber.toString()),
 
                               dividerUi(),
-
-
-                              rowUi("Start Date",tripdetails.data!.startDate.toString()),
+                              rowUi("Customer Name",
+                                  tripdetails.data!.name.toString()),
 
                               dividerUi(),
 
-                             /* Row(
+                              rowUi("Start Date",
+                                  tripdetails.data!.startDate.toString()),
+
+                              dividerUi(),
+
+                              /* Row(
                                 children: [
                                   Expanded(
                                     child: const Text(
@@ -546,11 +558,12 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 height: 8,
                               ),*/
 
-                              rowUi("Loading Location",tripdetails.data!.loadingLocation.toString()),
+                              rowUi("Loading Location",
+                                  tripdetails.data!.loadingLocation.toString()),
 
                               dividerUi(),
 
-                             /* Row(
+                              /* Row(
                                 children: [
                                   Expanded(
                                     child: const Text(
@@ -592,8 +605,10 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 height: 8,
                               ),*/
 
-
-                              rowUi("Offloading Location",tripdetails.data!.offloadingLocation.toString()),
+                              rowUi(
+                                  "Offloading Location",
+                                  tripdetails.data!.offloadingLocation
+                                      .toString()),
 
                               dividerUi(),
                               /*Row(
@@ -638,12 +653,10 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 height: 8,
                               ),*/
 
-
-
-                              rowUi("End Date",tripdetails.data!.endDate.toString()),
+                              rowUi("End Date",
+                                  tripdetails.data!.endDate.toString()),
 
                               dividerUi(),
-
 
                               /*Row(
                                 children: [
@@ -687,48 +700,53 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 height: 8,
                               ),*/
 
-
-                              rowUi("Cargo Type",tripdetails.data!.typeOfCargo.toString()),
-
-                              dividerUi(),
-
-
-                              rowUi( "Assigned Truck", tripdetails.data!.truck.toString()),
+                              rowUi("Cargo Type",
+                                  tripdetails.data!.typeOfCargo.toString()),
 
                               dividerUi(),
 
-                              rowUi("Truck Plate", tripdetails.data!.plate_number.toString()),
+                              rowUi("Assigned Truck",
+                                  tripdetails.data!.truck.toString()),
 
                               dividerUi(),
 
-                              rowUi("Weight Of Cargo",  "${tripdetails.data!.weightOfCargo.toString()} Kg"),
+                              rowUi("Truck Plate",
+                                  tripdetails.data!.platenumber.toString()),
 
                               dividerUi(),
 
-                              rowUi("Initial Diesel", tripdetails.data!.initialDiesel.toString()),
+                              rowUi("Weight Of Cargo",
+                                  "${tripdetails.data!.weightOfCargo.toString()} Kg"),
 
                               dividerUi(),
 
-                              rowUi( "Mileage Allowances", "${tripdetails.data!.mileageAllowanceCur.toString()} ${tripdetails.data!.mileageAllowance.toString()}"),
+                              rowUi("Initial Diesel",
+                                  tripdetails.data!.initialDiesel.toString()),
 
                               dividerUi(),
 
-                              rowUi( "Movement Sheet ", "${tripdetails.data!.movementSheetCurr.toString()} ${tripdetails.data!.movementSheet.toString()}"),
+                              rowUi("Mileage Allowances",
+                                  "${tripdetails.data!.mileageAllowanceCur.toString()} ${tripdetails.data!.mileageAllowance.toString()}"),
 
                               dividerUi(),
 
-                              rowUi("Road Toll","${tripdetails.data!.roadTollCurr.toString()} ${tripdetails.data!.roadToll.toString()}"),
+                              rowUi("Movement Sheet ",
+                                  "${tripdetails.data!.movementSheetCurr.toString()} ${tripdetails.data!.movementSheet.toString()}"),
 
+                              dividerUi(),
 
-                              SizedBox(height: 30,)
+                              rowUi("Road Toll",
+                                  "${tripdetails.data!.roadTollCurr.toString()} ${tripdetails.data!.roadToll.toString()}"),
+
+                              const SizedBox(
+                                height: 30,
+                              )
                               // dividerUi(),
                               //
                               // rowUi("Road Toll","\$${tripdetails.data!.roadToll.toString()}"),
-
                             ],
                           ),
                         )
-
                       : indexx ==
                               tripData.indexWhere((element) =>
                                   element.contains("Add On Diesel") &&
@@ -832,11 +850,11 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               // color: Colors.amber,
                                               // height: screens.height * 0.08,
-                                              width: screens.width * 0.20,
-                                              child: const Row(
+                                              //  width: screens.width * 0.20,
+                                              child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
@@ -857,7 +875,6 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                           ],
                                         ),
                                         dividerUi(),
-
                                         ListView.builder(
                                           physics:
                                               const NeverScrollableScrollPhysics(),
@@ -887,116 +904,259 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                         // color: Colors.amber,
                                                         width: screens.width *
                                                             0.20,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Container(
-                                                              height: 40,
-                                                              width: 40,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                border: Border.all(
-                                                                    width: 1,
-                                                                    color: MyColor
-                                                                        .button),
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                            .all(
-                                                                        Radius.circular(
+                                                        child: Container(
+                                                          height: 40,
+                                                          width: 40,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                width: 1,
+                                                                color: MyColor
+                                                                    .button),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
+                                                                        .circular(
                                                                             10)),
-                                                              ),
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  Navigator
-                                                                      .push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              LargeImages(
-                                                                        imagesUrl: tripdetails
-                                                                            .data!
-                                                                            .addOnDiesels![index]
-                                                                            .petrolStationImage
-                                                                            .toString(),
-                                                                        nameProperty:
-                                                                            "Add On Diesel",
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius: const BorderRadius
-                                                                          .all(
-                                                                      Radius.circular(
-                                                                          09)),
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    imageUrl: tripdetails
+                                                          ),
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LargeImages(
+                                                                    imagesUrl: tripdetails
                                                                         .data!
                                                                         .addOnDiesels![
                                                                             index]
                                                                         .petrolStationImage
                                                                         .toString(),
-                                                                    progressIndicatorBuilder: (context,
+                                                                    nameProperty:
+                                                                        "Add On Diesel",
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          09)),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl: tripdetails
+                                                                    .data!
+                                                                    .addOnDiesels![
+                                                                        index]
+                                                                    .petrolStationImage
+                                                                    .toString(),
+                                                                progressIndicatorBuilder:
+                                                                    (context,
                                                                             url,
                                                                             downloadProgress) =>
                                                                         Padding(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              8.0),
-                                                                      child:
-                                                                          CircularProgressIndicator(
-                                                                        color: MyColor
-                                                                            .button,
-                                                                        value: downloadProgress
-                                                                            .progress,
-                                                                      ),
-                                                                    ),
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        const Icon(
-                                                                            Icons.error),
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                    height: screens
-                                                                            .height *
-                                                                        0.08,
-                                                                    width: screens
-                                                                            .width *
-                                                                        0.08,
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    color: MyColor
+                                                                        .button,
+                                                                    value: downloadProgress
+                                                                        .progress,
                                                                   ),
                                                                 ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    const Icon(Icons
+                                                                        .error),
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                                height: screens
+                                                                        .height *
+                                                                    0.08,
+                                                                width: screens
+                                                                        .width *
+                                                                    0.08,
                                                               ),
                                                             ),
-                                                          ],
+                                                          ),
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        // color: Colors.amber,
-                                                        // height: screens.height * 0.08,
-                                                        width: screens.width *
-                                                            0.20,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
+
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              SizedBox(
+                                                                // color: Colors.amber,
+                                                                // height: screens.height * 0.08,
+                                                                width: screens
+                                                                        .width *
+                                                                    0.20,
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        tripdetails
+                                                                            .data!
+                                                                            .addOnDiesels![index]
+                                                                            .quantityInLitres
+                                                                            .toString(),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color:
+                                                                              MyColor.black,
+
+                                                                          // overflow: TextOverflow.ellipsis,
+                                                                          fontFamily:
+                                                                              ColorFamily.fontsSFProDisplay,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                // color: Colors.amber,
+                                                                // height: screens.height * 0.08,
+                                                                width: screens
+                                                                        .width *
+                                                                    0.20,
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        tripdetails
+                                                                            .data!
+                                                                            .addOnDiesels![index]
+                                                                            .unitPrice
+                                                                            .toString(),
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color:
+                                                                              MyColor.black,
+
+                                                                          // overflow: TextOverflow.ellipsis,
+                                                                          fontFamily:
+                                                                              ColorFamily.fontsSFProDisplay,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                // color: Colors.amber,
+                                                                // height: screens.height * 0.08,
+                                                                width: screens
+                                                                        .width *
+                                                                    0.17,
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        tripdetails
+                                                                            .data!
+                                                                            .addOnDiesels![index]
+                                                                            .petrolStation
+                                                                            .toString(),
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color:
+                                                                              MyColor.black,
+
+                                                                          // overflow: TextOverflow.ellipsis,
+                                                                          fontFamily:
+                                                                              ColorFamily.fontsSFProDisplay,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 12,
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              const Text(
+                                                                "Date :",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: MyColor
+                                                                      .black,
+
+                                                                  // overflow: TextOverflow.ellipsis,
+                                                                  fontFamily:
+                                                                      ColorFamily
+                                                                          .fontsSFProDisplay,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
                                                                 tripdetails
                                                                     .data!
                                                                     .addOnDiesels![
                                                                         index]
-                                                                    .quantityInLitres
+                                                                    .date
                                                                     .toString(),
                                                                 textAlign:
                                                                     TextAlign
-                                                                        .center,
+                                                                        .start,
                                                                 style:
                                                                     const TextStyle(
                                                                   fontSize: 14,
@@ -1009,94 +1169,14 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                                           .fontsSFProDisplay,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w400,
+                                                                          .w300,
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        // color: Colors.amber,
-                                                        // height: screens.height * 0.08,
-                                                        width: screens.width *
-                                                            0.20,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                tripdetails
-                                                                    .data!
-                                                                    .addOnDiesels![
-                                                                        index]
-                                                                    .unitPrice
-                                                                    .toString(),
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: MyColor
-                                                                      .black,
+                                                            ],
+                                                          )
+                                                        ],
+                                                      )
 
-                                                                  // overflow: TextOverflow.ellipsis,
-                                                                  fontFamily:
-                                                                      ColorFamily
-                                                                          .fontsSFProDisplay,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-
-                                                      SizedBox(
-                                                        // color: Colors.amber,
-                                                        // height: screens.height * 0.08,
-                                                        width: screens.width *
-                                                            0.17,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                tripdetails
-                                                                    .data!
-                                                                    .addOnDiesels![
-                                                                        index]
-                                                                    .petrolStation
-                                                                    .toString(),
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 14,
-                                                                  color: MyColor
-                                                                      .black,
-
-                                                                  // overflow: TextOverflow.ellipsis,
-                                                                  fontFamily:
-                                                                      ColorFamily
-                                                                          .fontsSFProDisplay,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
                                                       // Content below the Divider
                                                     ],
                                                   ),
@@ -3687,12 +3767,14 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                                       shrinkWrap:
                                                                           true,
                                                                       itemCount: tripdetails
-                                                                          .data!
-                                                                          .deliveryNote!
-                                                                          .length > 0 ?  1 : tripdetails
-                                                                          .data!
-                                                                          .deliveryNote!
-                                                                          .length,
+                                                                              .data!
+                                                                              .deliveryNote!
+                                                                              .isNotEmpty
+                                                                          ? 1
+                                                                          : tripdetails
+                                                                              .data!
+                                                                              .deliveryNote!
+                                                                              .length,
                                                                       itemBuilder:
                                                                           (BuildContext context,
                                                                               index) {
@@ -3706,7 +3788,6 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-
                                                                               const Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
@@ -3738,7 +3819,9 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                                                 ],
                                                                               ),
 
-                                                                              SizedBox(height: 10,),
+                                                                              const SizedBox(
+                                                                                height: 10,
+                                                                              ),
                                                                               // dividerUi(),
                                                                               Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -3839,11 +3922,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                                                                   SizedBox(
                                                                                     width: screens.width * 0.10,
                                                                                   ),
-
                                                                                 ],
                                                                               ),
-
-
                                                                             ],
                                                                           ),
                                                                         );
@@ -3888,13 +3968,17 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
-    print("jsonResponse.................${jsonResponse}");
+    debugPrint("jsonResponse.................$jsonResponse");
     loading1 = true;
     tripData.clear();
     if (jsonResponse['status'] == true) {
       tripdetails = Tripdetails.fromJson(jsonResponse);
 
       if (tripdetails.data!.status.toString() == "Accepted") {
+        btnName = "Truck Loading";
+        setState(() {});
+      }
+      if (tripdetails.data!.status.toString() == "Loading") {
         indexbutton = 1;
         setState(() {});
       }
@@ -3976,22 +4060,28 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
 
     if (jsonResponse['status'] == true) {
       statusresponse = Statusresponse.fromJson(jsonResponse);
-      if (indexbutton == 1) {
-        // _scrollToPosition();
-      }
+      // if (indexbutton == 1) {
+      //   btnName = "Loading";
+      // }
       debugPrint("statusresponse.data!.status${statusresponse.data!.status}");
       if (statusresponse.data!.status == "Accepted" && context.mounted) {
-        // Navigator.pop(context);
-        // debugPrint("DAta");
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => const StartTrip()));
-        indexbutton = 1;
+        debugPrint(
+            "status............................${statusresponse.data!.status}");
+        btnName = "Truck Loading";
         setState(() {});
       }
-    } else {
+      if (statusresponse.data!.status.toString() == "Loading") {
+        debugPrint(
+            "status 55............................${statusresponse.data!.status}");
+        indexbutton = 1;
+        btnName = "Start Trip";
+        setState(() {});
+      } else {
+        Fluttertoast.showToast(msg: jsonResponse['message']);
+      }
+    }else if(jsonResponse['status'] != true){
       Fluttertoast.showToast(msg: jsonResponse['message']);
     }
-
     return Statusresponse.fromJson(jsonDecode(response.body));
   }
 
@@ -4016,63 +4106,81 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                     btnHeight: MediaQuery.of(context).size.height * 0.07,
                     onPressed: () {
                       if (indexbutton != 1) {
-                        acceptApi(context, "Accepted",
-                            tripdetails.data!.id.toString());
+                        // tripdetails.data!.isStatus.toString() == "Accepted" && tripdetails.data!.status.toString() == "Accepted" && tripdetails.data!.addOnDiesels!.isEmpty && context.mounted
+                        if (btnName == "Truck Loading") {
+                          acceptApi(context, "Loading",
+                              tripdetails.data!.id.toString());
+                        } else {
+                          acceptApi(context, "Accepted",
+                              tripdetails.data!.id.toString());
+                        }
                       }
-
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const StartTrip()));
-                      indexbutton = 1;
+                      // indexbutton = 1;
                       setState(() {});
                     },
-                    name: tripdetails.data!.status.toString() != "Accepted"
-                        ? "Accept"
-                        : "Accept"),
+                    name: btnName),
               ],
             ),
           )
-        : tripdetails.data!.isStatus.toString() == "Accepted" &&
-                tripdetails.data!.isStatus.toString() == "Accepted" &&
-                tripdetails.data!.addOnDiesels!.isEmpty
+        :
+        /*tripdetails.data!.isStatus.toString() == "Accepted" && tripdetails.data!.status.toString() == "Accepted" &&
+    tripdetails.data!.addOnDiesels!.isEmpty
+    ?
+    Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 15),
+      child: AppButton(
+          textStyle: const TextStyle(
+            color: MyColor.white,
+            fontSize: 16,
+            fontFamily: ColorFamily.fontsSFProDisplay,
+            fontWeight: FontWeight.w600,
+          ),
+          btnWidth: MediaQuery.of(context).size.width * 0.90,
+          btnHeight: MediaQuery.of(context).size.height * 0.07,
+          onPressed: () {
+            acceptApi(context, "Loading", tripdetails.data!.id.toString());
+            setState(() {});
+          },
+          name: "Loading"),
+    )
+        : */
+        tripdetails.data!.status.toString() == "Loading" &&
+                    tripdetails.data!.isStatus.toString() != "On the way" &&
+                    tripdetails.data!.addOnDiesels!.isEmpty ||
+                tripdetails.data!.addOnDiesels!.isEmpty &&
+                    btnName == "Start Trip"
             ? Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppButton(
-                        textStyle: const TextStyle(
-                          color: MyColor.white,
-                          fontSize: 16,
-                          fontFamily: ColorFamily.fontsSFProDisplay,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        btnWidth: MediaQuery.of(context).size.width * 0.90,
-                        btnHeight: MediaQuery.of(context).size.height * 0.07,
-                        onPressed: () {
-                          // acceptApi(context, "On the way",
-                          //     tripdetails.data!.id.toString());
+                child: AppButton(
+                    textStyle: const TextStyle(
+                      color: MyColor.white,
+                      fontSize: 16,
+                      fontFamily: ColorFamily.fontsSFProDisplay,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    btnWidth: MediaQuery.of(context).size.width * 0.90,
+                    btnHeight: MediaQuery.of(context).size.height * 0.07,
+                    onPressed: () {
+                      // acceptApi(context, "On the way",
+                      //     tripdetails.data!.id.toString());
 
-                          // indexbutton = 1;
-                          Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StartTrip(
-                                          tripId: widget.tripId,
-                                          truckId: widget.truckId)))
-                              .then((value) => apihit());
+                      // indexbutton = 1;
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StartTrip(
+                                      tripId: widget.tripId,
+                                      truckId: widget.truckId)))
+                          .then((value) => apihit());
 
-                          setState(() {});
-                        },
-                        name: "Start Trip"),
-                  ],
-                ),
+                      setState(() {});
+                    },
+                    name: "Start Trip"),
               )
             : tripdetails.data!.addOnDiesels!.isEmpty
                 ? Visibility(
-      visible: false,
-                  child: Padding(
+                    visible: false,
+                    child: Padding(
                       padding: EdgeInsets.only(
                           top: tripdetails.data!.addOnDiesels!.isEmpty ? 5 : 50,
                           bottom: 15),
@@ -4086,7 +4194,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 fontFamily: ColorFamily.fontsSFProDisplay,
                                 fontWeight: FontWeight.w600,
                               ),
-                              btnWidth: MediaQuery.of(context).size.width * 0.90,
+                              btnWidth:
+                                  MediaQuery.of(context).size.width * 0.90,
                               onPressed: () {
                                 Navigator.push(
                                         context,
@@ -4101,14 +4210,13 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                         ],
                       ),
                     ),
-                )
-
+                  )
                 : tripdetails.data!.isStatus.toString() != "Accepted" &&
                         tripdetails.data!.endTrip!.isEmpty &&
                         tripdetails.data!.deliveryNote!.isEmpty
                     ? Visibility(
-                       visible: false,
-                      child: Padding(
+                        visible: false,
+                        child: Padding(
                           padding: EdgeInsets.only(
                               top: tripdetails.data!.addOnDiesels!.isEmpty
                                   ? 10
@@ -4127,8 +4235,9 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                   btnWidth:
                                       MediaQuery.of(context).size.width * 0.90,
                                   onPressed: () {
-                                    print(" tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
-                                  /*  Navigator.push(
+                                    debugPrint(
+                                        " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                    /*  Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
@@ -4143,13 +4252,13 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                             ],
                           ),
                         ),
-                    )
+                      )
                     : tripdetails.data!.otherCharges != null &&
                             tripdetails.data!.endTrip!.isEmpty &&
                             tripdetails.data!.deliveryNote!.isEmpty
                         ? Visibility(
-      visible: false,
-                          child: Padding(
+                            visible: false,
+                            child: Padding(
                               padding: EdgeInsets.only(
                                   top: tripdetails.data!.otherCharges != null
                                       ? 05
@@ -4162,7 +4271,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                       textStyle: const TextStyle(
                                         color: MyColor.white,
                                         fontSize: 16,
-                                        fontFamily: ColorFamily.fontsSFProDisplay,
+                                        fontFamily:
+                                            ColorFamily.fontsSFProDisplay,
                                         fontWeight: FontWeight.w600,
                                       ),
                                       btnWidth:
@@ -4170,14 +4280,14 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                               0.90,
                                       onPressed: () {
                                         Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DeliveryScreen(
-                                                            tripId: widget.tripId,
-                                                            truckId:
-                                                                widget.truckId)))
-                                            .then((value) => apihit());
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DeliveryScreen(
+                                                        tripId: widget.tripId,
+                                                        truckId: widget
+                                                            .truckId))).then(
+                                            (value) => apihit());
 
                                         setState(() {});
                                       },
@@ -4185,8 +4295,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                                 ],
                               ),
                             ),
-                        )
-
+                          )
                         : tripdetails.data!.endTrip!.isEmpty &&
                                 tripdetails.data!.deliveryNote!.isNotEmpty
                             ? Padding(
@@ -4232,21 +4341,19 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                             : null;
   }
 
-
   rowUi(String title, String value) {
     return Column(
       children: [
         Row(
           children: [
             Expanded(
-              child:  Text(
+              child: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText,
                   // overflow: TextOverflow.ellipsis,
-                  fontFamily:
-                  ColorFamily.fontsSFProDisplay,
+                  fontFamily: ColorFamily.fontsSFProDisplay,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -4254,13 +4361,12 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
             Expanded(
               child: Text(
                 // "Box Truck",
-               value,
-                style:  TextStyle(
+                value,
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.black,
                   // overflow: TextOverflow.ellipsis,
-                  fontFamily:
-                  ColorFamily.fontsSFProDisplay,
+                  fontFamily: ColorFamily.fontsSFProDisplay,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -4271,51 +4377,45 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
     );
   }
 
-  dividerUi(){
+  dividerUi() {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
         Divider(
           height: 1,
           color: MyColor.divider.withOpacity(0.80),
         ),
-
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
       ],
     );
   }
 
-  dividerUi1(){
+  dividerUi1() {
     return Column(
       children: [
-
         Divider(
           height: 1,
           color: MyColor.divider.withOpacity(0.80),
         ),
-
-
       ],
     );
   }
 
   togglebutton(IconData icon) {
     return InkWell(
-        onTap: (){
-          is_floating = !is_floating;
+        onTap: () {
+          isfloating = !isfloating;
           setState(() {});
         },
         child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-
-                gradient:
-                const LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
@@ -4324,7 +4424,9 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin{
                   ],
                 ),
                 borderRadius: BorderRadius.circular(15)),
-            child: Icon(icon,color: Colors.white,))
-    );
+            child: Icon(
+              icon,
+              color: Colors.white,
+            )));
   }
 }
