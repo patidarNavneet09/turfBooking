@@ -90,10 +90,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     notificatuincard(notificationList[index]),
                               );
                             })
-                        : Container(
-                            height: data.size.height,
-                            margin: EdgeInsets.only(top: data.size.height / 5),
-                            child: const Text("No notification"),
+                        : SizedBox(
+                            height: data.size.height * 0.75,
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(child: Text("No notification")),
+                              ],
+                            ),
                           ),
 
                     const SizedBox(
