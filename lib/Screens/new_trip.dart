@@ -305,8 +305,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
       //Init Floating Action Bubble
       floatingActionButton: tripdetails.status == true
           ? tripdetails.data!.status.toString() == "Loading" &&
-                  tripdetails.data!.isStatus.toString() != "Accepted" &&
-                  tripdetails.data!.isStatus.toString() != "Delivered"
+                  tripdetails.data!.isStatus.toString() != "Accepted"
               ? Container(
                   width: MediaQuery.of(context).size.width * 0.60,
                   alignment: Alignment.bottomRight,
@@ -351,64 +350,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                 ),
               ),
               SizedBox(height: 10,),*/
-                            AppButton(
-                                textStyle: const TextStyle(
-                                  color: MyColor.white,
-                                  fontSize: 16,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                btnWidth:
-                                    MediaQuery.of(context).size.width * 0.60,
-                                onPressed: () {
-                                  isfloating = false;
-                                  setState(() {});
-                                  Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddOnDieselscreen(
-                                                      tripId: widget.tripId,
-                                                      truckId: widget.truckId)))
-                                      .then((value) => apihit());
-                                },
-                                name: "Add On Diesel"),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            AppButton(
-                                textStyle: const TextStyle(
-                                  color: MyColor.white,
-                                  fontSize: 16,
-                                  fontFamily: ColorFamily.fontsSFProDisplay,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                btnWidth:
-                                    MediaQuery.of(context).size.width * 0.60,
-                                onPressed: () {
-                                  isfloating = false;
-                                  setState(() {});
-                                  debugPrint(
-                                      " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
-                                  Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ExpentionType(
-                                                      tripId: widget.tripId,
-                                                      truckId: widget.truckId)))
-                                      .then((value) => apihit());
-
-                                  setState(() {});
-                                },
-                                name: "Add Expenses"),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                AppButton(
+                            tripdetails.data!.isStatus.toString() != "Delivered"
+                                ? AppButton(
                                     textStyle: const TextStyle(
                                       color: MyColor.white,
                                       fontSize: 16,
@@ -425,7 +368,38 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      DeliveryScreen(
+                                                      AddOnDieselscreen(
+                                                          tripId: widget.tripId,
+                                                          truckId:
+                                                              widget.truckId)))
+                                          .then((value) => apihit());
+                                    },
+                                    name: "Add On Diesel")
+                                : Container(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            tripdetails.data!.isStatus.toString() != "Delivered"
+                                ? AppButton(
+                                    textStyle: const TextStyle(
+                                      color: MyColor.white,
+                                      fontSize: 16,
+                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    btnWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.60,
+                                    onPressed: () {
+                                      isfloating = false;
+                                      setState(() {});
+                                      debugPrint(
+                                          " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                      Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ExpentionType(
                                                           tripId: widget.tripId,
                                                           truckId:
                                                               widget.truckId)))
@@ -433,9 +407,81 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
 
                                       setState(() {});
                                     },
-                                    name: "Mark as delivered"),
-                              ],
+                                    name: "Add Expenses")
+                                : Container(),
+                            const SizedBox(
+                              height: 10,
                             ),
+                            tripdetails.data!.isStatus.toString() != "Delivered"
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AppButton(
+                                          textStyle: const TextStyle(
+                                            color: MyColor.white,
+                                            fontSize: 16,
+                                            fontFamily:
+                                                ColorFamily.fontsSFProDisplay,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          btnWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.60,
+                                          onPressed: () {
+                                            isfloating = false;
+                                            setState(() {});
+                                            Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DeliveryScreen(
+                                                                tripId: widget
+                                                                    .tripId,
+                                                                truckId: widget
+                                                                    .truckId)))
+                                                .then((value) => apihit());
+
+                                            setState(() {});
+                                          },
+                                          name: "Mark as delivered"),
+                                    ],
+                                  )
+                                : Container(),
+                            tripdetails.data!.isStatus.toString() == "Completed"
+                                ? Container()
+                                : tripdetails.data!.isStatus.toString() ==
+                                        "Delivered"
+                                    ? AppButton(
+                                        textStyle: const TextStyle(
+                                          color: MyColor.white,
+                                          fontSize: 16,
+                                          fontFamily:
+                                              ColorFamily.fontsSFProDisplay,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        btnWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.60,
+                                        onPressed: () {
+                                          isfloating = false;
+                                          setState(() {});
+                                          debugPrint(
+                                              " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EndTripscr(
+                                                          tripId: widget.tripId,
+                                                          truckId: widget
+                                                              .truckId))).then(
+                                              (value) => apihit());
+
+                                          setState(() {});
+                                        },
+                                        name: "End Trip")
+                                    : Container(),
                             const SizedBox(
                               height: 10,
                             ),
@@ -3935,12 +3981,302 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                             ),
                                                           ],
                                                         )
-                                                      : SizedBox(
-                                                          height: MediaQuery.of(context).size.height * 0.70,
-                                                          child: const Center(
-                                                            child:
-                                                                Text("No data"),
-                                                          )),
+                                                      : indexx == tripData.indexWhere((element) => element.contains("End Trip") && tripdetails.data!.endTrip!.isNotEmpty)
+                                                          ? Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            8.0),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        const Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              "End Trip",
+                                                                              style: TextStyle(
+                                                                                fontSize: 14,
+                                                                                color: MyColor.black,
+                                                                                fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                fontWeight: FontWeight.w400,
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              10,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              // color: Colors.amber,
+                                                                              // height: screens.height * 0.08,
+                                                                              width: screens.width * 0.40,
+                                                                              child: const Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "Odometer Image",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 14,
+                                                                                      color: MyColor.greyText,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              // color: Colors.amber,
+                                                                              // height: screens.height * 0.08,
+                                                                              // width: screens.width * 0.20,
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "Dieselmeter Image",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 14,
+                                                                                      color: MyColor.greyText,
+                                                                                      fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            // SizedBox(
+                                                                            //   // color: Colors.amber,
+                                                                            //   // height: screens.height * 0.08,
+                                                                            //   width: screens.width * 0.20,
+                                                                            //   child: const Row(
+                                                                            //     mainAxisAlignment: MainAxisAlignment.center,
+                                                                            //     children: [
+                                                                            //       Text(
+                                                                            //         "",
+                                                                            //         style: TextStyle(
+                                                                            //           fontSize: 14,
+                                                                            //           color: MyColor.greyText,
+                                                                            //           fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                            //           fontWeight: FontWeight.w400,
+                                                                            //         ),
+                                                                            //       ),
+                                                                            //     ],
+                                                                            //   ),
+                                                                            // ),
+                                                                            SizedBox(
+                                                                              // color: Colors.amber,
+                                                                              // height: screens.height * 0.08,
+                                                                              width: screens.width * 0.10,
+                                                                              // child: const Row(
+                                                                              //   mainAxisAlignment:
+                                                                              //       MainAxisAlignment.center,
+                                                                              //   children: [
+                                                                              //     Text(
+                                                                              //       "Fuel Station",
+                                                                              //       style: TextStyle(
+                                                                              //         fontSize: 14,
+                                                                              //         color: MyColor.greyText,
+                                                                              //         fontFamily: ColorFamily
+                                                                              //             .fontsSFProDisplay,
+                                                                              //         fontWeight:
+                                                                              //             FontWeight.w400,
+                                                                              //       ),
+                                                                              //     ),
+                                                                              //   ],
+                                                                              // ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        dividerUi(),
+                                                                        ListView
+                                                                            .builder(
+                                                                          physics:
+                                                                              const NeverScrollableScrollPhysics(),
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          itemCount: tripdetails
+                                                                              .data!
+                                                                              .endTrip!
+                                                                              .length,
+                                                                          itemBuilder:
+                                                                              (BuildContext context, index) {
+                                                                            return Padding(
+                                                                              padding: const EdgeInsets.all(2.0),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                    children: [
+                                                                                      SizedBox(
+                                                                                        // color: Colors.amber,
+                                                                                        width: screens.width * 0.40,
+                                                                                        child: Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          children: [
+                                                                                            Container(
+                                                                                              height: 40,
+                                                                                              width: 40,
+                                                                                              decoration: BoxDecoration(
+                                                                                                border: Border.all(width: 1, color: MyColor.button),
+                                                                                                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                                                                              ),
+                                                                                              child: InkWell(
+                                                                                                onTap: () {
+                                                                                                  Navigator.push(
+                                                                                                    context,
+                                                                                                    MaterialPageRoute(
+                                                                                                      builder: (context) => LargeImages(
+                                                                                                        imagesUrl: tripdetails.data!.endTrip![index].odometerImage.toString(),
+                                                                                                        nameProperty: "End Trip",
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  );
+                                                                                                },
+                                                                                                child: ClipRRect(
+                                                                                                  borderRadius: const BorderRadius.all(Radius.circular(09)),
+                                                                                                  child: CachedNetworkImage(
+                                                                                                    imageUrl: tripdetails.data!.endTrip![index].odometerImage.toString(),
+                                                                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
+                                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                                      child: CircularProgressIndicator(
+                                                                                                        color: MyColor.button,
+                                                                                                        value: downloadProgress.progress,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                                                                                    fit: BoxFit.fill,
+                                                                                                    height: screens.height * 0.08,
+                                                                                                    width: screens.width * 0.08,
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        // color: Colors.amber,
+                                                                                        width: screens.width * 0.40,
+                                                                                        child: Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          children: [
+                                                                                            Container(
+                                                                                              height: 40,
+                                                                                              width: 40,
+                                                                                              decoration: BoxDecoration(
+                                                                                                border: Border.all(width: 1, color: MyColor.button),
+                                                                                                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                                                                              ),
+                                                                                              child: InkWell(
+                                                                                                onTap: () {
+                                                                                                  Navigator.push(
+                                                                                                    context,
+                                                                                                    MaterialPageRoute(
+                                                                                                      builder: (context) => LargeImages(
+                                                                                                        imagesUrl: tripdetails.data!.endTrip![index].dieselMeterImage.toString(),
+                                                                                                        nameProperty: "End Trip",
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  );
+                                                                                                },
+                                                                                                child: ClipRRect(
+                                                                                                  borderRadius: const BorderRadius.all(Radius.circular(09)),
+                                                                                                  child: CachedNetworkImage(
+                                                                                                    imageUrl: tripdetails.data!.endTrip![index].dieselMeterImage.toString(),
+                                                                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Padding(
+                                                                                                      padding: const EdgeInsets.all(8.0),
+                                                                                                      child: CircularProgressIndicator(
+                                                                                                        color: MyColor.button,
+                                                                                                        value: downloadProgress.progress,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                                                                                    fit: BoxFit.fill,
+                                                                                                    height: screens.height * 0.08,
+                                                                                                    width: screens.width * 0.08,
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        // color: Colors.amber,
+                                                                                        // height: screens.height * 0.08,
+                                                                                        width: screens.width * 0.10,
+                                                                                        // c
+                                                                                      ),
+                                                                                      // Content below the Divider
+                                                                                    ],
+                                                                                  ),
+                                                                                  // const Row(
+                                                                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  //   children: [
+                                                                                  //     Text(
+                                                                                  //       "Description",
+                                                                                  //       style: TextStyle(
+                                                                                  //         fontSize: 14,
+                                                                                  //         color: MyColor.greyText,
+                                                                                  //         fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  //         fontWeight: FontWeight.w400,
+                                                                                  //       ),
+                                                                                  //     ),
+                                                                                  //   ],
+                                                                                  // ),
+                                                                                  // Row(
+                                                                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  //   children: [
+                                                                                  //     Expanded(
+                                                                                  //       child: Text(
+                                                                                  //         tripdetails.data!.otherCharges![index].description.toString(),
+                                                                                  //         style: const TextStyle(
+                                                                                  //           fontSize: 14,
+                                                                                  //           color: MyColor.black,
+                                                                                  //           fontFamily: ColorFamily.fontsSFProDisplay,
+                                                                                  //           fontWeight: FontWeight.w400,
+                                                                                  //         ),
+                                                                                  //       ),
+                                                                                  //     ),
+                                                                                  //   ],
+                                                                                  // ),
+                                                                                  dividerUi()
+                                                                                ],
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : SizedBox(
+                                                              height: MediaQuery.of(context).size.height * 0.70,
+                                                              child: const Center(
+                                                                child: Text(
+                                                                    "No data"),
+                                                              )),
                 ],
               ),
             ),
@@ -4018,6 +4354,9 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
       if (tripdetails.data!.deliveryNote!.isNotEmpty) {
         tripData.add("Delivery Information");
       }
+      if (tripdetails.data!.endTrip!.isNotEmpty) {
+        tripData.add("End Trip");
+      }
 
       setState(() {
         loading1 = false;
@@ -4079,14 +4418,16 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
       } else {
         Fluttertoast.showToast(msg: jsonResponse['message']);
       }
-    }else if(jsonResponse['status'] != true){
+    } else if (jsonResponse['status'] != true) {
       Fluttertoast.showToast(msg: jsonResponse['message']);
     }
     return Statusresponse.fromJson(jsonDecode(response.body));
   }
 
   button() {
-    return tripdetails.data!.addOnDiesels!.isEmpty && indexbutton != 1
+    return tripdetails.data!.addOnDiesels!.isEmpty &&
+            indexbutton != 1 &&
+            tripdetails.data!.status != "Completed"
         ? Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 15),
             child: Row(
@@ -4144,11 +4485,13 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
           name: "Loading"),
     )
         : */
-        tripdetails.data!.status.toString() == "Loading" &&
+        tripdetails.data!.status.toString() != "Loading" &&
+                    tripdetails.data!.status != "Completed" &&
                     tripdetails.data!.isStatus.toString() != "On the way" &&
                     tripdetails.data!.addOnDiesels!.isEmpty ||
                 tripdetails.data!.addOnDiesels!.isEmpty &&
-                    btnName == "Start Trip"
+                    btnName == "Start Trip" &&
+                    tripdetails.data!.status != "Completed"
             ? Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: AppButton(
