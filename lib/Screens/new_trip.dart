@@ -350,7 +350,9 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                 ),
               ),
               SizedBox(height: 10,),*/
-                            tripdetails.data!.isStatus.toString() != "Delivered"
+                            tripdetails.data!.isStatus.toString() !=
+                                        "Delivered" &&
+                                    tripdetails.data!.enrouteDiesels!.isEmpty
                                 ? AppButton(
                                     textStyle: const TextStyle(
                                       color: MyColor.white,
