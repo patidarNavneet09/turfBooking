@@ -409,8 +409,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -463,7 +463,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -584,6 +584,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
+                        isLoading: isLoading,
                         // color: MyColor.transparent,
                         textStyle: const TextStyle(
                           color: MyColor.white,
