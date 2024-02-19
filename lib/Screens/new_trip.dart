@@ -2877,7 +2877,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                         // color: Colors.amber,
                                                                         // height: screens.height * 0.08,
                                                                         width: screens.width *
-                                                                            0.20,
+                                                                            0.30,
                                                                         child:
                                                                             Row(
                                                                           mainAxisAlignment:

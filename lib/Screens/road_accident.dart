@@ -416,7 +416,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: costController,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Cost (id any)"),
                 ),
@@ -508,8 +508,8 @@ class _RoadAccidentState extends State<RoadAccident> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -562,7 +562,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
