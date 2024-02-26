@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:truckmanagement/Screens/road_accident.dart';
 import 'package:truckmanagement/Screens/enroute_diesel.dart';
@@ -7,6 +8,7 @@ import 'package:truckmanagement/Screens/repairs.dart';
 import 'package:truckmanagement/Screens/tolls.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 
 class ExpentionType extends StatefulWidget {
   final String? tripId;
@@ -23,9 +25,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Select Expenses Type",
-          style: TextStyle(
+        title: Text(
+          MyString.SelectExpensesType.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -59,9 +61,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Enroute Diesel ",
-                      style: TextStyle(
+                    leading: Text(
+                      MyString.EnrouteDiesel.tr(),
+                      style: const TextStyle(
                         fontSize: 16,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -88,9 +90,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Repairs",
-                      style: TextStyle(
+                    leading: Text(
+                      MyString.Repairs.tr(),
+                      style: const TextStyle(
                         fontSize: 16,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -117,9 +119,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Tolls",
-                      style: TextStyle(
+                    leading: Text(
+                      MyString.Tolls.tr(),
+                      style: const TextStyle(
                         fontSize: 16,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -146,9 +148,9 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Road Accidents",
-                      style: TextStyle(
+                    leading: Text(
+                      MyString.RoadAccidents.tr(),
+                      style: const TextStyle(
                         fontSize: 16,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -175,8 +177,8 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Fines",
+                    leading: Text(
+                      MyString.Fines.tr(),
                       style: TextStyle(
                         fontSize: 16,
                         color: MyColor.black,
@@ -204,8 +206,8 @@ class _ExpentionTypeState extends State<ExpentionType> {
                                   tripId: widget.tripId,
                                   truckId: widget.truckId)));
                     },
-                    leading: const Text(
-                      "Other Charges",
+                    leading: Text(
+                      MyString.OtherCharges.tr(),
                       style: TextStyle(
                         fontSize: 16,
                         color: MyColor.black,

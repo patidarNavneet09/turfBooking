@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/endiesel.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -175,8 +177,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Enroute Diesel",
+        title: Text(
+          MyString.EnrouteDiesel.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -244,14 +246,14 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   controller: enterNameOFStatationController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                      hintText: "   Enter name of petrol station"),
+                      hintText: MyString.Enternameofpetrolstation.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo",
+              Text(
+                MyString.Uploadphoto.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -293,7 +295,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                  msg: MyString.Youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -318,8 +320,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                           height: 62,
                           child: imageFileListBanner.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -372,7 +374,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -408,8 +410,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -418,8 +419,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -515,22 +515,23 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact quantity in liters");
+                                msg: MyString.Fillexactquantityinliters.tr());
                           } else if (unitPrice.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact unit price");
+                                msg: MyString.Fillexactunitprice.tr());
                           } else if (enterNameOFStatation.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact Enter name of petrol station");
+                                msg: MyString.FillexactEnternameofpetrolstation
+                                    .tr());
                           } else if (imageFileListBanner.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo");
+                                msg: MyString.Pleaseuploadphoto.tr());
                           } else {
                             enRouteddieselApi(context, quantityLiters,
                                 unitPrice, enterNameOFStatation);
@@ -542,7 +543,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: "Submit"),
+                        name: MyString.Submit.tr()),
                   ],
                 ),
               )
@@ -564,8 +565,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -592,8 +593,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -616,8 +617,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

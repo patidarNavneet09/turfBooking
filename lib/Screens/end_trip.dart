@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/end_tripmodel.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:image_picker/image_picker.dart';
@@ -282,8 +284,8 @@ class _EndTripscrState extends State<EndTripscr> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "End Trip",
+        title: Text(
+          MyString.EndTrip.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -309,8 +311,8 @@ class _EndTripscrState extends State<EndTripscr> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo of the diesel meter",
+              Text(
+                MyString.Uploadphotoofthedieselmeter.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -352,7 +354,7 @@ class _EndTripscrState extends State<EndTripscr> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                  msg: MyString.Youselectonlyoneimages);
                             }
                           },
                           child: DottedBorder(
@@ -377,8 +379,8 @@ class _EndTripscrState extends State<EndTripscr> {
                           height: 62,
                           child: imageFileListBanner.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -431,7 +433,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -467,8 +469,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -477,8 +478,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -549,8 +549,8 @@ class _EndTripscrState extends State<EndTripscr> {
               // const SizedBox(
               //   height: 10,
               // ),
-              const Text(
-                "  Upload photo of Odometer",
+              Text(
+                MyString.UploadphotoofOdometer.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -592,7 +592,7 @@ class _EndTripscrState extends State<EndTripscr> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                  msg: MyString.Youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -617,8 +617,8 @@ class _EndTripscrState extends State<EndTripscr> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -671,7 +671,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -707,8 +707,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -717,8 +716,7 @@ class _EndTripscrState extends State<EndTripscr> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -805,12 +803,13 @@ class _EndTripscrState extends State<EndTripscr> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo of the diesel meter");
+                                msg: MyString.Pleaseuploadphotoofthedieselmeter
+                                    .tr());
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo of odometer");
+                                msg: MyString.Pleaseuploadphotoofodometer.tr());
                           } else {
                             endTripApi(context);
                           }
@@ -821,7 +820,7 @@ class _EndTripscrState extends State<EndTripscr> {
                           //         builder: (context) =>
                           //             const AddonAddExpenstion()));
                         },
-                        name: "End Trip"),
+                        name: MyString.EndTrip.tr()),
                   ],
                 ),
               )
@@ -843,8 +842,8 @@ class _EndTripscrState extends State<EndTripscr> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -874,8 +873,8 @@ class _EndTripscrState extends State<EndTripscr> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -902,8 +901,8 @@ class _EndTripscrState extends State<EndTripscr> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

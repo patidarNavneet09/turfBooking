@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/Screens/privacy_policy.dart';
 import 'package:truckmanagement/Screens/term_condition.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 import '../constant/apiconstant.dart';
@@ -115,10 +117,10 @@ class _SettingState extends State<Setting> {
                                         builder: (context) =>
                                             const ProfileSetting()));
                               },
-                              child: const Padding(
+                              child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  "Edit Profile",
+                                  MyString.EditProfile.tr(),
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: MyColor.white,
@@ -276,8 +278,8 @@ class _SettingState extends State<Setting> {
                                             const SizedBox(
                                               width: 15,
                                             ),
-                                            const Text(
-                                              "Terms & Conditions",
+                                            Text(
+                                              MyString.TermsConditions.tr(),
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,
@@ -337,8 +339,8 @@ class _SettingState extends State<Setting> {
                                             const SizedBox(
                                               width: 15,
                                             ),
-                                            const Text(
-                                              "Privacy Policy",
+                                            Text(
+                                              MyString.PrivacyPolicy.tr(),
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,
@@ -369,9 +371,9 @@ class _SettingState extends State<Setting> {
                                   context: context,
                                   builder: (BuildContext context) =>
                                       AlertDialog(
-                                    title: const Center(
+                                    title: Center(
                                       child: Text(
-                                        "Are you sure, you want to logout ?",
+                                        MyString.Areyousureyouwanttologout.tr(),
                                         style: TextStyle(
                                           fontSize: 15,
                                           color: MyColor.button,
@@ -404,7 +406,7 @@ class _SettingState extends State<Setting> {
                                                       .size
                                                       .width *
                                                   0.25,
-                                              name: 'Yes',
+                                              name: MyString.Yes.tr(),
                                               onPressed: () {
                                                 logout(context);
                                               },
@@ -435,7 +437,7 @@ class _SettingState extends State<Setting> {
                                                       .size
                                                       .width *
                                                   0.25,
-                                              name: 'No',
+                                              name: MyString.No.tr(),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
@@ -474,8 +476,8 @@ class _SettingState extends State<Setting> {
                                             const SizedBox(
                                               width: 15,
                                             ),
-                                            const Text(
-                                              "Logout",
+                                            Text(
+                                              MyString.Logout.tr(),
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -308,8 +310,8 @@ class _FinesScreenState extends State<FinesScreen> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Fines",
+        title: Text(
+          MyString.Fines.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -345,7 +347,7 @@ class _FinesScreenState extends State<FinesScreen> {
                   controller: fineController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Fine Name"),
+                      .prefixIconTextField(hintText: MyString.FineName.tr()),
                 ),
               ),
               const SizedBox(
@@ -362,7 +364,7 @@ class _FinesScreenState extends State<FinesScreen> {
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Amount"),
+                      .prefixIconTextField(hintText: MyString.Amount.tr()),
                 ),
               ),
               const SizedBox(
@@ -380,14 +382,14 @@ class _FinesScreenState extends State<FinesScreen> {
                   keyboardType: TextInputType.text,
                   maxLines: 5,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Description"),
+                      .prefixIconTextField(hintText: MyString.Description.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo",
+              Text(
+                MyString.Uploadphoto.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -429,7 +431,7 @@ class _FinesScreenState extends State<FinesScreen> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                  msg: MyString.Youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -454,8 +456,8 @@ class _FinesScreenState extends State<FinesScreen> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -508,7 +510,7 @@ class _FinesScreenState extends State<FinesScreen> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -544,8 +546,7 @@ class _FinesScreenState extends State<FinesScreen> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -554,8 +555,7 @@ class _FinesScreenState extends State<FinesScreen> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -646,22 +646,22 @@ class _FinesScreenState extends State<FinesScreen> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please enter fine name");
+                                msg: MyString.Pleaseenterfinename.tr());
                           } else if (amount.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please enter amount");
+                                msg: MyString.Pleaseenteramount.tr());
                           } else if (description.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please enter description");
+                                msg: MyString.Pleaseenterdescription.tr());
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo");
+                                msg: MyString.Pleaseuploadphoto.tr());
                           } else {
                             finesApi(
                               context,
@@ -678,7 +678,7 @@ class _FinesScreenState extends State<FinesScreen> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: "Submit"),
+                        name: MyString.Submit.tr()),
                   ],
                 ),
               )
@@ -699,8 +699,8 @@ class _FinesScreenState extends State<FinesScreen> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -727,8 +727,8 @@ class _FinesScreenState extends State<FinesScreen> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -751,8 +751,8 @@ class _FinesScreenState extends State<FinesScreen> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

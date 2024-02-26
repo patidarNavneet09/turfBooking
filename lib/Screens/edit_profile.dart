@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
@@ -11,6 +12,7 @@ import 'dart:convert' as convert;
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 
 class ProfileSetting extends StatefulWidget {
   const ProfileSetting({super.key});
@@ -71,8 +73,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "My Trips",
+        title: Text(
+          MyString.MyTrips.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -232,8 +234,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      "First Name",
+                    Text(
+                      MyString.FirstName.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
@@ -269,7 +271,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //         states.contains(MaterialState.focused)
                                 //             ? MyColor.black
                                 //             : Colors.grey),
-                                hintText: "  James",
+                                hintText: MyString.James.tr(),
                                 hintStyle: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: ColorFamily.fontsSFProDisplay,
@@ -292,8 +294,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      "Last Name",
+                    Text(
+                      MyString.LastName.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
@@ -334,7 +336,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                               //     (states) => states.contains(MaterialState.focused)
                               //         ? MyColor.black
                               //         : Colors.grey),
-                              hintText: "  Smith",
+                              hintText: MyString.Smith.tr(),
                               hintStyle: const TextStyle(
                                   color: MyColor.black,
                                   fontFamily: ColorFamily.fontsSFProDisplay,
@@ -358,8 +360,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      "Phone Number",
+                    Text(
+                      MyString.PhoneNumber.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
@@ -424,8 +426,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      "Email",
+                    Text(
+                      MyString.Email.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
@@ -472,7 +474,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //         states.contains(MaterialState.focused)
                                 //             ? MyColor.black
                                 //             : Colors.grey),
-                                hintText: "  james@gmail.com",
+                                hintText: MyString.James.tr(),
 
                                 hintStyle: const TextStyle(
                                     color: MyColor.greyText,
@@ -587,8 +589,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -616,8 +618,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -639,8 +641,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.button,

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/notificationmodel.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import '../constant/AppColor/app_colors.dart';
 import '../constant/app_fontfamily.dart';
 import 'dart:convert' as convert;
@@ -56,8 +58,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
           : Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: const Text(
-                  "Notifications",
+                title: Text(
+                  MyString.Notifications.tr(),
                   style: TextStyle(
                     color: MyColor.black,
                     fontWeight: FontWeight.w600,
@@ -92,11 +94,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             })
                         : SizedBox(
                             height: data.size.height * 0.75,
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Center(child: Text("No notification")),
+                                Center(
+                                    child: Text(
+                                  MyString.Nonotification.tr(),
+                                )),
                               ],
                             ),
                           ),

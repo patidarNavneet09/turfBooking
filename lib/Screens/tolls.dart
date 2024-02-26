@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/tollrespo.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -286,8 +288,8 @@ class _TollsScreenState extends State<TollsScreen> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Tolls",
+        title: Text(
+          MyString.Tolls.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -320,8 +322,9 @@ class _TollsScreenState extends State<TollsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: tollNameController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Toll Name"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.TollName.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -337,16 +340,17 @@ class _TollsScreenState extends State<TollsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: amountController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Amount"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.Amount.tr(),
+                  ),
                 ),
               ),
 
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo",
+              Text(
+                MyString.Uploadphoto.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -386,9 +390,10 @@ class _TollsScreenState extends State<TollsScreen> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.Youselectonlyoneimages.tr(),
+                              );
                             }
                           },
                           child: DottedBorder(
@@ -413,8 +418,8 @@ class _TollsScreenState extends State<TollsScreen> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -467,7 +472,7 @@ class _TollsScreenState extends State<TollsScreen> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -503,8 +508,7 @@ class _TollsScreenState extends State<TollsScreen> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -513,8 +517,7 @@ class _TollsScreenState extends State<TollsScreen> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -592,46 +595,47 @@ class _TollsScreenState extends State<TollsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
-                        // color: MyColor.transparent,
-                        textStyle: const TextStyle(
-                          color: MyColor.white,
-                          fontSize: 16,
-                          fontFamily: ColorFamily.fontsSFProDisplay,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        btnWidth: MediaQuery.of(context).size.width * 0.90,
-                        onPressed: () {
-                          var tollname = tollNameController.text;
-                          var amount = amountController.text;
-                          if (tollname.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill  tollname name");
-                          } else if (amount.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill  amount");
-                          } else if (imageFileListBanner2.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo");
-                          } else {
-                            enRouteddieselApi(
-                              context,
-                              tollname,
-                              amount,
-                            );
-                          }
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const addonAddExpenstion()));
-                        },
-                        name: "Submit"),
+                      // color: MyColor.transparent,
+                      textStyle: const TextStyle(
+                        color: MyColor.white,
+                        fontSize: 16,
+                        fontFamily: ColorFamily.fontsSFProDisplay,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      btnWidth: MediaQuery.of(context).size.width * 0.90,
+                      onPressed: () {
+                        var tollname = tollNameController.text;
+                        var amount = amountController.text;
+                        if (tollname.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Filltollnamename.tr(),
+                          );
+                        } else if (amount.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillamount.tr(),
+                          );
+                        } else if (imageFileListBanner2.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Pleaseuploadphoto.tr(),
+                          );
+                        } else {
+                          enRouteddieselApi(
+                            context,
+                            tollname,
+                            amount,
+                          );
+                        }
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const addonAddExpenstion()));
+                      },
+                      name: MyString.Submit.tr(),
+                    ),
                   ],
                 ),
               )
@@ -653,8 +657,8 @@ class _TollsScreenState extends State<TollsScreen> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -681,8 +685,8 @@ class _TollsScreenState extends State<TollsScreen> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -705,8 +709,8 @@ class _TollsScreenState extends State<TollsScreen> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

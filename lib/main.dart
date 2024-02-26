@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/Screens/login_screen.dart';
 import 'package:truckmanagement/Screens/notifiction_hendler.dart';
+import 'package:truckmanagement/constant/utility.dart';
 
 String fcmtoken = "";
 FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -44,6 +46,7 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -57,7 +60,19 @@ Future<void> main() async {
   });
   islogin = sharedPreferences.getBool("isLogin");
   FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
-  runApp(const MyApp());
+  var locale = await Utility.getLanguage();
+  runApp(EasyLocalization(
+    supportedLocales: const [
+      //English en-US, Italian it-IT, German de-DE, French fr-FR
+      Locale('en', 'US'),
+      // Locale('it', 'IT'),
+      // Locale('de', 'DE'),
+      // Locale('fr', 'FR'),
+    ],
+    path: 'assets/translations',
+    fallbackLocale: locale,
+    child: MyApp(),
+  ));
 }
 
 Future<void> _backgroundHandler(RemoteMessage message) async {

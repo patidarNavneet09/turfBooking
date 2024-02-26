@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 
 class Utility {
@@ -24,6 +26,46 @@ class Utility {
       // textColor: Colors.white,
       // fontSize: 16.0
     );
+  }
+
+  static setLanguage(String language, BuildContext context) async {
+    ///For now in development, we don't user any other language so we comment this code
+    String countryCode = "";
+    if (language == "en") {
+      countryCode = "US";
+    }
+    // else if (language == "de") {
+    //   countryCode = "DE";
+    // } else if (language == "fr") {
+    //   countryCode = "FR";
+    // } else if (language == "it") {
+    //   countryCode = "IT";
+    // } else {
+    //   countryCode = "US";
+    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("language", language);
+    context.setLocale(Locale(language, countryCode));
+  }
+
+  static Future<Locale?>? getLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? language = prefs.getString('language');
+    language ??= "en";
+    String countryCode = "US";
+    if (language == "en") {
+      countryCode = "US";
+    }
+    // else if (language == "it") {
+    //   countryCode = "IT";
+    // } else if (language == 'de') {
+    //   countryCode = "DE";
+    // } else if (language == "fr") {
+    //   countryCode = "FR";
+    // } else {
+    //   countryCode = "US";
+    // }
+    return Locale(language.toString(), countryCode);
   }
 
   static progressloadingDialog(BuildContext context, bool status) async {

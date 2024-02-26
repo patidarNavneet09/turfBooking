@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/repairmodel.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -295,8 +297,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Repairs",
+        title: Text(
+          MyString.Repairs.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -329,8 +331,9 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: shopNameController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Shop Name"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.ShopName.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -346,8 +349,9 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: repairNameController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Repair Name"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.RepairName.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -363,8 +367,9 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: repairCostController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Repair Cost"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.RepairCost.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -380,8 +385,9 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: spareNameController,
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Spare Name"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.SpareName.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -397,8 +403,9 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: sparecostController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Spare Cost"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.SpareCost.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -414,16 +421,17 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: totalAmountController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Total Amount"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.TotalAmount.tr(),
+                  ),
                 ),
               ),
 
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo",
+              Text(
+                MyString.Uploadphoto.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -463,9 +471,10 @@ class _RepairsScreenState extends State<RepairsScreen> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.Youselectonlyoneimages.tr(),
+                              );
                             }
                           },
                           child: DottedBorder(
@@ -490,8 +499,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                           height: 62,
                           child: imageFileListBanner2.isEmpty
                               ? Visibility(
-                            visible: false,
-                                child: Padding(
+                                  visible: false,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 2, bottom: 2),
                                     child: SizedBox(
@@ -544,7 +553,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                                       ),
                                     ),
                                   ),
-                              )
+                                )
                               : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
@@ -580,8 +589,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                                                                   .button),
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           12)),
                                                         ),
@@ -590,8 +598,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               const BorderRadius
-                                                                      .all(
-                                                                  Radius
+                                                                  .all(Radius
                                                                       .circular(
                                                                           10)),
                                                           child: Image.file(
@@ -669,73 +676,74 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppButton(
-                        // color: MyColor.transparent,
-                        textStyle: const TextStyle(
-                          color: MyColor.white,
-                          fontSize: 16,
-                          fontFamily: ColorFamily.fontsSFProDisplay,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        btnWidth: MediaQuery.of(context).size.width * 0.90,
-                        onPressed: () {
-                          var shopname = shopNameController.text;
+                      // color: MyColor.transparent,
+                      textStyle: const TextStyle(
+                        color: MyColor.white,
+                        fontSize: 16,
+                        fontFamily: ColorFamily.fontsSFProDisplay,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      btnWidth: MediaQuery.of(context).size.width * 0.90,
+                      onPressed: () {
+                        var shopname = shopNameController.text;
 
-                          var reparename = repairNameController.text;
+                        var reparename = repairNameController.text;
 
-                          var repaircost = repairCostController.text;
+                        var repaircost = repairCostController.text;
 
-                          var sparename = spareNameController.text;
+                        var sparename = spareNameController.text;
 
-                          var sparecost = sparecostController.text;
+                        var sparecost = sparecostController.text;
 
-                          var totalamount = totalAmountController.text;
-                          if (shopname.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill  shop name");
-                          } else if (reparename.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill repaire name ");
-                          } else if (repaircost.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill repair cost");
-                          } else if (sparename.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill spare name");
-                          } else if (sparecost.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill spare cost");
-                          } else if (totalamount.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill total amount");
-                          } else if (imageFileListBanner2.isEmpty == true) {
-                            Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Please upload photo");
-                          } else {
-                            enRouteddieselApi(context, shopname, reparename,
-                                repaircost, sparename, sparecost, totalamount);
-                          }
+                        var totalamount = totalAmountController.text;
+                        if (shopname.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillshopname.tr(),
+                          );
+                        } else if (reparename.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillrepairename.tr(),
+                          );
+                        } else if (repaircost.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillrepaircost.tr(),
+                          );
+                        } else if (sparename.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillsparename.tr(),
+                          );
+                        } else if (sparecost.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Fillsparecost.tr(),
+                          );
+                        } else if (totalamount.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Filltotalamount.tr(),
+                          );
+                        } else if (imageFileListBanner2.isEmpty == true) {
+                          Utility.getToast(
+                            toastColor: const Color.fromARGB(255, 34, 71, 99),
+                            msg: MyString.Pleaseuploadphoto.tr(),
+                          );
+                        } else {
+                          enRouteddieselApi(context, shopname, reparename,
+                              repaircost, sparename, sparecost, totalamount);
+                        }
 
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const addonAddExpenstion()));
-                        },
-                        name: "Submit"),
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const addonAddExpenstion()));
+                      },
+                      name: MyString.Submit.tr(),
+                    ),
                   ],
                 ),
               )
@@ -757,8 +765,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -785,8 +793,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -809,8 +817,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

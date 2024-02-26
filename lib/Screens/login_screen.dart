@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/main.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -98,8 +100,8 @@ class _LoginState extends State<Login> {
 
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Login",
+        title: Text(
+          MyString.Login.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -122,8 +124,8 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 25,
             ),
-            const Text(
-              "SENOTRACK",
+            Text(
+              MyString.SENOTRACK.tr(),
               style: TextStyle(
                   fontSize: 28,
                   color: Color(0xFF075693),
@@ -187,7 +189,7 @@ class _LoginState extends State<Login> {
                     //         states.contains(MaterialState.focused)
                     //             ? MyColor.black
                     //             : Colors.grey),
-                    hintText: "  Email",
+                    hintText: MyString.Email.tr(),
                     hintStyle: const TextStyle(
                         color: Colors.black,
                         fontFamily: ColorFamily.fontsSFProDisplay,
@@ -265,7 +267,7 @@ class _LoginState extends State<Login> {
                           //         states.contains(MaterialState.focused)
                           //             ? MyColor.black
                           //             : Colors.grey),
-                          hintText: "  Password",
+                          hintText: MyString.Password.tr(),
                           hintStyle: const TextStyle(
                               color: Colors.black,
                               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -307,10 +309,10 @@ class _LoginState extends State<Login> {
                         String password = passwordController.text;
                         if (email.isEmpty) {
                           Fluttertoast.showToast(
-                              msg: "Please Enter Your Email");
+                              msg: MyString.PleaseEnterYourEmail.tr());
                         } else if (password.isEmpty) {
                           Fluttertoast.showToast(
-                              msg: "Please Enter Your Password");
+                              msg: MyString.PleaseEnterYourPassword.tr());
                         } else {
                           loginApi(context);
                         }

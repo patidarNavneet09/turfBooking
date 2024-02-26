@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'dart:convert' as convert;
 
 import '../Model/statusresponsemodel.dart';
@@ -176,8 +178,8 @@ class _HomescreenState extends State<Homescreen> {
                                                           FontWeight.w600,
                                                     ),
                                                   ),
-                                                  const Text(
-                                                    "Welcome back",
+                                                  Text(
+                                                    MyString.Welcomeback.tr(),
                                                     // getGreeting(),
                                                     style: TextStyle(
                                                       fontSize: 13,
@@ -237,8 +239,8 @@ class _HomescreenState extends State<Homescreen> {
                           SizedBox(
                             height: screen.height * 0.02,
                           ),
-                          const Text(
-                            "My Trips",
+                          Text(
+                            MyString.MyTrips.tr(),
                             style: TextStyle(
                               fontSize: 18,
                               color: MyColor.black,
@@ -291,7 +293,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          "New Jobs",
+                                          MyString.NewJobs.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 0
@@ -334,7 +336,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          "Active",
+                                          MyString.Active.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 1
@@ -377,7 +379,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          "Completed",
+                                          MyString.Completed.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 2
@@ -401,13 +403,15 @@ class _HomescreenState extends State<Homescreen> {
                                       "Trips not Found!"
                               ? SizedBox(
                                   height: screen.height * 0.545,
-                                  child: const Column(
+                                  child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
                                       Center(
-                                        child: Text("No Data"),
+                                        child: Text(
+                                          MyString.NoData.tr(),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -418,14 +422,16 @@ class _HomescreenState extends State<Homescreen> {
                                           ? SizedBox(
                                               // color: Colors.amber,
                                               height: screen.height * 0.45,
-                                              child: const Column(
+                                              child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
                                                   Center(
-                                                    child: Text("No Data"),
+                                                    child: Text(
+                                                      MyString.NoData.tr(),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -517,8 +523,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      const Text(
-                                                                                        "Trip Name",
+                                                                                      Text(
+                                                                                        MyString.TripName.tr(),
                                                                                         style: TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
@@ -549,7 +555,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         width: 5,
                                                                                       ),
                                                                                       Text(
-                                                                                        myTrip.data![index].status.toString() == "Pending" ? "New Jobs" : "",
+                                                                                        myTrip.data![index].status.toString() == "Pending" ? MyString.NewJobs.tr() : "",
                                                                                         style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.cardpendding,
@@ -590,8 +596,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      const Text(
-                                                                                        "Start Date",
+                                                                                      Text(
+                                                                                        MyString.StartDate.tr(),
                                                                                         style: TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
@@ -643,8 +649,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
-                                                                                  const Text(
-                                                                                    "Loading Location",
+                                                                                  Text(
+                                                                                    MyString.LoadingLocation.tr(),
                                                                                     style: TextStyle(
                                                                                       fontSize: 12,
                                                                                       color: MyColor.textcolor,
@@ -685,7 +691,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                               width: MediaQuery.of(context).size.width * 0.02,
                                                                             ),
                                                                             Padding(
-                                                                              padding: const EdgeInsets.only(top: 5,right: 0,left: 0),
+                                                                              padding: const EdgeInsets.only(top: 5, right: 0, left: 0),
                                                                               child: SizedBox(height: 22, width: MediaQuery.of(context).size.width * 0.05, child: Image.asset("assets/images/cargotype.png")),
                                                                             ),
                                                                             SizedBox(
@@ -702,8 +708,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      const Text(
-                                                                                        "Cargo Type",
+                                                                                      Text(
+                                                                                        MyString.CargoType.tr(),
                                                                                         style: TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
@@ -744,9 +750,9 @@ class _HomescreenState extends State<Homescreen> {
                                                                                           ),
                                                                                           bottomRight: Radius.circular(10)),
                                                                                     ),
-                                                                                    child: const Center(
+                                                                                    child: Center(
                                                                                       child: Text(
-                                                                                        "View Detail",
+                                                                                        MyString.ViewDetail.tr(),
                                                                                         style: TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.white,
@@ -778,7 +784,7 @@ class _HomescreenState extends State<Homescreen> {
                                           child: myTrip.data!.isEmpty
                                               ? SizedBox(
                                                   height: screen.height * 0.45,
-                                                  child: const Column(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
@@ -787,7 +793,9 @@ class _HomescreenState extends State<Homescreen> {
                                                             .center,
                                                     children: [
                                                       Center(
-                                                        child: Text("No Data"),
+                                                        child: Text(
+                                                          MyString.NoData.tr(),
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -800,7 +808,7 @@ class _HomescreenState extends State<Homescreen> {
                                                       child: ListView.builder(
                                                           padding:
                                                               const EdgeInsetsDirectional
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 40),
                                                           shrinkWrap: true,
                                                           itemCount: myTrip
@@ -874,8 +882,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          const Text(
-                                                                                            "Trip Name",
+                                                                                          Text(
+                                                                                            MyString.TripName.tr(),
                                                                                             style: TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
@@ -943,8 +951,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          const Text(
-                                                                                            "Start Date",
+                                                                                          Text(
+                                                                                            MyString.StartDate.tr(),
                                                                                             style: TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
@@ -993,8 +1001,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      const Text(
-                                                                                        "Loading Location",
+                                                                                      Text(
+                                                                                        MyString.LoadingLocation.tr(),
                                                                                         style: TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
@@ -1032,7 +1040,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                                   width: MediaQuery.of(context).size.width * 0.02,
                                                                                 ),
                                                                                 Padding(
-                                                                                    padding: const EdgeInsets.only(top: 5, right: 0, left: 0),
+                                                                                  padding: const EdgeInsets.only(top: 5, right: 0, left: 0),
                                                                                   child: SizedBox(height: 22, width: MediaQuery.of(context).size.width * 0.05, child: Image.asset("assets/images/cargotype.png")),
                                                                                 ),
                                                                                 SizedBox(
@@ -1049,8 +1057,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          const Text(
-                                                                                            "Cargo Type",
+                                                                                          Text(
+                                                                                            MyString.CargoType.tr(),
                                                                                             style: TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
@@ -1091,9 +1099,9 @@ class _HomescreenState extends State<Homescreen> {
                                                                                               ),
                                                                                               bottomRight: Radius.circular(10)),
                                                                                         ),
-                                                                                        child: const Center(
+                                                                                        child: Center(
                                                                                           child: Text(
-                                                                                            "View Detail",
+                                                                                            MyString.ViewDetail.tr(),
                                                                                             style: TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.white,
@@ -1126,7 +1134,7 @@ class _HomescreenState extends State<Homescreen> {
                                                   ? SizedBox(
                                                       height:
                                                           screen.height * 0.45,
-                                                      child: const Column(
+                                                      child: Column(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,
@@ -1135,8 +1143,10 @@ class _HomescreenState extends State<Homescreen> {
                                                                 .center,
                                                         children: [
                                                           Center(
-                                                            child:
-                                                                Text("No Data"),
+                                                            child: Text(
+                                                              MyString.NoData
+                                                                  .tr(),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -1149,12 +1159,13 @@ class _HomescreenState extends State<Homescreen> {
                                                                   .size
                                                                   .height *
                                                               0.545,
-                                                          child:
-                                                              ListView.builder(
-                                                                  padding: const EdgeInsetsDirectional
+                                                          child: ListView
+                                                              .builder(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
                                                                           .only(
-                                                                      bottom:
-                                                                          40),
+                                                                          bottom:
+                                                                              40),
                                                                   shrinkWrap:
                                                                       true,
                                                                   itemCount:
@@ -1210,8 +1221,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             mainAxisAlignment: MainAxisAlignment.start,
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
-                                                                                              const Text(
-                                                                                                "Trip Name",
+                                                                                              Text(
+                                                                                                MyString.TripName.tr(),
                                                                                                 style: TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
@@ -1279,8 +1290,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             mainAxisAlignment: MainAxisAlignment.start,
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
-                                                                                              const Text(
-                                                                                                "Start Date",
+                                                                                              Text(
+                                                                                                MyString.StartDate.tr(),
                                                                                                 style: TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
@@ -1329,8 +1340,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
-                                                                                          const Text(
-                                                                                            "Loading Location",
+                                                                                          Text(
+                                                                                            MyString.LoadingLocation.tr(),
                                                                                             style: TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
@@ -1385,8 +1396,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             mainAxisAlignment: MainAxisAlignment.start,
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
-                                                                                              const Text(
-                                                                                                "Cargo Type",
+                                                                                              Text(
+                                                                                                MyString.CargoType.tr(),
                                                                                                 style: TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
@@ -1427,9 +1438,9 @@ class _HomescreenState extends State<Homescreen> {
                                                                                                   ),
                                                                                                   bottomRight: Radius.circular(10)),
                                                                                             ),
-                                                                                            child: const Center(
+                                                                                            child: Center(
                                                                                               child: Text(
-                                                                                                "View Detail",
+                                                                                                MyString.ViewDetail.tr(),
                                                                                                 style: TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.white,
@@ -1494,8 +1505,8 @@ class _HomescreenState extends State<Homescreen> {
                   height: 25,
                   width: 25,
                   child: Image.asset("assets/images/Home.png")),
-              const Text(
-                "Home",
+              Text(
+                MyString.Home.tr(),
                 style: TextStyle(
                   fontSize: 10,
                   color: MyColor.white,
@@ -1514,8 +1525,8 @@ class _HomescreenState extends State<Homescreen> {
                   height: 25,
                   width: 25,
                   child: Image.asset("assets/images/setting.png")),
-              const Text(
-                "Settings",
+              Text(
+                MyString.Settings.tr(),
                 style: TextStyle(
                   fontSize: 10,
                   color: MyColor.white,

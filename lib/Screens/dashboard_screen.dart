@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:truckmanagement/Screens/notification.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/Screens/settingscreen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:location/location.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 
 class DashBoardscreen extends StatefulWidget {
   final int pagesProviderIndex;
@@ -116,7 +118,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 0 ? MyColor.white : Colors.grey)),
                   Text(
-                    "Home",
+                    MyString.Home.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 0 ? MyColor.white : Colors.grey,
@@ -149,7 +151,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 1 ? MyColor.white : Colors.grey)),
                   Text(
-                    "Settings",
+                    MyString.Settings.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 1 ? MyColor.white : Colors.grey,
@@ -184,7 +186,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 2 ? MyColor.white : Colors.grey)),
                   Text(
-                    "Notification",
+                    MyString.Notification.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 2 ? MyColor.white : Colors.grey,

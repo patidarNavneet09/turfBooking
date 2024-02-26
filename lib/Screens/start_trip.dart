@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,6 +15,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -299,8 +301,8 @@ class _StartTripState extends State<StartTrip> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Start Trip",
+        title: Text(
+          MyString.StartTrip.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -333,15 +335,17 @@ class _StartTripState extends State<StartTrip> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: kmdrivenController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Exact km driven"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                    hintText: MyString.Exactkmdriven.tr(),
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo of the diesel meter of existing diesel",
+              Text(
+                // "  Upload photo of the diesel meter of existing diesel",
+                MyString.Uploadphotoofthedieselmeterofexistingdiesel.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -383,9 +387,10 @@ class _StartTripState extends State<StartTrip> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.Youselectonlyoneimages.tr(),
+                              );
                             }
                           },
                           child: DottedBorder(
@@ -504,8 +509,7 @@ class _StartTripState extends State<StartTrip> {
                                                                     .button),
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             12)),
                                                           ),
@@ -514,8 +518,7 @@ class _StartTripState extends State<StartTrip> {
                                                           child: ClipRRect(
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             10)),
                                                             child: Image.file(
@@ -587,8 +590,8 @@ class _StartTripState extends State<StartTrip> {
               // const SizedBox(
               //   height: 10,
               // ),
-              const Text(
-                "  Upload photo of Odometer",
+              Text(
+                MyString.UploadphotoofOdometer.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -628,9 +631,10 @@ class _StartTripState extends State<StartTrip> {
                                   builder: ((builder) => bottomSheet1()));
                             } else {
                               Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.Youselectonlyoneimages.tr(),
+                              );
                             }
                           },
                           child: DottedBorder(
@@ -749,8 +753,7 @@ class _StartTripState extends State<StartTrip> {
                                                                     .button),
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             12)),
                                                           ),
@@ -759,8 +762,7 @@ class _StartTripState extends State<StartTrip> {
                                                           child: ClipRRect(
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             10)),
                                                             child: Image.file(
@@ -848,25 +850,26 @@ class _StartTripState extends State<StartTrip> {
                           var kmDriven = kmdrivenController.text;
                           if (kmDriven.isEmpty == true) {
                             Utility.getToast(
-                                toastColor:
-                                    const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact kilometer driven");
+                              toastColor: const Color.fromARGB(255, 34, 71, 99),
+                              msg: MyString.Fillexactkilometerdriven.tr(),
+                            );
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "please upload photo of Odometer ");
+                                msg: MyString.Pleaseuploadphotoofodometer.tr());
                           } else if (imageFileListBanner.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg:
-                                    "please upload photo diesel meter of existing diesel");
+                                msg: MyString
+                                    .pleaseuploadphotodieselmeterofexistingdiesel
+                                    .tr());
                           } else if (currentLocation == null) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "please refresh home page");
+                                msg: MyString.pleaserefreshhomepage.tr());
                           } else {
                             startTripApi(context, kmDriven);
                           }
@@ -907,8 +910,8 @@ class _StartTripState extends State<StartTrip> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose Profile Photo",
+          Text(
+            MyString.ChooseProfilePhoto.tr(),
             style: TextStyle(
               fontSize: 20,
               color: MyColor.black,
@@ -938,8 +941,8 @@ class _StartTripState extends State<StartTrip> {
                     Icons.camera,
                     color: MyColor.black,
                   ),
-                  label: const Text(
-                    "camera",
+                  label: Text(
+                    MyString.camera.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
@@ -966,8 +969,8 @@ class _StartTripState extends State<StartTrip> {
                   Icons.image,
                   color: MyColor.black,
                 ),
-                label: const Text(
-                  "Gallery",
+                label: Text(
+                  MyString.Gallery.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: MyColor.black,

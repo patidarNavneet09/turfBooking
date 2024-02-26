@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/diesel.dart';
@@ -9,6 +10,7 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/mytakephoto.dart';
+import 'package:truckmanagement/constant/stringfile.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:truckmanagement/utils/textfields.dart';
@@ -286,8 +288,8 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          "Add On Diesel",
+        title: Text(
+          MyString.AddOnDiesel.tr(),
           style: TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
@@ -320,8 +322,8 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   textAlignVertical: TextAlignVertical.center,
                   controller: quantityLitersController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Quantity in liters"),
+                  decoration: const InputDecoration().prefixIconTextField(
+                      hintText: MyString.Quantityinliters.tr()),
                 ),
               ),
               const SizedBox(
@@ -338,7 +340,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   controller: unitPriceController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: "   Unit Price"),
+                      .prefixIconTextField(hintText: MyString.UnitPrice.tr()),
                 ),
               ),
               const SizedBox(
@@ -355,14 +357,14 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   controller: enterNameOFStatationController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                      hintText: "   Enter name of petrol station"),
+                      hintText: MyString.Enternameofpetrolstation.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "  Upload photo",
+              Text(
+                MyString.Uploadphoto.tr(),
                 style: TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
@@ -385,7 +387,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                     // Text("You can add upto 3 photos".tr),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //    crossAxisAlignment: CrossAxisAlignment.start,
+                      //    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextButton(
                           onPressed: () {
@@ -405,7 +407,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: "You select only one images");
+                                  msg: MyString.Youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -431,10 +433,13 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                             height: 62,
                             child: imageFileListBanner.isEmpty
                                 ? Visibility(
-                              visible: false,
-                                  child: Padding(
+                                    visible: false,
+                                    child: Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 10, right: 10, top: 2, bottom: 2),
+                                          left: 10,
+                                          right: 10,
+                                          top: 2,
+                                          bottom: 2),
                                       child: SizedBox(
                                         width: screen.size.width * 0.60,
                                         child: Row(
@@ -485,7 +490,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                                         ),
                                       ),
                                     ),
-                                )
+                                  )
                                 : ListView.builder(
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
@@ -510,8 +515,8 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                                                               10),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                2.0),
+                                                            const EdgeInsets
+                                                                .all(2.0),
                                                         child: Container(
                                                           decoration:
                                                               BoxDecoration(
@@ -521,8 +526,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                                                                     .button),
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             12)),
                                                           ),
@@ -531,8 +535,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                                                           child: ClipRRect(
                                                             borderRadius:
                                                                 const BorderRadius
-                                                                        .all(
-                                                                    Radius
+                                                                    .all(Radius
                                                                         .circular(
                                                                             10)),
                                                             child: Image.file(
@@ -629,17 +632,18 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact quantity in liters");
+                                msg: MyString.Fillexactquantityinliters.tr());
                           } else if (unitPrice.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact unit price");
+                                msg: MyString.Fillexactunitprice.tr());
                           } else if (enterNameOFStatation.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: "Fill exact Enter name of petrol station");
+                                msg: MyString.FillexactEnternameofpetrolstation
+                                    .tr());
                           } else {
                             addondieselApi(context, quantityLiters, unitPrice,
                                 enterNameOFStatation);
@@ -650,7 +654,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: "Submit"),
+                        name: MyString.Submit.tr()),
                   ],
                 ),
               )
