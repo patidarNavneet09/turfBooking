@@ -10,6 +10,7 @@ import 'package:truckmanagement/Screens/login_screen.dart';
 import 'package:truckmanagement/Screens/notifiction_hendler.dart';
 import 'package:truckmanagement/constant/utility.dart';
 
+// kkkk
 String fcmtoken = "";
 FirebaseMessaging messaging = FirebaseMessaging.instance;
 void pushFCMtoken() async {
