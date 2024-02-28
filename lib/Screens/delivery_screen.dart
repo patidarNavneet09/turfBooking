@@ -639,8 +639,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -668,7 +668,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -691,8 +691,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

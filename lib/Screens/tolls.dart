@@ -289,8 +289,8 @@ class _TollsScreenState extends State<TollsScreen> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.Tolls.tr(),
-          style: TextStyle(
+          MyString.tolls.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -323,7 +323,7 @@ class _TollsScreenState extends State<TollsScreen> {
                   controller: tollNameController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.TollName.tr(),
+                    hintText: MyString.tollName.tr(),
                   ),
                 ),
               ),
@@ -341,7 +341,7 @@ class _TollsScreenState extends State<TollsScreen> {
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.Amount.tr(),
+                    hintText: MyString.amount.tr(),
                   ),
                 ),
               ),
@@ -350,8 +350,8 @@ class _TollsScreenState extends State<TollsScreen> {
                 height: 10,
               ),
               Text(
-                MyString.Uploadphoto.tr(),
-                style: TextStyle(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -392,7 +392,7 @@ class _TollsScreenState extends State<TollsScreen> {
                               Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Youselectonlyoneimages.tr(),
+                                msg: MyString.youselectonlyoneimages.tr(),
                               );
                             }
                           },
@@ -609,17 +609,17 @@ class _TollsScreenState extends State<TollsScreen> {
                         if (tollname.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Filltollnamename.tr(),
+                            msg: MyString.filltollnamename.tr(),
                           );
                         } else if (amount.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillamount.tr(),
+                            msg: MyString.fillamount.tr(),
                           );
                         } else if (imageFileListBanner2.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Pleaseuploadphoto.tr(),
+                            msg: MyString.pleaseuploadphoto.tr(),
                           );
                         } else {
                           enRouteddieselApi(
@@ -634,7 +634,7 @@ class _TollsScreenState extends State<TollsScreen> {
                         //         builder: (context) =>
                         //             const addonAddExpenstion()));
                       },
-                      name: MyString.Submit.tr(),
+                      name: MyString.submit.tr(),
                     ),
                   ],
                 ),
@@ -658,8 +658,8 @@ class _TollsScreenState extends State<TollsScreen> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -687,7 +687,7 @@ class _TollsScreenState extends State<TollsScreen> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -710,8 +710,8 @@ class _TollsScreenState extends State<TollsScreen> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

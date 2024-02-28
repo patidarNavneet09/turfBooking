@@ -74,7 +74,7 @@ class _HomescreenState extends State<Homescreen> {
     var screen = MediaQuery.of(context).size;
     final data = MediaQuery.of(context);
     return MediaQuery(
-      data: data.copyWith(textScaleFactor: 1.0),
+      data: data.copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.zero,
@@ -179,9 +179,9 @@ class _HomescreenState extends State<Homescreen> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    MyString.Welcomeback.tr(),
+                                                    MyString.welcomeback.tr(),
                                                     // getGreeting(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 13,
                                                       color: MyColor.white,
                                                       // overflow: TextOverflow.ellipsis,
@@ -240,8 +240,8 @@ class _HomescreenState extends State<Homescreen> {
                             height: screen.height * 0.02,
                           ),
                           Text(
-                            MyString.MyTrips.tr(),
-                            style: TextStyle(
+                            MyString.myTrips.tr(),
+                            style: const TextStyle(
                               fontSize: 18,
                               color: MyColor.black,
                               // overflow: TextOverflow.ellipsis,
@@ -293,7 +293,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          MyString.NewJobs.tr(),
+                                          MyString.newJobs.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 0
@@ -336,7 +336,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          MyString.Active.tr(),
+                                          MyString.active.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 1
@@ -379,7 +379,7 @@ class _HomescreenState extends State<Homescreen> {
                                           : const BoxDecoration(),
                                       child: Center(
                                         child: Text(
-                                          MyString.Completed.tr(),
+                                          MyString.completed.tr(),
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: index == 2
@@ -410,7 +410,7 @@ class _HomescreenState extends State<Homescreen> {
                                     children: [
                                       Center(
                                         child: Text(
-                                          MyString.NoData.tr(),
+                                          MyString.noData.tr(),
                                         ),
                                       ),
                                     ],
@@ -430,7 +430,7 @@ class _HomescreenState extends State<Homescreen> {
                                                 children: [
                                                   Center(
                                                     child: Text(
-                                                      MyString.NoData.tr(),
+                                                      MyString.noData.tr(),
                                                     ),
                                                   ),
                                                 ],
@@ -524,8 +524,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
                                                                                       Text(
-                                                                                        MyString.TripName.tr(),
-                                                                                        style: TextStyle(
+                                                                                        MyString.tripName.tr(),
+                                                                                        style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
                                                                                           // overflow: TextOverflow.ellipsis,
@@ -555,7 +555,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         width: 5,
                                                                                       ),
                                                                                       Text(
-                                                                                        myTrip.data![index].status.toString() == "Pending" ? MyString.NewJobs.tr() : "",
+                                                                                        myTrip.data![index].status.toString() == "Pending" ? MyString.newJobs.tr() : "",
                                                                                         style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.cardpendding,
@@ -597,8 +597,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
                                                                                       Text(
-                                                                                        MyString.StartDate.tr(),
-                                                                                        style: TextStyle(
+                                                                                        MyString.startDate.tr(),
+                                                                                        style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
                                                                                           // overflow: TextOverflow.ellipsis,
@@ -650,8 +650,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
                                                                                   Text(
-                                                                                    MyString.LoadingLocation.tr(),
-                                                                                    style: TextStyle(
+                                                                                    MyString.loadingLocation.tr(),
+                                                                                    style: const TextStyle(
                                                                                       fontSize: 12,
                                                                                       color: MyColor.textcolor,
                                                                                       // overflow: TextOverflow.ellipsis,
@@ -709,8 +709,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
                                                                                       Text(
-                                                                                        MyString.CargoType.tr(),
-                                                                                        style: TextStyle(
+                                                                                        MyString.cargoType.tr(),
+                                                                                        style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
                                                                                           // overflow: TextOverflow.ellipsis,
@@ -752,8 +752,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     ),
                                                                                     child: Center(
                                                                                       child: Text(
-                                                                                        MyString.ViewDetail.tr(),
-                                                                                        style: TextStyle(
+                                                                                        MyString.viewDetail.tr(),
+                                                                                        style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.white,
                                                                                           // overflow: TextOverflow.ellipsis,
@@ -794,7 +794,7 @@ class _HomescreenState extends State<Homescreen> {
                                                     children: [
                                                       Center(
                                                         child: Text(
-                                                          MyString.NoData.tr(),
+                                                          MyString.noData.tr(),
                                                         ),
                                                       ),
                                                     ],
@@ -883,8 +883,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
-                                                                                            MyString.TripName.tr(),
-                                                                                            style: TextStyle(
+                                                                                            MyString.tripName.tr(),
+                                                                                            style: const TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
                                                                                               // overflow: TextOverflow.ellipsis,
@@ -952,8 +952,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
-                                                                                            MyString.StartDate.tr(),
-                                                                                            style: TextStyle(
+                                                                                            MyString.startDate.tr(),
+                                                                                            style: const TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
                                                                                               // overflow: TextOverflow.ellipsis,
@@ -1002,8 +1002,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
                                                                                       Text(
-                                                                                        MyString.LoadingLocation.tr(),
-                                                                                        style: TextStyle(
+                                                                                        MyString.loadingLocation.tr(),
+                                                                                        style: const TextStyle(
                                                                                           fontSize: 12,
                                                                                           color: MyColor.textcolor,
                                                                                           // overflow: TextOverflow.ellipsis,
@@ -1058,8 +1058,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
-                                                                                            MyString.CargoType.tr(),
-                                                                                            style: TextStyle(
+                                                                                            MyString.cargoType.tr(),
+                                                                                            style: const TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
                                                                                               // overflow: TextOverflow.ellipsis,
@@ -1101,8 +1101,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         ),
                                                                                         child: Center(
                                                                                           child: Text(
-                                                                                            MyString.ViewDetail.tr(),
-                                                                                            style: TextStyle(
+                                                                                            MyString.viewDetail.tr(),
+                                                                                            style: const TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.white,
                                                                                               // overflow: TextOverflow.ellipsis,
@@ -1144,7 +1144,7 @@ class _HomescreenState extends State<Homescreen> {
                                                         children: [
                                                           Center(
                                                             child: Text(
-                                                              MyString.NoData
+                                                              MyString.noData
                                                                   .tr(),
                                                             ),
                                                           ),
@@ -1222,8 +1222,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
                                                                                               Text(
-                                                                                                MyString.TripName.tr(),
-                                                                                                style: TextStyle(
+                                                                                                MyString.tripName.tr(),
+                                                                                                style: const TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
                                                                                                   // overflow: TextOverflow.ellipsis,
@@ -1291,8 +1291,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
                                                                                               Text(
-                                                                                                MyString.StartDate.tr(),
-                                                                                                style: TextStyle(
+                                                                                                MyString.startDate.tr(),
+                                                                                                style: const TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
                                                                                                   // overflow: TextOverflow.ellipsis,
@@ -1341,8 +1341,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
                                                                                           Text(
-                                                                                            MyString.LoadingLocation.tr(),
-                                                                                            style: TextStyle(
+                                                                                            MyString.loadingLocation.tr(),
+                                                                                            style: const TextStyle(
                                                                                               fontSize: 12,
                                                                                               color: MyColor.textcolor,
                                                                                               // overflow: TextOverflow.ellipsis,
@@ -1397,8 +1397,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                                                             children: [
                                                                                               Text(
-                                                                                                MyString.CargoType.tr(),
-                                                                                                style: TextStyle(
+                                                                                                MyString.cargoType.tr(),
+                                                                                                style: const TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.textcolor,
                                                                                                   // overflow: TextOverflow.ellipsis,
@@ -1440,8 +1440,8 @@ class _HomescreenState extends State<Homescreen> {
                                                                                             ),
                                                                                             child: Center(
                                                                                               child: Text(
-                                                                                                MyString.ViewDetail.tr(),
-                                                                                                style: TextStyle(
+                                                                                                MyString.viewDetail.tr(),
+                                                                                                style: const TextStyle(
                                                                                                   fontSize: 12,
                                                                                                   color: MyColor.white,
                                                                                                   // overflow: TextOverflow.ellipsis,
@@ -1506,8 +1506,8 @@ class _HomescreenState extends State<Homescreen> {
                   width: 25,
                   child: Image.asset("assets/images/Home.png")),
               Text(
-                MyString.Home.tr(),
-                style: TextStyle(
+                MyString.home.tr(),
+                style: const TextStyle(
                   fontSize: 10,
                   color: MyColor.white,
                   // overflow: TextOverflow.ellipsis,
@@ -1526,8 +1526,8 @@ class _HomescreenState extends State<Homescreen> {
                   width: 25,
                   child: Image.asset("assets/images/setting.png")),
               Text(
-                MyString.Settings.tr(),
-                style: TextStyle(
+                MyString.settings.tr(),
+                style: const TextStyle(
                   fontSize: 10,
                   color: MyColor.white,
                   // overflow: TextOverflow.ellipsis,

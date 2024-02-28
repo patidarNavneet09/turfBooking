@@ -298,8 +298,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.Repairs.tr(),
-          style: TextStyle(
+          MyString.repairs.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -332,7 +332,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: shopNameController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.ShopName.tr(),
+                    hintText: MyString.shopName.tr(),
                   ),
                 ),
               ),
@@ -350,7 +350,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: repairNameController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.RepairName.tr(),
+                    hintText: MyString.repairName.tr(),
                   ),
                 ),
               ),
@@ -368,7 +368,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: repairCostController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.RepairCost.tr(),
+                    hintText: MyString.repairCost.tr(),
                   ),
                 ),
               ),
@@ -386,7 +386,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: spareNameController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.SpareName.tr(),
+                    hintText: MyString.spareName.tr(),
                   ),
                 ),
               ),
@@ -404,7 +404,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: sparecostController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.SpareCost.tr(),
+                    hintText: MyString.spareCost.tr(),
                   ),
                 ),
               ),
@@ -422,7 +422,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   controller: totalAmountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.TotalAmount.tr(),
+                    hintText: MyString.totalAmount.tr(),
                   ),
                 ),
               ),
@@ -431,8 +431,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                 height: 10,
               ),
               Text(
-                MyString.Uploadphoto.tr(),
-                style: TextStyle(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -473,7 +473,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                               Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Youselectonlyoneimages.tr(),
+                                msg: MyString.youselectonlyoneimages.tr(),
                               );
                             }
                           },
@@ -699,37 +699,37 @@ class _RepairsScreenState extends State<RepairsScreen> {
                         if (shopname.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillshopname.tr(),
+                            msg: MyString.fillshopname.tr(),
                           );
                         } else if (reparename.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillrepairename.tr(),
+                            msg: MyString.fillrepairename.tr(),
                           );
                         } else if (repaircost.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillrepaircost.tr(),
+                            msg: MyString.fillrepaircost.tr(),
                           );
                         } else if (sparename.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillsparename.tr(),
+                            msg: MyString.fillsparename.tr(),
                           );
                         } else if (sparecost.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Fillsparecost.tr(),
+                            msg: MyString.fillsparecost.tr(),
                           );
                         } else if (totalamount.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Filltotalamount.tr(),
+                            msg: MyString.filltotalamount.tr(),
                           );
                         } else if (imageFileListBanner2.isEmpty == true) {
                           Utility.getToast(
                             toastColor: const Color.fromARGB(255, 34, 71, 99),
-                            msg: MyString.Pleaseuploadphoto.tr(),
+                            msg: MyString.pleaseuploadphoto.tr(),
                           );
                         } else {
                           enRouteddieselApi(context, shopname, reparename,
@@ -742,7 +742,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                         //         builder: (context) =>
                         //             const addonAddExpenstion()));
                       },
-                      name: MyString.Submit.tr(),
+                      name: MyString.submit.tr(),
                     ),
                   ],
                 ),
@@ -766,8 +766,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -795,7 +795,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -818,8 +818,8 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

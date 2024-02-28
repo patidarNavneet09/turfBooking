@@ -285,8 +285,8 @@ class _EndTripscrState extends State<EndTripscr> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.EndTrip.tr(),
-          style: TextStyle(
+          MyString.endTrip.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -312,8 +312,8 @@ class _EndTripscrState extends State<EndTripscr> {
                 height: 10,
               ),
               Text(
-                MyString.Uploadphotoofthedieselmeter.tr(),
-                style: TextStyle(
+                MyString.uploadphotoofthedieselmeter.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -354,7 +354,7 @@ class _EndTripscrState extends State<EndTripscr> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.Youselectonlyoneimages);
+                                  msg: MyString.youselectonlyoneimages);
                             }
                           },
                           child: DottedBorder(
@@ -550,8 +550,8 @@ class _EndTripscrState extends State<EndTripscr> {
               //   height: 10,
               // ),
               Text(
-                MyString.UploadphotoofOdometer.tr(),
-                style: TextStyle(
+                MyString.uploadphotoofOdometer.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -592,7 +592,7 @@ class _EndTripscrState extends State<EndTripscr> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.Youselectonlyoneimages.tr());
+                                  msg: MyString.youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -803,13 +803,13 @@ class _EndTripscrState extends State<EndTripscr> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Pleaseuploadphotoofthedieselmeter
+                                msg: MyString.pleaseuploadphotoofthedieselmeter
                                     .tr());
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Pleaseuploadphotoofodometer.tr());
+                                msg: MyString.pleaseuploadphotoofodometer.tr());
                           } else {
                             endTripApi(context);
                           }
@@ -820,7 +820,7 @@ class _EndTripscrState extends State<EndTripscr> {
                           //         builder: (context) =>
                           //             const AddonAddExpenstion()));
                         },
-                        name: MyString.EndTrip.tr()),
+                        name: MyString.endTrip.tr()),
                   ],
                 ),
               )
@@ -843,8 +843,8 @@ class _EndTripscrState extends State<EndTripscr> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -875,7 +875,7 @@ class _EndTripscrState extends State<EndTripscr> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -902,8 +902,8 @@ class _EndTripscrState extends State<EndTripscr> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

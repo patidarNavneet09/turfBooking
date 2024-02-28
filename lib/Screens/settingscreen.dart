@@ -16,7 +16,7 @@ import 'dart:convert' as convert;
 import '../constant/apiconstant.dart';
 
 class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+  const Setting({super.key});
 
   @override
   State<Setting> createState() => _SettingState();
@@ -118,10 +118,10 @@ class _SettingState extends State<Setting> {
                                             const ProfileSetting()));
                               },
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  MyString.EditProfile.tr(),
-                                  style: TextStyle(
+                                  MyString.editProfile.tr(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: MyColor.white,
                                     fontFamily: ColorFamily.fontsSFProDisplay,
@@ -279,8 +279,8 @@ class _SettingState extends State<Setting> {
                                               width: 15,
                                             ),
                                             Text(
-                                              MyString.TermsConditions.tr(),
-                                              style: TextStyle(
+                                              MyString.termsConditions.tr(),
+                                              style: const TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,
                                                 // overflow: TextOverflow.ellipsis,
@@ -340,8 +340,8 @@ class _SettingState extends State<Setting> {
                                               width: 15,
                                             ),
                                             Text(
-                                              MyString.PrivacyPolicy.tr(),
-                                              style: TextStyle(
+                                              MyString.privacyPolicy.tr(),
+                                              style: const TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,
                                                 // overflow: TextOverflow.ellipsis,
@@ -373,8 +373,8 @@ class _SettingState extends State<Setting> {
                                       AlertDialog(
                                     title: Center(
                                       child: Text(
-                                        MyString.Areyousureyouwanttologout.tr(),
-                                        style: TextStyle(
+                                        MyString.areyousureyouwanttologout.tr(),
+                                        style: const TextStyle(
                                           fontSize: 15,
                                           color: MyColor.button,
                                           // overflow: TextOverflow.ellipsis,
@@ -406,7 +406,7 @@ class _SettingState extends State<Setting> {
                                                       .size
                                                       .width *
                                                   0.25,
-                                              name: MyString.Yes.tr(),
+                                              name: MyString.yes.tr(),
                                               onPressed: () {
                                                 logout(context);
                                               },
@@ -437,7 +437,7 @@ class _SettingState extends State<Setting> {
                                                       .size
                                                       .width *
                                                   0.25,
-                                              name: MyString.No.tr(),
+                                              name: MyString.no.tr(),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
@@ -477,8 +477,8 @@ class _SettingState extends State<Setting> {
                                               width: 15,
                                             ),
                                             Text(
-                                              MyString.Logout.tr(),
-                                              style: TextStyle(
+                                              MyString.logout.tr(),
+                                              style: const TextStyle(
                                                 fontSize: 15,
                                                 color: MyColor.listviewtext,
                                                 // overflow: TextOverflow.ellipsis,

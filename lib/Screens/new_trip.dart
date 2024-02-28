@@ -35,7 +35,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
   Statusresponse statusresponse = Statusresponse();
   bool loading1 = true;
   final ScrollController _controller = ScrollController();
-  String btnName = MyString.Accept.tr();
+  String btnName = MyString.accept.tr();
 
   bool _open = false;
 
@@ -131,7 +131,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              MyString.TripDetails.tr(),
+                              MyString.tripDetails.tr(),
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: MyColor.appbartext,
@@ -378,7 +378,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                               widget.truckId)))
                                           .then((value) => apihit());
                                     },
-                                    name: MyString.AddOnDiesel.tr(),
+                                    name: MyString.addOnDiesel.tr(),
                                   )
                                 : Container(),
                             const SizedBox(
@@ -412,7 +412,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
 
                                       setState(() {});
                                     },
-                                    name: MyString.AddExpenses.tr(),
+                                    name: MyString.addExpenses.tr(),
                                   )
                                 : Container(),
                             const SizedBox(
@@ -448,7 +448,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
 
                                           setState(() {});
                                         },
-                                        name: MyString.Markasdelivered.tr(),
+                                        name: MyString.markasdelivered.tr(),
                                       ),
                                     ],
                                   )
@@ -485,7 +485,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
 
                                           setState(() {});
                                         },
-                                        name: MyString.EndTrip.tr(),
+                                        name: MyString.endTrip.tr(),
                                       )
                                     : Container(),
                             const SizedBox(
@@ -554,16 +554,16 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                 height: 8,
                               ),*/
 
-                              rowUi(MyString.TripId.tr(),
+                              rowUi(MyString.tripId.tr(),
                                   tripdetails.data!.tripnumber.toString()),
 
                               dividerUi(),
-                              rowUi(MyString.CustomerName.tr(),
+                              rowUi(MyString.customerName.tr(),
                                   tripdetails.data!.name.toString()),
 
                               dividerUi(),
 
-                              rowUi(MyString.StartDate.tr(),
+                              rowUi(MyString.startDate.tr(),
                                   tripdetails.data!.startDate.toString()),
 
                               dividerUi(),
@@ -610,7 +610,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                 height: 8,
                               ),*/
 
-                              rowUi(MyString.LoadingLocation.tr(),
+                              rowUi(MyString.loadingLocation.tr(),
                                   tripdetails.data!.loadingLocation.toString()),
 
                               dividerUi(),
@@ -658,7 +658,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                               ),*/
 
                               rowUi(
-                                  MyString.OffloadingLocation.tr(),
+                                  MyString.offloadingLocation.tr(),
                                   tripdetails.data!.offloadingLocation
                                       .toString()),
 
@@ -705,7 +705,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                 height: 8,
                               ),*/
 
-                              rowUi(MyString.EndDate.tr(),
+                              rowUi(MyString.endDate.tr(),
                                   tripdetails.data!.endDate.toString()),
 
                               dividerUi(),
@@ -752,42 +752,42 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                 height: 8,
                               ),*/
 
-                              rowUi(MyString.CargoType.tr(),
+                              rowUi(MyString.cargoType.tr(),
                                   tripdetails.data!.typeOfCargo.toString()),
 
                               dividerUi(),
 
-                              rowUi(MyString.AssignedTruck.tr(),
+                              rowUi(MyString.assignedTruck.tr(),
                                   tripdetails.data!.truck.toString()),
 
                               dividerUi(),
 
-                              rowUi(MyString.TruckPlate.tr(),
+                              rowUi(MyString.truckPlate.tr(),
                                   tripdetails.data!.platenumber.toString()),
 
                               dividerUi(),
 
-                              rowUi(MyString.WeightOfCargo.tr(),
+                              rowUi(MyString.weightOfCargo.tr(),
                                   "${tripdetails.data!.weightOfCargo.toString()} Kg"),
 
                               dividerUi(),
 
-                              rowUi(MyString.InitialDiesel.tr(),
+                              rowUi(MyString.initialDiesel.tr(),
                                   tripdetails.data!.initialDiesel.toString()),
 
                               dividerUi(),
 
-                              rowUi(MyString.MileageAllowances.tr(),
+                              rowUi(MyString.mileageAllowances.tr(),
                                   "${tripdetails.data!.mileageAllowanceCur.toString()} ${tripdetails.data!.mileageAllowance.toString()}"),
 
                               dividerUi(),
 
-                              rowUi(MyString.MovementSheet.tr(),
+                              rowUi(MyString.movementSheet.tr(),
                                   "${tripdetails.data!.movementSheetCurr.toString()} ${tripdetails.data!.movementSheet.toString()}"),
 
                               dividerUi(),
 
-                              rowUi(MyString.RoadToll.tr(),
+                              rowUi(MyString.roadToll.tr(),
                                   "${tripdetails.data!.roadTollCurr.toString()} ${tripdetails.data!.roadToll.toString()}"),
 
                               const SizedBox(
@@ -816,7 +816,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              MyString.AddOnDiesel.tr(),
+                                              MyString.addOnDiesel.tr(),
                                               style: const TextStyle(
                                                 fontSize: 14,
                                                 color: MyColor.black,
@@ -845,7 +845,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    MyString.Photos.tr(),
+                                                    MyString.photos.tr(),
                                                     style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.greyText,
@@ -867,7 +867,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    MyString.Quantity.tr(),
+                                                    MyString.quantity.tr(),
                                                     style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.greyText,
@@ -889,7 +889,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    MyString.UnitPrice.tr(),
+                                                    MyString.unitPrice.tr(),
                                                     style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.greyText,
@@ -911,7 +911,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    MyString.FuelStation.tr(),
+                                                    MyString.fuelStation.tr(),
                                                     style: const TextStyle(
                                                       fontSize: 14,
                                                       color: MyColor.greyText,
@@ -986,7 +986,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                         .petrolStationImage
                                                                         .toString(),
                                                                     nameProperty:
-                                                                        MyString.AddOnDiesel
+                                                                        MyString
+                                                                            .addOnDiesel
                                                                             .tr(),
                                                                   ),
                                                                 ),
@@ -1177,7 +1178,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                           Row(
                                                             children: [
                                                               Text(
-                                                                "${MyString.Date.tr()} :",
+                                                                "${MyString.date.tr()} :",
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
@@ -1262,7 +1263,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  MyString.EnrouteDiesel.tr(),
+                                                  MyString.enrouteDiesel.tr(),
                                                   style: const TextStyle(
                                                     fontSize: 14,
                                                     color: MyColor.black,
@@ -1293,7 +1294,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        MyString.Photos.tr(),
+                                                        MyString.photos.tr(),
                                                         style: const TextStyle(
                                                           fontSize: 14,
                                                           color:
@@ -1317,7 +1318,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        MyString.Quantity.tr(),
+                                                        MyString.quantity.tr(),
                                                         style: const TextStyle(
                                                           fontSize: 14,
                                                           color:
@@ -1341,7 +1342,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        MyString.UnitPrice.tr(),
+                                                        MyString.unitPrice.tr(),
                                                         style: const TextStyle(
                                                           fontSize: 14,
                                                           color:
@@ -1365,7 +1366,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        MyString.FuelStation
+                                                        MyString.fuelStation
                                                             .tr(),
                                                         style: const TextStyle(
                                                           fontSize: 14,
@@ -1447,7 +1448,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             imagesUrl:
                                                                                 tripdetails.data!.enrouteDiesels![index].petrolStationImage.toString(),
                                                                             nameProperty:
-                                                                                MyString.EnrouteDiesel.tr(),
+                                                                                MyString.enrouteDiesel.tr(),
                                                                           ),
                                                                         ),
                                                                       );
@@ -1656,7 +1657,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      MyString.Repairs.tr(),
+                                                      MyString.repairs.tr(),
                                                       style: const TextStyle(
                                                         fontSize: 14,
                                                         color: MyColor.black,
@@ -1689,7 +1690,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            MyString.Photos
+                                                            MyString.photos
                                                                 .tr(),
                                                             style:
                                                                 const TextStyle(
@@ -1718,7 +1719,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            MyString.ShopName
+                                                            MyString.shopName
                                                                 .tr(),
                                                             style:
                                                                 const TextStyle(
@@ -1742,7 +1743,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          MyString.RepairName
+                                                          MyString.repairName
                                                               .tr(),
                                                           style:
                                                               const TextStyle(
@@ -1768,7 +1769,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            MyString.RepairCost
+                                                            MyString.repairCost
                                                                 .tr(),
                                                             style:
                                                                 const TextStyle(
@@ -1853,7 +1854,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             MaterialPageRoute(
                                                                               builder: (context) => LargeImages(
                                                                                 imagesUrl: tripdetails.data!.repairs![index].uploadBill.toString(),
-                                                                                nameProperty: MyString.Repairs.tr(),
+                                                                                nameProperty: MyString.repairs.tr(),
                                                                               ),
                                                                             ),
                                                                           );
@@ -2035,7 +2036,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                     .center,
                                                             children: [
                                                               Text(
-                                                                MyString.Photos
+                                                                MyString.photos
                                                                     .tr(),
                                                                 style:
                                                                     const TextStyle(
@@ -2059,7 +2060,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              MyString.SpareName
+                                                              MyString.spareName
                                                                   .tr(),
                                                               style:
                                                                   const TextStyle(
@@ -2082,7 +2083,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              MyString.SpareCost
+                                                              MyString.spareCost
                                                                   .tr(),
                                                               style:
                                                                   const TextStyle(
@@ -2105,7 +2106,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              MyString.TotalAmount
+                                                              MyString
+                                                                  .totalAmount
                                                                   .tr(),
                                                               style:
                                                                   const TextStyle(
@@ -2187,7 +2189,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 MaterialPageRoute(
                                                                                   builder: (context) => LargeImages(
                                                                                     imagesUrl: tripdetails.data!.repairs![index].uploadBill.toString(),
-                                                                                    nameProperty: MyString.Repairs.tr(),
+                                                                                    nameProperty: MyString.repairs.tr(),
                                                                                   ),
                                                                                 ),
                                                                               );
@@ -2341,7 +2343,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          MyString.Tolls.tr(),
+                                                          MyString.tolls.tr(),
                                                           style:
                                                               const TextStyle(
                                                             fontSize: 14,
@@ -2377,7 +2379,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                     .center,
                                                             children: [
                                                               Text(
-                                                                MyString.Photos
+                                                                MyString.photos
                                                                     .tr(),
                                                                 style:
                                                                     const TextStyle(
@@ -2406,7 +2408,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                     .center,
                                                             children: [
                                                               Text(
-                                                                MyString.TollName
+                                                                MyString
+                                                                    .tollName
                                                                     .tr(),
                                                                 style:
                                                                     const TextStyle(
@@ -2435,7 +2438,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                     .center,
                                                             children: [
                                                               Text(
-                                                                MyString.Amount
+                                                                MyString.amount
                                                                     .tr(),
                                                                 style:
                                                                     const TextStyle(
@@ -2539,7 +2542,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 MaterialPageRoute(
                                                                                   builder: (context) => LargeImages(
                                                                                     imagesUrl: tripdetails.data!.tolls![index].tollImage.toString(),
-                                                                                    nameProperty: MyString.Tolls.tr(),
+                                                                                    nameProperty: MyString.tolls.tr(),
                                                                                   ),
                                                                                 ),
                                                                               );
@@ -2677,7 +2680,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              MyString.RoadAccident
+                                                              MyString
+                                                                  .roadAccident
                                                                   .tr(),
                                                               style:
                                                                   const TextStyle(
@@ -2717,7 +2721,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    MyString.Photos
+                                                                    MyString
+                                                                        .photos
                                                                         .tr(),
                                                                     style:
                                                                         const TextStyle(
@@ -2746,7 +2751,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    MyString.AccidentCategory
+                                                                    MyString
+                                                                        .accidentCategory
                                                                         .tr(),
                                                                     style:
                                                                         const TextStyle(
@@ -2777,7 +2783,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    MyString.Cost
+                                                                    MyString
+                                                                        .cost
                                                                         .tr(),
                                                                     style:
                                                                         const TextStyle(
@@ -2878,7 +2885,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                     MaterialPageRoute(
                                                                                       builder: (context) => LargeImages(
                                                                                         imagesUrl: tripdetails.data!.roadAccidents![index].image.toString(),
-                                                                                        nameProperty: MyString.RoadAccident.tr(),
+                                                                                        nameProperty: MyString.roadAccident.tr(),
                                                                                       ),
                                                                                     ),
                                                                                   );
@@ -2976,7 +2983,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             .start,
                                                                     children: [
                                                                       Text(
-                                                                        MyString.Description
+                                                                        MyString
+                                                                            .description
                                                                             .tr(),
                                                                         style:
                                                                             const TextStyle(
@@ -3055,7 +3063,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  MyString.Fine
+                                                                  MyString.fine
                                                                       .tr(),
                                                                   style:
                                                                       const TextStyle(
@@ -3096,7 +3104,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             .center,
                                                                     children: [
                                                                       Text(
-                                                                        MyString.Photos
+                                                                        MyString
+                                                                            .photos
                                                                             .tr(),
                                                                         style:
                                                                             const TextStyle(
@@ -3123,7 +3132,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             .center,
                                                                     children: [
                                                                       Text(
-                                                                        MyString.FineName
+                                                                        MyString
+                                                                            .fineName
                                                                             .tr(),
                                                                         style:
                                                                             const TextStyle(
@@ -3152,7 +3162,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             .center,
                                                                     children: [
                                                                       Text(
-                                                                        MyString.Amount
+                                                                        MyString
+                                                                            .amount
                                                                             .tr(),
                                                                         style:
                                                                             const TextStyle(
@@ -3250,7 +3261,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                         MaterialPageRoute(
                                                                                           builder: (context) => LargeImages(
                                                                                             imagesUrl: tripdetails.data!.fines![index].image.toString(),
-                                                                                            nameProperty: MyString.Fine.tr(),
+                                                                                            nameProperty: MyString.fine.tr(),
                                                                                           ),
                                                                                         ),
                                                                                       );
@@ -3345,7 +3356,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             MainAxisAlignment.start,
                                                                         children: [
                                                                           Text(
-                                                                            MyString.Description.tr(),
+                                                                            MyString.description.tr(),
                                                                             style:
                                                                                 const TextStyle(
                                                                               fontSize: 14,
@@ -3405,7 +3416,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                           .start,
                                                                   children: [
                                                                     Text(
-                                                                      MyString.OtherCharges
+                                                                      MyString
+                                                                          .otherCharges
                                                                           .tr(),
                                                                       style:
                                                                           const TextStyle(
@@ -3444,7 +3456,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             MainAxisAlignment.center,
                                                                         children: [
                                                                           Text(
-                                                                            MyString.Photos.tr(),
+                                                                            MyString.photos.tr(),
                                                                             style:
                                                                                 const TextStyle(
                                                                               fontSize: 14,
@@ -3466,7 +3478,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             MainAxisAlignment.center,
                                                                         children: [
                                                                           Text(
-                                                                            MyString.ChargeName.tr(),
+                                                                            MyString.chargeName.tr(),
                                                                             style:
                                                                                 const TextStyle(
                                                                               fontSize: 14,
@@ -3490,7 +3502,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                             MainAxisAlignment.center,
                                                                         children: [
                                                                           Text(
-                                                                            MyString.Amount.tr(),
+                                                                            MyString.amount.tr(),
                                                                             style:
                                                                                 const TextStyle(
                                                                               fontSize: 14,
@@ -3581,7 +3593,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                             MaterialPageRoute(
                                                                                               builder: (context) => LargeImages(
                                                                                                 imagesUrl: tripdetails.data!.otherCharges![index].image.toString(),
-                                                                                                nameProperty: MyString.OtherCharges.tr(),
+                                                                                                nameProperty: MyString.otherCharges.tr(),
                                                                                               ),
                                                                                             ),
                                                                                           );
@@ -3671,7 +3683,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 MainAxisAlignment.start,
                                                                             children: [
                                                                               Text(
-                                                                                MyString.Description.tr(),
+                                                                                MyString.description.tr(),
                                                                                 style: const TextStyle(
                                                                                   fontSize: 14,
                                                                                   color: MyColor.greyText,
@@ -3730,7 +3742,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                               .start,
                                                                       children: [
                                                                         Text(
-                                                                          MyString.DeliveryInformation
+                                                                          MyString
+                                                                              .deliveryInformation
                                                                               .tr(),
                                                                           style:
                                                                               const TextStyle(
@@ -3878,7 +3891,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
                                                                                   Text(
-                                                                                    MyString.Description.tr(),
+                                                                                    MyString.description.tr(),
                                                                                     style: const TextStyle(
                                                                                       fontSize: 14,
                                                                                       color: MyColor.greyText,
@@ -3930,7 +3943,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                               MaterialPageRoute(
                                                                                                 builder: (context) => LargeImages(
                                                                                                   imagesUrl: tripdetails.data!.deliveryNote![index].image.toString(),
-                                                                                                  nameProperty: MyString.DeliveryInformation.tr(),
+                                                                                                  nameProperty: MyString.deliveryInformation.tr(),
                                                                                                 ),
                                                                                               ),
                                                                                             );
@@ -4043,7 +4056,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                               MainAxisAlignment.start,
                                                                           children: [
                                                                             Text(
-                                                                              MyString.EndTrip.tr(),
+                                                                              MyString.endTrip.tr(),
                                                                               style: const TextStyle(
                                                                                 fontSize: 14,
                                                                                 color: MyColor.black,
@@ -4071,7 +4084,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   Text(
-                                                                                    MyString.OdometerImage.tr(),
+                                                                                    MyString.odometerImage.tr(),
                                                                                     style: const TextStyle(
                                                                                       fontSize: 14,
                                                                                       color: MyColor.greyText,
@@ -4090,7 +4103,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   Text(
-                                                                                    MyString.DieselmeterImage.tr(),
+                                                                                    MyString.dieselmeterImage.tr(),
                                                                                     style: const TextStyle(
                                                                                       fontSize: 14,
                                                                                       color: MyColor.greyText,
@@ -4187,7 +4200,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                                     MaterialPageRoute(
                                                                                                       builder: (context) => LargeImages(
                                                                                                         imagesUrl: tripdetails.data!.endTrip![index].odometerImage.toString(),
-                                                                                                        nameProperty: MyString.EndTrip.tr(),
+                                                                                                        nameProperty: MyString.endTrip.tr(),
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -4234,7 +4247,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                                                                     MaterialPageRoute(
                                                                                                       builder: (context) => LargeImages(
                                                                                                         imagesUrl: tripdetails.data!.endTrip![index].dieselMeterImage.toString(),
-                                                                                                        nameProperty: MyString.EndTrip.tr(),
+                                                                                                        nameProperty: MyString.endTrip.tr(),
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -4316,7 +4329,8 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
                                                               height: MediaQuery.of(context).size.height * 0.70,
                                                               child: Center(
                                                                 child: Text(
-                                                                    MyString.NoData
+                                                                    MyString
+                                                                        .noData
                                                                         .tr()),
                                                               )),
                 ],

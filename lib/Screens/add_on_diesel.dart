@@ -289,8 +289,8 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.AddOnDiesel.tr(),
-          style: TextStyle(
+          MyString.addOnDiesel.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -323,7 +323,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   controller: quantityLitersController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                      hintText: MyString.Quantityinliters.tr()),
+                      hintText: MyString.quantityinliters.tr()),
                 ),
               ),
               const SizedBox(
@@ -340,7 +340,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   controller: unitPriceController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: MyString.UnitPrice.tr()),
+                      .prefixIconTextField(hintText: MyString.unitPrice.tr()),
                 ),
               ),
               const SizedBox(
@@ -357,15 +357,15 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                   controller: enterNameOFStatationController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                      hintText: MyString.Enternameofpetrolstation.tr()),
+                      hintText: MyString.enternameofpetrolstation.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                MyString.Uploadphoto.tr(),
-                style: TextStyle(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -407,7 +407,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.Youselectonlyoneimages.tr());
+                                  msg: MyString.youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -632,17 +632,17 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Fillexactquantityinliters.tr());
+                                msg: MyString.fillexactquantityinliters.tr());
                           } else if (unitPrice.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Fillexactunitprice.tr());
+                                msg: MyString.fillexactunitprice.tr());
                           } else if (enterNameOFStatation.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.FillexactEnternameofpetrolstation
+                                msg: MyString.fillexactEnternameofpetrolstation
                                     .tr());
                           } else {
                             addondieselApi(context, quantityLiters, unitPrice,
@@ -654,7 +654,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: MyString.Submit.tr()),
+                        name: MyString.submit.tr()),
                   ],
                 ),
               )

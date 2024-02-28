@@ -101,8 +101,8 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.Login.tr(),
-          style: TextStyle(
+          MyString.login.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -125,8 +125,8 @@ class _LoginState extends State<Login> {
               height: 25,
             ),
             Text(
-              MyString.SENOTRACK.tr(),
-              style: TextStyle(
+              MyString.sENOTRACK.tr(),
+              style: const TextStyle(
                   fontSize: 28,
                   color: Color(0xFF075693),
                   fontWeight: FontWeight.bold),
@@ -189,7 +189,7 @@ class _LoginState extends State<Login> {
                     //         states.contains(MaterialState.focused)
                     //             ? MyColor.black
                     //             : Colors.grey),
-                    hintText: MyString.Email.tr(),
+                    hintText: MyString.email.tr(),
                     hintStyle: const TextStyle(
                         color: Colors.black,
                         fontFamily: ColorFamily.fontsSFProDisplay,
@@ -267,7 +267,7 @@ class _LoginState extends State<Login> {
                           //         states.contains(MaterialState.focused)
                           //             ? MyColor.black
                           //             : Colors.grey),
-                          hintText: MyString.Password.tr(),
+                          hintText: MyString.password.tr(),
                           hintStyle: const TextStyle(
                               color: Colors.black,
                               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -309,10 +309,10 @@ class _LoginState extends State<Login> {
                         String password = passwordController.text;
                         if (email.isEmpty) {
                           Fluttertoast.showToast(
-                              msg: MyString.PleaseEnterYourEmail.tr());
+                              msg: MyString.pleaseEnterYourEmail.tr());
                         } else if (password.isEmpty) {
                           Fluttertoast.showToast(
-                              msg: MyString.PleaseEnterYourPassword.tr());
+                              msg: MyString.pleaseEnterYourPassword.tr());
                         } else {
                           loginApi(context);
                         }

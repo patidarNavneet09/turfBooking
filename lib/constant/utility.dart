@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 
@@ -45,7 +44,9 @@ class Utility {
     // }
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("language", language);
-    context.setLocale(Locale(language, countryCode));
+    if (context.mounted) {
+      context.setLocale(Locale(language, countryCode));
+    }
   }
 
   static Future<Locale?>? getLanguage() async {
@@ -74,8 +75,8 @@ class Utility {
           barrierColor: Colors.transparent,
           context: context,
           barrierDismissible: false,
-          builder: (_) => WillPopScope(
-              onWillPop: () async => false,
+          builder: (_) => PopScope(
+              canPop: false,
               child: Center(
                   // child: CircularProgressIndicator(
                   //   color: MyColor.color_gradient3,

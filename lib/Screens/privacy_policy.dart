@@ -33,8 +33,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.PrivacyPolicy.tr(),
-          style: TextStyle(
+          MyString.privacyPolicy.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,

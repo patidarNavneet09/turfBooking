@@ -302,8 +302,8 @@ class _StartTripState extends State<StartTrip> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.StartTrip.tr(),
-          style: TextStyle(
+          MyString.startTrip.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -336,7 +336,7 @@ class _StartTripState extends State<StartTrip> {
                   controller: kmdrivenController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration().prefixIconTextField(
-                    hintText: MyString.Exactkmdriven.tr(),
+                    hintText: MyString.exactkmdriven.tr(),
                   ),
                 ),
               ),
@@ -345,8 +345,8 @@ class _StartTripState extends State<StartTrip> {
               ),
               Text(
                 // "  Upload photo of the diesel meter of existing diesel",
-                MyString.Uploadphotoofthedieselmeterofexistingdiesel.tr(),
-                style: TextStyle(
+                MyString.uploadphotoofthedieselmeterofexistingdiesel.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -389,7 +389,7 @@ class _StartTripState extends State<StartTrip> {
                               Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Youselectonlyoneimages.tr(),
+                                msg: MyString.youselectonlyoneimages.tr(),
                               );
                             }
                           },
@@ -591,8 +591,8 @@ class _StartTripState extends State<StartTrip> {
               //   height: 10,
               // ),
               Text(
-                MyString.UploadphotoofOdometer.tr(),
-                style: TextStyle(
+                MyString.uploadphotoofOdometer.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -633,7 +633,7 @@ class _StartTripState extends State<StartTrip> {
                               Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Youselectonlyoneimages.tr(),
+                                msg: MyString.youselectonlyoneimages.tr(),
                               );
                             }
                           },
@@ -851,13 +851,13 @@ class _StartTripState extends State<StartTrip> {
                           if (kmDriven.isEmpty == true) {
                             Utility.getToast(
                               toastColor: const Color.fromARGB(255, 34, 71, 99),
-                              msg: MyString.Fillexactkilometerdriven.tr(),
+                              msg: MyString.fillexactkilometerdriven.tr(),
                             );
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Pleaseuploadphotoofodometer.tr());
+                                msg: MyString.pleaseuploadphotoofodometer.tr());
                           } else if (imageFileListBanner.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
@@ -911,8 +911,8 @@ class _StartTripState extends State<StartTrip> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -943,7 +943,7 @@ class _StartTripState extends State<StartTrip> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -970,8 +970,8 @@ class _StartTripState extends State<StartTrip> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

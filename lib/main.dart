@@ -72,7 +72,7 @@ Future<void> main() async {
     ],
     path: 'assets/translations',
     fallbackLocale: locale,
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 

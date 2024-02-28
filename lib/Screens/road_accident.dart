@@ -304,8 +304,8 @@ class _RoadAccidentState extends State<RoadAccident> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.RoadAccident.tr(),
-          style: TextStyle(
+          MyString.roadAccident.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -343,8 +343,8 @@ class _RoadAccidentState extends State<RoadAccident> {
                             isExpanded: true,
                             isDense: true,
                             hint: Text(
-                              MyString.SelectAccidentCategory.tr(),
-                              style: TextStyle(
+                              MyString.selectAccidentCategory.tr(),
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: MyColor.greyText,
                               ),
@@ -420,7 +420,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                   controller: costController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: MyString.Costidany.tr()),
+                      .prefixIconTextField(hintText: MyString.costidany.tr()),
                 ),
               ),
               const SizedBox(
@@ -438,15 +438,15 @@ class _RoadAccidentState extends State<RoadAccident> {
                   keyboardType: TextInputType.text,
                   maxLines: 5,
                   decoration: const InputDecoration()
-                      .prefixIconTextField(hintText: MyString.Description.tr()),
+                      .prefixIconTextField(hintText: MyString.description.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                MyString.Uploadphoto.tr(),
-                style: TextStyle(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -485,7 +485,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.Youselectonlyoneimages.tr());
+                                  msg: MyString.youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -699,22 +699,22 @@ class _RoadAccidentState extends State<RoadAccident> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.SelectAccidentCategory.tr());
+                                msg: MyString.selectAccidentCategory.tr());
                           } else if (cost.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Fillcost.tr());
+                                msg: MyString.fillcost.tr());
                           } else if (description.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Filldescription.tr());
+                                msg: MyString.filldescription.tr());
                           } else if (imageFileListBanner2.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Pleaseuploadphoto.tr());
+                                msg: MyString.pleaseuploadphoto.tr());
                           } else {
                             roadAcciedentApi(context, selectedValue.toString(),
                                 cost, description);
@@ -727,7 +727,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: MyString.Submit.tr()),
+                        name: MyString.submit.tr()),
                   ],
                 ),
               )
@@ -749,8 +749,8 @@ class _RoadAccidentState extends State<RoadAccident> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -778,7 +778,7 @@ class _RoadAccidentState extends State<RoadAccident> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -801,8 +801,8 @@ class _RoadAccidentState extends State<RoadAccident> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

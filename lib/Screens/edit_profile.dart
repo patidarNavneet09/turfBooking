@@ -74,8 +74,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.MyTrips.tr(),
-          style: TextStyle(
+          MyString.myTrips.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -235,8 +235,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       height: 10,
                     ),
                     Text(
-                      MyString.FirstName.tr(),
-                      style: TextStyle(
+                      MyString.firstName.tr(),
+                      style: const TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -271,7 +271,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //         states.contains(MaterialState.focused)
                                 //             ? MyColor.black
                                 //             : Colors.grey),
-                                hintText: MyString.James.tr(),
+                                hintText: MyString.james.tr(),
                                 hintStyle: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: ColorFamily.fontsSFProDisplay,
@@ -295,8 +295,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       height: 10,
                     ),
                     Text(
-                      MyString.LastName.tr(),
-                      style: TextStyle(
+                      MyString.lastName.tr(),
+                      style: const TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -336,7 +336,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                               //     (states) => states.contains(MaterialState.focused)
                               //         ? MyColor.black
                               //         : Colors.grey),
-                              hintText: MyString.Smith.tr(),
+                              hintText: MyString.smith.tr(),
                               hintStyle: const TextStyle(
                                   color: MyColor.black,
                                   fontFamily: ColorFamily.fontsSFProDisplay,
@@ -361,8 +361,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       height: 10,
                     ),
                     Text(
-                      MyString.PhoneNumber.tr(),
-                      style: TextStyle(
+                      MyString.phoneNumber.tr(),
+                      style: const TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -427,8 +427,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                       height: 10,
                     ),
                     Text(
-                      MyString.Email.tr(),
-                      style: TextStyle(
+                      MyString.email.tr(),
+                      style: const TextStyle(
                         fontSize: 18,
                         color: MyColor.black,
                         // overflow: TextOverflow.ellipsis,
@@ -474,7 +474,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 //         states.contains(MaterialState.focused)
                                 //             ? MyColor.black
                                 //             : Colors.grey),
-                                hintText: MyString.James.tr(),
+                                hintText: MyString.james.tr(),
 
                                 hintStyle: const TextStyle(
                                     color: MyColor.greyText,
@@ -590,8 +590,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -620,7 +620,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -642,8 +642,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.button,
                     fontFamily: ColorFamily.fontsSFProDisplay,

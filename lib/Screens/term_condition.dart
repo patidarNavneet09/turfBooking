@@ -33,8 +33,8 @@ class _TermConditionState extends State<TermCondition> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.TermsConditions.tr(),
-          style: TextStyle(
+          MyString.termsConditions.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,

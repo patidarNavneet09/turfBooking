@@ -178,8 +178,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Text(
-          MyString.EnrouteDiesel.tr(),
-          style: TextStyle(
+          MyString.enrouteDiesel.tr(),
+          style: const TextStyle(
             fontSize: 16,
             color: MyColor.appbartext,
             // overflow: TextOverflow.ellipsis,
@@ -246,15 +246,15 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   controller: enterNameOFStatationController,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration().prefixIconTextField(
-                      hintText: MyString.Enternameofpetrolstation.tr()),
+                      hintText: MyString.enternameofpetrolstation.tr()),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                MyString.Uploadphoto.tr(),
-                style: TextStyle(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: MyColor.greyText2,
                   // overflow: TextOverflow.ellipsis,
@@ -295,7 +295,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                               Utility.getToast(
                                   toastColor:
                                       const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.Youselectonlyoneimages.tr());
+                                  msg: MyString.youselectonlyoneimages.tr());
                             }
                           },
                           child: DottedBorder(
@@ -515,23 +515,23 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Fillexactquantityinliters.tr());
+                                msg: MyString.fillexactquantityinliters.tr());
                           } else if (unitPrice.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Fillexactunitprice.tr());
+                                msg: MyString.fillexactunitprice.tr());
                           } else if (enterNameOFStatation.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.FillexactEnternameofpetrolstation
+                                msg: MyString.fillexactEnternameofpetrolstation
                                     .tr());
                           } else if (imageFileListBanner.isEmpty == true) {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.Pleaseuploadphoto.tr());
+                                msg: MyString.pleaseuploadphoto.tr());
                           } else {
                             enRouteddieselApi(context, quantityLiters,
                                 unitPrice, enterNameOFStatation);
@@ -543,7 +543,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                           //         builder: (context) =>
                           //             const addonAddExpenstion()));
                         },
-                        name: MyString.Submit.tr()),
+                        name: MyString.submit.tr()),
                   ],
                 ),
               )
@@ -566,8 +566,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
       child: Column(
         children: <Widget>[
           Text(
-            MyString.ChooseProfilePhoto.tr(),
-            style: TextStyle(
+            MyString.chooseProfilePhoto.tr(),
+            style: const TextStyle(
               fontSize: 20,
               color: MyColor.black,
               fontFamily: ColorFamily.fontsSFProDisplay,
@@ -595,7 +595,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   ),
                   label: Text(
                     MyString.camera.tr(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: MyColor.black,
                       fontFamily: ColorFamily.fontsSFProDisplay,
@@ -618,8 +618,8 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   color: MyColor.black,
                 ),
                 label: Text(
-                  MyString.Gallery.tr(),
-                  style: TextStyle(
+                  MyString.gallery.tr(),
+                  style: const TextStyle(
                     fontSize: 10,
                     color: MyColor.black,
                     fontFamily: ColorFamily.fontsSFProDisplay,

@@ -118,7 +118,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 0 ? MyColor.white : Colors.grey)),
                   Text(
-                    MyString.Home.tr(),
+                    MyString.home.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 0 ? MyColor.white : Colors.grey,
@@ -151,7 +151,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 1 ? MyColor.white : Colors.grey)),
                   Text(
-                    MyString.Settings.tr(),
+                    MyString.settings.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 1 ? MyColor.white : Colors.grey,
@@ -186,7 +186,7 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
                           color:
                               pagesIndex == 2 ? MyColor.white : Colors.grey)),
                   Text(
-                    MyString.Notification.tr(),
+                    MyString.notification.tr(),
                     style: TextStyle(
                       fontSize: 10,
                       color: pagesIndex == 2 ? MyColor.white : Colors.grey,

@@ -46,7 +46,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return MediaQuery(
-      data: data.copyWith(textScaleFactor: 1.0),
+      data: data.copyWith(textScaler: const TextScaler.linear(1.0)),
       child: load
           ? SizedBox(
               height: data.size.height,
@@ -59,8 +59,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
               appBar: AppBar(
                 centerTitle: true,
                 title: Text(
-                  MyString.Notifications.tr(),
-                  style: TextStyle(
+                  MyString.notifications.tr(),
+                  style: const TextStyle(
                     color: MyColor.black,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -100,7 +100,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               children: [
                                 Center(
                                     child: Text(
-                                  MyString.Nonotification.tr(),
+                                  MyString.nonotification.tr(),
                                 )),
                               ],
                             ),
