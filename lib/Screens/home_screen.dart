@@ -36,6 +36,7 @@ class _HomescreenState extends State<Homescreen> {
   dynamic status = '';
   int index = 0;
   MyTrip myTrip = MyTrip();
+  // init -- screen calling aPI
   @override
   void initState() {
     super.initState();
@@ -1477,6 +1478,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
+// bottom navigation bar
   Container buildMyNavBar(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Container(
@@ -1542,6 +1544,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
+// Api intrigration - get data from mytrip api like :- active , newjobds ,complated
   Future<MyTrip> mytripGet(BuildContext context, String status) async {
     // Utility.progressloadingDialog(context, true);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -1586,6 +1589,7 @@ class _HomescreenState extends State<Homescreen> {
     return MyTrip.fromJson(jsonDecode(response.body));
   }
 
+// Api intrigration - get data from profile api
   Future<ProfileGet> profileGet(
     BuildContext context,
   ) async {

@@ -24,8 +24,8 @@ LocationData? currentLocation;
 
 class _DashBoardscreenState extends State<DashBoardscreen> {
   int pagesIndex = 0;
-
-  var pagesProvider = [
+//  pagesScreen view all screen by index
+  var pagesScreen = [
     const Homescreen(),
     const Setting(),
     const NotificationScreen()
@@ -75,10 +75,11 @@ class _DashBoardscreenState extends State<DashBoardscreen> {
           ),
         ),
       ),
-      body: pagesProvider[pagesIndex],
+      body: pagesScreen[pagesIndex],
     );
   }
 
+// Bottom navigation bar in dashboard screen
   Container buildMyNavBar(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.10,

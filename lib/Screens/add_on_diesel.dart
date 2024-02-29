@@ -278,10 +278,14 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
   //     // print(imageFileListBanner);
   //   });
   // }
+
+  // textEditiong controller
+
   TextEditingController quantityLitersController = TextEditingController();
   TextEditingController unitPriceController = TextEditingController();
   TextEditingController enterNameOFStatationController =
       TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -666,6 +670,8 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     );
   }
 
+// bottom sheet open code from gallary and camera
+
   Widget bottomSheet1() {
     return Container(
       height: 100.0,
@@ -747,6 +753,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
     );
   }
 
+// Api addondiesel post data
   Future<Dieselrespose> addondieselApi(context, String quantityLiters,
       String unitPrice, String petrolStation) async {
     setLoading(true);
