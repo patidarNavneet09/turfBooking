@@ -33,6 +33,8 @@ class Homescreen extends StatefulWidget {
 bool loading1 = true;
 
 class _HomescreenState extends State<Homescreen> {
+  // location is variable
+  dynamic locationId;
   dynamic status = '';
   int index = 0;
   MyTrip myTrip = MyTrip();
@@ -1577,7 +1579,7 @@ class _HomescreenState extends State<Homescreen> {
       });
     }
     // locationId are data set from start trip time for its id set and get location
-    var locationId = sharedPreferences.getString("trip_id");
+    locationId = sharedPreferences.getString("trip_id");
     if (activetip.toString() != "0" && context.mounted && locationId != null) {
       debugPrint("navnnnnnn12121");
       updatelocationApi(context);
@@ -1661,7 +1663,7 @@ class _HomescreenState extends State<Homescreen> {
   forground() {
     // =========== this is for clickable notification in kill state ===========
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if (message == null) {
+      if (message == null && locationId != null) {
         debugPrint("navneertttttttttttt");
         timer = Timer.periodic(const Duration(seconds: 15), (timer) {
           debugPrint("navneert545ttttt");
