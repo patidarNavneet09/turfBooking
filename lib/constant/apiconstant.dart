@@ -22,4 +22,5 @@ class ApiServer {
   static const endtripApi = "${baseurl}end-trip";
   static const updatelocation = "${baseurl}updatelocation";
   static const getnotification = "${baseurl}getnotification";
+  static const seennotification = "${baseurl}notification-seen";
 }

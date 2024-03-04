@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/notificationmodel.dart';
 import 'package:truckmanagement/constant/apiconstant.dart';
 import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import '../constant/AppColor/app_colors.dart';
 import '../constant/app_fontfamily.dart';
 import 'dart:convert' as convert;
@@ -18,6 +19,9 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  // seen bool notification
+  bool seenbool = false;
+
   int page = 1;
   Notificationmodel notificationRes = Notificationmodel();
   ScrollController scrollcontroller = ScrollController();
@@ -132,68 +136,92 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   notificatuincard(Items model) {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
-      decoration: BoxDecoration(
-          color: MyColor.white,
-          boxShadow: const [
-            BoxShadow(color: MyColor.greyText, spreadRadius: 0.1)
-          ],
-          borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 38,
-            width: 38,
-            decoration: const BoxDecoration(
-                gradient:
-                    LinearGradient(colors: [MyColor.button, MyColor.button1]),
-                shape: BoxShape.circle),
-            //backgroundColor: MyColor.button,
-            child: Center(
-              child: Image.asset(
-                "assets/images/notification.png",
-                color: MyColor.white,
-                height: 20,
-                width: 20,
+    return GestureDetector(
+      onTap: () {
+        seennotificationApi(model.id.toString());
+        setState(() {
+          if (seenbool = true) {
+            model.isSeen = "1";
+            seenbool = false;
+          }
+        });
+      },
+      child: Container(
+        padding:
+            const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+        decoration: BoxDecoration(
+            color: MyColor.white,
+            boxShadow: const [
+              BoxShadow(color: MyColor.greyText, spreadRadius: 0.1)
+            ],
+            borderRadius: BorderRadius.circular(10)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 38,
+              width: 38,
+              decoration: const BoxDecoration(
+                  gradient:
+                      LinearGradient(colors: [MyColor.button, MyColor.button1]),
+                  shape: BoxShape.circle),
+              //backgroundColor: MyColor.button,
+              child: Center(
+                child: Image.asset(
+                  "assets/images/notification.png",
+                  color: MyColor.white,
+                  height: 20,
+                  width: 20,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 0,
-              ),
-              Text(
-                "${model.title}",
-                style: const TextStyle(
-                  color: MyColor.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                  fontFamily: ColorFamily.fontsSFProDisplay,
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 0,
                 ),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Text(
-                "${model.description}",
-                style: const TextStyle(
-                  color: MyColor.black,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 12,
-                  fontFamily: ColorFamily.fontsSFProDisplay,
+                Text(
+                  "${model.title}",
+                  style: const TextStyle(
+                    color: MyColor.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    fontFamily: ColorFamily.fontsSFProDisplay,
+                  ),
                 ),
-              ),
-            ],
-          )),
-        ],
+                const SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  "${model.description}",
+                  style: const TextStyle(
+                    color: MyColor.black,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 12,
+                    fontFamily: ColorFamily.fontsSFProDisplay,
+                  ),
+                ),
+              ],
+            )),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                model.isSeen == "0"
+                    ? const CircleAvatar(
+                        radius: 5,
+                        backgroundColor: Colors.green,
+                      )
+                    : Container(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -271,5 +299,44 @@ class _NotificationScreenState extends State<NotificationScreen> {
         }
       }
     });
+  }
+
+  // notification seen api>>>>>
+
+  Future<void> seennotificationApi(String? id) async {
+    // var request = {};
+
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(logLevel: LogLevel.BODY),
+    ]);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response =
+        await http.get(Uri.parse("${ApiServer.seennotification}/$id"),
+            // body: convert.jsonEncode(request),
+            headers: {
+          "content-type": "application/json",
+          "accept": "application/json",
+          "Authorization":
+              "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+        });
+
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+
+    if (jsonResponse['status'] == true) {
+      // if (context.mounted) {
+      //   Utility.progressloadingDialog(context, false);
+      // }
+
+      // getNotificationApi(context, false);
+      setState(() {
+        seenbool = true;
+      });
+    } else {
+      Utility.getToast(msg: jsonResponse['message']);
+
+      setState(() {});
+    }
+
+    return;
   }
 }
