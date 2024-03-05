@@ -5,8 +5,9 @@ import 'dart:convert' as convert;
 import 'package:truckmanagement/constant/api_constant.dart';
 
 class ApiCall {
-  final Function trueCase;
-  final Function falseCase;
+  final Function? trueCase;
+  Function(bool)? trueCasebool;
+  final Function? falseCase;
   final String baseUrl;
   final Map<dynamic, dynamic> params;
   final bool isxClient;
@@ -14,8 +15,9 @@ class ApiCall {
   final Function(bool) setLoading;
 
   ApiCall({
-    required this.trueCase,
-    required this.falseCase,
+    this.trueCase,
+    this.trueCasebool,
+    this.falseCase,
     required this.baseUrl,
     required this.params,
     required this.isxClient,
@@ -55,9 +57,10 @@ class ApiCall {
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
     if (jsonResponse['status'] == true) {
       Class parsedResponse = fromJson(jsonResponse);
-      trueCase(parsedResponse);
+      trueCase!(parsedResponse);
+      trueCasebool!(true);
     } else {
-      falseCase();
+      falseCase!();
     }
   }
 }

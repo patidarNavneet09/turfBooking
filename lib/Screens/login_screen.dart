@@ -331,43 +331,8 @@ class _LoginState extends State<Login> {
                               msg: MyString.pleaseEnterYourPassword.tr());
                         } else {
                           // loginApi(context);
-                          SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          // loginApi(context);
-                          ApiCall(
-                              baseUrl: ApiServer.login,
-                              falseCase: () {
-                                print("failled");
-                              },
-                              fromJson: LoginResponse.fromJson,
-                              setLoading: (bool) {
-                                Utility.progressloadingDialog(context, bool);
-                              },
-                              params: {
-                                "email": emailController.text,
-                                'password': passwordController.text,
-                                'fcm_token': sharedPreferences
-                                    .getString("fcmtoken")
-                                    .toString(),
-                                'device_type': devicetype,
-                                'device_id': devicetoken,
-                              },
-                              isxClient: true,
-                              trueCase: (loginResponse) {
-                                print("loginsuccess${65 + 65 + 655}");
-                                sharedPreferences.setString("TOKEN",
-                                    loginResponse.data!.token.toString());
-                                if (context.mounted) {
-                                  sharedPreferences.setBool("isLogin", true);
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const DashBoardscreen(
-                                                pagesProviderIndex: 0,
-                                              )),
-                                      (Route<dynamic> route) => false);
-                                }
-                              }).customApiCall();
+
+                          login();
                         }
                       },
                       name: "Login"),
@@ -383,7 +348,44 @@ class _LoginState extends State<Login> {
   }
 
   /// loginApi  method to post data to database to login
+  login() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    ApiCall(
+      baseUrl: ApiServer.login,
+      falseCase: () {
+        print("failled");
+      },
+      fromJson: LoginResponse.fromJson,
+      setLoading: (bool) {
+        Utility.progressloadingDialog(context, bool);
+      },
+      params: {
+        "email": emailController.text,
+        'password': passwordController.text,
+        'fcm_token': sharedPreferences.getString("fcmtoken").toString(),
+        'device_type': devicetype,
+        'device_id': devicetoken,
+      },
+      isxClient: true,
+      trueCase: (loginResponse) {
+        sharedPreferences.setString(
+            "TOKEN", loginResponse.data!.token.toString());
+      },
+      trueCasebool: (bool) {
+        if (bool && context.mounted) {
+          sharedPreferences.setBool("isLogin", true);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => const DashBoardscreen(
+                        pagesProviderIndex: 0,
+                      )),
+              (Route<dynamic> route) => false);
+        }
+      },
+    ).customApiCall();
+  }
 
+/////
   Future<void> loginApi(
     BuildContext context,
   ) async {
