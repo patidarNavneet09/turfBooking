@@ -353,11 +353,11 @@ class _LoginState extends State<Login> {
     ApiCall(
       baseUrl: ApiServer.login,
       falseCase: () {
-        print("failled");
+        debugPrint("failled");
       },
       fromJson: LoginResponse.fromJson,
-      setLoading: (bool) {
-        Utility.progressloadingDialog(context, bool);
+      setLoading: (booldata) {
+        Utility.progressloadingDialog(context, booldata);
       },
       params: {
         "email": emailController.text,
@@ -371,8 +371,8 @@ class _LoginState extends State<Login> {
         sharedPreferences.setString(
             "TOKEN", loginResponse.data!.token.toString());
       },
-      trueCasebool: (bool) {
-        if (bool && context.mounted) {
+      trueCasebool: (booldata) {
+        if (booldata && context.mounted) {
           sharedPreferences.setBool("isLogin", true);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
@@ -382,7 +382,7 @@ class _LoginState extends State<Login> {
               (Route<dynamic> route) => false);
         }
       },
-    ).customApiCall();
+    ).clientPostApiCall();
   }
 
 /////

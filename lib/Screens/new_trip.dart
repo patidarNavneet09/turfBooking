@@ -15,8 +15,10 @@ import 'package:truckmanagement/Screens/expenstion_type.dart';
 import 'package:truckmanagement/Screens/large_images.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
+import 'package:truckmanagement/constant/api_method.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/string_file.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 import '../constant/api_constant.dart';
@@ -59,15 +61,85 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
     animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
     // _open = widget.initialOpen ?? false;
-    WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGet(
-        context, widget.truckId.toString(), widget.tripId.toString()));
+    WidgetsBinding.instance.addPostFrameCallback((_) => tripdetialsGetshort(
+        widget.truckId.toString(), widget.tripId.toString()));
   }
 
   apihit() {
     btnName = "";
     setState(() {});
-    tripdetialsGet(
-        context, widget.truckId.toString(), widget.tripId.toString());
+    tripdetialsGetshort(widget.truckId.toString(), widget.tripId.toString());
+  }
+
+  tripdetialsGetshort(String? truckId, String? tripId) async {
+    ApiCall(
+      baseUrl: "${ApiServer.tripdetailsapi}truck_id=$truckId&trip_id=$tripId",
+      falseCase: () {
+        debugPrint("failled");
+      },
+      // fromJson: LoginResponse.fromJson,
+      setLoading: (booldata) {
+        Utility.progressloadingDialog(context, booldata);
+      },
+
+      isxClient: true,
+      trueCase: (tripdetails) {
+        if (tripdetails.data!.status.toString() == "Accepted") {
+          btnName = "Truck Loading";
+          setState(() {});
+        }
+        if (tripdetails.data!.status.toString() == "Loading") {
+          indexbutton = 1;
+          setState(() {});
+        }
+
+        // Check if tripdetails.data!.addOnDiesels is not null and not empty
+
+        if (tripdetails.status == true) {
+          tripData.add("Trip Detail");
+        }
+        if (tripdetails.data!.addOnDiesels!.isNotEmpty) {
+          tripData.add("Add On Diesel");
+        }
+        if (tripdetails.data!.enrouteDiesels!.isNotEmpty) {
+          tripData.add("Enroute Diesel");
+        }
+
+        if (tripdetails.data!.repairs!.isNotEmpty) {
+          tripData.add("Repairs");
+        }
+
+        if (tripdetails.data!.tolls!.isNotEmpty) {
+          tripData.add("Tolls");
+        }
+
+        if (tripdetails.data!.roadAccidents!.isNotEmpty) {
+          tripData.add("Road Accident");
+        }
+
+        if (tripdetails.data!.fines!.isNotEmpty) {
+          tripData.add("Fine");
+        }
+
+        if (tripdetails.data!.otherCharges!.isNotEmpty) {
+          tripData.add("Other Charges");
+        }
+
+        if (tripdetails.data!.deliveryNote!.isNotEmpty) {
+          tripData.add("Delivery Information");
+        }
+        if (tripdetails.data!.endTrip!.isNotEmpty) {
+          tripData.add("End Trip");
+        }
+
+        setState(() {
+          loading1 = false;
+        });
+      },
+      trueCasebool: (booldata) {
+        if (booldata && context.mounted) {}
+      },
+    ).customApiCall();
   }
 
   void scrollToPosition() {

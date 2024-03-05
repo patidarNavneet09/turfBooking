@@ -9,14 +9,17 @@ import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/mytrip_model.dart';
 import 'package:truckmanagement/Model/profile_model.dart';
+import 'package:truckmanagement/Model/trip_details_model.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/Screens/edit_profile.dart';
 import 'package:truckmanagement/Screens/new_trip.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/api_constant.dart';
+import 'package:truckmanagement/constant/api_method.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/string_file.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'dart:convert' as convert;
 
 import '../Model/status_response_model.dart';
@@ -45,7 +48,7 @@ class _HomescreenState extends State<Homescreen> {
     index = 0;
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => mytripGet(context, "Pending"));
+        .addPostFrameCallback((_) => tripdetialsGetshort("Pending"));
   }
 
   returnApi(String status) {
@@ -56,7 +59,7 @@ class _HomescreenState extends State<Homescreen> {
     } else {
       sts = status;
     }
-    mytripGet(context, sts);
+    tripdetialsGetshort(sts);
   }
 
   String getGreeting() {
@@ -70,6 +73,53 @@ class _HomescreenState extends State<Homescreen> {
     } else {
       return 'Good Night';
     }
+  }
+
+// Api intrigration - get data from mytrip api like :- active , newjobds ,complated
+  tripdetialsGetshort(String status) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    ApiCall(
+      baseUrl: ApiServer.mytripapi + status,
+      falseCase: () {
+        debugPrint("failled");
+      },
+      // fromJson: LoginResponse.fromJson,
+      setLoading: (booldata) {
+        // Utility.progressloadingDialog(context, booldata);
+      },
+      isxClient: false,
+      fromJson: MyTrip.fromJson,
+      trueCase: (Data) {
+        myTrip = Data;
+
+        // locationId are data set from start trip time for its id set and get location
+
+        locationId = sharedPreferences.getString("trip_id");
+        if (activetip.toString() != "0" &&
+            context.mounted &&
+            locationId != null) {
+          updatelocationApi(context);
+          timer = Timer.periodic(const Duration(minutes: 5), (timer) {
+            updatelocationApi(context);
+          });
+          // forground();
+        }
+        setState(() {
+          loading1 = false;
+        });
+      },
+      trueCasebool: (booldata) {
+        if (booldata && context.mounted) {
+          setState(() {
+            loading1 = false;
+          });
+        } else {
+          setState(() {
+            loading1 = true;
+          });
+        }
+      },
+    ).customApiCall();
   }
 
   @override
@@ -272,7 +322,7 @@ class _HomescreenState extends State<Homescreen> {
                                     onTap: () {
                                       status = "Pending";
                                       index = 0;
-                                      mytripGet(context, status);
+                                      tripdetialsGetshort(status);
                                       setState(() {});
                                     },
                                     child: Container(
@@ -314,7 +364,7 @@ class _HomescreenState extends State<Homescreen> {
                                   InkWell(
                                     onTap: () {
                                       status = "Accepted";
-                                      mytripGet(context, status);
+                                      tripdetialsGetshort(status);
                                       index = 1;
                                       setState(() {});
                                     },
@@ -357,7 +407,7 @@ class _HomescreenState extends State<Homescreen> {
                                   InkWell(
                                     onTap: () {
                                       status = "Completed";
-                                      mytripGet(context, status);
+                                      tripdetialsGetshort(status);
                                       index = 2;
                                       setState(() {});
                                     },
@@ -1547,51 +1597,51 @@ class _HomescreenState extends State<Homescreen> {
   }
 
 // Api intrigration - get data from mytrip api like :- active , newjobds ,complated
-  Future<MyTrip> mytripGet(BuildContext context, String status) async {
-    // Utility.progressloadingDialog(context, true);
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
-      HttpLogger(logLevel: LogLevel.BODY),
-    ]);
+  // Future<MyTrip> mytripGet(BuildContext context, String status) async {
+  //   // Utility.progressloadingDialog(context, true);
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+  //     HttpLogger(logLevel: LogLevel.BODY),
+  //   ]);
 
-    var response =
-        await http.get(Uri.parse(ApiServer.mytripapi + status), headers: {
-      "content-type": "application/json",
-      "accept": "application/json",
-      "Authorization":
-          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
-    });
+  //   var response =
+  //       await http.get(Uri.parse(ApiServer.mytripapi + status), headers: {
+  //     "content-type": "application/json",
+  //     "accept": "application/json",
+  //     "Authorization":
+  //         "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+  //   });
 
-    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+  //   Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
-    loading1 = true;
-    activetip = jsonResponse['active_tip'].toString();
-    debugPrint("active_tip............>$activetip");
-    if (jsonResponse['status'] == true) {
-      myTrip = MyTrip.fromJson(jsonResponse);
-      setState(() {
-        loading1 = false;
-      });
-    } else {
-      myTrip = MyTrip.fromJson(jsonResponse);
-      setState(() {
-        loading1 = false;
-      });
-    }
-    // locationId are data set from start trip time for its id set and get location
-    locationId = sharedPreferences.getString("trip_id");
-    if (activetip.toString() != "0" && context.mounted && locationId != null) {
-      debugPrint("navnnnnnn12121");
-      updatelocationApi(context);
-      timer = Timer.periodic(const Duration(minutes: 5), (timer) {
-        debugPrint("navnnnnnn");
-        updatelocationApi(context);
-      });
-      // forground();
-    }
+  //   loading1 = true;
+  //   activetip = jsonResponse['active_tip'].toString();
+  //   debugPrint("active_tip............>$activetip");
+  //   if (jsonResponse['status'] == true) {
+  //     myTrip = MyTrip.fromJson(jsonResponse);
+  //     setState(() {
+  //       loading1 = false;
+  //     });
+  //   } else {
+  //     myTrip = MyTrip.fromJson(jsonResponse);
+  //     setState(() {
+  //       loading1 = false;
+  //     });
+  //   }
+  //   // locationId are data set from start trip time for its id set and get location
+  //   locationId = sharedPreferences.getString("trip_id");
+  //   if (activetip.toString() != "0" && context.mounted && locationId != null) {
+  //     debugPrint("navnnnnnn12121");
+  //     updatelocationApi(context);
+  //     timer = Timer.periodic(const Duration(minutes: 5), (timer) {
+  //       debugPrint("navnnnnnn");
+  //       updatelocationApi(context);
+  //     });
+  //     // forground();
+  //   }
 
-    return MyTrip.fromJson(jsonDecode(response.body));
-  }
+  //   return MyTrip.fromJson(jsonDecode(response.body));
+  // }
 
 // Api intrigration - get data from profile api
   Future<ProfileGet> profileGet(
