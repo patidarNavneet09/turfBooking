@@ -9,7 +9,6 @@ import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/mytrip_model.dart';
 import 'package:truckmanagement/Model/profile_model.dart';
-import 'package:truckmanagement/Model/trip_details_model.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/Screens/edit_profile.dart';
 import 'package:truckmanagement/Screens/new_trip.dart';
@@ -19,7 +18,6 @@ import 'package:truckmanagement/constant/api_constant.dart';
 import 'package:truckmanagement/constant/api_method.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/string_file.dart';
-import 'package:truckmanagement/constant/utility.dart';
 import 'dart:convert' as convert;
 
 import '../Model/status_response_model.dart';
@@ -89,8 +87,8 @@ class _HomescreenState extends State<Homescreen> {
       },
       isxClient: false,
       fromJson: MyTrip.fromJson,
-      trueCase: (Data) {
-        myTrip = Data;
+      trueCase: (dataresponse) {
+        myTrip = dataresponse;
 
         // locationId are data set from start trip time for its id set and get location
 

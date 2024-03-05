@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as convert;
@@ -31,6 +32,8 @@ class ApiCall {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     authenticate = prefs.getString('token').toString();
     userId = prefs.getString('user_id').toString();
+    debugPrint(authenticate);
+    debugPrint(userId);
     setLoading(true);
     var request = params;
     HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
@@ -61,7 +64,9 @@ class ApiCall {
     tokenauthenticate = prefs.getString('TOKEN').toString();
     userId = prefs.getString('user_id').toString();
     setLoading(true);
-    var request = params;
+    debugPrint(userId);
+    // var request = params;
+
     HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
       HttpLogger(logLevel: LogLevel.BODY),
     ]);
