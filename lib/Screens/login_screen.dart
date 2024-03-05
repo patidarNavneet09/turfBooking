@@ -9,8 +9,10 @@ import 'package:truckmanagement/Model/login_model.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/api_constant.dart';
+import 'package:truckmanagement/constant/api_method.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/string_file.dart';
+import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/main.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -317,7 +319,7 @@ class _LoginState extends State<Login> {
                         fontWeight: FontWeight.w600,
                       ),
                       btnWidth: MediaQuery.of(context).size.width * 0.90,
-                      onPressed: () {
+                      onPressed: () async {
                         loadingLogin = true;
                         String email = emailController.text;
                         String password = passwordController.text;
@@ -328,7 +330,44 @@ class _LoginState extends State<Login> {
                           Fluttertoast.showToast(
                               msg: MyString.pleaseEnterYourPassword.tr());
                         } else {
-                          loginApi(context);
+                          // loginApi(context);
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          // loginApi(context);
+                          ApiCall(
+                              baseUrl: ApiServer.login,
+                              falseCase: () {
+                                print("failled");
+                              },
+                              fromJson: LoginResponse.fromJson,
+                              setLoading: (bool) {
+                                Utility.progressloadingDialog(context, bool);
+                              },
+                              params: {
+                                "email": emailController.text,
+                                'password': passwordController.text,
+                                'fcm_token': sharedPreferences
+                                    .getString("fcmtoken")
+                                    .toString(),
+                                'device_type': devicetype,
+                                'device_id': devicetoken,
+                              },
+                              isxClient: true,
+                              trueCase: (loginResponse) {
+                                print("loginsuccess${65 + 65 + 655}");
+                                sharedPreferences.setString("TOKEN",
+                                    loginResponse.data!.token.toString());
+                                if (context.mounted) {
+                                  sharedPreferences.setBool("isLogin", true);
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const DashBoardscreen(
+                                                pagesProviderIndex: 0,
+                                              )),
+                                      (Route<dynamic> route) => false);
+                                }
+                              }).customApiCall();
                         }
                       },
                       name: "Login"),
