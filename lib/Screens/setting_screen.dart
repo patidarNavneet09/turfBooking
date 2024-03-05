@@ -10,10 +10,10 @@ import 'package:truckmanagement/Screens/privacy_policy.dart';
 import 'package:truckmanagement/Screens/term_condition.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
-import '../constant/apiconstant.dart';
+import '../constant/api_constant.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/notification_model.dart';
+import 'package:truckmanagement/Model/notification_data_model.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 bool navcheck = false;

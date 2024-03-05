@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:truckmanagement/Screens/notification.dart';
 
 import 'package:truckmanagement/Screens/home_screen.dart';
-import 'package:truckmanagement/Screens/settingscreen.dart';
+import 'package:truckmanagement/Screens/setting_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:location/location.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 
 class DashBoardscreen extends StatefulWidget {
   final int pagesProviderIndex;

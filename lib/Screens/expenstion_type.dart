@@ -8,7 +8,7 @@ import 'package:truckmanagement/Screens/repairs.dart';
 import 'package:truckmanagement/Screens/tolls.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 
 class ExpentionType extends StatefulWidget {
   final String? tripId;

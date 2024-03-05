@@ -1,48 +1,74 @@
-// To parse this JSON data, do
-//
-//     final notificationDataModel = notificationDataModelFromJson(jsonString);
+class Notificationmodel {
+  bool? status;
+  Data? data;
+  String? message;
 
-import 'dart:convert';
+  Notificationmodel({this.status, this.data, this.message});
 
-NotificationDataModel notificationDataModelFromJson(String str) =>
-    NotificationDataModel.fromJson(json.decode(str));
+  Notificationmodel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    message = json['message'];
+  }
 
-String notificationDataModelToJson(NotificationDataModel data) =>
-    json.encode(data.toJson());
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    data['message'] = message;
+    return data;
+  }
+}
 
-class NotificationDataModel {
-  String? cityName;
-  String? name;
-  String? screen;
-  String? clickAction;
-  String? propertyId;
-  String? cityId;
+class Data {
+  int? total;
+  List<Items>? items;
 
-  NotificationDataModel({
-    this.cityName,
-    this.name,
-    this.screen,
-    this.clickAction,
-    this.propertyId,
-    this.cityId,
-  });
+  Data({this.total, this.items});
 
-  factory NotificationDataModel.fromJson(Map<String, dynamic> json) =>
-      NotificationDataModel(
-        cityName: json["city_name"],
-        name: json["name"],
-        screen: json["screen"],
-        clickAction: json["click_action "],
-        propertyId: json["property_id"],
-        cityId: json["city_id"],
-      );
+  Data.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
+  }
 
-  Map<String, dynamic> toJson() => {
-        "city_name": cityName,
-        "name": name,
-        "screen": screen,
-        "click_action ": clickAction,
-        "property_id": propertyId,
-        "city_id": cityId,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Items {
+  int? id;
+  String? title;
+  String? description;
+  String? isSeen;
+
+  Items({this.id, this.title, this.description, this.isSeen});
+
+  Items.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    description = json['description'];
+    isSeen = json['is_seen'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['is_seen'] = isSeen;
+    return data;
+  }
 }

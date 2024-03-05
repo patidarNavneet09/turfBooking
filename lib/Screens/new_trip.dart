@@ -6,8 +6,8 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/statusresponsemodel.dart';
-import 'package:truckmanagement/Model/tripdetailsmodel.dart';
+import 'package:truckmanagement/Model/status_response_model.dart';
+import 'package:truckmanagement/Model/trip_details_model.dart';
 import 'package:truckmanagement/Screens/add_on_diesel.dart';
 import 'package:truckmanagement/Screens/delivery_screen.dart';
 import 'package:truckmanagement/Screens/end_trip.dart';
@@ -16,10 +16,10 @@ import 'package:truckmanagement/Screens/large_images.dart';
 import 'package:truckmanagement/Screens/start_trip.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
-import '../constant/apiconstant.dart';
+import '../constant/api_constant.dart';
 
 class NewTrip extends StatefulWidget {
   final String? tripId;

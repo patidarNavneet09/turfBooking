@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
-import 'package:truckmanagement/Model/termconditionmodel.dart';
+import 'package:truckmanagement/Model/term_condition_model.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
-import 'package:truckmanagement/constant/apiconstant.dart';
+import 'package:truckmanagement/constant/api_constant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'dart:convert' as convert;
 
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 
 class TermCondition extends StatefulWidget {
   const TermCondition({super.key});

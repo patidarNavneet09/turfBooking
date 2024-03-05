@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/profilemodel.dart';
+import 'package:truckmanagement/Model/profile_model.dart';
 import 'dart:convert' as convert;
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
-import 'package:truckmanagement/constant/apiconstant.dart';
+import 'package:truckmanagement/constant/api_constant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 
 class ProfileSetting extends StatefulWidget {
   const ProfileSetting({super.key});

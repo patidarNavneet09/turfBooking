@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/loginmodel.dart';
+import 'package:truckmanagement/Model/login_model.dart';
 import 'package:truckmanagement/Screens/dashboard_screen.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
-import 'package:truckmanagement/constant/apiconstant.dart';
+import 'package:truckmanagement/constant/api_constant.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 import 'package:truckmanagement/main.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -32,6 +32,9 @@ class _LoginState extends State<Login> {
   String devicetoken = "";
   String devicetype = "";
   String devicename = "";
+
+  /// init method to call with screen
+
   @override
   void initState() {
     pushFCMtoken();
@@ -42,6 +45,8 @@ class _LoginState extends State<Login> {
     texthide = true;
   }
 
+  /// isLoading bool and its method to set value to work
+
   bool isLoading = false;
 
   void setLoading(bool value) {
@@ -50,8 +55,15 @@ class _LoginState extends State<Login> {
     });
   }
 
+  /// loadingLogin bool here
+
   bool loadingLogin = false;
+
+  ///  loginResponse to call its model data LoginResponse
+
   LoginResponse loginResponse = LoginResponse();
+
+  /// pushFCMtoken method to take FCM toekn in "fcmtoken" variable
 
   void pushFCMtoken() async {
     try {
@@ -73,6 +85,8 @@ class _LoginState extends State<Login> {
       }
     }
   }
+
+  /// _getId method to find mobile data like - devicetype and devide ID
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
@@ -328,6 +342,8 @@ class _LoginState extends State<Login> {
       // bottomNavigationBar: buildMyNavBar(context),
     );
   }
+
+  /// loginApi  method to post data to database to login
 
   Future<void> loginApi(
     BuildContext context,

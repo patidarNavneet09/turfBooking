@@ -128,6 +128,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      // Dashboard screen and login screen call
       home: islogin.toString() == "true"
           ? const DashBoardscreen(
               pagesProviderIndex: 0,

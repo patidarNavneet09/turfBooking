@@ -3,9 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_http_logger/pretty_http_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:truckmanagement/Model/notificationmodel.dart';
-import 'package:truckmanagement/constant/apiconstant.dart';
-import 'package:truckmanagement/constant/stringfile.dart';
+import 'package:truckmanagement/Model/notification_model.dart';
+import 'package:truckmanagement/constant/api_constant.dart';
+import 'package:truckmanagement/constant/string_file.dart';
 import 'package:truckmanagement/constant/utility.dart';
 import '../constant/AppColor/app_colors.dart';
 import '../constant/app_fontfamily.dart';
@@ -225,6 +225,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
     );
   }
+////////////////// notifiaction data api
 
   Future<Notificationmodel> getNotificationApi(
       BuildContext context, bool loader) async {
@@ -301,7 +302,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     });
   }
 
-  // notification seen api>>>>>
+  ///////////// notification seen api>>>>>
 
   Future<void> seennotificationApi(String? id) async {
     // var request = {};
