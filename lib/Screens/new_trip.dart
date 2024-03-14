@@ -79,11 +79,13 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
       },
       // fromJson: LoginResponse.fromJson,
       setLoading: (booldata) {
-        Utility.progressloadingDialog(context, booldata);
+        // Utility.progressloadingDialog(context, booldata);
       },
 
       isxClient: true,
-      trueCase: (tripdetails) {
+      fromJson: Tripdetails.fromJson,
+      trueCase: (tripdetails1) {
+        tripdetails = tripdetails1;
         if (tripdetails.data!.status.toString() == "Accepted") {
           btnName = "Truck Loading";
           setState(() {});
@@ -137,6 +139,15 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
         });
       },
       trueCasebool: (booldata) {
+        if (booldata && context.mounted) {
+          setState(() {
+            loading1 = false;
+          });
+        } else {
+          setState(() {
+            loading1 = true;
+          });
+        }
         if (booldata && context.mounted) {}
       },
     ).customApiCall();
