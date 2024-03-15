@@ -37,7 +37,7 @@ class MyString {
   static const quantity = "Quantity";
   static const unitPrice = "Unit Price";
 
-  static const date = "Date";
+  static const date = "Date =";
   static const enrouteDiesel = "Enroute Diesel";
 
   static const fuelStation = "Fuel Station";
@@ -74,8 +74,8 @@ class MyString {
   static const youselectonlyoneimages = "You select only one images";
   static const fillexactquantityinliters = "Fill exact quantity in liters";
   static const fillexactunitprice = "Fill exact unit price";
-  static const petrolstationfieldrequired =
-     "Petrol station field is required";
+  static const fillexactEnternameofpetrolstation =
+      "Fill exact Enter name of petrol station";
   static const submit = "Submit";
   static const chooseProfilePhoto = "Choose Profile Photo";
   static const camera = "camera";
@@ -134,8 +134,8 @@ class MyString {
   static const fillexactkilometerdriven = "Fill exact kilometer driven";
   static const pleaseuploadphotodieselmeterofexistingdiesel =
       "please upload photo diesel meter of existing diesel";
-  static const filltollnamename = "Please enter tollname";
-  static const fillamount = "Please enter amount";
+  static const filltollnamename = "Fill  tollname ";
+  static const fillamount = "Fill  amount";
   static const areyousureyouwanttologout = "Are you sure, you want to logout ?";
   static const pleaserefreshhomepage = "please refresh home page";
 }

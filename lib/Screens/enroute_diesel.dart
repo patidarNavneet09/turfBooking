@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/end_diesel_model.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -76,13 +75,16 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
   bool isChecked = false;
   String? selectedId = " ";
   Future<void> chooseImage1(type) async {
+    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
       // image1 = await ImagePicker().pickImage(
       //   source: ImageSource.camera,
       // );
       // imageFileListBanner.add(image1);
+      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
       if (selectedImage1 == null) {
+        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -91,6 +93,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
         ppp = true;
         setState(() {});
       } else if (selectedImage2 == null) {
+        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -113,6 +116,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage1 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -143,18 +147,23 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.length}");
     }
+    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
   }
 
@@ -201,7 +210,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: quantityLitersController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Quantity in liters"),
                 ),
@@ -218,7 +227,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
                   controller: unitPriceController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: const InputDecoration()
                       .prefixIconTextField(hintText: "   Unit Price"),
                 ),
@@ -516,7 +525,7 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.petrolstationfieldrequired
+                                msg: MyString.fillexactEnternameofpetrolstation
                                     .tr());
                           } else if (imageFileListBanner.isEmpty == true) {
                             Utility.getToast(
@@ -656,7 +665,6 @@ class _EnrouteDieselState extends State<EnrouteDiesel> {
       debugPrint("response.body>>>>>>>>>>${response.body}");
       Navigator.pop(context);
     } else {
-         Fluttertoast.showToast(msg: body['message']);
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
     return EnrouteDieselRes.fromJson(jsonDecode(response.body));

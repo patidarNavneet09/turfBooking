@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/fines_model.dart';
@@ -95,13 +94,16 @@ class _FinesScreenState extends State<FinesScreen> {
   bool isChecked = false;
   String? selectedId = " ";
   Future<void> chooseImage1(type) async {
+    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
       // image1 = await ImagePicker().pickImage(
       //   source: ImageSource.camera,
       // );
       // imageFileListBanner.add(image1);
+      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
       if (selectedImage1 == null) {
+        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -110,6 +112,7 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp = true;
         setState(() {});
       } else if (selectedImage2 == null) {
+        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -132,6 +135,7 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage1 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -162,29 +166,37 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.length}");
     }
+    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
   }
 
   Future<void> chooseImage2(type) async {
+    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
       // image1 = await ImagePicker().pickImage(
       //   source: ImageSource.camera,
       // );
       // imageFileListBanner.add(image1);
+      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
       if (selectedImage4 == null) {
+        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -193,6 +205,7 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp = true;
         setState(() {});
       } else if (selectedImage5 == null) {
+        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -215,6 +228,7 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage4 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -245,18 +259,23 @@ class _FinesScreenState extends State<FinesScreen> {
         ppp2 = true;
         setState(() {});
       }
+      // print("imageFileListBanner${imageFileListBanner.length}");
     }
+    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage4!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage5!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage6!.readAsBytesSync());
+      // print(imageFileListBanner);
     });
   }
 
@@ -278,20 +297,11 @@ class _FinesScreenState extends State<FinesScreen> {
   TextEditingController fineController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     fineController.dispose();
     super.dispose();
-  }
-
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: const Color.fromARGB(255, 34, 71, 99),
-        content: Text(
-          message,
-          style: const TextStyle(color: Colors.white),
-        )));
   }
 
   @override
@@ -320,392 +330,361 @@ class _FinesScreenState extends State<FinesScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: MyColor.greyText),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: MyColor.greyText),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextFormField(
-                    textAlign: TextAlign.start,
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: fineController,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration()
-                        .prefixIconTextField(hintText: MyString.fineName.tr()),
-                  ),
+                child: TextFormField(
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: fineController,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration()
+                      .prefixIconTextField(hintText: MyString.fineName.tr()),
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: MyColor.greyText),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: MyColor.greyText),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextFormField(
-                    textAlign: TextAlign.start,
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: amountController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration()
-                        .prefixIconTextField(hintText: MyString.amount.tr()),
-                  ),
+                child: TextFormField(
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration()
+                      .prefixIconTextField(hintText: MyString.amount.tr()),
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: MyColor.greyText),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: MyColor.greyText),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextFormField(
-                    textAlign: TextAlign.start,
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: descriptionController,
-                    keyboardType: TextInputType.text,
-//                     validator: (value) {
-// Pattern pattern = r'^[a-zA-Z]+$';
-
-
-
-//                       if (value!.isEmpty) {
-//                         showSnackBar(context, 'Please enter a description');
-//                       }
-//                        if(value == pattern){
-//   showSnackBar(context, '54555555');
-//                       }else{
-                      
-//                       }
-
-//                       return null;
-//                     },
-                    maxLines: 5,
-                    decoration: const InputDecoration().prefixIconTextField(
-                        hintText: MyString.description.tr()),
-                  ),
+                child: TextFormField(
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: descriptionController,
+                  keyboardType: TextInputType.text,
+                  maxLines: 5,
+                  decoration: const InputDecoration()
+                      .prefixIconTextField(hintText: MyString.description.tr()),
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                MyString.uploadphoto.tr(),
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: MyColor.greyText2,
+                  // overflow: TextOverflow.ellipsis,
+                  fontFamily: ColorFamily.fontsSFProDisplay,
+                  fontWeight: FontWeight.w400,
                 ),
-                Text(
-                  MyString.uploadphoto.tr(),
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: MyColor.greyText2,
-                    // overflow: TextOverflow.ellipsis,
-                    fontFamily: ColorFamily.fontsSFProDisplay,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  height: 100,
-                  width: screen.size.width,
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(width: 1, color: MyColor.black),
-                  //   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  // ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // Text("You can add upto 3 photos".tr),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              indeximage = 1;
-                              setState(() {});
-                              if (imageFileListBanner2.isEmpty) {
-                                showModalBottomSheet(
-                                    shape: const RoundedRectangleBorder(
-                                      // <-- SEE HERE
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(20.0),
-                                      ),
+              ),
+              SizedBox(
+                height: 100,
+                width: screen.size.width,
+                // decoration: BoxDecoration(
+                //   border: Border.all(width: 1, color: MyColor.black),
+                //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+                // ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Text("You can add upto 3 photos".tr),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            indeximage = 1;
+                            setState(() {});
+                            if (imageFileListBanner2.isEmpty) {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    // <-- SEE HERE
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
                                     ),
-                                    context: context,
-                                    builder: ((builder) => bottomSheet1()));
-                              } else {
-                                Utility.getToast(
-                                    toastColor:
-                                        const Color.fromARGB(255, 34, 71, 99),
-                                    msg: MyString.youselectonlyoneimages.tr());
-                              }
-                            },
-                            child: DottedBorder(
-                                color: MyColor.button,
-                                strokeWidth: 2,
-                                borderType: BorderType.Rect,
-                                dashPattern: const [5, 10],
-                                child: Container(
-                                    margin: const EdgeInsets.all(1),
-                                    height: 50,
-                                    width: 53,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle),
-                                    child: const Icon(
-                                      Icons.add,
-                                      size: 30,
-                                      color: MyColor.greyText,
-                                    ))),
-                          ),
-                          SizedBox(
-                            width: screen.size.width * 0.68,
-                            height: 62,
-                            child: imageFileListBanner2.isEmpty
-                                ? Visibility(
-                                    visible: false,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10,
-                                          right: 10,
-                                          top: 2,
-                                          bottom: 2),
-                                      child: SizedBox(
-                                        width: screen.size.width * 0.60,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: 1,
-                                                    color: MyColor.button),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10)),
-                                              ),
-                                              height: 100,
-                                              width: 60,
-                                              child: const Icon(
-                                                Icons.photo,
-                                                color: MyColor.button,
-                                              ),
-                                            ),
-                                            // Container(
-                                            //   decoration: BoxDecoration(
-                                            //     border: Border.all(
-                                            //         width: 1, color: MyColor.black),
-                                            //     borderRadius:
-                                            //         const BorderRadius.all(
-                                            //             Radius.circular(10)),
-                                            //   ),
-                                            //   height: 100,
-                                            //   width: 60,
-                                            //   child: const Icon(Icons.photo),
-                                            // ),
-                                            // Container(
-                                            //   decoration: BoxDecoration(
-                                            //     border: Border.all(
-                                            //         width: 1, color: MyColor.black),
-                                            //     borderRadius:
-                                            //         const BorderRadius.all(
-                                            //             Radius.circular(10)),
-                                            //   ),
-                                            //   height: 100,
-                                            //   width: 60,
-                                            //   child: const Icon(Icons.photo),
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: imageFileListBanner2.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Stack(
+                                  ),
+                                  context: context,
+                                  builder: ((builder) => bottomSheet1()));
+                            } else {
+                              Utility.getToast(
+                                  toastColor:
+                                      const Color.fromARGB(255, 34, 71, 99),
+                                  msg: MyString.youselectonlyoneimages.tr());
+                            }
+                          },
+                          child: DottedBorder(
+                              color: MyColor.button,
+                              strokeWidth: 2,
+                              borderType: BorderType.Rect,
+                              dashPattern: const [5, 10],
+                              child: Container(
+                                  margin: const EdgeInsets.all(1),
+                                  height: 50,
+                                  width: 53,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle),
+                                  child: const Icon(
+                                    Icons.add,
+                                    size: 30,
+                                    color: MyColor.greyText,
+                                  ))),
+                        ),
+                        SizedBox(
+                          width: screen.size.width * 0.68,
+                          height: 62,
+                          child: imageFileListBanner2.isEmpty
+                              ? Visibility(
+                                  visible: false,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10, top: 2, bottom: 2),
+                                    child: SizedBox(
+                                      width: screen.size.width * 0.60,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, right: 8.0),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: Stack(
-                                                children: [
-                                                  SizedBox(
-                                                    height: 100,
-                                                    width: 65,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(2.0),
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                width: 2,
-                                                                color: MyColor
-                                                                    .button),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            12)),
-                                                          ),
-                                                          height: 65,
-                                                          width: 65,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            10)),
-                                                            child: Image.file(
-                                                              File(
-                                                                  imageFileListBanner2[
-                                                                          index]
-                                                                      .path),
-                                                              fit: BoxFit.fill,
-                                                            ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: MyColor.button),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
+                                            ),
+                                            height: 100,
+                                            width: 60,
+                                            child: const Icon(
+                                              Icons.photo,
+                                              color: MyColor.button,
+                                            ),
+                                          ),
+                                          // Container(
+                                          //   decoration: BoxDecoration(
+                                          //     border: Border.all(
+                                          //         width: 1, color: MyColor.black),
+                                          //     borderRadius:
+                                          //         const BorderRadius.all(
+                                          //             Radius.circular(10)),
+                                          //   ),
+                                          //   height: 100,
+                                          //   width: 60,
+                                          //   child: const Icon(Icons.photo),
+                                          // ),
+                                          // Container(
+                                          //   decoration: BoxDecoration(
+                                          //     border: Border.all(
+                                          //         width: 1, color: MyColor.black),
+                                          //     borderRadius:
+                                          //         const BorderRadius.all(
+                                          //             Radius.circular(10)),
+                                          //   ),
+                                          //   height: 100,
+                                          //   width: 60,
+                                          //   child: const Icon(Icons.photo),
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: imageFileListBanner2.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8.0),
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: Stack(
+                                              children: [
+                                                SizedBox(
+                                                  height: 100,
+                                                  width: 65,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              width: 2,
+                                                              color: MyColor
+                                                                  .button),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          12)),
+                                                        ),
+                                                        height: 65,
+                                                        width: 65,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          10)),
+                                                          child: Image.file(
+                                                            File(
+                                                                imageFileListBanner2[
+                                                                        index]
+                                                                    .path),
+                                                            fit: BoxFit.fill,
                                                           ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    height: 65,
-                                                    width: 66,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        InkWell(
-                                                            radius: 20,
-                                                            onTap: () {
-                                                              imageFileListBanner2
-                                                                  .removeAt(
-                                                                      index);
-                                                              setState(() {});
-                                                            },
-                                                            child: SizedBox(
-                                                              width: 20,
-                                                              child: Image.asset(
-                                                                  "assets/images/cross.png"),
-                                                            )
-                                                            // child:
-                                                            //     const CircleAvatar(
-                                                            //   backgroundColor:
-                                                            //       MyColor
-                                                            //           .transparent,
-                                                            //   radius: 10,
-                                                            //   child: Text(
-                                                            //     'x',
-                                                            //     style: TextStyle(
-                                                            //         color: MyColor
-                                                            //             .white),
-                                                            //   ),
-                                                            // ),
-                                                            ),
-                                                      ],
-                                                    ),
+                                                ),
+                                                SizedBox(
+                                                  height: 65,
+                                                  width: 66,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      InkWell(
+                                                          radius: 20,
+                                                          onTap: () {
+                                                            imageFileListBanner2
+                                                                .removeAt(
+                                                                    index);
+                                                            setState(() {});
+                                                          },
+                                                          child: SizedBox(
+                                                            width: 20,
+                                                            child: Image.asset(
+                                                                "assets/images/cross.png"),
+                                                          )
+                                                          // child:
+                                                          //     const CircleAvatar(
+                                                          //   backgroundColor:
+                                                          //       MyColor
+                                                          //           .transparent,
+                                                          //   radius: 10,
+                                                          //   child: Text(
+                                                          //     'x',
+                                                          //     style: TextStyle(
+                                                          //         color: MyColor
+                                                          //             .white),
+                                                          //   ),
+                                                          // ),
+                                                          ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      );
-                                    }),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppButton(
-                          isLoading: isLoading,
-                          // color: MyColor.transparent,
-                          textStyle: const TextStyle(
-                            color: MyColor.white,
-                            fontSize: 16,
-                            fontFamily: ColorFamily.fontsSFProDisplay,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          btnWidth: MediaQuery.of(context).size.width * 0.90,
-                          onPressed: () {
-                            // if (_formKey.currentState!.validate()) {}
-                            var name = fineController.text;
-                            var amount = amountController.text;
-                            var description = descriptionController.text;
-                            if (name.isEmpty == true) {
-                              Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.pleaseenterfinename.tr());
-                            } else if (amount.isEmpty == true) {
-                              Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.pleaseenteramount.tr());
-                            } else if (description.isEmpty == true) {
-                              Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.pleaseenterdescription.tr());
-                            } else if (imageFileListBanner2.isEmpty == true) {
-                              Utility.getToast(
-                                  toastColor:
-                                      const Color.fromARGB(255, 34, 71, 99),
-                                  msg: MyString.pleaseuploadphoto.tr());
-                            } else {
-                              finesApi(
-                                context,
-                                name,
-                                amount,
-                                description,
-                              );
-                            }
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppButton(
+                        isLoading: isLoading,
+                        // color: MyColor.transparent,
+                        textStyle: const TextStyle(
+                          color: MyColor.white,
+                          fontSize: 16,
+                          fontFamily: ColorFamily.fontsSFProDisplay,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        btnWidth: MediaQuery.of(context).size.width * 0.90,
+                        onPressed: () {
+                          var name = fineController.text;
+                          var amount = amountController.text;
+                          var description = descriptionController.text;
+                          if (name.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.pleaseenterfinename.tr());
+                          } else if (amount.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.pleaseenteramount.tr());
+                          } else if (description.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.pleaseenterdescription.tr());
+                          } else if (imageFileListBanner2.isEmpty == true) {
+                            Utility.getToast(
+                                toastColor:
+                                    const Color.fromARGB(255, 34, 71, 99),
+                                msg: MyString.pleaseuploadphoto.tr());
+                          } else {
+                            finesApi(
+                              context,
+                              name,
+                              amount,
+                              description,
+                            );
+                          }
 
-                            // Navigator.pop(context);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) =>
-                            //             const addonAddExpenstion()));
-                          },
-                          name: MyString.submit.tr()),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                          // Navigator.pop(context);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const addonAddExpenstion()));
+                        },
+                        name: MyString.submit.tr()),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
-      ),
-    );
-  }
-
-  void data(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Yay! A SnackBar!'),
       ),
     );
   }
@@ -824,7 +803,6 @@ class _FinesScreenState extends State<FinesScreen> {
       debugPrint("response.body>>>>>>>>>>${response.body}");
       Navigator.pop(context);
     } else {
-      Fluttertoast.showToast(msg: body['message']);
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
     return FinesModel.fromJson(jsonDecode(response.body));
