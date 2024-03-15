@@ -96,7 +96,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
         }
 
         // Check if tripdetails.data!.addOnDiesels is not null and not empty
-
+tripData.clear();
         if (tripdetails.status == true) {
           tripData.add("Trip Detail");
         }
