@@ -83,6 +83,9 @@ class _HomescreenState extends State<Homescreen> {
       },
       // fromJson: LoginResponse.fromJson,
       setLoading: (booldata) {
+           setState(() {
+          loading1 = booldata;
+        });
         // Utility.progressloadingDialog(context, booldata);
       },
       isxClient: false,
@@ -142,7 +145,6 @@ class _HomescreenState extends State<Homescreen> {
         ),
         body:
             loading1 == true ||
-                    profilegetResponse.status != true ||
                     myTrip.status != true
                 ? Center(
                     child: Image.asset("assets/images/gif_loader.gif"),
@@ -1664,7 +1666,9 @@ class _HomescreenState extends State<Homescreen> {
     if (jsonResponse['status'] == true) {
       profilegetResponse = ProfileGet.fromJson(jsonResponse);
 
-      loading1 = false;
+     setState(() {
+        loading1 = false;
+      });
     } else {
       setState(() {
         loading1 = false;
