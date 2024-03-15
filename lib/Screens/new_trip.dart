@@ -96,7 +96,7 @@ class _NewTripState extends State<NewTrip> with TickerProviderStateMixin {
         }
 
         // Check if tripdetails.data!.addOnDiesels is not null and not empty
-tripData.clear();
+        tripData.clear();
         if (tripdetails.status == true) {
           tripData.add("Trip Detail");
         }
@@ -383,25 +383,38 @@ tripData.clear();
           ],
         ),
       ),
-      // bottomNavigationBar: tripdetails.status != true ? null : button(),
+      bottomNavigationBar: tripdetails.status != true ? null : button(),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
       //Init Floating Action Bubble
       floatingActionButton: tripdetails.status == true
-          ? tripdetails.data!.status.toString() == "Loading" &&
-                  tripdetails.data!.isStatus.toString() != "Accepted"
-              ? Container(
-                  width: MediaQuery.of(context).size.width * 0.60,
-                  alignment: Alignment.bottomRight,
-                  // width:300,
-                  child: isfloating == false
-                      ? togglebutton(Icons.add)
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            /*      Padding(
+          ? tripdetails.data!.status == "Loading" &&
+                      tripdetails.data!.isStatus.toString() == "On the way" ||
+                  tripdetails.data!.status != "Loading" &&
+                      tripdetails.data!.isStatus != "Accepted" ||
+                  tripdetails.data!.status == "Loading" &&
+                      tripdetails.data!.isStatus == "Delivered" ||
+                  tripData.contains("End Trip") == false
+              ? tripdetails.data!.status == "Completed" ||
+                      tripdetails.data!.status == "Loading" &&
+                          tripdetails.data!.isStatus.toString() == "Accepted" ||
+                      tripdetails.data!.status == "Accepted" &&
+                          tripdetails.data!.isStatus.toString() == "Accepted" ||
+                      tripdetails.data!.status == "Pending" &&
+                          tripdetails.data!.isStatus.toString() == "Accepted"
+                  ? Container()
+                  : Container(
+                      width: MediaQuery.of(context).size.width * 0.60,
+                      alignment: Alignment.bottomRight,
+                      // width:300,
+                      child: isfloating == false
+                          ? togglebutton(Icons.add)
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                /*      Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -435,77 +448,11 @@ tripData.clear();
                 ),
               ),
               SizedBox(height: 10,),*/
-                            tripdetails.data!.isStatus.toString() !=
-                                        "Delivered" &&
-                                    tripdetails.data!.enrouteDiesels!.isEmpty
-                                ? AppButton(
-                                    textStyle: const TextStyle(
-                                      color: MyColor.white,
-                                      fontSize: 16,
-                                      fontFamily: ColorFamily.fontsSFProDisplay,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    btnWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.60,
-                                    onPressed: () {
-                                      isfloating = false;
-                                      setState(() {});
-                                      Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AddOnDieselscreen(
-                                                          tripId: widget.tripId,
-                                                          truckId:
-                                                              widget.truckId)))
-                                          .then((value) => apihit());
-                                    },
-                                    name: MyString.addOnDiesel.tr(),
-                                  )
-                                : Container(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            tripdetails.data!.isStatus.toString() != "Delivered"
-                                ? AppButton(
-                                    textStyle: const TextStyle(
-                                      color: MyColor.white,
-                                      fontSize: 16,
-                                      fontFamily: ColorFamily.fontsSFProDisplay,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    btnWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.60,
-                                    onPressed: () {
-                                      isfloating = false;
-                                      setState(() {});
-                                      debugPrint(
-                                          " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
-                                      Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ExpentionType(
-                                                          tripId: widget.tripId,
-                                                          truckId:
-                                                              widget.truckId)))
-                                          .then((value) => apihit());
-
-                                      setState(() {});
-                                    },
-                                    name: MyString.addExpenses.tr(),
-                                  )
-                                : Container(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            tripdetails.data!.isStatus.toString() != "Delivered"
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AppButton(
+                                tripdetails.data!.isStatus.toString() !=
+                                            "Delivered" &&
+                                        tripdetails
+                                            .data!.enrouteDiesels!.isEmpty
+                                    ? AppButton(
                                         textStyle: const TextStyle(
                                           color: MyColor.white,
                                           fontSize: 16,
@@ -523,22 +470,19 @@ tripData.clear();
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      DeliveryScreen(
+                                                      AddOnDieselscreen(
                                                           tripId: widget.tripId,
                                                           truckId: widget
                                                               .truckId))).then(
                                               (value) => apihit());
-
-                                          setState(() {});
                                         },
-                                        name: MyString.markasdelivered.tr(),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            tripdetails.data!.isStatus.toString() == "Completed"
-                                ? Container()
-                                : tripdetails.data!.isStatus.toString() ==
+                                        name: MyString.addOnDiesel.tr(),
+                                      )
+                                    : Container(),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                tripdetails.data!.isStatus.toString() !=
                                         "Delivered"
                                     ? AppButton(
                                         textStyle: const TextStyle(
@@ -560,7 +504,7 @@ tripData.clear();
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EndTripscr(
+                                                      ExpentionType(
                                                           tripId: widget.tripId,
                                                           truckId: widget
                                                               .truckId))).then(
@@ -568,17 +512,97 @@ tripData.clear();
 
                                           setState(() {});
                                         },
-                                        name: MyString.endTrip.tr(),
+                                        name: MyString.addExpenses.tr(),
                                       )
                                     : Container(),
-                            const SizedBox(
-                              height: 10,
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                tripdetails.data!.isStatus.toString() !=
+                                        "Delivered"
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          AppButton(
+                                            textStyle: const TextStyle(
+                                              color: MyColor.white,
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            btnWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.60,
+                                            onPressed: () {
+                                              isfloating = false;
+                                              setState(() {});
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DeliveryScreen(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
+
+                                              setState(() {});
+                                            },
+                                            name: MyString.markasdelivered.tr(),
+                                          ),
+                                        ],
+                                      )
+                                    : Container(),
+                                tripdetails.data!.isStatus.toString() ==
+                                        "Completed"
+                                    ? Container()
+                                    : tripdetails.data!.isStatus.toString() ==
+                                            "Delivered"
+                                        ? AppButton(
+                                            textStyle: const TextStyle(
+                                              color: MyColor.white,
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  ColorFamily.fontsSFProDisplay,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            btnWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.60,
+                                            onPressed: () {
+                                              isfloating = false;
+                                              setState(() {});
+                                              debugPrint(
+                                                  " tripdetails.data!.isStatus.toString()..........>${tripdetails.data!.isStatus.toString()}");
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EndTripscr(
+                                                                  tripId: widget
+                                                                      .tripId,
+                                                                  truckId: widget
+                                                                      .truckId)))
+                                                  .then((value) => apihit());
+
+                                              setState(() {});
+                                            },
+                                            name: MyString.endTrip.tr(),
+                                          )
+                                        : Container(),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                togglebutton(Icons.clear),
+                                const SizedBox(height: 0),
+                              ],
                             ),
-                            togglebutton(Icons.clear),
-                            const SizedBox(height: 0),
-                          ],
-                        ),
-                )
+                    )
               : null
           : null,
 
@@ -4624,13 +4648,17 @@ tripData.clear();
           name: "Loading"),
     )
         : */
-        tripdetails.data!.status.toString() != "Loading" &&
-                    tripdetails.data!.status != "Completed" &&
+
+        tripdetails.data!.status != "Completed" &&
                     tripdetails.data!.isStatus.toString() != "On the way" &&
-                    tripdetails.data!.addOnDiesels!.isEmpty ||
-                tripdetails.data!.addOnDiesels!.isEmpty &&
+                    tripdetails.data!.addOnDiesels!.isEmpty &&
+                    tripdetails.data!.addOnDiesels!.isEmpty &&
                     btnName == "Start Trip" &&
-                    tripdetails.data!.status != "Completed"
+                    tripdetails.data!.status != "Completed" &&
+                    tripdetails.data!.isStatus != "Delivered" ||
+                tripdetails.data!.status == "Loading" &&
+                    tripdetails.data!.isStatus == "Accepted" &&
+                    tripData.contains("End Trip") == false
             ? Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: AppButton(
@@ -4779,7 +4807,8 @@ tripData.clear();
                             ),
                           )
                         : tripdetails.data!.endTrip!.isEmpty &&
-                                tripdetails.data!.deliveryNote!.isNotEmpty
+                                tripdetails.data!.deliveryNote!.isNotEmpty&&
+                                tripdetails.data!.deliveryNote!.isEmpty
                             ? Padding(
                                 padding: EdgeInsets.only(
                                     top: tripdetails.data!.otherCharges !=
