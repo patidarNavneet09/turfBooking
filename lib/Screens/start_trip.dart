@@ -996,7 +996,7 @@ class _StartTripState extends State<StartTrip> {
       'Authorization':
           "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
     };
-
+  
     var uri = Uri.parse(ApiServer.tripstart);
 
     var request = https.MultipartRequest('post', uri)..headers.addAll(headers);
@@ -1014,7 +1014,7 @@ class _StartTripState extends State<StartTrip> {
     var response = await https.Response.fromStream(await request.send());
 
     var body = json.decode(response.body);
-    // print("jjjjjjjjjjjjjjjjjjj${request.fields}");
+// print("jjjjjjjjjjjjjjjjjjj${request.fields}");
     // print("eeeeeeeeeeeeeeeeee${reque}");
     // Utility.progressloadingDialog(context, true);
     setLoading(false);

@@ -737,6 +737,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
     var body = json.decode(response.body);
     setLoading(false);
+        debugPrint("jjjjjjjjjjjjjjjjjjj${request.fields}");
+    debugPrint("eeeeeeeeeeeeeeeeee${request.headers}");
+      debugPrint("eeeeeeeeeeeeeeeeee${uri}");
     if (response.statusCode == 200 && body['status'] == true) {
       debugPrint("response.body>>>>>>>>>>${response.body}");
       Navigator.pop(context);

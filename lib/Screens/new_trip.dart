@@ -383,7 +383,7 @@ tripData.clear();
           ],
         ),
       ),
-      bottomNavigationBar: tripdetails.status != true ? null : button(),
+      // bottomNavigationBar: tripdetails.status != true ? null : button(),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
