@@ -787,7 +787,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   onPressed: () {
                     Navigator.pop(context);
 
-                    chooseImage1("camera");
+                    chooseImage2("camera");
                   },
                   icon: const Icon(
                     Icons.camera,
