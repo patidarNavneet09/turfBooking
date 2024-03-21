@@ -18,7 +18,6 @@ import 'package:truckmanagement/constant/AppColor/app_colors.dart';
 import 'package:truckmanagement/constant/api_method.dart';
 import 'package:truckmanagement/constant/app_fontfamily.dart';
 import 'package:truckmanagement/constant/string_file.dart';
-import 'package:truckmanagement/constant/utility.dart';
 import 'package:truckmanagement/utils/mybuttons.dart';
 import 'dart:convert' as convert;
 import '../constant/api_constant.dart';

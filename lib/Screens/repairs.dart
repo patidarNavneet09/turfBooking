@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/repair_model.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -871,9 +872,11 @@ class _RepairsScreenState extends State<RepairsScreen> {
     var body = json.decode(response.body);
     setLoading(false);
     if (response.statusCode == 200 && body['status'] == true) {
-      debugPrint("response.body>>>>>>>>>>${response.body}");
+      debugPrint("response.body>>>>>>>>>>${body['message']}");
       Navigator.pop(context);
     } else {
+         Fluttertoast.showToast(msg: body['message']);
+          
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
     return RepairsModel.fromJson(jsonDecode(response.body));

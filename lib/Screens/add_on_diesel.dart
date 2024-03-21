@@ -646,7 +646,7 @@ class _AddOnDieselscreenState extends State<AddOnDieselscreen> {
                             Utility.getToast(
                                 toastColor:
                                     const Color.fromARGB(255, 34, 71, 99),
-                                msg: MyString.fillexactEnternameofpetrolstation
+                                msg: MyString.petrolstationfieldrequired
                                     .tr());
                           } else {
                             addondieselApi(context, quantityLiters, unitPrice,
