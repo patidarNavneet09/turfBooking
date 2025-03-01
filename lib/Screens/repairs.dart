@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckmanagement/Model/repair_model.dart';
 import 'package:truckmanagement/constant/AppColor/app_colors.dart';
@@ -94,48 +95,43 @@ class _RepairsScreenState extends State<RepairsScreen> {
   bool isChecked = false;
   String? selectedId = " ";
   Future<void> chooseImage1(type) async {
-    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
       // image1 = await ImagePicker().pickImage(
       //   source: ImageSource.camera,
       // );
       // imageFileListBanner.add(image1);
-      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
       if (selectedImage1 == null) {
-        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
         ))!;
-        imageFileListBanner2.add(image1);
+        imageFileListBanner.add(image1);
         ppp = true;
         setState(() {});
       } else if (selectedImage2 == null) {
-        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
         ))!;
-        imageFileListBanner2.add(image2);
+        imageFileListBanner.add(image2);
         ppp1 = true;
         setState(() {});
       } else if (selectedImage3 == null) {
         image3 = (await ImagePicker().pickImage(
           source: ImageSource.camera,
         ))!;
-        imageFileListBanner2.add(image3);
+        imageFileListBanner.add(image3);
         ppp2 = true;
         setState(() {});
       } else {
         image33 = (await ImagePicker().pickImage(
           source: ImageSource.camera,
         ))!;
-        imageFileListBanner2.add(image33);
+        imageFileListBanner.add(image33);
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage1 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -166,37 +162,29 @@ class _RepairsScreenState extends State<RepairsScreen> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.length}");
     }
-    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
   }
 
   Future<void> chooseImage2(type) async {
-    // print("imageFileList${imageFileListBanner.length}");
     if (type == "camera") {
       // image1 = await ImagePicker().pickImage(
       //   source: ImageSource.camera,
       // );
       // imageFileListBanner.add(image1);
-      // print("ggggg${imageFileListBanner.map((e) => e.path)}");
 
       if (selectedImage4 == null) {
-        // print("ffffffffffffffffff");
         image1 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -205,7 +193,6 @@ class _RepairsScreenState extends State<RepairsScreen> {
         ppp = true;
         setState(() {});
       } else if (selectedImage5 == null) {
-        // print("rrrrrrrrrrrr");
         image2 = (await ImagePicker().pickImage(
           imageQuality: 50,
           source: ImageSource.camera,
@@ -228,7 +215,6 @@ class _RepairsScreenState extends State<RepairsScreen> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.map((e) => e)}");
     } else {
       if (selectedImage4 == null) {
         image1 = (await ImagePicker().pickImage(
@@ -259,23 +245,18 @@ class _RepairsScreenState extends State<RepairsScreen> {
         ppp2 = true;
         setState(() {});
       }
-      // print("imageFileListBanner${imageFileListBanner.length}");
     }
-    // print("imageFileList>>>>>>>>>${imageFileListBanner.length}");
     setState(() {
       selectedImage1 = File(image1.path);
       base64Image = base64Encode(selectedImage4!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage2 = File(image2.path);
       base64Image = base64Encode(selectedImage5!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
     setState(() {
       selectedImage3 = File(image3.path);
       base64Image = base64Encode(selectedImage6!.readAsBytesSync());
-      // print(imageFileListBanner);
     });
   }
 
@@ -787,7 +768,7 @@ class _RepairsScreenState extends State<RepairsScreen> {
                   onPressed: () {
                     Navigator.pop(context);
 
-                    chooseImage1("camera");
+                    chooseImage2("camera");
                   },
                   icon: const Icon(
                     Icons.camera,
@@ -871,9 +852,11 @@ class _RepairsScreenState extends State<RepairsScreen> {
     var body = json.decode(response.body);
     setLoading(false);
     if (response.statusCode == 200 && body['status'] == true) {
-      debugPrint("response.body>>>>>>>>>>${response.body}");
+      debugPrint("response.body>>>>>>>>>>${body['message']}");
       Navigator.pop(context);
     } else {
+         Fluttertoast.showToast(msg: body['message']);
+          
       debugPrint("response.body>>>>>>>>>>${response.body}");
     }
     return RepairsModel.fromJson(jsonDecode(response.body));

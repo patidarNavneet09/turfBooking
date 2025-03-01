@@ -32,26 +32,19 @@ class _ProfileSettingState extends State<ProfileSetting> {
   String base64Image = "";
   Future<void> chooseImage1(type) async {
     imageFileList.clear();
-    // print("imageFileList${imageFileList.length}");
     if (type == "camera") {
       image1 = await ImagePicker()
           .pickImage(source: ImageSource.camera, imageQuality: 50);
       imageFileList.add(image1);
-
-      // print("ggggg${imageFileList.map((e) => e.path)}");
     } else {
       image1 = await ImagePicker()
           .pickImage(source: ImageSource.gallery, imageQuality: 50);
       imageFileList.add(image1);
-      // print(imageFileList.length);
     }
-
-    // print("imageFileList>>>>>>>>>${imageFileList.length}");
     if (image1 != null) {
       setState(() {
         selectedImage1 = File(image1.path);
         base64Image = base64Encode(selectedImage1!.readAsBytesSync());
-        // print(imageFileList);
       });
     }
   }

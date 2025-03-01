@@ -46,7 +46,7 @@ class _HomescreenState extends State<Homescreen> {
     index = 0;
     WidgetsBinding.instance.addPostFrameCallback((_) => profileGet(context));
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => tripdetialsGetshort("Pending"));
+        .addPostFrameCallback((_) => mytripGet(context, "Pending"));
   }
 
   returnApi(String status) {
@@ -57,7 +57,7 @@ class _HomescreenState extends State<Homescreen> {
     } else {
       sts = status;
     }
-    tripdetialsGetshort(sts);
+    mytripGet(context, sts);
   }
 
   String getGreeting() {
@@ -83,15 +83,21 @@ class _HomescreenState extends State<Homescreen> {
       },
       // fromJson: LoginResponse.fromJson,
       setLoading: (booldata) {
+        //    setState(() {
+        //   loading1 = booldata;
+        // });
         // Utility.progressloadingDialog(context, booldata);
       },
       isxClient: false,
       fromJson: MyTrip.fromJson,
       trueCase: (dataresponse) {
-        myTrip = dataresponse;
+        setState(() {
+          debugPrint("data>>>>>>>>>>>${dataresponse["active_tip"].toString()}");
+          myTrip = dataresponse;
+        });
 
         // locationId are data set from start trip time for its id set and get location
-
+        activetip = dataresponse['active_tip'].toString();
         locationId = sharedPreferences.getString("trip_id");
         if (activetip.toString() != "0" &&
             context.mounted &&
@@ -111,11 +117,12 @@ class _HomescreenState extends State<Homescreen> {
           setState(() {
             loading1 = false;
           });
-        } else {
-          setState(() {
-            loading1 = true;
-          });
         }
+        //  else {
+        //   // setState(() {
+        //   //   loading1 = true;
+        //   // });
+        // }
       },
     ).customApiCall();
   }
@@ -142,8 +149,8 @@ class _HomescreenState extends State<Homescreen> {
         ),
         body:
             loading1 == true ||
-                    profilegetResponse.status != true ||
-                    myTrip.status != true
+                    myTrip.status != true ||
+                    profilegetResponse.status != true
                 ? Center(
                     child: Image.asset("assets/images/gif_loader.gif"),
                   )
@@ -320,7 +327,7 @@ class _HomescreenState extends State<Homescreen> {
                                     onTap: () {
                                       status = "Pending";
                                       index = 0;
-                                      tripdetialsGetshort(status);
+                                      mytripGet(context, status);
                                       setState(() {});
                                     },
                                     child: Container(
@@ -362,7 +369,7 @@ class _HomescreenState extends State<Homescreen> {
                                   InkWell(
                                     onTap: () {
                                       status = "Accepted";
-                                      tripdetialsGetshort(status);
+                                      mytripGet(context, status);
                                       index = 1;
                                       setState(() {});
                                     },
@@ -405,7 +412,7 @@ class _HomescreenState extends State<Homescreen> {
                                   InkWell(
                                     onTap: () {
                                       status = "Completed";
-                                      tripdetialsGetshort(status);
+                                      mytripGet(context, status);
                                       index = 2;
                                       setState(() {});
                                     },
@@ -1595,51 +1602,50 @@ class _HomescreenState extends State<Homescreen> {
   }
 
 // Api intrigration - get data from mytrip api like :- active , newjobds ,complated
-  // Future<MyTrip> mytripGet(BuildContext context, String status) async {
-  //   // Utility.progressloadingDialog(context, true);
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
-  //     HttpLogger(logLevel: LogLevel.BODY),
-  //   ]);
+  Future<MyTrip> mytripGet(BuildContext context, String status) async {
+    // Utility.progressloadingDialog(context, true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    HttpWithMiddleware http = HttpWithMiddleware.build(middlewares: [
+      HttpLogger(logLevel: LogLevel.BODY),
+    ]);
 
-  //   var response =
-  //       await http.get(Uri.parse(ApiServer.mytripapi + status), headers: {
-  //     "content-type": "application/json",
-  //     "accept": "application/json",
-  //     "Authorization":
-  //         "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
-  //   });
+    var response =
+        await http.get(Uri.parse(ApiServer.mytripapi + status), headers: {
+      "content-type": "application/json",
+      "accept": "application/json",
+      "Authorization":
+          "Bearer ${sharedPreferences.getString("TOKEN").toString()}",
+    });
 
-  //   Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
+    Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
-  //   loading1 = true;
-  //   activetip = jsonResponse['active_tip'].toString();
-  //   debugPrint("active_tip............>$activetip");
-  //   if (jsonResponse['status'] == true) {
-  //     myTrip = MyTrip.fromJson(jsonResponse);
-  //     setState(() {
-  //       loading1 = false;
-  //     });
-  //   } else {
-  //     myTrip = MyTrip.fromJson(jsonResponse);
-  //     setState(() {
-  //       loading1 = false;
-  //     });
-  //   }
-  //   // locationId are data set from start trip time for its id set and get location
-  //   locationId = sharedPreferences.getString("trip_id");
-  //   if (activetip.toString() != "0" && context.mounted && locationId != null) {
-  //     debugPrint("navnnnnnn12121");
-  //     updatelocationApi(context);
-  //     timer = Timer.periodic(const Duration(minutes: 5), (timer) {
-  //       debugPrint("navnnnnnn");
-  //       updatelocationApi(context);
-  //     });
-  //     // forground();
-  //   }
+    loading1 = true;
+    activetip = jsonResponse['active_tip'].toString();
+    debugPrint("active_tip............>$activetip");
+    if (jsonResponse['status'] == true) {
+      myTrip = MyTrip.fromJson(jsonResponse);
+      setState(() {
+        loading1 = false;
+      });
+    } else {
+      myTrip = MyTrip.fromJson(jsonResponse);
+      setState(() {
+        loading1 = false;
+      });
+    }
 
-  //   return MyTrip.fromJson(jsonDecode(response.body));
-  // }
+    // locationId are data set from start trip time for its id set and get location
+    locationId = sharedPreferences.getString("trip_id");
+    if (activetip.toString() != "0" && context.mounted && locationId != null) {
+      updatelocationApi(context);
+      timer = Timer.periodic(const Duration(minutes: 5), (timer) {
+        updatelocationApi(context);
+      });
+      // forground();
+    }
+
+    return MyTrip.fromJson(jsonDecode(response.body));
+  }
 
 // Api intrigration - get data from profile api
   Future<ProfileGet> profileGet(
@@ -1660,11 +1666,13 @@ class _HomescreenState extends State<Homescreen> {
 
     Map<String, dynamic> jsonResponse = convert.jsonDecode(response.body);
 
-    loading1 = true;
+    // loading1 = true;
     if (jsonResponse['status'] == true) {
       profilegetResponse = ProfileGet.fromJson(jsonResponse);
 
-      loading1 = false;
+      setState(() {
+        loading1 = false;
+      });
     } else {
       setState(() {
         loading1 = false;

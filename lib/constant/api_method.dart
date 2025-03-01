@@ -85,7 +85,7 @@ class ApiCall {
     if (jsonResponse['status'] == true) {
       Class parsedResponse = fromJson!(jsonResponse);
       trueCase(parsedResponse);
-      trueCasebool!(true);
+      trueCasebool!(false);
     } else {
       falseCase!();
     }
