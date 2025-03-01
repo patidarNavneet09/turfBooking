@@ -1637,10 +1637,8 @@ class _HomescreenState extends State<Homescreen> {
     // locationId are data set from start trip time for its id set and get location
     locationId = sharedPreferences.getString("trip_id");
     if (activetip.toString() != "0" && context.mounted && locationId != null) {
-      debugPrint("navnnnnnn12121");
       updatelocationApi(context);
       timer = Timer.periodic(const Duration(minutes: 5), (timer) {
-        debugPrint("navnnnnnn");
         updatelocationApi(context);
       });
       // forground();

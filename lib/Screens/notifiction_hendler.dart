@@ -20,12 +20,10 @@ class NotificationService {
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static void notificationTapBackground(message) {
-    // print('>>>>>>>>>>>>>>>>3');
     // debugPrint('---notificationTapBackground');
 
     _handleMessage(message);
     chatReceivedUpdate(message!.data['chatId'], message.data['msgId']);
-    // print('notification(${notificationResponse.id}) action tapped: '
     //     '${notificationResponse.actionId} with'
     //     ' payload: ${notificationResponse.payload}');
     // if (notificationResponse.input?.isNotEmpty ?? false) {
@@ -43,7 +41,6 @@ class NotificationService {
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
         onDidReceiveNotificationResponse: (message) {
-      // debugPrint('---onDidReceiveNotificationResponse');
       notificationTapBackground(message);
     });
     _flutterLocalNotificationsPlugin.initialize(initializationSettings);
